@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { TalentCard } from './components/CardsList/TalentCard'
 
 const App = () => {
   return (
     <div>
-      <p>SkillScope</p>
+      <TalentCard />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
