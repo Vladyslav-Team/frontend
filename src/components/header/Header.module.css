@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap');
+
+.header {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 32px;
+
+    height: 76px;
+    background: #0A6E9A;
+}
+
+.logo_wrap {
+    position: flex;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.button_wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.button_in {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 111px;
+    height: 28px;
+    border: 1px solid #FFFFFF;
+    border-radius: 400px;
+    flex: none;
+
+    font-family: 'Inter';
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #0A6E9A;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.button_in:hover {
+    background-color: #FFFFFF;
+    color: #0A6E9A;
+}
