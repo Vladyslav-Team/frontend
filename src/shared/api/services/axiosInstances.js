@@ -1,9 +1,8 @@
 import axios from "axios";
 import { Endpoints } from "../constants/endpoints";
-import { getMockInit } from "../mock/mock";
-getMockInit();
+import { MockInit } from "../mock/mock";
+MockInit()
 
-export const axiosInstanceGet = axios.create({
-  method: "GET",
+export const axiosInstance = axios.create({
   baseURL: Endpoints.BASE_ENDPOINT_BACKEND,
 });
