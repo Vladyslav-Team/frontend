@@ -7,7 +7,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 32px;
-
     height: 76px;
     background: #0A6E9A;
 }
@@ -35,7 +34,6 @@
     border: 1px solid #FFFFFF;
     border-radius: 400px;
     flex: none;
-
     font-family: 'Inter';
     font-size: 14px;
     line-height: 20px;
