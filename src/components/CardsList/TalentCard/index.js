@@ -1,1 +1,0 @@
-export { TalentCard } from './TalentCard'
