@@ -14,7 +14,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "npx prettier --write .  && eslint . --ext .js --ext .jsx",
+        "test": "npx prettier --check . && eslint . --ext .js --ext .jsx",
         "lint-fix": "eslint . --ext .js --ext .jsx --fix",
         "format": "npx prettier --write ."
     },

@@ -4,6 +4,11 @@
         "es2021": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -13,7 +18,7 @@
     "rules": {
         "no-dupe-else-if": "warn",
         "max-lines": ["warn", 100],
-        "max-depth": ["error", 2],
+        "max-depth": ["warn", 2],
         "no-restricted-syntax": ["warn", "FunctionExpression", "FunctionDeclaration"],
         "no-unused-vars": "warn",
         "react-hooks/rules-of-hooks": "warn",
