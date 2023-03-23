@@ -1,10 +1,13 @@
+import {CssBaseline, ThemeProvider} from "@mui/material"
 import React from "react"
+import {theme} from "./Theme"
 
 const App = () => {
     return (
-        <div>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
             <p>SkillScope</p>
-        </div>
+        </ThemeProvider>
     )
 }
 
