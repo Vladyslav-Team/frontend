@@ -38,8 +38,8 @@ Menthor:
 -   [vlad-khrychov](https://github.com/vlad-khrychov)
 
 Team:
-* [@kirillserebrykov](https://github.com/kirillserebrykov)
-* [@yaasya21](https://github.com/yaasya21)
-* [@VladislavZabilskij](https://github.com/VladislavZabilskij)
-* [@yaroslavUsenko](https://github.com/yaroslavUsenko)
 
+-   [@kirillserebrykov](https://github.com/kirillserebrykov)
+-   [@yaasya21](https://github.com/yaasya21)
+-   [@VladislavZabilskij](https://github.com/VladislavZabilskij)
+-   [@yaroslavUsenko](https://github.com/yaroslavUsenko)
