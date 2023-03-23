@@ -1,11 +1,11 @@
-import React from "react";
-   
-const App = () => {
-  return (
-    <div>
-      <p>SkillScope</p>
-    </div>
-  );
-};
+import React from "react"
 
-export default App;
+const App = () => {
+    return (
+        <div>
+            <p>SkillScope</p>
+        </div>
+    )
+}
+
+export default App
