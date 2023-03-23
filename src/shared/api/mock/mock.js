@@ -3,7 +3,7 @@ import axios from "axios";
 import {allTalentsResponse} from "./response/allTalents";
 import {authenticationResponse, authenticationResponseError} from "./response/authentication";
 import { Endpoints } from "../constants/endpoints";
-var mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 export const MockInit = () => {
   mock.onGet("/talents").reply(200, allTalentsResponse);
   mock.onGet(Endpoints.GET_TALENT_BY_ID, { params: { "talent-id": "1" } }).reply(200, {});

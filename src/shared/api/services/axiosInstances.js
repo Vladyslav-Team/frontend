@@ -1,8 +1,6 @@
 import axios from "axios";
-import { Endpoints } from "../constants/endpoints";
-import { MockInit } from "../mock/mock";
-MockInit()
 
+const BASE_URL = process.env.REACT_APP_API_URL;
 export const axiosInstance = axios.create({
-  baseURL: Endpoints.BASE_ENDPOINT_BACKEND,
+  baseURL: BASE_URL,
 });
