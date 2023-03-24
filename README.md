@@ -6,6 +6,24 @@ This is frontend part of SkillScope project that will help you build whole websi
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+## How to use Eslint and Prettier
+
+### For DevOps in pipeline jenkins
+
+### `npm test`
+
+npm test check all files and find problems
+
+### For Devs need use before PR
+
+### `npm run lint-fix`
+
+npm run test check all files for Eslint and fix problem which can fix
+
+### `npm run format `
+
+npm run format check all files and format files
+
 ## How to Run
 
 This react application
@@ -38,8 +56,8 @@ Menthor:
 -   [vlad-khrychov](https://github.com/vlad-khrychov)
 
 Team:
-* [@kirillserebrykov](https://github.com/kirillserebrykov)
-* [@yaasya21](https://github.com/yaasya21)
-* [@VladislavZabilskij](https://github.com/VladislavZabilskij)
-* [@yaroslavUsenko](https://github.com/yaroslavUsenko)
 
+-   [@kirillserebrykov](https://github.com/kirillserebrykov)
+-   [@yaasya21](https://github.com/yaasya21)
+-   [@VladislavZabilskij](https://github.com/VladislavZabilskij)
+-   [@yaroslavUsenko](https://github.com/yaroslavUsenko)
