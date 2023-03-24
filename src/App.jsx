@@ -8,7 +8,6 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header />
-            <p>SkillScope</p>
         </ThemeProvider>
     )
 }
