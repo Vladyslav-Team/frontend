@@ -1,11 +1,15 @@
 import React from "react"
 import {Header} from "./components/Header"
+import {CssBaseline, ThemeProvider} from "@mui/material"
+import {theme} from "./Theme"
+
 const App = () => {
     return (
-        <div>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Header />
             <p>SkillScope</p>
-        </div>
+        </ThemeProvider>
     )
 }
 
