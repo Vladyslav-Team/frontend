@@ -1,26 +1,26 @@
 import { useState } from "react";
 import styles from "./VisitButton.module.css";
 
-function VisitButton() {
+const VisitButton = () => {
   const [isRegistered, setIsRegistered] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleClick = () => {
     if (!isRegistered) {
-      setShowPopup(true);
+      setShowLogin(true);
     } else {
-      // go to user profile
+      // go to talent profile
     }
   };
 
   return (
     <>
-      {/* {showPopup && <LogIn />} */}
+      {/* {showLogin && <LogIn />} */}
       <button className={styles.visitButton} onClick={handleClick}>
         Visit
       </button>
     </>
   );
-}
+};
 
 export { VisitButton };

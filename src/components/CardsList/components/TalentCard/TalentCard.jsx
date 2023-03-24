@@ -2,7 +2,7 @@ import { Avatar } from "./components/Avatar";
 import { VisitButton } from "./components/VisitButton";
 import styles from "./TalentCard.module.css";
 
-function TalentCard({ talent }) {
+const TalentCard = ({ talent }) => {
   return (
     <div className={styles.card}>
       <div className={styles.background}>
@@ -16,6 +16,6 @@ function TalentCard({ talent }) {
       <VisitButton />
     </div>
   );
-}
+};
 
 export { TalentCard };
