@@ -1,11 +1,13 @@
-import React from "react"
+import React from "react";
+import { Header } from './components/Header';
 
 const App = () => {
-    return (
-        <div>
-            <p>SkillScope</p>
-        </div>
-    )
+  return (
+    <div>
+      <Header />
+      <p>SkillScope</p>
+    </div>
+  );
 }
 
-export default App
+export default App;
