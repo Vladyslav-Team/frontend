@@ -1,5 +1,6 @@
 import React from "react"
 import {Header} from "./components/Header"
+import {Router} from "./Router"
 import {CssBaseline, ThemeProvider} from "@mui/material"
 import {theme} from "./Theme"
 
@@ -8,7 +9,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header />
-            <p>SkillScope</p>
+            <Router />
         </ThemeProvider>
     )
 }
