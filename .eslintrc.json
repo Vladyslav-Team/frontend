@@ -34,6 +34,7 @@
         "quotes": ["warn", "double", {"avoidEscape": true}],
         "eqeqeq": ["warn", "always"],
         "no-console": ["warn", {"allow": ["warn", "error"]}],
-        "no-debugger": "warn"
+        "no-debugger": "warn",
+        "react/prop-types": "off"
     }
 }
