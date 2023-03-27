@@ -4,10 +4,11 @@ import Pagination from "@mui/material/Pagination"
 export const WrapperPagination = styled("div")(() => ({
     width: "max-content",
     border: "0.4px solid #A4A7A7",
-    borderRadius: "11px",
+    borderRadius: "11px 11px 0 0",
     boxShadow: "1px 2px 30px 0px rgba(0,0,0,0.24)",
     overflow: "hidden",
     position: "fixed",
+    backgroundColor: "#ffff",
     left: "50%",
     transform: "translate(-50%,0)",
     bottom: 0,

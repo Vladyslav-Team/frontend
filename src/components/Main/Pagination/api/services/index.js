@@ -1,4 +1,5 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
+import { createSelector } from "@reduxjs/toolkit"
 import {axiosBaseQuery} from "../../../../../shared/api/services"
 
 export const api = createApi({
@@ -16,4 +17,8 @@ export const api = createApi({
     },
 })
 
+
+
 export const {useGetTalentsQuery} = api
+
+
