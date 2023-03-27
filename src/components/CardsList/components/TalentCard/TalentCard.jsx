@@ -15,13 +15,14 @@ const TalentCard = ({talent}) => {
                 <div className={styles.location}>{talent.location}</div>
                 <div className={styles.proof}></div>
             </div>
-            <VisitButton />
+            <VisitButton id={talent.id} />
         </div>
     )
 }
 
 TalentCard.propTypes = {
     talent: PropTypes.shape({
+        id: PropTypes.number,
         image: PropTypes.string,
         name: PropTypes.string,
         surname: PropTypes.string,
