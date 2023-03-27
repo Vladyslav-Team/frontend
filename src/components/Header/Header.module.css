@@ -40,6 +40,7 @@
     background-color: #0a6e9a;
     color: #ffffff;
     cursor: pointer;
+    transition-duration: 0.3s;
 }
 
 .button_in:hover {
