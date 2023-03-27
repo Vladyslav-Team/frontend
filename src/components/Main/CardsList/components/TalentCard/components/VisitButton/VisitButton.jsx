@@ -1,27 +1,39 @@
 import React from "react"
-import {useState} from "react"
+import {useState, useEffect} from "react"
+import PropTypes from "prop-types"
 import styles from "./VisitButton.module.css"
+import {NavLink} from "react-router-dom"
+import {Endpoints} from "../../../../../../shared/api/constants/endpoints"
 
-const VisitButton = () => {
+const VisitButton = ({id}) => {
     const [isRegistered] = useState(false)
-    const [, setShowLogin] = useState(false)
+    const [endpoint, setEndpoint] = useState("")
 
     const handleClick = () => {
         if (!isRegistered) {
-            setShowLogin(true)
+            setEndpoint(`${Endpoints.POST_TALENT_LOGIN}`)
         } else {
-            // go to talent profile
+            setEndpoint(`${Endpoints.GET_TALENT_BY_ID}/${id}`)
         }
     }
 
+    useEffect(() => {
+        handleClick()
+    })
+
     return (
         <>
-            {/* {showLogin && <LogIn />} */}
             <button className={styles.visitButton} onClick={handleClick}>
-                Visit
+                <NavLink className={styles.link} to={endpoint}>
+                    Visit
+                </NavLink>
             </button>
         </>
     )
+}
+
+VisitButton.propTypes = {
+    id: PropTypes.number,
 }
 
 export {VisitButton}
