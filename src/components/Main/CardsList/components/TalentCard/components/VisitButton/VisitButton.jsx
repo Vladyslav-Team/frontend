@@ -3,7 +3,7 @@ import {useState, useEffect} from "react"
 import PropTypes from "prop-types"
 import styles from "./VisitButton.module.css"
 import {NavLink} from "react-router-dom"
-import {Endpoints} from "../../../../../../shared/api/constants/endpoints"
+import {Endpoints} from "../../../../../../../shared/api/constants/endpoints"
 
 const VisitButton = ({id}) => {
     const [isRegistered] = useState(false)

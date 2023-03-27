@@ -1,6 +1,6 @@
 import React from "react"
 import {Route, Routes} from "react-router-dom"
-import {CardsList} from "../components/CardsList"
+import {CardsList} from "../components/Main/CardsList"
 import {Endpoints} from "../shared/api/constants/endpoints"
 
 const Router = () => {
