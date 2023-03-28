@@ -2,6 +2,7 @@ import React from "react"
 import {useForm} from "react-hook-form"
 import styles from "./LoginPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
+import {NavLink} from "react-router-dom"
 
 const LoginPopup = () => {
     const {
@@ -58,9 +59,9 @@ const LoginPopup = () => {
                 <p className={styles.login_form_elem}>or</p>
                 <p>
                     Want to join SkillScope?{" "}
-                    <a className={styles.login_form_elem}>
+                    <NavLink to={"/talents/signup"} className={styles.login_form_elem}>
                         <b>Sign up</b>
-                    </a>
+                    </NavLink>
                 </p>
             </form>
         </>
