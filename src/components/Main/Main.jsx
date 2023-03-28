@@ -10,7 +10,7 @@ const Main = () => {
 
     const navigate = useNavigate()
     useEffect(() => {
-        navigate(`?page=${page}`)
+        navigate(`/talents?page=${page}`)
     }, [navigate, page])
 
     return (

@@ -15,7 +15,6 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: ["Nunito", "sans-serif"].join(","),
-
         h1: {
             fontFamily: ["Inter", "sans-serif"].join(","),
         },
