@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import {Pagination} from "./Pagination"
 import {useGetTalentsQuery} from "./Pagination/api/services"
 import {CardsList} from "./CardsList"
 import {useNavigate} from "react-router-dom"
+import {useSelector} from "react-redux"
 
 const Main = () => {
-    const [page, setPage] = useState(1)
+    const page = useSelector((state) => state.page.value)
     const GetTalentsData = useGetTalentsQuery(page)
 
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const Main = () => {
             <CardsList GetTalentsData={GetTalentsData} />
             <Pagination
                 totalPages={GetTalentsData.data && GetTalentsData.data.totalPages}
-                setPage={setPage}
+                currentPage={GetTalentsData.data && GetTalentsData.data.currentPage}
             />
         </>
     )

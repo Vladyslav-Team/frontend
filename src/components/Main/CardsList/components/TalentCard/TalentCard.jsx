@@ -3,7 +3,7 @@ import {Avatar} from "./components/Avatar"
 import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
 import styles from "./TalentCard.module.css"
-
+import {LoginPopupContext} from "../../../../../context"
 const TalentCard = ({talent}) => {
     return (
         <div className={styles.card}>
@@ -15,7 +15,15 @@ const TalentCard = ({talent}) => {
                 <div className={styles.location}>{talent.location}</div>
                 <div className={styles.proof}></div>
             </div>
-            <VisitButton id={talent.id} />
+
+            <LoginPopupContext.Consumer>
+                {({setVisibilityLoginPopup}) => (
+                    <VisitButton
+                        setVisibilityLoginPopup={setVisibilityLoginPopup}
+                        id={talent.id}
+                    />
+                )}
+            </LoginPopupContext.Consumer>
         </div>
     )
 }

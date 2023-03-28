@@ -72,7 +72,14 @@ form .error {
     grid-column-gap: 20px;
     align-items: center;
 }
-
+.login_form_elem {
+    text-decoration-line: underline;
+    cursor: pointer;
+    display: inline;
+    cursor: pointer;
+    color: #3e3e3e;
+    font-weight: 600;
+}
 .or::before,
 .or::after {
     content: "";
