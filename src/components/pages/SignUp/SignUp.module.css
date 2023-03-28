@@ -10,7 +10,6 @@
     width: 320px;
     height: 550px;
     margin: auto;
-    margin-bottom: 75px;
     background: rgba(10, 110, 154, 0.3);
     border-radius: 30px;
     align-items: center;
@@ -42,7 +41,7 @@ form .error {
 .form_wrap button {
     display: block;
     justify-content:center;
-    width: 90px;
+    width: 100px;
     height: 28px;
     margin: auto;
     margin-top: 20px;
