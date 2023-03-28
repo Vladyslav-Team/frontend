@@ -2,9 +2,10 @@
 
 .login_background {
     position: absolute;
+    top: 0px;
     height: 100%;
     width: 100%;
-    background: #3e3e3e;
+    background: #636363;
     opacity: 30%;
 }
 
@@ -16,7 +17,7 @@
     padding: 30px 50px 20px 50px;
     width: 370px;
     text-align: center;
-    background: #80b6cd;
+    background: #b5d3e1;
     border-radius: 30px;
     color: #3e3e3e;
     font-family: "Nunito";
@@ -50,14 +51,29 @@ input.login_form_elem:focus {
 }
 
 button.login_form_elem {
-    height: 30px;
-    width: 40%;
-    border: none;
+    display: block;
+    justify-content: center;
+    width: 100px;
+    height: 28px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 4px 8px;
+    position: relative;
+    border: 1px solid #ffffff;
+    background: #ffffff;
+    color: #0a6e9a;
     border-radius: 400px;
-    color: #80b6cd;
     cursor: pointer;
-    background-color: white;
-    font-family: "Nunito";
+    font-family: "Inter";
+    font-size: 14px;
+    line-height: 20px;
+    transition-duration: 0.3s;
+    /* font-family: "Nunito"; */
+}
+
+button.login_form_elem:hover {
+    background: #0a6e9a;
+    color: #ffffff;
 }
 
 p.login_form_elem {
@@ -89,4 +105,9 @@ p.login_form_elem:after {
 a.login_form_elem {
     text-decoration-line: underline;
     cursor: pointer;
+}
+
+form .error {
+    font-size: 12px;
+    color: rgba(205, 1, 1, 0.76);
 }
