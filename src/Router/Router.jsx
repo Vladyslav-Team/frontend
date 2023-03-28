@@ -1,6 +1,7 @@
 import React from "react"
 import {Route, Routes} from "react-router-dom"
 import {CardsList} from "../components/CardsList"
+import { SignUp } from "../components/pages/SignUp"
 import {Endpoints} from "../shared/api/constants/endpoints"
 
 const Router = () => {
@@ -8,7 +9,7 @@ const Router = () => {
         <Routes>
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route index element={<CardsList />} />
-                <Route path={"signup"} element={<h1>Sign up</h1>} />
+                <Route path={"signup"} element={<SignUp />} />
                 <Route
                     path={`${Endpoints.POST_TALENT_LOGIN}`}
                     element={<h1>Log in</h1>}
