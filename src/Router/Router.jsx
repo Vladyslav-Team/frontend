@@ -6,7 +6,7 @@ import {Endpoints} from "../shared/api/constants/endpoints"
 const Router = () => {
     return (
         <Routes>
-            <Route path={`${Endpoints.GET_ALL_TALENTS}` } >
+            <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route index path="*" element={<Main />} />
                 <Route path={"signup"} element={<h1>Sign up</h1>} />
                 <Route

@@ -2,9 +2,7 @@ import React from "react"
 import Stack from "@mui/material/Stack"
 import {PaginationUI, WrapperPagination} from "./styles"
 
-
 const Pagination = ({setPage, totalPages}) => {
-    console.log(totalPages)
     return (
         <Stack spacing={2}>
             {/* <PaginationMUI

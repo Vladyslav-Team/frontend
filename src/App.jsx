@@ -2,7 +2,7 @@ import React from "react"
 import {Header} from "./components/Header"
 import {CssBaseline, ThemeProvider} from "@mui/material"
 import {theme} from "./Theme"
-import {Router} from './Router'
+import {Router} from "./Router"
 
 const App = () => {
     return (
@@ -15,4 +15,3 @@ const App = () => {
 }
 
 export default App
-

@@ -62,68 +62,68 @@ export const page1 = {
     ],
 }
 export const page2 = {
-    "totalItems": 16,
-    "totalPages": 2,
-    "currentPage": 2,
-    "talents": [
-    {
-    "id": 9,
-    "image": "https://tvcenter.ru/wp-content/uploads/2012/01/wpid-Arnold-SHvartsenegger-Kino-segodnya-ochen-zloe-FOTO-1.jpg",
-    "name": "Arnold",
-    "surname": "Schwarzenegger",
-    "location": "Austria"
-    },
-    {
-    "id": 10,
-    "image": "https://play-lh.googleusercontent.com/8GsTy26UE0lDGqoFOeClJ_t1874nm9gqBEUfX62Ztcpq9aOMuMI6xrpByAxqxOid-m4",
-    "name": "Ricardo",
-    "surname": "Milos",
-    "location": "Kharkiv"
-    },
-    {
-    "id": 11,
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9b-G5NDFGpNDf3C1pkpIWsZHjwTzbGS3BsMn5VnCvCGTtFLj8IyX-jCsVFZ0WQoJCX2A&usqp=CAU",
-    "name": "Denys",
-    "surname": "Karpenko",
-    "location": "Zaporizhzhia"
-    },
-    {
-    "id": 12,
-    "image": "https://media.istockphoto.com/id/611778400/photo/happy-man-showing-thumb-up.jpg?s=170667a&w=0&k=20&c=O2RHAuRaWvveIduXAGXLtHaGLXrXS7WeEBeAdkkMRbY=",
-    "name": "Svyatoslav",
-    "surname": "Hryshchenkovskii",
-    "location": "Odessa"
-    },
-    {
-    "id": 13,
-    "image": "https://thumbs.dreamstime.com/b/happy-man-okay-sign-portrait-white-background-showing-31418338.jpg",
-    "name": "Vitalii",
-    "surname": "Kharechko",
-    "location": "Kharkiv"
-    },
-    {
-    "id": 14,
-    "image": "https://thumbs.dreamstime.com/b/satisfied-man-okay-sign-12922386.jpg",
-    "name": "Ayton",
-    "surname": "Crouford",
-    "location": "Zaporizhzhia"
-    },
-    {
-    "id": 15,
-    "image": "https://thumbs.dreamstime.com/b/smart-man-showing-okay-sign-handsome-young-ok-over-white-32991125.jpg",
-    "name": "Leonardo",
-    "surname": "Biller",
-    "location": "Odessa"
-    },
-    {
-    "id": 16,
-    "image": "https://media.istockphoto.com/id/175440771/photo/handsome-young-man-gesturing-thumbs-up-isolated.jpg?s=612x612&w=0&k=20&c=RMLEXPrDjwFg7uPb_Ri3KqpYF0BAEPjzloAB81viyCk=",
-    "name": "Alexander",
-    "surname": "Caripo",
-    "location": "Kyiv"
-    }
-    ]
-    }
+    totalItems: 16,
+    totalPages: 2,
+    currentPage: 2,
+    talents: [
+        {
+            id: 9,
+            image: "https://tvcenter.ru/wp-content/uploads/2012/01/wpid-Arnold-SHvartsenegger-Kino-segodnya-ochen-zloe-FOTO-1.jpg",
+            name: "Arnold",
+            surname: "Schwarzenegger",
+            location: "Austria",
+        },
+        {
+            id: 10,
+            image: "https://play-lh.googleusercontent.com/8GsTy26UE0lDGqoFOeClJ_t1874nm9gqBEUfX62Ztcpq9aOMuMI6xrpByAxqxOid-m4",
+            name: "Ricardo",
+            surname: "Milos",
+            location: "Kharkiv",
+        },
+        {
+            id: 11,
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9b-G5NDFGpNDf3C1pkpIWsZHjwTzbGS3BsMn5VnCvCGTtFLj8IyX-jCsVFZ0WQoJCX2A&usqp=CAU",
+            name: "Denys",
+            surname: "Karpenko",
+            location: "Zaporizhzhia",
+        },
+        {
+            id: 12,
+            image: "https://media.istockphoto.com/id/611778400/photo/happy-man-showing-thumb-up.jpg?s=170667a&w=0&k=20&c=O2RHAuRaWvveIduXAGXLtHaGLXrXS7WeEBeAdkkMRbY=",
+            name: "Svyatoslav",
+            surname: "Hryshchenkovskii",
+            location: "Odessa",
+        },
+        {
+            id: 13,
+            image: "https://thumbs.dreamstime.com/b/happy-man-okay-sign-portrait-white-background-showing-31418338.jpg",
+            name: "Vitalii",
+            surname: "Kharechko",
+            location: "Kharkiv",
+        },
+        {
+            id: 14,
+            image: "https://thumbs.dreamstime.com/b/satisfied-man-okay-sign-12922386.jpg",
+            name: "Ayton",
+            surname: "Crouford",
+            location: "Zaporizhzhia",
+        },
+        {
+            id: 15,
+            image: "https://thumbs.dreamstime.com/b/smart-man-showing-okay-sign-handsome-young-ok-over-white-32991125.jpg",
+            name: "Leonardo",
+            surname: "Biller",
+            location: "Odessa",
+        },
+        {
+            id: 16,
+            image: "https://media.istockphoto.com/id/175440771/photo/handsome-young-man-gesturing-thumbs-up-isolated.jpg?s=612x612&w=0&k=20&c=RMLEXPrDjwFg7uPb_Ri3KqpYF0BAEPjzloAB81viyCk=",
+            name: "Alexander",
+            surname: "Caripo",
+            location: "Kyiv",
+        },
+    ],
+}
 
 export const page3 = {
     totalPages: 10,
