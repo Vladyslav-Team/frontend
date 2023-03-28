@@ -1,9 +1,9 @@
-import React, {useState} from "react"
+import React from "react"
 import {useForm} from "react-hook-form"
 import styles from "./LoginPopup.module.css"
 // import {registerOptions} from "../pages/SignUp/validationRules.js"
 
-const LoginPopup = ({isVisibility, setVisibility}) => {
+const LoginPopup = () => {
     const {
         register,
         handleSubmit,
