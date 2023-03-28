@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap'); 
+
+.login_background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #3E3E3E;
+    opacity: 30%;
+}
+
+.login_form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px 50px 20px 50px;
+    width: 370px;
+    text-align: center;
+    background: #80B6CD;
+    border-radius: 30px;
+    color: #3E3E3E;
+    font-family: "Nunito";
+}
+
+h2.login_form_elem {
+    margin: 0 0 10px 0;
+}
+
+div.login_form_elem {
+    margin: auto;
+    text-align: left;
+    width: fit-content;
+    width: 100%;
+    margin: 0 0 15px 0;
+}
+
+input.login_form_elem {
+    font-size: 15px;
+    margin: 5px 0 0 0;
+    padding: 10px 5px;
+    width: 100%;
+    height: 35px;
+    border: 2px solid #3E3E3E;
+    border-radius: 10px;
+    outline: 0;
+}
+
+input.login_form_elem:focus {
+    border: 2px solid black;
+}
+
+button.login_form_elem {
+    height: 30px;
+    width: 40%;
+    border: none;
+    border-radius: 400px;
+    color: #80B6CD;
+    cursor: pointer;
+    background-color: white;
+    font-family: "Nunito";
+}
+
+p.login_form_elem {
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+p.login_form_elem:before, p.login_form_elem:after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    vertical-align: middle;
+    height: 0.15px;
+    background: #000000;
+}
+
+p.login_form_elem:before {
+    right: 10%;
+    margin-left: -50%;
+}
+
+p.login_form_elem:after {
+    left: 10%;
+    margin-right: -50%;
+}
+
+a.login_form_elem {
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+label.Login_form_warn_mess {
+    font-size: 13px;
+    color: red;
+}
