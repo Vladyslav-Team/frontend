@@ -1,0 +1,81 @@
+.signup h1 {
+    position: relative;
+    text-align: center;
+    margin: 50px 0 20px 0;
+}
+
+.form_wrap {
+    position: relative;
+    display: flex;
+    width: 320px;
+    height: 550px;
+    margin: auto;
+    margin-bottom: 75px;
+    background: rgba(10, 110, 154, 0.3);
+    border-radius: 30px;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+}
+
+form input, select {
+    display: block;
+    width: 190px;
+    height: 26px;
+    background: #FFFFFF;
+    border: 2px solid rgba(62, 62, 62, 0.76);
+    border-radius: 7px;
+    padding: 0 10px;
+}
+
+form .error {
+    position: absolute;
+    font-size: 12px;
+    color: rgba(205, 1, 1, 0.76);
+}
+
+.input_wrap {
+    display: block;
+    margin: 15px;
+}
+
+.form_wrap button {
+    display: block;
+    justify-content:center;
+    width: 90px;
+    height: 28px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 4px 8px;
+    position: relative;
+    border: 1px solid #ffffff;
+    background: #FFFFFF;
+    color: #0a6e9a;
+    border-radius: 400px;
+    cursor: pointer;
+    font-family: "Inter";
+    font-size: 14px;
+    line-height: 20px;
+    transition-duration: 0.3s;
+}
+
+
+.form_wrap button:hover {
+    background: #0a6e9a;
+    color: #FFFFFF;
+}
+ .or{
+    display: grid;
+    margin: 15px 0;
+    grid-template-columns: 80px max-content 80px;
+    grid-column-gap: 20px;
+    align-items: center;
+}
+    
+.or::before,
+.or::after {
+    content: "";
+    display: block;
+    height: 0.5px;
+    background-color: currentColor;
+}
