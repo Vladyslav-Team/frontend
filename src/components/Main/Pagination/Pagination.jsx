@@ -3,7 +3,8 @@ import Stack from "@mui/material/Stack"
 import {PaginationUI, WrapperPagination} from "./styles"
 
 
-const Pagination = ({setPage}) => {
+const Pagination = ({setPage, totalPages}) => {
+    console.log(totalPages)
     return (
         <Stack spacing={2}>
             {/* <PaginationMUI
@@ -24,7 +25,7 @@ const Pagination = ({setPage}) => {
             <WrapperPagination>
                 <PaginationUI
                     size="large"
-                    count={4}
+                    count={totalPages}
                     siblingCount={1}
                     boundaryCount={1}
                     color="primary"
