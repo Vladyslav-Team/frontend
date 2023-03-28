@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap'); 
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
 
 .login_background {
     position: absolute;
     height: 100%;
     width: 100%;
-    background: #3E3E3E;
+    background: #3e3e3e;
     opacity: 30%;
 }
 
@@ -12,13 +12,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 30px 50px 20px 50px;
     width: 370px;
     text-align: center;
-    background: #80B6CD;
+    background: #80b6cd;
     border-radius: 30px;
-    color: #3E3E3E;
+    color: #3e3e3e;
     font-family: "Nunito";
 }
 
@@ -40,7 +40,7 @@ input.login_form_elem {
     padding: 10px 5px;
     width: 100%;
     height: 35px;
-    border: 2px solid #3E3E3E;
+    border: 2px solid #3e3e3e;
     border-radius: 10px;
     outline: 0;
 }
@@ -54,7 +54,7 @@ button.login_form_elem {
     width: 40%;
     border: none;
     border-radius: 400px;
-    color: #80B6CD;
+    color: #80b6cd;
     cursor: pointer;
     background-color: white;
     font-family: "Nunito";
@@ -65,7 +65,8 @@ p.login_form_elem {
     margin: 10px 0;
 }
 
-p.login_form_elem:before, p.login_form_elem:after {
+p.login_form_elem:before,
+p.login_form_elem:after {
     content: "";
     display: inline-block;
     position: relative;

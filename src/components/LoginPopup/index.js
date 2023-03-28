@@ -1,1 +1,1 @@
-export { LoginPopup } from './LoginPopup';
+export {LoginPopup} from "./LoginPopup"
