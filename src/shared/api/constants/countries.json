@@ -28,10 +28,10 @@
     {"name": "Bhutan", "cca2": "BT", "flag": "🇧🇹", "code": "975"},
     {"name": "Botswana", "cca2": "BW", "flag": "🇧🇼", "code": "267"},
     {
-      "name": "Central African Republic",
-      "cca2": "CF",
-      "flag": "🇨🇫",
-      "code": "236"
+        "name": "Central African Republic",
+        "cca2": "CF",
+        "flag": "🇨🇫",
+        "code": "236"
     },
     {"name": "Canada", "cca2": "CA", "flag": "🇨🇦", "code": "1"},
     {"name": "Switzerland", "cca2": "CH", "flag": "🇨🇭", "code": "41"},
@@ -189,10 +189,10 @@
     {"name": "Uzbekistan", "cca2": "UZ", "flag": "🇺🇿", "code": "998"},
     {"name": "Vatican City", "cca2": "VA", "flag": "🇻🇦", "code": "3906698"},
     {
-      "name": "Saint Vincent and the Grenadines",
-      "cca2": "VC",
-      "flag": "🇻🇨",
-      "code": "1784"
+        "name": "Saint Vincent and the Grenadines",
+        "cca2": "VC",
+        "flag": "🇻🇨",
+        "code": "1784"
     },
     {"name": "Venezuela", "cca2": "VE", "flag": "🇻🇪", "code": "58"},
     {"name": "Vietnam", "cca2": "VN", "flag": "🇻🇳", "code": "84"},
@@ -202,4 +202,4 @@
     {"name": "South Africa", "cca2": "ZA", "flag": "🇿🇦", "code": "27"},
     {"name": "Zambia", "cca2": "ZM", "flag": "🇿🇲", "code": "260"},
     {"name": "Zimbabwe", "cca2": "ZW", "flag": "🇿🇼", "code": "263"}
-  ]
+]
