@@ -89,8 +89,3 @@ a.login_form_elem {
     text-decoration-line: underline;
     cursor: pointer;
 }
-
-label.Login_form_warn_mess {
-    font-size: 13px;
-    color: red;
-}

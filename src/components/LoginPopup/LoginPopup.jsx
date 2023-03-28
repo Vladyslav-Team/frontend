@@ -1,39 +1,25 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import styles from "./LoginPopup.module.css";
 
 const LoginPopup = (props) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleSubmit = (event) => {
-        if (email == "" || password == "") {
-            event.preventDefault();
-        }
-    };
+    const {register, handleSubmit} = useForm();
+    const onSubmit = data => console.log(JSON.stringify(data));
 
     return (
         <>
             <div className={styles.login_background} onClick={() => props.loginFormVisibility()}/>
-            <form className={styles.login_form} onSubmit={handleSubmit}>
+            <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
                 <h2 className={styles.login_form_elem}>Log in</h2>
                 <div className={styles.login_form_elem}>
                     <label>Email</label>
                     <br/>
-                    <input className={styles.login_form_elem} type="email" name="login_email" onChange={handleEmailChange}/>
+                    <input type="email" {...register("loginEmail", {required: true, minLength: 5, maxLength: 254})} className={styles.login_form_elem} />
                 </div>
                 <div className={styles.login_form_elem}>
                     <label>Password</label>
                     <br/>
-                    <input className={styles.login_form_elem} type="password" name="login_password" onChange={handlePasswordChange}/>
+                    <input type="password" {...register("loginPassword", {required: true, minLength: 8, maxLength: 64})} className={styles.login_form_elem} />
                 </div>
                 <button className={styles.login_form_elem} type="submit">LOG IN</button>
                 <p className={styles.login_form_elem}>or</p>
