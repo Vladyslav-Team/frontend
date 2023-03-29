@@ -1,6 +1,6 @@
 import React from "react"
 import {Navigate, Route, Routes} from "react-router-dom"
-import {CardsList} from "../components/CardsList"
+import {Main} from "../components/Main"
 import {SignUp} from "../components/pages/SignUp"
 import {LoginPopup} from "../components/LoginPopup"
 import {Endpoints} from "../shared/api/constants/endpoints"
@@ -8,8 +8,9 @@ import {Endpoints} from "../shared/api/constants/endpoints"
 const Router = ({isRegistered}) => {
     return (
         <Routes>
+            <Route index path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
-                <Route index element={<CardsList />} />
+                <Route index path="*" element={<Main />} />
                 <Route
                     path={"signup"}
                     element={

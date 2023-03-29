@@ -1,0 +1,1 @@
+export {axiosBaseQuery} from "./axiosInstances"

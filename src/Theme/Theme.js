@@ -18,6 +18,9 @@ const theme = createTheme({
         h1: {
             fontFamily: ["Inter", "sans-serif"].join(","),
         },
+        pagination: {
+            fontFamily: ["Inter", "sans-serif"].join(","),
+        },
         button: {
             fontFamily: ["Inter", "sans-serif"].join(","),
         },

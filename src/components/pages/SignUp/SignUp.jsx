@@ -90,8 +90,10 @@ const SignUp = () => {
                 <p className={styles.or}>or</p>
                 <p className={styles.login_check}>
                     Already on SkillScope?{" "}
-                    <NavLink to={`${Endpoints.POST_TALENT_LOGIN}`}>
-                        <b>Log in</b>
+                    <NavLink
+                        className={styles.login_form_elem}
+                        to={`${Endpoints.POST_TALENT_LOGIN}`}>
+                        Log in
                     </NavLink>
                 </p>
             </div>
@@ -100,3 +102,4 @@ const SignUp = () => {
 }
 
 export {SignUp}
+

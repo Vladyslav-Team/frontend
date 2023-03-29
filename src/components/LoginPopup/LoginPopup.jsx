@@ -4,7 +4,7 @@ import styles from "./LoginPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
 import {NavLink} from "react-router-dom"
 
-const LoginPopup = () => {
+const LoginPopup = ({setVisibilityLoginPopup}) => {
     const {
         register,
         handleSubmit,
@@ -25,7 +25,8 @@ const LoginPopup = () => {
         <>
             <div
                 className={styles.login_background}
-                // onClick={() => 0}
+                style={{display: !setVisibilityLoginPopup ? "none" : "block"}}
+                onClick={() => setVisibilityLoginPopup && setVisibilityLoginPopup(false)}
             />
             <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
                 <h2 className={styles.login_form_elem}>Log in</h2>
@@ -59,7 +60,12 @@ const LoginPopup = () => {
                 <p className={styles.login_form_elem}>or</p>
                 <p>
                     Want to join SkillScope?{" "}
-                    <NavLink to={"/talents/signup"} className={styles.login_form_elem}>
+                    <NavLink
+                        className={styles.login_form_elem}
+                        onClick={() =>
+                            setVisibilityLoginPopup && setVisibilityLoginPopup(false)
+                        }
+                        to={"/talents/signup"}>
                         <b>Sign up</b>
                     </NavLink>
                 </p>

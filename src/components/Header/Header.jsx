@@ -4,21 +4,24 @@ import styles from "./Header.module.css"
 import {NavLink, useLocation} from "react-router-dom"
 import PropTypes from "prop-types"
 import {Endpoints} from "../../shared/api/constants/endpoints"
+import {useSelector} from "react-redux"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
 
 const Header = ({isRegistered}) => {
-    const {pathname} = useLocation()
-    let isSigUpPage = pathname === "/talents/signup"
+    const page = useSelector((state) => state.page.value)
+    let location = useLocation()
+    const isSignup =
+        location.pathname === "/talents/signup" || location.pathname === "/talents/login"
 
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
-                <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
+                <NavLink to={`${Endpoints.GET_ALL_TALENTS}?page=${page}`}>
                     <Logo />
                 </NavLink>
             </div>
-            {isSigUpPage ? (
+            {isSignup ? (
                 <></>
             ) : (
                 <div className={styles.button_wrap}>
