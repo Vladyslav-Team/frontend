@@ -13,7 +13,7 @@ const Pagination = ({totalPages, currentPage}) => {
     return (
         <WrapperPagination>
             <PaginationUI
-                size="large"
+                size="medium"
                 count={totalPages}
                 page={value ? value : 2}
                 siblingCount={1}

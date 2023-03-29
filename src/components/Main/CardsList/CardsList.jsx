@@ -2,6 +2,8 @@ import React, {useLayoutEffect, useState} from "react"
 import {TalentCard} from "./components/TalentCard"
 import Grid from "@mui/material/Grid"
 import {Transition} from "react-transition-group"
+import styles from "./CardsList.module.css"
+
 const duration = 120
 
 const defaultStyle = {
@@ -44,17 +46,20 @@ const CardsList = ({GetTalentsData}) => {
         })
 
     return (
-        <>
-            <h1 style={{paddingTop: "20px", paddingLeft: "32px"}}>Talents</h1>
+        <div className={styles.wrapper}>
+            <h1 style={{fontSize: "28px"}}>Talents</h1>
             <Grid
                 container
-                spacing={10}
-                sx={{display: "flex", justifyContent: "center", paddingTop: "20px"}}>
+                alignItems="center"
+                rowSpacing={5}
+                columnSpacing={9}
+                justifyContent="center"
+                mt={-3}>
                 <Transition in={!contentChanged} timeout={300}>
                     {(state) => <>{talents && talents(state)}</>}
                 </Transition>
             </Grid>
-        </>
+        </div>
     )
 }
 
