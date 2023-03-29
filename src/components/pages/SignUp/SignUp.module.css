@@ -2,6 +2,7 @@
     position: relative;
     text-align: center;
     margin: 50px 0 20px 0;
+    top: -25px;
 }
 
 .form_wrap {
@@ -15,6 +16,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    top: -30px;
 }
 
 form input,
@@ -70,7 +72,14 @@ form .error {
     grid-column-gap: 20px;
     align-items: center;
 }
-
+.login_form_elem {
+    text-decoration-line: underline;
+    cursor: pointer;
+    display: inline;
+    cursor: pointer;
+    color: #3e3e3e;
+    font-weight: 600;
+}
 .or::before,
 .or::after {
     content: "";

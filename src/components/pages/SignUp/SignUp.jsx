@@ -3,7 +3,7 @@ import countryList from "../../../shared/api/constants/countries.json"
 import {useForm} from "react-hook-form"
 import {registerOptions} from "./validationRules"
 import styles from "./SignUp.module.css"
-
+import {NavLink} from "react-router-dom"
 const SignUp = () => {
     const {
         register,
@@ -87,7 +87,10 @@ const SignUp = () => {
                 </form>
                 <p className={styles.or}>or</p>
                 <p className={styles.login_check}>
-                    Already on SkillScope? <b>Log in</b>
+                    Already on SkillScope?{" "}
+                    <NavLink className={styles.login_form_elem} to={"/talents/login"}>
+                        Log in
+                    </NavLink>
                 </p>
             </div>
         </div>
