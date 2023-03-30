@@ -1,19 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
 
 .header {
+    position: fixed;
+    width: 100vw;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0px 32px;
-    height: 76px;
+    height: 55px;
     background: #0a6e9a;
+    z-index: 100;
 }
 
 .logo_wrap {
     position: flex;
-    margin-top: 5px;
     cursor: pointer;
 }
 
@@ -29,13 +31,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 111px;
+    width: 105px;
     height: 28px;
     border: 1px solid #ffffff;
     border-radius: 400px;
     flex: none;
     font-family: "Inter";
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     background-color: #0a6e9a;
     color: #ffffff;

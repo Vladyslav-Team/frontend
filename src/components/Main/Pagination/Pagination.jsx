@@ -9,23 +9,27 @@ const Pagination = ({totalPages, currentPage}) => {
     useEffect(() => {
         setValue(+currentPage)
         window.scroll({
-            top: 100,
-            left: 100,
+            top: 0,
+            left: 0,
             behavior: "smooth",
         })
     }, [value, currentPage])
 
+    const handleChange = (e, value) => {
+        dispatch(setPage(value))
+    }
+
     return (
         <WrapperPagination>
             <PaginationUI
-                size="large"
+                size="medium"
                 count={totalPages}
                 page={value ? value : false}
                 siblingCount={1}
                 boundaryCount={1}
                 color="primary"
                 shape="rounded"
-                onChange={(e, value) => dispatch(setPage(value))}
+                onChange={handleChange}
             />
         </WrapperPagination>
     )
