@@ -40,7 +40,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="text"
-                        {...register("loginEmail", registerOptions.email)}
+                        {...register("email", registerOptions.email)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginEmail && (
@@ -52,7 +52,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="password"
-                        {...register("loginPassword", registerOptionsPassword)}
+                        {...register("password", registerOptionsPassword)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginPassword && (
