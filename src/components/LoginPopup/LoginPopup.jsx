@@ -17,9 +17,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         maxLength: registerOptions.password.maxLength,
     }
 
-    const onSubmit = (data) => {
-        console.log(JSON.stringify(data))
-    }
+    const onSubmit = (data) => {}
 
     const loginStyle = !setVisibilityLoginPopup
         ? {position: "absolute", zIndex: 99}
