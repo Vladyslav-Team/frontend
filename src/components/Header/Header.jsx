@@ -3,17 +3,21 @@ import {Logo} from "./Logo"
 import styles from "./Header.module.css"
 import {NavLink} from "react-router-dom"
 import {Endpoints} from "../../shared/api/constants/endpoints"
-import {useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
+import {setPage} from "../Main/Pagination/slices/pageSlice"
 import {useLocation} from "react-router-dom"
 const Header = () => {
-    const page = useSelector((state) => state.page.value)
     let location = useLocation()
+    const dispatch = useDispatch()
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/login"
+
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
-                <NavLink to={`${Endpoints.GET_ALL_TALENTS}?page=${page}`}>
+                <NavLink
+                    to={`${Endpoints.GET_ALL_TALENTS}`}
+                    onClick={() => dispatch(setPage(undefined))}>
                     <Logo />
                 </NavLink>
             </div>
