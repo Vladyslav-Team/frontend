@@ -21,14 +21,21 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         console.log(JSON.stringify(data))
     }
 
+    const loginStyle = !setVisibilityLoginPopup
+        ? {position: "absolute", zIndex: 99}
+        : {position: "fixed", zIndex: 101}
+
     return (
         <>
             <div
                 className={styles.login_background}
-                style={{display: !setVisibilityLoginPopup ? "none" : "block"}}
+                style={{display: !setVisibilityLoginPopup ? "none" : "flex"}}
                 onClick={() => setVisibilityLoginPopup && setVisibilityLoginPopup(false)}
             />
-            <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
+            <form
+                className={styles.login_form}
+                onSubmit={handleSubmit(onSubmit)}
+                style={loginStyle}>
                 <h2 className={styles.login_form_elem}>Log in</h2>
                 <div className={styles.login_form_elem}>
                     <label>Email</label>

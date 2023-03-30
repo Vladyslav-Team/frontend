@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
 
 .header {
+    position: fixed;
     width: 100vw;
     box-sizing: border-box;
     display: flex;
@@ -10,6 +11,7 @@
     padding: 0px 32px;
     height: 55px;
     background: #0a6e9a;
+    z-index: 100;
 }
 
 .logo_wrap {

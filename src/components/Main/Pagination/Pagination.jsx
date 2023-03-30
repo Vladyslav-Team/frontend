@@ -10,6 +10,14 @@ const Pagination = ({totalPages, currentPage}) => {
         setValue(+currentPage)
     }, [value, currentPage])
 
+    const handleChange = (e, value) => {
+        dispatch(setPage(value))
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        })
+    }
+
     return (
         <WrapperPagination>
             <PaginationUI
@@ -20,7 +28,7 @@ const Pagination = ({totalPages, currentPage}) => {
                 boundaryCount={1}
                 color="primary"
                 shape="rounded"
-                onChange={(e, value) => dispatch(setPage(value))}
+                onChange={handleChange}
             />
         </WrapperPagination>
     )
