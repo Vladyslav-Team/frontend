@@ -3,8 +3,13 @@ import countryList from "../../../shared/api/constants/countries.json"
 import {useForm} from "react-hook-form"
 import {registerOptions} from "./validationRules"
 import styles from "./SignUp.module.css"
+import {useAddTalentsMutation} from "../../../shared/api/services/authentication"
 import {NavLink} from "react-router-dom"
+import jwt_decode from "jwt-decode"
+import {useNavigate} from "react-router-dom"
 const SignUp = () => {
+    const [updatePost, result] = useAddTalentsMutation()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -12,7 +17,10 @@ const SignUp = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(JSON.stringify(data))
+        updatePost(JSON.stringify(data))
+        console.log(result.data["jwt-token"])
+        result.data && localStorage.setItem("jwt-token", result.data["jwt-token"])
+        data && navigate("/")
     }
 
     return (

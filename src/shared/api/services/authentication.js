@@ -2,7 +2,7 @@ import {createApi} from "@reduxjs/toolkit/query/react"
 import {axiosBaseQuery} from "./axiosInstances"
 
 export const authenticationApi = createApi({
-    reducerPath: "autificationApi",
+    reducerPath: "authenticationApi",
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => {
         return {
@@ -17,4 +17,4 @@ export const authenticationApi = createApi({
     },
 })
 
-export const {useAddTalentsQuery} = authenticationApi
+export const {useAddTalentsMutation} = authenticationApi
