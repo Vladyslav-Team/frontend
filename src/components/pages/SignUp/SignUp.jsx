@@ -18,9 +18,8 @@ const SignUp = () => {
 
     const onSubmit = (data) => {
         updatePost(JSON.stringify(data))
-        console.log(result.data["jwt-token"])
         result.data && localStorage.setItem("jwt-token", result.data["jwt-token"])
-        data && navigate("/")
+        result.data && navigate("/")
     }
 
     return (
