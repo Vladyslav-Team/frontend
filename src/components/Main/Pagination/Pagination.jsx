@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react"
 import {PaginationUI, WrapperPagination} from "./styles"
-import {useDispatch} from "react-redux"
-import {setPage} from "./slices/pageSlice"
+import {useNavigate} from "react-router-dom"
+
 const Pagination = ({totalPages, currentPage}) => {
     const [value, setValue] = useState(null)
-    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         setValue(+currentPage)
@@ -16,7 +16,7 @@ const Pagination = ({totalPages, currentPage}) => {
     }, [value, currentPage])
 
     const handleChange = (e, value) => {
-        dispatch(setPage(value))
+        navigate(`/talents?page=${value}`)
     }
 
     return (
@@ -24,7 +24,7 @@ const Pagination = ({totalPages, currentPage}) => {
             <PaginationUI
                 size="medium"
                 count={totalPages}
-                page={value ? value : false}
+                page={currentPage}
                 siblingCount={1}
                 boundaryCount={1}
                 color="primary"

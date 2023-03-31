@@ -10,7 +10,7 @@ const Router = () => {
         <Routes>
             <Route index path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
-                <Route index path="*" element={<Main />} />
+                <Route path="" element={<Main />} />
                 <Route path={"signup"} element={<SignUp />} />
                 <Route path={`${Endpoints.POST_TALENT_LOGIN}`} element={<LoginPopup />} />
             </Route>
