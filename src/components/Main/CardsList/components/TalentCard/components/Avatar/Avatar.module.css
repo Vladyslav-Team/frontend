@@ -2,8 +2,6 @@
     position: relative;
     top: 35%;
     margin: 0 auto;
-    width: 58px;
-    height: 58px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.7);
     outline: 2px solid rgba(215, 227, 224, 0.5);
@@ -14,8 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 58px;
-    height: 58px;
+
     border-radius: 50%;
     color: #fff;
     font-weight: normal;
