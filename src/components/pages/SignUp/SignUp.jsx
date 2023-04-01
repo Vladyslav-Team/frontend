@@ -11,8 +11,8 @@ const SignUp = () => {
         formState: {errors},
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(JSON.stringify(data))
+    const onSubmit = () => {
+        //console.log(JSON.stringify(data))
     }
 
     return (
