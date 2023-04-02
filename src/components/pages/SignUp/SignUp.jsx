@@ -12,7 +12,7 @@ const SignUp = () => {
     } = useForm()
 
     const onSubmit = () => {
-        //console.log(JSON.stringify(data))
+        // console.log(JSON.stringify(data))
     }
 
     return (
