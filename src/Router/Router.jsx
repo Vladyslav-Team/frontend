@@ -4,6 +4,7 @@ import {Main} from "../components/Main"
 import {SignUp} from "../components/pages/SignUp"
 import {LoginPopup} from "../components/LoginPopup"
 import {Endpoints} from "../shared/api/constants/endpoints"
+import {PageNotFound} from "../components/404"
 
 const Router = () => {
     return (
@@ -14,7 +15,7 @@ const Router = () => {
                 <Route path={"signup"} element={<SignUp />} />
                 <Route path={`${Endpoints.POST_TALENT_LOGIN}`} element={<LoginPopup />} />
             </Route>
-            <Route path="*" element={<h1>Error Page</h1>} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
 }
