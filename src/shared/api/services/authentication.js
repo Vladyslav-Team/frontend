@@ -13,8 +13,15 @@ export const authenticationApi = createApi({
                     body: body,
                 }),
             }),
+            SigninTalent: build.mutation({
+                query: (body) => ({
+                    url: "/signin",
+                    method: "POST",
+                    body: body,
+                }),
+            }),
         }
     },
 })
 
-export const {useAddTalentsMutation} = authenticationApi
+export const {useAddTalentsMutation, useSigninTalentMutation} = authenticationApi
