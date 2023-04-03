@@ -9,14 +9,12 @@ const Header = () => {
     let location = useLocation()
     const navigate = useNavigate()
     const isSignup =
-        location.pathname === "/talents/signup" || location.pathname === "/talents/login"
+        location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
 
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
-                <NavLink
-                    to={`${Endpoints.GET_ALL_TALENTS}`}
-                    onClick={() => navigate("/talents")}>
+                <NavLink to={"/talents?page=1"}>
                     <Logo />
                 </NavLink>
             </div>
@@ -27,8 +25,8 @@ const Header = () => {
                     </NavLink>
                     <NavLink
                         className={styles.button_in}
-                        to={`${Endpoints.POST_TALENT_LOGIN}`}>
-                        LOG IN
+                        to={`${Endpoints.POST_TALENT_SIGNIN}`}>
+                        SIGN IN
                     </NavLink>
                 </div>
             )}

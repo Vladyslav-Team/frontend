@@ -3,21 +3,21 @@ import {Header} from "./components/Header"
 import {CssBaseline, ThemeProvider} from "@mui/material"
 import {theme} from "./Theme"
 import {Router} from "./Router"
-import {LoginPopup} from "./components/LoginPopup"
-import {LoginPopupContext} from "./context"
+import {SigninPopup} from "./components/SigninPopup"
+import {SigninPopupContext} from "./context"
 
 const App = () => {
-    const [visibilityLoginPopup, setVisibilityLoginPopup] = useState(false)
+    const [visibilitySigninPopup, setVisibilitySigninPopup] = useState(false)
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header />
-            <LoginPopupContext.Provider value={{setVisibilityLoginPopup}}>
+            <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
                 <Router />
-            </LoginPopupContext.Provider>
-            {visibilityLoginPopup && (
-                <LoginPopup setVisibilityLoginPopup={setVisibilityLoginPopup} />
+            </SigninPopupContext.Provider>
+            {visibilitySigninPopup && (
+                <SigninPopup setVisibilitySigninPopup={setVisibilitySigninPopup} />
             )}
         </ThemeProvider>
     )
