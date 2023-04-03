@@ -7,14 +7,15 @@ import {LoginPopup} from "./components/LoginPopup"
 import {LoginPopupContext} from "./context"
 
 const App = () => {
+    const [isRegistered] = useState(true)
     const [visibilityLoginPopup, setVisibilityLoginPopup] = useState(false)
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header />
+            <Header isRegistered={isRegistered} />
             <LoginPopupContext.Provider value={{setVisibilityLoginPopup}}>
-                <Router />
+                <Router isRegistered={isRegistered} />
             </LoginPopupContext.Provider>
             {visibilityLoginPopup && (
                 <LoginPopup setVisibilityLoginPopup={setVisibilityLoginPopup} />

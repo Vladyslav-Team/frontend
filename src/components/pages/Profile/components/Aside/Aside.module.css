@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 135px;
+}
+
+.info {
+    min-height: 100px;
+    color: #0a6f9a;
+}
+
+.generalInfo {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 700;
+    flex: 1 0 auto;
+}
+
+.location {
+    font-size: 18px;
+    display: flex;
+}
+
+.biography {
+    margin-top: 10px;
+}

@@ -1,11 +1,14 @@
 import React from "react"
-import {Logo} from "./Logo"
+import {Logo} from "./components/Logo"
 import styles from "./Header.module.css"
 import {NavLink} from "react-router-dom"
 import {Endpoints} from "../../shared/api/constants/endpoints"
 import {useNavigate} from "react-router-dom"
 import {useLocation} from "react-router-dom"
-const Header = () => {
+import {Avatar} from "../Avatar"
+import {ArrowButton} from "./components/ArrowButton"
+
+const Header = ({isRegistered}) => {
     let location = useLocation()
     const navigate = useNavigate()
     const isSignup =
@@ -20,16 +23,29 @@ const Header = () => {
                     <Logo />
                 </NavLink>
             </div>
-            {!isSignup && (
+            {isSignup ? (
+                <></>
+            ) : (
                 <div className={styles.button_wrap}>
-                    <NavLink className={styles.button_in} to="/talents/signup">
-                        SIGN UP
-                    </NavLink>
-                    <NavLink
-                        className={styles.button_in}
-                        to={`${Endpoints.POST_TALENT_LOGIN}`}>
-                        LOG IN
-                    </NavLink>
+                    {isRegistered ? (
+                        <>
+                            <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
+                                <Avatar avatar={""} size={40} style={styles.avatar} />
+                            </NavLink>
+                            <ArrowButton />
+                        </>
+                    ) : (
+                        <>
+                            <NavLink className={styles.button_in} to="/talents/signup">
+                                SIGN UP
+                            </NavLink>
+                            <NavLink
+                                className={styles.button_in}
+                                to={`${Endpoints.POST_TALENT_LOGIN}`}>
+                                LOG IN
+                            </NavLink>
+                        </>
+                    )}
                 </div>
             )}
         </header>

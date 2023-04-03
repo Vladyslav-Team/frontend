@@ -10,6 +10,10 @@
     text-decoration: none;
 }
 
+a {
+    color: #000;
+}
+
 body {
     font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 }
