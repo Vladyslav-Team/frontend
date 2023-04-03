@@ -11,6 +11,18 @@ const validatePassword = (value) => {
     }
 }
 
+const validateEmail = (value) => {
+    const emailLatin = /^[a-zA-Z]+$/
+    if (!emailLatin.test(value)) {
+        return "Email must be written in Latin"
+    }
+
+    const emailValid = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+    if (!emailValid.test(value)) {
+        return "Not valid email. Must be examp@gmail.com"
+    }
+}
+
 const validateDate = (value) => {
     const today = new Date()
     const birthDate = new Date(value)
@@ -52,9 +64,8 @@ const registerOptions = {
     },
     email: {
         required: "Email is required",
-        pattern: {
-            value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-            message: "Not valid email. Must be examp@gmail.com",
+        validate: {
+            message: validateEmail,
         },
         minLength: {
             value: 5,
