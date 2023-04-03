@@ -3,7 +3,7 @@ import {Avatar} from "./components/Avatar"
 import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
 import styles from "./TalentCard.module.css"
-import {LoginPopupContext} from "../../../../../context"
+import {SigninPopupContext} from "../../../../../context"
 const TalentCard = ({talent}) => {
     return (
         <div className={styles.card}>
@@ -16,14 +16,14 @@ const TalentCard = ({talent}) => {
                 <div className={styles.proof}>{talent.experience}</div>
             </div>
 
-            <LoginPopupContext.Consumer>
-                {({setVisibilityLoginPopup}) => (
+            <SigninPopupContext.Consumer>
+                {({setVisibilitySigninPopup}) => (
                     <VisitButton
-                        setVisibilityLoginPopup={setVisibilityLoginPopup}
+                        setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={talent.id}
                     />
                 )}
-            </LoginPopupContext.Consumer>
+            </SigninPopupContext.Consumer>
         </div>
     )
 }

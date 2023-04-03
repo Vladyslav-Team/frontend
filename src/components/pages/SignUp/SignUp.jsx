@@ -86,10 +86,10 @@ const SignUp = () => {
                     <button type="submit">SIGN UP</button>
                 </form>
                 <p className={styles.or}>or</p>
-                <p className={styles.login_check}>
+                <p className={styles.signin_check}>
                     Already on SkillScope?{" "}
-                    <NavLink className={styles.login_form_elem} to={"/talents/login"}>
-                        Log in
+                    <NavLink className={styles.signin_form_elem} to={"/talents/signin"}>
+                        Sign in
                     </NavLink>
                 </p>
             </div>
