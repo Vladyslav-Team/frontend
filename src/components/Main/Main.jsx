@@ -5,7 +5,7 @@ import {CardsList} from "./CardsList"
 import {useNavigate, useSearchParams} from "react-router-dom"
 import styles from "./Main.module.css"
 
-const Main = () => {
+const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
@@ -14,20 +14,25 @@ const Main = () => {
 
     useEffect(() => {
         if (!page) {
-            navigate(`/talents?page=${pageURL !== 0 ? pageURL : 1}`)
+            navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}`)
             setPage(+searchParams.get("page"))
         } else if (GetTalentsData.isError || isNaN(pageURL) === true) {
-            navigate("/talents?page=1")
+            navigate(`/${url}=1`)
             setPage(1)
         }
-    }, [GetTalentsData.isError, navigate, page, pageURL, searchParams])
+    }, [GetTalentsData.isError, navigate, page, pageURL, searchParams, url])
 
     return (
         <div className={styles.wrapper}>
-            <CardsList GetTalentsData={GetTalentsData} className={styles.content} />
+            <CardsList
+                GetTalentsData={GetTalentsData}
+                className={styles.content}
+                type={type}
+            />
             <Pagination
                 totalPages={GetTalentsData.data && GetTalentsData.data.totalPages}
                 currentPage={pageURL}
+                url={url}
                 sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
             />
         </div>

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import {PaginationUI, WrapperPagination} from "./styles"
 import {useNavigate} from "react-router-dom"
 
-const Pagination = ({totalPages, currentPage}) => {
+const Pagination = ({totalPages, currentPage, url}) => {
     const [value, setValue] = useState(null)
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ const Pagination = ({totalPages, currentPage}) => {
     }, [value, currentPage])
 
     const handleChange = (e, value) => {
-        navigate(`/talents?page=${value}`)
+        navigate(`/${url}=${value}`)
     }
 
     return (
