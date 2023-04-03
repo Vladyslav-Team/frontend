@@ -17,7 +17,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         maxLength: registerOptions.password.maxLength,
     }
 
-    const onSubmit = (data) => {}
+    const onSubmit = () => {}
 
     const loginStyle = !setVisibilityLoginPopup
         ? {position: "absolute", zIndex: 99}
@@ -40,7 +40,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="text"
-                        {...register("email", registerOptions.email)}
+                        {...register("loginEmail", registerOptions.email)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginEmail && (
@@ -52,7 +52,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="password"
-                        {...register("password", registerOptionsPassword)}
+                        {...register("loginPassword", registerOptionsPassword)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginPassword && (
