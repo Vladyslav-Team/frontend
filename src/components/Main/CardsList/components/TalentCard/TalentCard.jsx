@@ -1,14 +1,15 @@
 import React from "react"
-import {Avatar} from "./components/Avatar"
+import {Avatar} from "../../../../Avatar"
 import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
 import styles from "./TalentCard.module.css"
 import {SigninPopupContext} from "../../../../../context"
+
 const TalentCard = ({talent}) => {
     return (
         <div className={styles.card}>
             <div className={styles.background}>
-                <Avatar avatar={talent.image} />
+                <Avatar avatar={talent.image} size={58} />
             </div>
             <div className={styles.content}>
                 <div>{`${talent.name} ${talent.surname}`}</div>
