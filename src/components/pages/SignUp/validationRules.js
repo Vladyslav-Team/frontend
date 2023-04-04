@@ -11,18 +11,6 @@ const validatePassword = (value) => {
     }
 }
 
-const validateEmail = (value) => {
-    const emailLatin = /^[a-zA-Z]+$/
-    if (!emailLatin.test(value)) {
-        return "Email must be written in Latin"
-    }
-
-    const emailValid = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
-    if (!emailValid.test(value)) {
-        return "Not valid email. Must be examp@gmail.com"
-    }
-}
-
 const validateDate = (value) => {
     const today = new Date()
     const birthDate = new Date(value)
@@ -35,7 +23,7 @@ const registerOptions = {
     name: {
         required: "Name is required",
         pattern: {
-            value: /^[a-zA-Z\s]*$/,
+            value: /^[A-Za-z]+$/,
             message: "Name must be written in Latin",
         },
         minLength: {
@@ -50,7 +38,7 @@ const registerOptions = {
     surname: {
         required: "Surname is required",
         pattern: {
-            value: /^[a-zA-Z\s]*$/,
+            value: /^[A-Za-z]+$/,
             message: "Surname must be written in Latin",
         },
         minLength: {
@@ -64,8 +52,9 @@ const registerOptions = {
     },
     email: {
         required: "Email is required",
-        validate: {
-            message: validateEmail,
+        pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            message: "Not valid email. Must be examp@gmail.com",
         },
         minLength: {
             value: 5,
