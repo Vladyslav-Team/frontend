@@ -7,7 +7,10 @@ import {LoginPopup} from "./components/LoginPopup"
 import {LoginPopupContext} from "./context"
 
 const App = () => {
-    const [visibilityLoginPopup, setVisibilityLoginPopup] = useState(false)
+    const [visibilityLoginPopup, setVisibilityLoginPopup] = useState({
+        status: false,
+        id: null,
+    })
 
     return (
         <ThemeProvider theme={theme}>
@@ -16,8 +19,12 @@ const App = () => {
             <LoginPopupContext.Provider value={{setVisibilityLoginPopup}}>
                 <Router />
             </LoginPopupContext.Provider>
-            {visibilityLoginPopup && (
-                <LoginPopup setVisibilityLoginPopup={setVisibilityLoginPopup} />
+            {visibilityLoginPopup.status && (
+                <LoginPopup
+                    setVisibilityLoginPopup={setVisibilityLoginPopup}
+                    id={visibilityLoginPopup.id}
+                    status={visibilityLoginPopup.status}
+                />
             )}
         </ThemeProvider>
     )

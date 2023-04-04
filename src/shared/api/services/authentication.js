@@ -18,7 +18,7 @@ export const authenticationApi = createApi({
                     url: "/talents/login",
                     method: "POST",
                     auth: {
-                        username: "rhodaburgess@mailinator.com",
+                        username: "rhodaburgess@mailinator.cm",
                         password: "eaes@vXl1z",
                     },
                 }),

@@ -5,9 +5,12 @@ import {registerOptions} from "../pages/SignUp/validationRules.js"
 import {NavLink} from "react-router-dom"
 import {useSigninTalentMutation} from "../../shared/api/services/authentication"
 import {useNavigate} from "react-router-dom"
+import {useEffect} from "react"
+import {AlertError} from "../../shared/components"
 
-const LoginPopup = ({setVisibilityLoginPopup}) => {
+const LoginPopup = ({setVisibilityLoginPopup, id, status}) => {
     const [updatePost, result] = useSigninTalentMutation()
+
     const navigate = useNavigate()
     const {
         register,
@@ -20,15 +23,20 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         minLength: registerOptions.password.minLength,
         maxLength: registerOptions.password.maxLength,
     }
-
     const onSubmit = (data) => {
         console.log(JSON.stringify(data))
-        updatePost(JSON.stringify(data))
-        result.data && localStorage.setItem("jwt-token", result.data["jwt-token"])
-        result.data && navigate("/")
+        updatePost(data)
     }
 
-    const loginStyle = !setVisibilityLoginPopup
+    useEffect(() => {
+        if (result.data) {
+            localStorage.setItem("jwt-token", result.data["jwt-token"])
+            navigate(`/profile/${id}`)
+            setVisibilityLoginPopup({status: false})
+        }
+    }, [id, navigate, result.data, setVisibilityLoginPopup])
+
+    const loginStyle = !status
         ? {position: "absolute", zIndex: 99}
         : {position: "fixed", zIndex: 101}
 
@@ -39,6 +47,10 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                 style={{display: !setVisibilityLoginPopup ? "none" : "flex"}}
                 onClick={() => setVisibilityLoginPopup && setVisibilityLoginPopup(false)}
             />
+
+            {result.error && (
+                <AlertError defaultStatus={true} massageError={"бек спит "} />
+            )}
             <form
                 className={styles.login_form}
                 onSubmit={handleSubmit(onSubmit)}
@@ -49,11 +61,11 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="text"
-                        {...register("username", registerOptions.email)}
+                        {...register("username", registerOptions.username)}
                         className={styles.login_form_elem}
                     />
-                    {errors.loginEmail && (
-                        <p className={styles.error}>{errors.loginEmail.message}</p>
+                    {errors.username && (
+                        <p className={styles.error}>{errors.username.message}</p>
                     )}
                 </div>
                 <div className={styles.login_form_elem}>
@@ -64,8 +76,8 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                         {...register("password", registerOptionsPassword)}
                         className={styles.login_form_elem}
                     />
-                    {errors.loginPassword && (
-                        <p className={styles.error}>{errors.loginPassword.message}</p>
+                    {errors.password && (
+                        <p className={styles.error}>{errors.password.message}</p>
                     )}
                 </div>
                 <button className={styles.login_form_elem} type="submit">
@@ -87,5 +99,4 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         </>
     )
 }
-
 export {LoginPopup}

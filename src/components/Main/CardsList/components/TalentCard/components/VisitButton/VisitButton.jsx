@@ -12,7 +12,7 @@ const VisitButton = ({setVisibilityLoginPopup, id}) => {
         if (data) {
             navigate(`/profile/${id}`)
         } else {
-            setVisibilityLoginPopup(true)
+            setVisibilityLoginPopup({status: true, id: id})
         }
     }
     return (
