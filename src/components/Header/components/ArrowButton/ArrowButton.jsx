@@ -27,6 +27,7 @@ const ArrowButton = () => {
             <Menu
                 id="avatar-menu"
                 anchorEl={anchorEl}
+                disableScrollLock={true}
                 open={open}
                 MenuListProps={{
                     "aria-labelledby": "avatar-button",
@@ -41,7 +42,7 @@ const ArrowButton = () => {
                 }}
                 onClose={handleClose}>
                 <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
-                    <MenuItem onClick={handleClose}>Main</MenuItem>
+                    <MenuItem onClick={handleClose}>Talents</MenuItem>
                 </NavLink>
                 <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -50,7 +51,7 @@ const ArrowButton = () => {
                     <MenuItem onClick={handleClose}>Settings</MenuItem>
                 </NavLink>
                 <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
-                    <MenuItem onClick={handleClose}>log out</MenuItem>
+                    <MenuItem onClick={handleClose}>Sign out</MenuItem>
                 </NavLink>
             </Menu>
         </>

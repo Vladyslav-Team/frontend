@@ -20,9 +20,8 @@
     word-wrap: break-word;
 }
 
-.education > li {
-    font-size: 14px;
-    padding: 10px 0 0 12px;
+.education > p {
+    padding: 5px 0 0 12px;
 }
 
 .socialMedia {

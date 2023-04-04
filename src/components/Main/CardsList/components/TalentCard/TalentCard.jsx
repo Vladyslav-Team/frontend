@@ -20,7 +20,7 @@ const TalentCard = ({talent}) => {
             <LoginPopupContext.Consumer>
                 {({setVisibilityLoginPopup}) => (
                     <VisitButton
-                        setVisibilityLoginPopup={setVisibilityLoginPopup}
+                        setVisibilitySigninPopup={setVisibilityLoginPopup}
                         id={talent.id}
                     />
                 )}

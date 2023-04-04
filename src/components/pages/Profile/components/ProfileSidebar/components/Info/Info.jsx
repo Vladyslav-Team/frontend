@@ -1,44 +1,39 @@
 import React from "react"
 import styles from "./Info.module.css"
 import FacebookIcon from "@mui/icons-material/Facebook"
-import InstagramIcon from "@mui/icons-material/Instagram"
+import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import GitHub from "@mui/icons-material/GitHub"
 
 const Info = ({talent}) => {
-    const {age, email, phone, education, socials} = {...talent}
-    const {facebook, instagram, github, linkedin} = {...socials}
+    const {education, age, email, phone, socials} = {...talent}
+    const {facebook, twitter, github, linkedin} = {...socials}
 
     return (
         <div className={styles.wrapper}>
             {age && (
                 <div>
-                    Age : <span>{age}</span>{" "}
+                    <span>Age : </span>
+                    <span>{age}</span>{" "}
                 </div>
             )}
             {email && (
                 <div>
-                    Email : <span>{email}</span>
+                    <span>Email : </span>
+                    <span>{email}</span>
                 </div>
             )}
+
             {phone && (
                 <div>
-                    Phone : <span>{phone}</span>
+                    <span>Phone : </span>
+                    <span>{phone}</span>
                 </div>
             )}
             {education && (
-                <ul className={styles.education}>
-                    Education :
-                    {education.map((listItem, index) => {
-                        return (
-                            <li key={index}>
-                                {listItem[0]}
-                                <br />
-                                {listItem[1]}
-                            </li>
-                        )
-                    })}
-                </ul>
+                <div className={styles.education}>
+                    <span>Education :</span> <p>{education}</p>
+                </div>
             )}
             <div className={styles.socialMedia}>
                 {facebook && (
@@ -48,16 +43,13 @@ const Info = ({talent}) => {
                         />
                     </a>
                 )}
-                {instagram && (
-                    <a href={instagram}>
-                        <InstagramIcon
+                {twitter && (
+                    <a href={twitter}>
+                        <TwitterIcon
                             sx={{
-                                background:
-                                    "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
-                                borderRadius: 0.8,
-                                color: "#ffffff",
-                                width: "30px",
-                                height: "30px",
+                                color: "#1DA1F2",
+                                width: "35px",
+                                height: "35px",
                             }}
                         />
                     </a>

@@ -1,15 +1,14 @@
 import React from "react"
 import styles from "./Content.module.css"
-import {Post} from "./components"
+import {Proof} from "./components/Proof"
 
 const Content = () => {
     return (
         <div className={styles.wrapper}>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            <Proof />
+            <Proof />
+            <Proof />
+            <Proof />
         </div>
     )
 }
