@@ -3,8 +3,12 @@ import {useForm} from "react-hook-form"
 import styles from "./LoginPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
 import {NavLink} from "react-router-dom"
+import {useSigninTalentMutation} from "../../shared/api/services/authentication"
+import {useNavigate} from "react-router-dom"
 
 const LoginPopup = ({setVisibilityLoginPopup}) => {
+    const [updatePost, result] = useSigninTalentMutation()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -17,7 +21,12 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
         maxLength: registerOptions.password.maxLength,
     }
 
-    const onSubmit = () => {}
+    const onSubmit = (data) => {
+        console.log(JSON.stringify(data))
+        updatePost(JSON.stringify(data))
+        result.data && localStorage.setItem("jwt-token", result.data["jwt-token"])
+        result.data && navigate("/")
+    }
 
     const loginStyle = !setVisibilityLoginPopup
         ? {position: "absolute", zIndex: 99}
@@ -40,7 +49,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="text"
-                        {...register("loginEmail", registerOptions.email)}
+                        {...register("username", registerOptions.email)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginEmail && (
@@ -52,7 +61,7 @@ const LoginPopup = ({setVisibilityLoginPopup}) => {
                     <br />
                     <input
                         type="password"
-                        {...register("loginPassword", registerOptionsPassword)}
+                        {...register("password", registerOptionsPassword)}
                         className={styles.login_form_elem}
                     />
                     {errors.loginPassword && (

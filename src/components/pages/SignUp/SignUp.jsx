@@ -5,7 +5,6 @@ import {registerOptions} from "./validationRules"
 import styles from "./SignUp.module.css"
 import {useAddTalentsMutation} from "../../../shared/api/services/authentication"
 import {NavLink} from "react-router-dom"
-import jwt_decode from "jwt-decode"
 import {useNavigate} from "react-router-dom"
 const SignUp = () => {
     const [updatePost, result] = useAddTalentsMutation()
@@ -17,6 +16,7 @@ const SignUp = () => {
     } = useForm()
 
     const onSubmit = (data) => {
+        console.log(JSON.stringify(data))
         updatePost(JSON.stringify(data))
         result.data && localStorage.setItem("jwt-token", result.data["jwt-token"])
         result.data && navigate("/")

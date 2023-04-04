@@ -8,13 +8,23 @@ export const authenticationApi = createApi({
         return {
             AddTalents: build.mutation({
                 query: (body) => ({
-                    url: "/signup",
+                    url: "/talents",
                     method: "POST",
                     body: body,
+                }),
+            }),
+            SigninTalent: build.mutation({
+                query: (body) => ({
+                    url: "/talents/login",
+                    method: "POST",
+                    auth: {
+                        username: "rhodaburgess@mailinator.com",
+                        password: "eaes@vXl1z",
+                    },
                 }),
             }),
         }
     },
 })
 
-export const {useAddTalentsMutation} = authenticationApi
+export const {useAddTalentsMutation, useSigninTalentMutation} = authenticationApi
