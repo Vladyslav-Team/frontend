@@ -21,7 +21,7 @@ const AlertError = ({defaultStatus, massageError}) => {
                         </IconButton>
                     }
                     severity="error"
-                    sx={{position: "fixed", bottom: "10px", right: "10px", zIndex: 20}}>
+                    sx={{position: "fixed", bottom: "10px", right: "10px", zIndex: 120}}>
                     <AlertTitle>Error</AlertTitle>
                     {massageError}
                 </Alert>

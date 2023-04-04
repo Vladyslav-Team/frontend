@@ -39,18 +39,20 @@ const LoginPopup = ({setVisibilityLoginPopup, id, status}) => {
     const loginStyle = !status
         ? {position: "absolute", zIndex: 99}
         : {position: "fixed", zIndex: 101}
-
+    console.log()
     return (
-        <>
+        <div>
             <div
                 className={styles.login_background}
                 style={{display: !setVisibilityLoginPopup ? "none" : "flex"}}
-                onClick={() => setVisibilityLoginPopup && setVisibilityLoginPopup(false)}
-            />
+                onClick={() =>
+                    setVisibilityLoginPopup && setVisibilityLoginPopup(false)
+                }></div>
 
             {result.error && (
-                <AlertError defaultStatus={true} massageError={"бек спит "} />
+                <AlertError defaultStatus={true} massageError={result.error.message} />
             )}
+
             <form
                 className={styles.login_form}
                 onSubmit={handleSubmit(onSubmit)}
@@ -96,7 +98,7 @@ const LoginPopup = ({setVisibilityLoginPopup, id, status}) => {
                     </NavLink>
                 </p>
             </form>
-        </>
+        </div>
     )
 }
 export {LoginPopup}
