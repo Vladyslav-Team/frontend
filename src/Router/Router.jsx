@@ -2,7 +2,7 @@ import React from "react"
 import {Navigate, Route, Routes} from "react-router-dom"
 import {Main} from "../components/Main"
 import {SignUp} from "../components/pages/SignUp"
-import {LoginPopup} from "../components/LoginPopup"
+import {SigninPopup} from "../components/SigninPopup"
 import {Endpoints} from "../shared/api/constants/endpoints"
 import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
@@ -13,6 +13,7 @@ const Router = ({isRegistered}) => {
             <Route index path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main />} />
+
                 <Route path={`${Endpoints.GET_TALENT_BY_ID}/id`} element={<Profile />} />
                 <Route
                     path={"signup"}
@@ -25,12 +26,12 @@ const Router = ({isRegistered}) => {
                     }
                 />
                 <Route
-                    path={`${Endpoints.POST_TALENT_LOGIN}`}
+                    path={`${Endpoints.POST_TALENT_SIGNIN}`}
                     element={
                         isRegistered ? (
                             <Navigate to={`${Endpoints.GET_ALL_TALENTS}`} />
                         ) : (
-                            <LoginPopup />
+                            <SigninPopup />
                         )
                     }
                 />

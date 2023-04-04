@@ -78,7 +78,7 @@ form .error {
     grid-column-gap: 20px;
     align-items: center;
 }
-.login_form_elem {
+.signin_form_elem {
     text-decoration-line: underline;
     cursor: pointer;
     display: inline;

@@ -13,7 +13,7 @@ const ProfileSidebar = ({talent}) => {
         <div className={styles.sidebar}>
             <Avatar avatar={talent.image} size={180} style={styles.avatar} />
             <Info talent={talent} />
-            <NavLink to={"/"}>
+            <NavLink to={"/talents/edit"}>
                 <Button
                     variant="outlined"
                     size="large"
