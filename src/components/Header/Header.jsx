@@ -12,6 +12,9 @@ const Header = ({isRegistered}) => {
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
 
+    const isTalentsPage = location.pathname === "/talents"
+    const isProofsPage = location.pathname === "/proofs"
+
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
@@ -19,6 +22,30 @@ const Header = ({isRegistered}) => {
                     <Logo />
                 </NavLink>
             </div>
+            <nav className={styles.navigation}>
+                <ul>
+                    <li>
+                        <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
+                            <span
+                                className={`${styles.navItem} ${
+                                    isTalentsPage && styles.active
+                                }`}>
+                                Talents
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/proofs"}>
+                            <span
+                                className={`${styles.navItem} ${
+                                    isProofsPage && styles.active
+                                }`}>
+                                Proofs
+                            </span>
+                        </NavLink>
+                    </li>
+                </ul>
+            </nav>
             {isSignup ? (
                 <></>
             ) : (

@@ -41,14 +41,8 @@ const ArrowButton = () => {
                     horizontal: "right",
                 }}
                 onClose={handleClose}>
-                <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
-                    <MenuItem onClick={handleClose}>Talents</MenuItem>
-                </NavLink>
-                <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                </NavLink>
                 <NavLink to={"/edit"}>
-                    <MenuItem onClick={handleClose}>Settings</MenuItem>
+                    <MenuItem onClick={handleClose}>Edit</MenuItem>
                 </NavLink>
                 <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
                     <MenuItem onClick={handleClose}>Sign out</MenuItem>
