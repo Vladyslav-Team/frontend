@@ -5,14 +5,14 @@ import styles from "./VisitButton.module.css"
 import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {useNavigate} from "react-router-dom"
 
-const VisitButton = ({setVisibilityLoginPopup, id}) => {
+const VisitButton = ({setVisibilitySigninPopup, id}) => {
     const {data} = useJwtCheck()
     const navigate = useNavigate()
     const handleClick = () => {
         if (data) {
             navigate(`/profile/${id}`)
         } else {
-            setVisibilityLoginPopup({status: true, id: id})
+            setVisibilitySigninPopup({status: true, id: id})
         }
     }
     return (

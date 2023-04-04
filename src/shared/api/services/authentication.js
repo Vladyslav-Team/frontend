@@ -10,17 +10,14 @@ export const authenticationApi = createApi({
                 query: (body) => ({
                     url: "/talents",
                     method: "POST",
-                    body: body,
+                    data: body,
                 }),
             }),
             SigninTalent: build.mutation({
                 query: (body) => ({
                     url: "/talents/login",
                     method: "POST",
-                    auth: {
-                        username: "rhodaburgess@mailinator.cm",
-                        password: "eaes@vXl1z",
-                    },
+                    auth: body,
                 }),
             }),
         }
