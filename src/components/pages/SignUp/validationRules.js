@@ -23,7 +23,7 @@ const registerOptions = {
     name: {
         required: "Name is required",
         pattern: {
-            value: /^[a-zA-Z\s]*$/,
+            value: /^[A-Za-z]+$/,
             message: "Name must be written in Latin",
         },
         minLength: {
@@ -38,7 +38,7 @@ const registerOptions = {
     surname: {
         required: "Surname is required",
         pattern: {
-            value: /^[a-zA-Z\s]*$/,
+            value: /^[A-Za-z]+$/,
             message: "Surname must be written in Latin",
         },
         minLength: {
@@ -53,7 +53,7 @@ const registerOptions = {
     email: {
         required: "Email is required",
         pattern: {
-            value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             message: "Not valid email. Must be examp@gmail.com",
         },
         minLength: {

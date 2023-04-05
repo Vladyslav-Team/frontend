@@ -1,8 +1,6 @@
 import React from "react"
-import {Avatar} from "./components/Avatar"
-import {VisitButton} from "./components/VisitButton"
 import styles from "./TalentCard.module.css"
-import {LoginPopupContext} from "../../../../../context"
+
 import Typography from "@mui/material/Typography"
 const ProofCard = ({talent}) => {
     return (
@@ -25,14 +23,6 @@ const ProofCard = ({talent}) => {
             <Typography variant="subtitle2" gutterBottom>
                 11.05.2023
             </Typography>
-            <LoginPopupContext.Consumer>
-                {({setVisibilityLoginPopup}) => (
-                    <VisitButton
-                        setVisibilityLoginPopup={setVisibilityLoginPopup}
-                        id={talent.id}
-                    />
-                )}
-            </LoginPopupContext.Consumer>
         </div>
     )
 }

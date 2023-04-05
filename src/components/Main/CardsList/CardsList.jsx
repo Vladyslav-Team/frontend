@@ -9,7 +9,7 @@ const CardsList = ({GetTalentsData, type}) => {
         data.talents.map((talent) => {
             return (
                 <Grid item key={talent.id}>
-                    {type === "Talent" ? (
+                    {type === "Talents" ? (
                         <TalentCard talent={talent} />
                     ) : (
                         <ProofCard talent={talent} />
