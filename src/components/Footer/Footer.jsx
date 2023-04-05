@@ -1,5 +1,4 @@
 import React from "react"
-// import { Logo } from "./Logo"
 import styles from "./Footer.module.css"
 import { Logo } from "../Header/components/Logo"
 

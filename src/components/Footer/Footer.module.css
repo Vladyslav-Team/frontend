@@ -1,12 +1,11 @@
 .footer_wrap {
     width: 100%;
     padding: 10px 0;
-    bottom: 0px;
     margin-top: 70px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #2e2c2c;
+    background-color: #414141;
     color: white;
 }
 
