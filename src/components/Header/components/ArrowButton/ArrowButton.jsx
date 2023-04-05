@@ -1,6 +1,5 @@
 import React, {useState} from "react"
 import {NavLink} from "react-router-dom"
-import {Endpoints} from "../../../../shared/api/constants/endpoints"
 import {KeyboardArrowDown} from "@mui/icons-material"
 import {Menu, MenuItem} from "@mui/material"
 
@@ -44,7 +43,7 @@ const ArrowButton = () => {
                 <NavLink to={"/edit"}>
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
                 </NavLink>
-                <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
+                <NavLink onClick={() => localStorage.removeItem("jwt-token")} to={"/"}>
                     <MenuItem onClick={handleClose}>Sign out</MenuItem>
                 </NavLink>
             </Menu>

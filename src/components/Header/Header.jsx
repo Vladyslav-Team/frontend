@@ -6,8 +6,10 @@ import {Endpoints} from "../../shared/api/constants/endpoints"
 import {useLocation} from "react-router-dom"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
+import {useJwtCheck} from "../../shared/api/hooks"
 
-const Header = ({isRegistered}) => {
+const Header = () => {
+    const {data} = useJwtCheck()
     let location = useLocation()
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
@@ -50,9 +52,9 @@ const Header = ({isRegistered}) => {
                 <></>
             ) : (
                 <div className={styles.button_wrap}>
-                    {isRegistered ? (
+                    {data ? (
                         <>
-                            <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
+                            <NavLink to={`${"profile"}/${data.id}`}>
                                 <Avatar avatar={""} size={40} style={styles.avatar} />
                             </NavLink>
                             <ArrowButton />

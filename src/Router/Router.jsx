@@ -13,8 +13,6 @@ const Router = ({isRegistered}) => {
             <Route index path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main />} />
-
-                <Route path={`${Endpoints.GET_TALENT_BY_ID}/id`} element={<Profile />} />
                 <Route
                     path={"signup"}
                     element={
@@ -35,6 +33,9 @@ const Router = ({isRegistered}) => {
                         )
                     }
                 />
+            </Route>
+            <Route path={"/profile"}>
+                <Route path={":talentId"} element={<Profile />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -10,12 +10,12 @@ const axiosInstance = axios.create({
 
 export const axiosBaseQuery =
     ({baseUrl} = {}) =>
-    async ({url, method}) => {
-        try {
-            const response = await axiosInstance({url: url, method: method})
-            return {data: response.data}
-        } catch (error) {
-            console.error(error)
-            throw error
-        }
+    async ({url, method, data, auth}) => {
+        const response = await axiosInstance({
+            url: url,
+            method: method,
+            data: data,
+            auth: auth,
+        })
+        return {data: response.data}
     }

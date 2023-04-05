@@ -13,8 +13,9 @@ export const MockInit = () => {
     mock.onGet(`${Endpoints.BASE_ENDPOINT_BACKEND}/talents?page=3`).reply(200, page3)
     mock.onGet(`${Endpoints.BASE_ENDPOINT_BACKEND}/talents?page=4`).reply(200, page4)
     mock.onGet(Endpoints.GET_TALENT_BY_ID, {params: {"talent-id": "1"}}).reply(200, {})
-    mock.onPost(Endpoints.POST_TALENT_ADD).reply(200, authenticationResponse)
-    mock.onPost(Endpoints.POST_TALENT_SIGNIN).reply(500, authenticationResponseError)
+    mock.onPost("/signup").reply(200, authenticationResponse)
+    mock.onPost("/signin").reply(200, authenticationResponse)
+    mock.onPost(Endpoints.POST_TALENT_LOGIN).reply(500, authenticationResponseError)
     mock.onPatch(Endpoints.PATCH_TALENT_INFO, {params: {"talent-id": "1"}}).reply(200, {})
     mock.onDelete(Endpoints.DELETE_TALENT, {params: {"talent-id": "1"}}).reply(200, {})
 }
