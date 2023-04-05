@@ -8,9 +8,8 @@ import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
 import {useJwtCheck} from "../../shared/api/hooks"
 
-const Header = ({isRegistered}) => {
+const Header = () => {
     const {data} = useJwtCheck()
-    console.log(data)
     let location = useLocation()
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/signin"

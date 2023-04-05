@@ -2,12 +2,17 @@ import React, {useEffect, useState} from "react"
 import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"
+import {useJwtCheck} from "../../../shared/api/hooks"
+import {useNavigate} from "react-router-dom"
 
 const Profile = () => {
+    const data = useJwtCheck()
+    const navigate = useNavigate()
     const [talent, setTalent] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
+        !data && navigate("/talents/signin")
         setTalent({
             id: 1,
             image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqghHTeMq3Qm98GfOQbr2TaNJxoj3AYsX1TEZ0N9GCmCqCYv0osGYwl4k2bFgsa3433qI&usqp=CAU",
@@ -30,7 +35,7 @@ const Profile = () => {
         })
 
         setIsLoaded(true)
-    }, [])
+    }, [data, navigate])
 
     return (
         <>
