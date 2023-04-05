@@ -11,16 +11,11 @@ const axiosInstance = axios.create({
 export const axiosBaseQuery =
     ({baseUrl} = {}) =>
     async ({url, method, data, auth}) => {
-        try {
-            const response = await axiosInstance({
-                url: url,
-                method: method,
-                data: data,
-                auth: auth,
-            })
-            return {data: response.data}
-        } catch (error) {
-            console.error(error)
-            throw error
-        }
+        const response = await axiosInstance({
+            url: url,
+            method: method,
+            data: data,
+            auth: auth,
+        })
+        return {data: response.data}
     }

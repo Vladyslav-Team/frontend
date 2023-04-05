@@ -1,6 +1,5 @@
 import React, {useState} from "react"
 import {NavLink} from "react-router-dom"
-import {Endpoints} from "../../../../shared/api/constants/endpoints"
 import {KeyboardArrowDown} from "@mui/icons-material"
 import {Menu, MenuItem} from "@mui/material"
 
