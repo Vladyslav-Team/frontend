@@ -5,6 +5,7 @@ import {theme} from "./Theme"
 import {Router} from "./Router"
 import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
+import { Footer } from "./components/Footer"
 
 const App = () => {
     const [isRegistered] = useState(true)
@@ -21,6 +22,7 @@ const App = () => {
             {visibilitySigninPopup && (
                 <SigninPopup setVisibilitySigninPopup={setVisibilitySigninPopup} />
             )}
+            <Footer />
         </ThemeProvider>
     )
 }
