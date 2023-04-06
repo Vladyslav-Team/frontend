@@ -1,5 +1,6 @@
 import axios from "axios"
 import {Endpoints} from "../constants/endpoints"
+import {useJwtCheck} from "../hooks"
 
 const axiosInstance = axios.create({
     baseURL: Endpoints.BASE_ENDPOINT_BACKEND,
@@ -16,6 +17,11 @@ export const axiosBaseQuery =
             method: method,
             data: data,
             auth: auth,
+            headers: {
+                Authorization:
+                    localStorage.getItem("jwt-token") &&
+                    `Bearer ${localStorage.getItem("jwt-token")}`,
+            },
         })
         return {data: response.data}
     }
