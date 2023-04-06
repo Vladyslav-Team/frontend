@@ -78,7 +78,7 @@ form .error {
     grid-column-gap: 20px;
     align-items: center;
 }
-.login_form_elem {
+.signin_form_elem {
     text-decoration-line: underline;
     cursor: pointer;
     display: inline;
@@ -92,4 +92,16 @@ form .error {
     display: block;
     height: 0.5px;
     background-color: currentColor;
+}
+
+button:disabled,
+button[disabled] {
+    cursor: not-allowed;
+}
+
+button:disabled,
+button[disabled]:hover {
+    border: 1px solid #ffffff;
+    background: #ffffff;
+    color: #0a6e9a;
 }

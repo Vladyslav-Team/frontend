@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
 
-.login_background {
+.signin_background {
     position: fixed;
     justify-content: center;
     align-items: center;
@@ -13,7 +13,7 @@
     z-index: 101;
 }
 
-.login_form {
+.signin_form {
     position: absolute;
     top: 20vh;
     left: 50%;
@@ -27,11 +27,11 @@
     z-index: 102;
 }
 
-h2.login_form_elem {
+h2.signin_form_elem {
     margin: 0 0 10px 0;
 }
 
-div.login_form_elem {
+div.signin_form_elem {
     margin: auto;
     text-align: left;
     width: fit-content;
@@ -39,7 +39,7 @@ div.login_form_elem {
     margin: 0 0 25px 0;
 }
 
-input.login_form_elem {
+input.signin_form_elem {
     font-size: 15px;
     margin: 5px 0 0 0;
     padding: 10px 5px;
@@ -50,11 +50,11 @@ input.login_form_elem {
     outline: 0;
 }
 
-input.login_form_elem:focus {
+input.signin_form_elem:focus {
     border: 2px solid black;
 }
 
-button.login_form_elem {
+button.signin_form_elem {
     display: block;
     justify-content: center;
     width: 100px;
@@ -74,18 +74,18 @@ button.login_form_elem {
     transition-duration: 0.3s;
 }
 
-button.login_form_elem:hover {
+button.signin_form_elem:hover {
     background: #0a6e9a;
     color: #ffffff;
 }
 
-p.login_form_elem {
+p.signin_form_elem {
     overflow: hidden;
     margin: 10px 0;
 }
 
-p.login_form_elem:before,
-p.login_form_elem:after {
+p.signin_form_elem:before,
+p.signin_form_elem:after {
     content: "";
     display: inline-block;
     position: relative;
@@ -95,17 +95,17 @@ p.login_form_elem:after {
     background: #000000;
 }
 
-p.login_form_elem:before {
+p.signin_form_elem:before {
     right: 10%;
     margin-left: -50%;
 }
 
-p.login_form_elem:after {
+p.signin_form_elem:after {
     left: 10%;
     margin-right: -50%;
 }
 
-a.login_form_elem {
+a.signin_form_elem {
     text-decoration-line: underline;
     cursor: pointer;
     display: inline;

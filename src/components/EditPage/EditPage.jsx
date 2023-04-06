@@ -17,7 +17,9 @@ const EditPage = () => {
         handleSubmit,
         formState: {errors},
     } = useForm()
-    const onSubmit = () => {}
+    const onSubmit = (data) => {
+        console.log(JSON.stringify(data).replace("T22:00:00.000Z", ""))
+    }
     // console.log(JSON.stringify(data).replace("T22:00:00.000Z", ""))
     const matches = useMediaQuery("(min-width:750px)")
 

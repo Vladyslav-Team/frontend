@@ -26,7 +26,7 @@ const BirthDate = ({control, errors}) => {
                             }}
                             slotProps={{
                                 textField: {
-                                    error: !!errors.Email,
+                                    error: !errors.BirthDate,
                                     helperText:
                                         errors.BirthDate && `${errors.BirthDate.message}`,
                                 },

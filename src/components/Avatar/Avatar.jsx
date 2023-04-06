@@ -1,29 +1,23 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styles from "./Avatar.module.css"
-import avatarIncognito from "../../../../../../../source/img/avatarIncognito.png"
+import avatarIncognito from "../../source/img/avatarIncognito.png"
 
-const Avatar = ({avatar, size = 58}) => {
+const Avatar = ({avatar, size, style}) => {
+    const sizeStyle = {width: `${size}px`, height: `${size}px`}
+
     const handleError = (e) => {
         e.target.src = avatarIncognito
     }
 
     return (
-        <div
-            style={{
-                width: size,
-                height: size,
-            }}
-            className={styles.wrapper}>
+        <div className={`${styles.wrapper}`} style={sizeStyle}>
             <img
                 src={avatar || avatarIncognito}
                 alt="avatar"
-                className={styles.avatar}
+                className={`${style} ${styles.avatar} `}
                 onError={handleError}
-                style={{
-                    width: size,
-                    height: size,
-                }}
+                style={sizeStyle}
             />
         </div>
     )
@@ -31,6 +25,8 @@ const Avatar = ({avatar, size = 58}) => {
 
 Avatar.propTypes = {
     avatar: PropTypes.string,
+    size: PropTypes.number,
+    style: PropTypes.string,
 }
 
 export {Avatar}
