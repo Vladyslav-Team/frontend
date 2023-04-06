@@ -1,7 +1,8 @@
 import axios from "axios"
 import {Endpoints} from "../constants/endpoints"
-import {MockInit} from "./../mock/mock"
+import {MockInit} from "../mock/mock"
 MockInit()
+
 const axiosInstance = axios.create({
     baseURL: Endpoints.BASE_ENDPOINT_BACKEND,
     headers: {
@@ -17,6 +18,11 @@ export const axiosBaseQuery =
             method: method,
             data: data,
             auth: auth,
+            headers: {
+                Authorization:
+                    localStorage.getItem("jwt-token") &&
+                    `Bearer ${localStorage.getItem("jwt-token")}`,
+            },
         })
         return {data: response.data}
     }

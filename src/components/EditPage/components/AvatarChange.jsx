@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {Avatar} from "../../Avatar"
 
-const AvatarChange = () => {
+const AvatarChange = ({avatar}) => {
     const matches = useMediaQuery("(min-width:750px)")
     return (
         <Grid
@@ -16,7 +16,7 @@ const AvatarChange = () => {
             justifyContent="flex-start"
             alignItems={"center"}
             marginTop={"120px"}>
-            <Avatar size={180} />
+            <Avatar avatar={avatar} size={180} />
             <Button
                 sx={{position: "relative", top: "20px"}}
                 size="large"

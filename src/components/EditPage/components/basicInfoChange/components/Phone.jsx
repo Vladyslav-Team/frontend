@@ -12,11 +12,11 @@ const Phone = ({field, errors}) => {
                 inputStyle={{width: "100%", height: "56px", outline: "none"}}
                 country={"ua"}
                 onlyCountries={countryList.map((el) => el.cca2.toLowerCase())}
-                error={!!errors.Phone}
+                error={!!errors.phone}
                 enableSearch
                 searchStyle={{borderRadius: "5px"}}
                 buttonStyle={{border: "none"}}
-                helperText={errors.Phone && `${errors.Phone.message}`}
+                helperText={errors.Phone && `${errors.phone.message}`}
                 {...field}
             />
         </Grid>

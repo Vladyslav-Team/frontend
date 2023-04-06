@@ -19,8 +19,8 @@ const BasicInfoChange = ({control, errors}) => {
                 <BirthDate control={control} errors={errors} />
                 <Location control={control} errors={errors} />
                 <Controller
-                    name="Phone"
-                    rules={registerOptions.Phone}
+                    name="phone"
+                    rules={registerOptions.phone}
                     control={control}
                     render={({field}) => <Phone field={field} errors={errors} />}
                 />

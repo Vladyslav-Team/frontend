@@ -18,7 +18,7 @@ const Location = ({control, errors}) => {
             paddingBottom={"20px"}>
             <Controller
                 control={control}
-                name="Country"
+                name="location"
                 rules={registerOptions.location}
                 render={({field: {onChange, value}}) => (
                     <Autocomplete

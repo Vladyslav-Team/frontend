@@ -20,8 +20,15 @@ export const authenticationApi = createApi({
                     auth: body,
                 }),
             }),
+            SignOutTalent: build.mutation({
+                query: () => ({
+                    url: "/talents/logout",
+                    method: "GET",
+                }),
+            }),
         }
     },
 })
 
-export const {useAddTalentsMutation, useSigninTalentMutation} = authenticationApi
+export const {useAddTalentsMutation, useSigninTalentMutation, useSignOutTalentMutation} =
+    authenticationApi

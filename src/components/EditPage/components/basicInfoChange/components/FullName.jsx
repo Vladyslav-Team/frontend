@@ -22,17 +22,18 @@ const FullName = ({control, errors}) => {
                 width={matches ? "350px" : "100%"}
                 paddingBottom={matches ? "0" : "20px"}>
                 <Controller
-                    name="FirstName"
+                    name="name"
                     control={control}
                     rules={registerOptions.name}
                     render={({field}) => (
                         <TextField
                             sx={{width: "100%"}}
                             id="outlined-basic1"
+                            InputLabelProps={{shrink: true}}
                             label="FIRST NAME"
                             variant="outlined"
-                            error={!!errors.FirstName}
-                            helperText={errors.FirstName && `${errors.FirstName.message}`}
+                            error={!!errors.name}
+                            helperText={errors.name && `${errors.name.message}`}
                             {...field}
                         />
                     )}
@@ -40,17 +41,18 @@ const FullName = ({control, errors}) => {
             </Grid>
             <Grid item width={matches ? "350px" : "100%"}>
                 <Controller
-                    name="LastName"
+                    name="surname"
                     control={control}
                     rules={registerOptions.name}
                     render={({field}) => (
                         <TextField
+                            InputLabelProps={{shrink: true}}
                             sx={{width: "100%"}}
                             id="outlined-basic"
                             label="LAST NAME"
                             variant="outlined"
-                            error={!!errors.LastName}
-                            helperText={errors.LastName && `${errors.LastName.message}`}
+                            error={!!errors.surname}
+                            helperText={errors.surname && `${errors.surname.message}`}
                             {...field}
                         />
                     )}
