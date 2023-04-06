@@ -8,8 +8,11 @@ export const GetAllInfoByID = createApi({
         return {
             GetAllInfoByID: build.query({
                 query: (id, token) => ({
-                    url: "/talents/2",
+                    url: `/talents/${id}`,
                     method: "GET",
+                    headers: {
+                        Authorization: token && `Bearer ${token} `,
+                    },
                 }),
             }),
         }
