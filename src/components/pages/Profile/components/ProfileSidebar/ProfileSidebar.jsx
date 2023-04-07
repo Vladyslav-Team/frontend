@@ -5,6 +5,7 @@ import {Button} from "@mui/material"
 import {Info} from "./components/Info"
 import {useTheme} from "@emotion/react"
 import {NavLink} from "react-router-dom"
+import {DeleteButton} from "../../../../DeleteButton"
 
 const ProfileSidebar = ({talent}) => {
     const theme = useTheme()
@@ -25,6 +26,7 @@ const ProfileSidebar = ({talent}) => {
                     Edit
                 </Button>
             </NavLink>
+            <DeleteButton />
         </div>
     )
 }

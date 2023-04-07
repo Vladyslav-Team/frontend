@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 10px 10px;
     position: relative;
     overflow: hidden;
     transition: all 0.8s ease 0s;
