@@ -4,20 +4,18 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider"
 import {DatePicker} from "@mui/x-date-pickers/DatePicker"
 import {Controller} from "react-hook-form"
 import {registerOptions} from "../../../../pages/SignUp/validationRules"
-import dayjs from "dayjs"
 const BirthDate = ({control, errors}) => {
     return (
         <>
             <Controller
-                name="birthDate"
+                name="birthday"
                 control={control}
-                rules={registerOptions.birthDate}
-                render={({field: {onChange, value, ...restField}}) => (
+                rules={registerOptions.birthday}
+                render={({field: {onChange, ...restField}}) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
-                            inputFormat="dd/MM/yyyy"
-                            value={dayjs(value)}
-                            label="BirthDate"
+                            format="DD-MM-YYYY"
+                            label="New birth date"
                             onChange={(date) => {
                                 onChange(date)
                             }}
@@ -27,9 +25,9 @@ const BirthDate = ({control, errors}) => {
                             }}
                             slotProps={{
                                 textField: {
-                                    error: errors.birthDate,
+                                    error: errors.birthday,
                                     helperText:
-                                        errors.birthDate && `${errors.birthDate.message}`,
+                                        errors.birthday && `${errors.birthday.message}`,
                                 },
                             }}
                             {...restField}

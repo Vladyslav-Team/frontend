@@ -1,3 +1,4 @@
+export {SecurityChange} from "./SecurityChange"
 export {AvatarChange} from "./AvatarChange"
 export {NameStage} from "./NameStage"
 export {BasicInfoChange} from "./basicInfoChange"
