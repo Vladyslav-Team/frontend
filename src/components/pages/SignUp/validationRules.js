@@ -88,6 +88,12 @@ const registerOptions = {
             message: validateDate,
         },
     },
+    about: {
+        maxLength: {
+            value: 1000,
+            message: "About must have maximum 1000 characters",
+        },
+    },
 }
 
 export {registerOptions}

@@ -2,12 +2,22 @@ import React from "react"
 import PropTypes from "prop-types"
 import styles from "./VisitButton.module.css"
 
-const VisitButton = ({setVisibilitySigninPopup}) => {
+import {useJwtCheck} from "../../../../../../../shared/api/hooks"
+import {useNavigate} from "react-router-dom"
+
+const VisitButton = ({setVisibilitySigninPopup, id}) => {
+    const {data} = useJwtCheck()
+    const navigate = useNavigate()
+    const handleClick = () => {
+        if (data) {
+            navigate(`/profile/${id}`)
+        } else {
+            setVisibilitySigninPopup({status: true, id: id})
+        }
+    }
     return (
         <>
-            <button
-                className={styles.visitButton}
-                onClick={() => setVisibilitySigninPopup(true)}>
+            <button className={styles.visitButton} onClick={handleClick}>
                 <span className={styles.link}>Visit</span>
             </button>
         </>
