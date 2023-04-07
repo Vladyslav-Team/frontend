@@ -10,8 +10,10 @@ const Biography = ({biography}) => {
     }
 
     useEffect(() => {
-        if (biography.length >= 300) {
-            setIsTruncated(true)
+        if (biography) {
+            if (biography.length >= 300) {
+                setIsTruncated(true)
+            }
         }
     }, [biography])
 

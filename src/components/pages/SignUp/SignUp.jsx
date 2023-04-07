@@ -10,6 +10,7 @@ import {AlertError} from "../../../shared/components"
 const SignUp = () => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
@@ -17,7 +18,9 @@ const SignUp = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        updatePost(JSON.stringify(data))
+        const res = data
+        res.birthday = data.birthday.split("-").reverse().join("-")
+        updatePost(JSON.stringify(res))
     }
     useEffect(() => {
         if (result.data) {
@@ -87,15 +90,15 @@ const SignUp = () => {
                             )}
                         </div>
                         <div className={styles.input_wrap}>
-                            <label htmlFor="birthDate">Date of Birth</label>
+                            <label htmlFor="birthday">Date of Birth</label>
                             <input
                                 type="date"
                                 min="1900-01-01"
                                 max={new Date().toISOString().split("T")[0]}
-                                {...register("birthDate", registerOptions.birthDate)}
+                                {...register("birthday", registerOptions.birthday)}
                             />
-                            {errors.birthDate && (
-                                <p className={styles.error}>{errors.birthDate.message}</p>
+                            {errors.birthday && (
+                                <p className={styles.error}>{errors.birthday.message}</p>
                             )}
                         </div>
                         <button type="submit">SIGN UP</button>
