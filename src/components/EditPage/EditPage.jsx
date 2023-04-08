@@ -15,6 +15,7 @@ import {useLocation, useNavigate} from "react-router-dom"
 import {useGetAllInfoByIDQuery} from "../pages/Profile/api"
 import Loader from "../../shared/components/Loader"
 import {useEditTalentMutation} from "./api"
+import {useJwtCheck} from "../../shared/api/hooks"
 
 const filterResForm = (res, data) => {
     let dataRes = {}
@@ -48,10 +49,12 @@ const filterDataForDate = (data) => {
 const EditPage = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    const {data} = useJwtCheck()
     const matches = useMediaQuery("(min-width:750px)")
     const idTalent = location.pathname.replace(/[^0-9\\.]+/g, "")
     const [updateTalentInfo, result] = useEditTalentMutation()
     const AllInfo = useGetAllInfoByIDQuery(idTalent)
+
     const {
         control,
         handleSubmit,
@@ -71,7 +74,8 @@ const EditPage = () => {
     }
     useEffect(() => {
         result.data && navigate(`/profile/${idTalent}`)
-    }, [idTalent, navigate, result.data])
+        if (data.id !== idTalent) navigate(`/profile/${data.id}/edit`)
+    }, [data.id, idTalent, navigate, result.data])
 
     return (
         <>
