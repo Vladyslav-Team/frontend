@@ -3,7 +3,9 @@ import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
 import Divider from "@mui/material/Divider"
 import Typography from "@mui/material/Typography"
+import {useNavigate} from "react-router-dom"
 const NameStage = ({name, button = false}) => {
+    const navigate = useNavigate()
     return (
         <>
             <Grid
@@ -29,7 +31,10 @@ const NameStage = ({name, button = false}) => {
                     {button && (
                         <>
                             <Grid item>
-                                <Button size="medium" variant="outlined">
+                                <Button
+                                    onClick={() => navigate(-1)}
+                                    size="medium"
+                                    variant="outlined">
                                     CANCEL
                                 </Button>
                             </Grid>

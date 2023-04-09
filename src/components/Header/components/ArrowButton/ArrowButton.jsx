@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom"
 import {KeyboardArrowDown} from "@mui/icons-material"
 import {Menu, MenuItem} from "@mui/material"
 import {useSignOutTalentMutation} from "../../../../shared/api/services/authentication"
-const ArrowButton = () => {
+const ArrowButton = ({id}) => {
     const [updatePost] = useSignOutTalentMutation()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
@@ -43,7 +43,7 @@ const ArrowButton = () => {
                     horizontal: "right",
                 }}
                 onClose={handleClose}>
-                <NavLink to={"/edit"}>
+                <NavLink to={id && `/profile/${id}/edit`}>
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
                 </NavLink>
                 <NavLink onClick={SignOut} to={"/talents?page=1"}>
