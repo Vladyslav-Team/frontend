@@ -76,7 +76,10 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
                         <p className={styles.error}>{errors.password.message}</p>
                     )}
                 </div>
-                <button className={styles.signin_form_elem} type="submit">
+                <button
+                    disabled={result.isLoading}
+                    className={styles.signin_form_elem}
+                    type="submit">
                     SIGN IN
                 </button>
                 <p className={styles.signin_form_elem}>or</p>

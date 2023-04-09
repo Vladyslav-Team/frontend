@@ -10,7 +10,7 @@ const BirthDate = ({control, errors}) => {
             <Controller
                 name="birthday"
                 control={control}
-                rules={registerOptions.birthday}
+                rules={registerOptions.birthDateEdit}
                 render={({field: {onChange, ...restField}}) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker

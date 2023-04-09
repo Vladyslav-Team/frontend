@@ -1,3 +1,5 @@
+import countriesList from "../../../shared/api/constants/countries.json"
+
 const validatePassword = (value) => {
     // Check for invalid passwords - 8 identical characters
     if (/(\w)\1\1\1\1\1\1\1/.test(value)) {
@@ -11,11 +13,31 @@ const validatePassword = (value) => {
     }
 }
 
+const validateLocation = (value) => {
+    const filterCountry = countriesList
+        .map((country) => {
+            if (value !== country.name) {
+                return "This country not available"
+            } else {
+                return "This country available"
+            }
+        })
+        .filter((el) => el === "This country available")
+    console.log(filterCountry)
+    if (!filterCountry[0]) {
+        return "This country not available"
+    }
+}
+
 const validateDate = (value) => {
     const today = new Date()
     const birthDate = new Date(value)
     if (birthDate.getTime() > today.getTime()) {
         return "Birth date cannot be later than today"
+    }
+    console.log(birthDate.getYear())
+    if (birthDate.getYear() < 0) {
+        return "This date is too old. Please select a more recent date"
     }
 }
 
@@ -81,9 +103,17 @@ const registerOptions = {
     },
     location: {
         required: "Location is required",
+        validate: {
+            message: validateLocation,
+        },
     },
     birthDate: {
         required: "Birth date is required",
+        validate: {
+            message: validateDate,
+        },
+    },
+    birthDateEdit: {
         validate: {
             message: validateDate,
         },
