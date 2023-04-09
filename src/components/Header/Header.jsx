@@ -63,7 +63,7 @@ const Header = () => {
                                     style={styles.avatar}
                                 />
                             </NavLink>
-                            <ArrowButton />
+                            <ArrowButton id={data.id} />
                         </>
                     ) : (
                         <>

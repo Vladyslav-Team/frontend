@@ -5,7 +5,6 @@ import {Controller} from "react-hook-form"
 import {registerOptions} from "../../pages/SignUp/validationRules"
 
 const SecurityChange = ({control, errors, password}) => {
-    console.log(password)
     return (
         <Grid
             container
