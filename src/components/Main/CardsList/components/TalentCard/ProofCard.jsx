@@ -1,12 +1,11 @@
 import React from "react"
 import styles from "./TalentCard.module.css"
-
 import Typography from "@mui/material/Typography"
+import {SigninPopupContext} from "../../../../../context"
+import {VisitButton} from "./components/VisitButton"
 const ProofCard = ({talent}) => {
     return (
-        <div
-            style={{width: "470px", height: "370px", textOverflow: "ellipsis"}}
-            className={styles.card}>
+        <div style={{width: "470px", textOverflow: "ellipsis"}} className={styles.card}>
             <div
                 style={{display: "flex", justifyContent: "center", alignItems: "center"}}
                 className={styles.background}>
@@ -20,9 +19,19 @@ const ProofCard = ({talent}) => {
                     `}
                 </Typography>
             </div>
+
             <Typography variant="subtitle2" gutterBottom>
                 11.05.2023
             </Typography>
+            <SigninPopupContext.Consumer>
+                {({setVisibilitySigninPopup}) => (
+                    <VisitButton
+                        setVisibilitySigninPopup={setVisibilitySigninPopup}
+                        id={talent.id}
+                        to="proof"
+                    />
+                )}
+            </SigninPopupContext.Consumer>
         </div>
     )
 }
