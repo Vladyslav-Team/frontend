@@ -11,11 +11,13 @@ const Info = ({talent}) => {
 
     return (
         <div className={styles.wrapper}>
-            {age && (
+            {age ? (
                 <div>
                     <span>Age : </span>
                     <span>{age}</span>{" "}
                 </div>
+            ) : (
+                <span>Age : 0 </span>
             )}
             {email && (
                 <div>

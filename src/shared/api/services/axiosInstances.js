@@ -1,6 +1,5 @@
 import axios from "axios"
 import {Endpoints} from "../constants/endpoints"
-import {useJwtCheck} from "../hooks"
 
 const axiosInstance = axios.create({
     baseURL: Endpoints.BASE_ENDPOINT_BACKEND,

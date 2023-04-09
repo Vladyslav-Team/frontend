@@ -1,5 +1,5 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
-import {axiosBaseQuery} from "../../../shared/api/services"
+import {axiosBaseQuery} from "../../../../../shared/api/services"
 
 export const DeleteAccount = createApi({
     reducerPath: "DeleteAccount",
