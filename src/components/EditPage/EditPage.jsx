@@ -73,9 +73,9 @@ const EditPage = () => {
         updateTalentInfo({payload, idTalent})
     }
     useEffect(() => {
-        result.data && navigate(`/profile/${idTalent}`)
-        if (data.id !== idTalent) navigate(`/profile/${data.id}/edit`)
-    }, [data.id, idTalent, navigate, result.data])
+        result.data && navigate(`/profile/${data.id}`)
+        if (!result.data && data.id !== idTalent) navigate(`/profile/${data.id}/edit`)
+    }, [data.id, idTalent, navigate, result, result.data])
 
     return (
         <>

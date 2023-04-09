@@ -34,8 +34,10 @@ const Location = ({control, errors}) => {
                                 label="Country"
                                 variant="outlined"
                                 onChange={onChange}
-                                error={!!errors.Country}
-                                helperText={errors.Country && `${errors.Country.message}`}
+                                error={!!errors.location}
+                                helperText={
+                                    errors.location && `${errors.location.message}`
+                                }
                             />
                         )}
                     />
