@@ -14,7 +14,7 @@
 }
 
 .waveBtnText {
-    color: #fff;
+    color: #000;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 18px;
@@ -22,6 +22,7 @@
     letter-spacing: 5px;
     position: relative;
     z-index: 1;
+    font-family: Nunito, sans-serif;
 }
 
 .waveBtnWaves {
@@ -30,7 +31,7 @@
     left: 0;
     width: 280px;
     height: 280px;
-    background-color: #0a6e9a;
+    background-color: #d65e5e;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
     transition: all 11s ease 0s;
 }
@@ -58,12 +59,12 @@
 }
 
 .waveBtnWaves::before {
-    background-color: #000;
+    background-color: #ffffff;
     border-radius: 47%;
 }
 
 .waveBtnWaves::after {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #ffffffd6;
     border-radius: 43%;
 }
 
