@@ -16,6 +16,7 @@ import {useGetAllInfoByIDQuery} from "../pages/Profile/api"
 import Loader from "../../shared/components/Loader"
 import {useEditTalentMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
+import {DeleteField} from "./components/DeleteField/DeleteField"
 
 const filterResForm = (res, data) => {
     let dataRes = {}
@@ -111,6 +112,7 @@ const EditPage = () => {
                                 password={password}
                             />
                         </form>
+                        <DeleteField />
                     </Grid>
                 </Grid>
             ) : (

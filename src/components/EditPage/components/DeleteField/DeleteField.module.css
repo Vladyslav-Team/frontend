@@ -1,0 +1,78 @@
+.waveBtn {
+    width: 280px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.8s ease 0s;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.waveBtnText {
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    position: relative;
+    z-index: 1;
+    font-family: Nunito, sans-serif;
+}
+
+.waveBtnWaves {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    width: 280px;
+    height: 280px;
+    background-color: #d65e5e;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    transition: all 11s ease 0s;
+}
+
+.active {
+    top: -100%;
+}
+
+.active::before {
+    animation: waves 5s infinite linear;
+}
+
+.active::after {
+    animation: waves 7s infinite linear;
+}
+
+.waveBtnWaves::before,
+.waveBtnWaves::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 250%;
+    height: 250%;
+    transform: translate(-50%, -96%);
+}
+
+.waveBtnWaves::before {
+    background-color: #ffffff;
+    border-radius: 47%;
+}
+
+.waveBtnWaves::after {
+    background-color: #ffffffd6;
+    border-radius: 43%;
+}
+
+@keyframes waves {
+    0% {
+        transform: translate(-50%, -96%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -96%) rotate(360deg);
+    }
+}

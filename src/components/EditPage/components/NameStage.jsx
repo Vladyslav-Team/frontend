@@ -47,7 +47,7 @@ const NameStage = ({name, button = false}) => {
                     )}
                 </Grid>
             </Grid>
-            <Divider />
+            <Divider sx={{width: "96%"}} />
         </>
     )
 }
