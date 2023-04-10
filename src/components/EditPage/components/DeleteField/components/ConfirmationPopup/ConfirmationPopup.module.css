@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
+
+.background {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #636363;
+    opacity: 50%;
+    z-index: 101;
+}
+
+.popup_elem {
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 30px 50px 20px 50px;
+    width: max-content;
+    text-align: center;
+    background: #b5d3e1;
+    border-radius: 30px;
+    font-family: "Nunito";
+    z-index: 102;
+}
