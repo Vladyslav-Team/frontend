@@ -35,12 +35,15 @@ const AboutMeChange = ({control, errors}) => {
             <Controller
                 name="experience"
                 control={control}
+                rules={registerOptions.experience}
                 render={({field}) => (
                     <TextField
                         label="Experience"
                         InputLabelProps={{shrink: true}}
                         variant="outlined"
                         sx={{width: "100%", paddingBottom: "20px"}}
+                        error={errors.experience}
+                        helperText={errors.experience && `${errors.experience.message}`}
                         {...field}
                     />
                 )}
@@ -48,12 +51,15 @@ const AboutMeChange = ({control, errors}) => {
             <Controller
                 name="education"
                 control={control}
+                rules={registerOptions.education}
                 render={({field}) => (
                     <TextField
                         label="Education"
                         InputLabelProps={{shrink: true}}
                         variant="outlined"
                         sx={{width: "100%"}}
+                        error={errors.education}
+                        helperText={errors.education && `${errors.education.message}`}
                         {...field}
                     />
                 )}
