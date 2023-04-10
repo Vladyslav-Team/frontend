@@ -3,7 +3,7 @@ import {createTheme} from "@mui/material/styles"
 const theme = createTheme({
     palette: {
         primary: {
-            dark: "#005079",
+            dark: "#09658c",
             main: "#0a6f9a",
             light: "#57bad8",
         },
@@ -23,6 +23,15 @@ const theme = createTheme({
         },
         button: {
             fontFamily: ["Inter", "sans-serif"].join(","),
+        },
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
         },
     },
     spacing: 5,

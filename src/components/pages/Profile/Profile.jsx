@@ -1,5 +1,4 @@
 import React from "react"
-
 import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"

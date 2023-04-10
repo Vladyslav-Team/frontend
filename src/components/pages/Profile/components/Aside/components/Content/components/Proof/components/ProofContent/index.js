@@ -1,0 +1,1 @@
+export {ProofContent} from "./ProofContent"
