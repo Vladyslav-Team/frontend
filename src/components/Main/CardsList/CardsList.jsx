@@ -1,26 +1,32 @@
-import React from "react"
-import {ProofCard, TalentCard} from "./components/TalentCard"
+import React, {useMemo} from "react"
+import {NameStage, ProofCard, TalentCard} from "./components/TalentCard"
 import Grid from "@mui/material/Grid"
 import styles from "./CardsList.module.css"
-const CardsList = ({GetTalentsData, type}) => {
-    const {data} = GetTalentsData
-    const talents =
-        data &&
-        data.talents.map((talent) => {
-            return (
-                <Grid item key={talent.id}>
-                    {type === "Talents" ? (
-                        <TalentCard talent={talent} />
-                    ) : (
-                        <ProofCard talent={talent} />
-                    )}
-                </Grid>
-            )
-        })
+
+const CardsList = ({GetTalentsData, type, setSort, sort}) => {
+    const {data, currentData, refetch} = GetTalentsData
+    const talents = useMemo(() => {
+        return (
+            currentData &&
+            data[type].map((talent) => {
+                return (
+                    <Grid item key={talent.id}>
+                        {type === "talents" ? (
+                            <TalentCard talent={talent} />
+                        ) : (
+                            <ProofCard talent={talent} />
+                        )}
+                    </Grid>
+                )
+            })
+        )
+    }, [currentData, data, type])
 
     return (
         <div className={styles.wrapper}>
-            {data && <h1 style={{paddingTop: "20px", paddingLeft: "32px"}}>{type}</h1>}
+            {data && (
+                <NameStage type={type} setSort={setSort} sort={sort} refetch={refetch} />
+            )}
             <Grid
                 container
                 spacing={10}

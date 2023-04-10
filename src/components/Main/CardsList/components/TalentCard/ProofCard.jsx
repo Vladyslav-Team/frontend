@@ -9,9 +9,7 @@ const ProofCard = ({talent}) => {
             <div
                 style={{display: "flex", justifyContent: "center", alignItems: "center"}}
                 className={styles.background}>
-                <h1 style={{color: "#ffff", fontSize: "20px"}}>
-                    для языка программирования Java
-                </h1>
+                <h1 style={{color: "#ffff", fontSize: "20px"}}>{talent.title}</h1>
             </div>
             <div className={styles.content}>
                 <Typography variant="body1" gutterBottom>
@@ -21,7 +19,7 @@ const ProofCard = ({talent}) => {
             </div>
 
             <Typography variant="subtitle2" gutterBottom>
-                11.05.2023
+                {talent.publication_date}
             </Typography>
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (

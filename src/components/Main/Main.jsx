@@ -8,9 +8,17 @@ import styles from "./Main.module.css"
 const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
+    const [sort, setSort] = useState(false)
+    const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
-    const GetTalentsData = useGetTalentsQuery(pageURL)
     const navigate = useNavigate()
+
+    const GetTalentsData = useGetTalentsQuery(
+        {pageURL, typeCards, sort},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
 
     useEffect(() => {
         if (!page) {
@@ -28,6 +36,8 @@ const Main = ({url, type}) => {
                 GetTalentsData={GetTalentsData}
                 className={styles.content}
                 type={type}
+                setSort={setSort}
+                sort={sort}
             />
             <Pagination
                 totalPages={GetTalentsData.data && GetTalentsData.data.totalPages}
