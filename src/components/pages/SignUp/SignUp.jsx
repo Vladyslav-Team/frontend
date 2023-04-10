@@ -19,7 +19,7 @@ const SignUp = () => {
 
     const onSubmit = (data) => {
         const res = data
-        res.birthday = data.birthday.split("-").reverse().join("-")
+        res.birthday = data.birthDate.split("-").reverse().join("-")
         updatePost(JSON.stringify(res))
     }
     useEffect(() => {
