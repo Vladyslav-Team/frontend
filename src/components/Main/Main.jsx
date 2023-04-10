@@ -9,7 +9,9 @@ const Main = () => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
-    const GetTalentsData = useGetTalentsQuery(pageURL)
+    const GetTalentsData = useGetTalentsQuery(pageURL, {
+        refetchOnMountOrArgChange: true,
+    })
     const navigate = useNavigate()
 
     useEffect(() => {

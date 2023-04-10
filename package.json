@@ -33,7 +33,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run format && npm run lint-fix && git add .",
+            "pre-commit": "npm run format && git diff --cached --name-only --diff-filter=ACMRT | grep '\\.js$' | xargs npm run lint-fix && git add .",
             "pre-push": "npm test"
         }
     },

@@ -22,7 +22,7 @@ const SecurityChange = ({control, errors, password}) => {
                 rules={password && registerOptions.password}
                 render={({field}) => (
                     <TextField
-                        label="Password"
+                        label="New password"
                         type={"password"}
                         name="password"
                         autoComplete="new-password"
