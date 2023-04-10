@@ -3,7 +3,7 @@ import styles from "./ConfirmationPopup.module.css"
 import {Button} from "@mui/material"
 import {useTheme} from "@emotion/react"
 
-const ConfirmationPopup = ({setVisibilityConfirmationPopup, deleteTalent}) => {
+const ConfirmationPopup = ({setVisibilityConfirmationPopup, setIsDeleted}) => {
     const theme = useTheme()
     const buttonTheme = {
         width: theme.spacing(15),
@@ -13,7 +13,7 @@ const ConfirmationPopup = ({setVisibilityConfirmationPopup, deleteTalent}) => {
 
     const deletionConfirmed = () => {
         setVisibilityConfirmationPopup(false)
-        deleteTalent()
+        setIsDeleted(true)
     }
 
     return (

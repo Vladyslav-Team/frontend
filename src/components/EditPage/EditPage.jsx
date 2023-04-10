@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import {
@@ -17,6 +17,7 @@ import Loader from "../../shared/components/Loader"
 import {useEditTalentMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {DeleteField} from "./components/DeleteField/DeleteField"
+import {ConfirmationPopup} from "./components/DeleteField/components/ConfirmationPopup/ConfirmationPopup"
 
 const filterResForm = (res, data) => {
     let dataRes = {}
@@ -56,6 +57,9 @@ const EditPage = () => {
     const [updateTalentInfo, result] = useEditTalentMutation()
     const AllInfo = useGetAllInfoByIDQuery(idTalent)
 
+    const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
+    const [isDeleted, setIsDeleted] = useState(false)
+
     const {
         control,
         handleSubmit,
@@ -82,6 +86,14 @@ const EditPage = () => {
         <>
             {AllInfo.data ? (
                 <Grid container maxWidth={1900} columns={2} alignItems={"start"}>
+                    {visibilityConfirmationPopup && (
+                        <ConfirmationPopup
+                            setVisibilityConfirmationPopup={
+                                setVisibilityConfirmationPopup
+                            }
+                            setIsDeleted={setIsDeleted}
+                        />
+                    )}
                     <AvatarChange avatar={AllInfo.data && AllInfo.data.image} />
                     <Grid
                         item
@@ -112,7 +124,13 @@ const EditPage = () => {
                                 password={password}
                             />
                         </form>
-                        <DeleteField />
+                        <DeleteField
+                            isDeleted={isDeleted}
+                            setIsDeleted={setIsDeleted}
+                            setVisibilityConfirmationPopup={
+                                setVisibilityConfirmationPopup
+                            }
+                        />
                     </Grid>
                 </Grid>
             ) : (

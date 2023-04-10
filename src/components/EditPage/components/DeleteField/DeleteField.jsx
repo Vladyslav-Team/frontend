@@ -1,13 +1,12 @@
-import React, {useRef, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import styles from "./DeleteField.module.css"
 import {useNavigate} from "react-router-dom"
 import {useJwtCheck} from "../../../../shared/api/hooks"
 import {useDeleteAccountMutation} from "./api"
 import {Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
-import {ConfirmationPopup} from "./components/ConfirmationPopup/ConfirmationPopup"
 
-const DeleteField = () => {
+const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
     const navigate = useNavigate()
     const {data} = useJwtCheck()
     const [deleteAccount] = useDeleteAccountMutation()
@@ -16,8 +15,6 @@ const DeleteField = () => {
     const [isFilling, setIsFilling] = useState(false)
     const [isError, setIsError] = useState(false)
     const timerIdRef = useRef(null)
-
-    const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
 
     const deleteTalent = async () => {
         setIsLoading(true)
@@ -33,6 +30,13 @@ const DeleteField = () => {
         }
     }
 
+    useEffect(() => {
+        if (isDeleted) {
+            deleteTalent()
+            setIsDeleted(false)
+        }
+    }, [isDeleted])
+
     const handleMouseDown = () => {
         setIsFilling(true)
         timerIdRef.current = setTimeout(() => {
@@ -47,12 +51,6 @@ const DeleteField = () => {
 
     return (
         <>
-            {visibilityConfirmationPopup && (
-                <ConfirmationPopup
-                    setVisibilityConfirmationPopup={setVisibilityConfirmationPopup}
-                    deleteTalent={deleteTalent}
-                />
-            )}
             <Grid
                 container
                 columns={1}
