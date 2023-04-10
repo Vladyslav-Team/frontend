@@ -6,14 +6,18 @@ import {Endpoints} from "../../shared/api/constants/endpoints"
 import {useLocation} from "react-router-dom"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
+import {useJwtCheck} from "../../shared/api/hooks"
+import {useGetAvatarTalentQuery} from "../Avatar/api"
 
-const Header = ({isRegistered}) => {
+const Header = () => {
+    const {data} = useJwtCheck()
     let location = useLocation()
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
 
     const isTalentsPage = location.pathname === "/talents"
     const isProofsPage = location.pathname === "/proofs"
+    const AvatarIMG = useGetAvatarTalentQuery(data && data.id)
 
     return (
         <header className={styles.header}>
@@ -50,12 +54,16 @@ const Header = ({isRegistered}) => {
                 <></>
             ) : (
                 <div className={styles.button_wrap}>
-                    {isRegistered ? (
+                    {data ? (
                         <>
-                            <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
-                                <Avatar avatar={""} size={40} style={styles.avatar} />
+                            <NavLink to={`profile/${data.id}`}>
+                                <Avatar
+                                    avatar={AvatarIMG.data && AvatarIMG.data.image}
+                                    size={40}
+                                    style={styles.avatar}
+                                />
                             </NavLink>
-                            <ArrowButton />
+                            <ArrowButton id={data.id} />
                         </>
                     ) : (
                         <>

@@ -3,8 +3,15 @@ import {useForm} from "react-hook-form"
 import styles from "./SigninPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
 import {NavLink} from "react-router-dom"
+import {useSigninTalentMutation} from "../../shared/api/services/authentication"
+import {useNavigate} from "react-router-dom"
+import {useEffect} from "react"
+import {AlertError} from "../../shared/components"
 
-const SigninPopup = ({setVisibilitySigninPopup}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
+    const [updatePost, result] = useSigninTalentMutation()
+
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -16,13 +23,21 @@ const SigninPopup = ({setVisibilitySigninPopup}) => {
         minLength: registerOptions.password.minLength,
         maxLength: registerOptions.password.maxLength,
     }
+    const onSubmit = (data) => {
+        updatePost(data)
+    }
 
-    const onSubmit = () => {}
+    useEffect(() => {
+        if (result.data) {
+            localStorage.setItem("jwt-token", result.data["jwt-token"])
+            id ? navigate(`/profile/${id}`) : navigate("/")
+            id && setVisibilitySigninPopup({status: false})
+        }
+    }, [id, navigate, result.data, setVisibilitySigninPopup])
 
-    const SigninStyle = !setVisibilitySigninPopup
+    const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}
         : {position: "fixed", zIndex: 101}
-
     return (
         <>
             <div
@@ -42,13 +57,11 @@ const SigninPopup = ({setVisibilitySigninPopup}) => {
                     <br />
                     <input
                         type="text"
-                        {...register("signinEmail", registerOptions.email)}
+                        {...register("username", registerOptions.email)}
                         className={styles.signin_form_elem}
                     />
-                    {errors.signinEmail && (
-                        <label className={styles.error}>
-                            {errors.signinEmail.message}
-                        </label>
+                    {errors.username && (
+                        <label className={styles.error}>{errors.username.message}</label>
                     )}
                 </div>
                 <div className={styles.signin_form_elem}>
@@ -56,14 +69,17 @@ const SigninPopup = ({setVisibilitySigninPopup}) => {
                     <br />
                     <input
                         type="password"
-                        {...register("signinPassword", registerOptionsPassword)}
+                        {...register("password", registerOptionsPassword)}
                         className={styles.signin_form_elem}
                     />
-                    {errors.signinPassword && (
-                        <p className={styles.error}>{errors.signinPassword.message}</p>
+                    {errors.password && (
+                        <p className={styles.error}>{errors.password.message}</p>
                     )}
                 </div>
-                <button className={styles.signin_form_elem} type="submit">
+                <button
+                    disabled={result.isLoading}
+                    className={styles.signin_form_elem}
+                    type="submit">
                     SIGN IN
                 </button>
                 <p className={styles.signin_form_elem}>or</p>
@@ -79,6 +95,9 @@ const SigninPopup = ({setVisibilitySigninPopup}) => {
                     </NavLink>
                 </p>
             </form>
+            {result.error && (
+                <AlertError defaultStatus={true} massageError={result.error.message} />
+            )}
         </>
     )
 }

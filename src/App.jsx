@@ -7,19 +7,24 @@ import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
 
 const App = () => {
-    const [isRegistered] = useState(true)
-    const [visibilitySigninPopup, setVisibilitySigninPopup] = useState(false)
+    const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
+        status: false,
+        id: null,
+    })
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-
-            <Header isRegistered={isRegistered} />
+            <Header />
             <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
-                <Router isRegistered={isRegistered} />
+                <Router />
             </SigninPopupContext.Provider>
-            {visibilitySigninPopup && (
-                <SigninPopup setVisibilitySigninPopup={setVisibilitySigninPopup} />
+            {visibilitySigninPopup.status && (
+                <SigninPopup
+                    setVisibilitySigninPopup={setVisibilitySigninPopup}
+                    id={visibilitySigninPopup.id}
+                    status={visibilitySigninPopup.status}
+                />
             )}
         </ThemeProvider>
     )
