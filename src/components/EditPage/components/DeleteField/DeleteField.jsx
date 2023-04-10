@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import styles from "./DeleteField.module.css"
 import {useNavigate} from "react-router-dom"
 import {useJwtCheck} from "../../../../shared/api/hooks"
@@ -6,7 +6,7 @@ import {useDeleteAccountMutation} from "./api"
 import {Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
 
-const DeleteField = () => {
+const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
     const navigate = useNavigate()
     const {data} = useJwtCheck()
     const [deleteAccount] = useDeleteAccountMutation()
@@ -30,12 +30,17 @@ const DeleteField = () => {
         }
     }
 
+    useEffect(() => {
+        if (isDeleted) {
+            deleteTalent()
+            setIsDeleted(false)
+        }
+    }, [isDeleted])
+
     const handleMouseDown = () => {
         setIsFilling(true)
         timerIdRef.current = setTimeout(() => {
-            if (window.confirm("Are you sure you want to delete your account?")) {
-                deleteTalent()
-            }
+            setVisibilityConfirmationPopup(true)
         }, 5000)
     }
 
