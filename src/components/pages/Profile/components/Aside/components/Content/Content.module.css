@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 30px;
     margin: 20px 0;
