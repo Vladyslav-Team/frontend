@@ -95,10 +95,10 @@ const SignUp = () => {
                                 type="date"
                                 min="1900-01-01"
                                 max={new Date().toISOString().split("T")[0]}
-                                {...register("birthDate", registerOptions.birthDate)}
+                                {...register("birthday", registerOptions.birthday)}
                             />
-                            {errors.birthDate && (
-                                <p className={styles.error}>{errors.birthDate.message}</p>
+                            {errors.birthday && (
+                                <p className={styles.error}>{errors.birthday.message}</p>
                             )}
                         </div>
                         <button type="submit">SIGN UP</button>
