@@ -6,7 +6,12 @@ import {useDeleteAccountMutation} from "./api"
 import {Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
 
-const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
+const DeleteField = ({
+    isDeleted,
+    setIsDeleted,
+    setVisibilityConfirmationPopup,
+    visibilityConfirmationPopup,
+}) => {
     const navigate = useNavigate()
     const {data} = useJwtCheck()
     const [deleteAccount] = useDeleteAccountMutation()
@@ -37,11 +42,12 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) 
         }
     }, [isDeleted])
 
-    const handleMouseDown = () => {
+    const handleMouseDown = async () => {
         setIsFilling(true)
         timerIdRef.current = setTimeout(() => {
             setVisibilityConfirmationPopup(true)
-        }, 5000)
+            setIsFilling(false)
+        }, 2000)
     }
 
     const handleMouseUp = () => {

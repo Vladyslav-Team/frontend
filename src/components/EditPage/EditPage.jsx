@@ -130,6 +130,7 @@ const EditPage = () => {
                             setVisibilityConfirmationPopup={
                                 setVisibilityConfirmationPopup
                             }
+                            visibilityConfirmationPopup={visibilityConfirmationPopup}
                         />
                     </Grid>
                 </Grid>

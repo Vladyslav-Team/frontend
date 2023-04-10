@@ -33,7 +33,11 @@
     height: 280px;
     background-color: #d65e5e;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-    transition: all 11s ease 0s;
+    transition: all 5s ease 0s;
+    -webkit-transition: all 5s ease 0s;
+    -moz-transition: all 5s ease 0s;
+    -ms-transition: all 5s ease 0s;
+    -o-transition: all 5s ease 0s;
 }
 
 .active {
