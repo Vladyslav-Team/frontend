@@ -2,11 +2,18 @@ import React, {useEffect, useState} from "react"
 import styles from "./Content.module.css"
 import {Proof} from "./components/Proof"
 import {useJwtCheck} from "../../../../../../../shared/api/hooks"
+import {useGetProofsQuery} from "./components/Proof/api"
+import {useLocation} from "react-router"
 
 const Content = () => {
+    const location = useLocation()
+    const idTalent = location.pathname.replace("/profile/", "")
     const [proofs, setProofs] = useState([])
     const {data} = useJwtCheck()
 
+    const allProofs = useGetProofsQuery(idTalent)
+
+    console.log(allProofs)
     useEffect(() => {
         setProofs([
             {
