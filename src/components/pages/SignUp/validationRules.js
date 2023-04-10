@@ -124,6 +124,18 @@ const registerOptions = {
             message: "About must have maximum 1000 characters",
         },
     },
+    experience: {
+        maxLength: {
+            value: 100,
+            message: "Experience must have maximum 100 characters",
+        },
+    },
+    education: {
+        maxLength: {
+            value: 200,
+            message: "Experience must have maximum 200 characters",
+        },
+    },
 }
 
 export {registerOptions}

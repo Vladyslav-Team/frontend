@@ -1,6 +1,6 @@
 {
     "name": "skillscope",
-    "version": "0.1.0",
+    "version": "1.4.0",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.10.6",
@@ -33,7 +33,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run format && npm run lint-fix && git add .",
+            "pre-commit": "npm run format && git diff --cached --name-only --diff-filter=ACMRT | grep '\\.js$' | xargs npm run lint-fix && git add .",
             "pre-push": "npm test"
         }
     },

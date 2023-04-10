@@ -14,7 +14,10 @@ const TalentCard = ({talent}) => {
             <div className={styles.content}>
                 <div>{`${talent.name} ${talent.surname}`}</div>
                 <div className={styles.location}>{talent.location}</div>
-                <div className={styles.proof}>{talent.experience}</div>
+                <div className={styles.proof}>
+                    {" "}
+                    <span>{talent.experience}</span>{" "}
+                </div>
             </div>
 
             <SigninPopupContext.Consumer>
