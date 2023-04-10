@@ -13,7 +13,7 @@
 }
 
 .popup_elem {
-    position: absolute;
+    position: fixed;
     top: 50vh;
     left: 50%;
     transform: translateX(-50%);
