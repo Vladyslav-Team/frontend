@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom"
 import {useEffect} from "react"
 import {AlertError} from "../../shared/components"
 
-const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
     const [updatePost, result] = useSigninTalentMutation()
 
     const navigate = useNavigate()
@@ -30,10 +30,10 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            id ? navigate(`/profile/${id}`) : navigate("/talents?page=1")
+            id ? navigate(`/${type}/${id}`) : navigate("/talents?page=1")
             id && setVisibilitySigninPopup({status: false})
         }
-    }, [id, navigate, result.data, setVisibilitySigninPopup])
+    }, [id, navigate, result.data, setVisibilitySigninPopup, type])
 
     const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}

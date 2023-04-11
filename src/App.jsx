@@ -10,6 +10,7 @@ const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
         status: false,
         id: null,
+        type: "talent",
     })
 
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     setVisibilitySigninPopup={setVisibilitySigninPopup}
                     id={visibilitySigninPopup.id}
                     status={visibilitySigninPopup.status}
+                    type={visibilitySigninPopup.type}
                 />
             )}
         </ThemeProvider>

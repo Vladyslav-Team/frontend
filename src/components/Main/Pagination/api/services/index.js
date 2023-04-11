@@ -8,7 +8,9 @@ export const api = createApi({
         return {
             getTalents: build.query({
                 query: ({pageURL, typeCards, sort}) => ({
-                    url: `/${typeCards}?page=${pageURL}${sort ? "&newest=true" : ""}`,
+                    url: `/${typeCards}?page=${pageURL}${
+                        !sort ? "&newest=true" : "&newest=false"
+                    }`,
                     method: "GET",
                 }),
             }),

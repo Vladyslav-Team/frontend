@@ -3,18 +3,18 @@ import {NameStage, ProofCard, TalentCard} from "./components/TalentCard"
 import Grid from "@mui/material/Grid"
 import styles from "./CardsList.module.css"
 
-const CardsList = ({GetTalentsData, type, setSort, sort}) => {
-    const {data, currentData, refetch} = GetTalentsData
-    const talents = useMemo(() => {
+const CardsList = ({GetData, type, setSort, sort}) => {
+    const {data, currentData, refetch} = GetData
+    const Cards = useMemo(() => {
         return (
             currentData &&
-            data[type].map((talent) => {
+            data[type].map((data) => {
                 return (
-                    <Grid item key={talent.id}>
+                    <Grid item key={data.id}>
                         {type === "talents" ? (
-                            <TalentCard talent={talent} />
+                            <TalentCard talent={data} />
                         ) : (
-                            <ProofCard talent={talent} />
+                            <ProofCard proof={data} />
                         )}
                     </Grid>
                 )
@@ -31,7 +31,7 @@ const CardsList = ({GetTalentsData, type, setSort, sort}) => {
                 container
                 spacing={10}
                 sx={{display: "flex", justifyContent: "center", paddingTop: "20px"}}>
-                {talents && talents}
+                {Cards && Cards}
             </Grid>
         </div>
     )
