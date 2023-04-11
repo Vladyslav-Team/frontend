@@ -32,7 +32,7 @@ const NameStage = ({name, button = false}) => {
                         <>
                             <Grid item>
                                 <Button
-                                    onClick={() => navigate(-1)}
+                                    onClick={() => navigate(-2)}
                                     size="medium"
                                     variant="outlined">
                                     CANCEL
@@ -47,7 +47,7 @@ const NameStage = ({name, button = false}) => {
                     )}
                 </Grid>
             </Grid>
-            <Divider />
+            <Divider sx={{width: "96%"}} />
         </>
     )
 }
