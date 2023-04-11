@@ -11,10 +11,8 @@ const ProofCard = ({proof}) => {
                 className={styles.background}>
                 <h1 style={{color: "#ffff", fontSize: "20px"}}>{proof.title}</h1>
             </div>
-            <div className={styles.content}>
-                <Typography
-                    ariant="body1"
-                    style={{maxHeight: "150px", overflow: "hidden"}}>
+            <div className={styles.content} style={{height: "100px", overflow: "hidden"}}>
+                <Typography variant="body1" gutterBottom>
                     {proof.description}
                 </Typography>
             </div>
