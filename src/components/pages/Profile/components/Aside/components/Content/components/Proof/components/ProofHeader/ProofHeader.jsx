@@ -5,7 +5,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import DeleteIcon from "@mui/icons-material/Delete"
 import {ConfirmPopup} from "../ConfirmPopup"
 
-const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
+const ProofHeader = ({status, setStatus, setIsHidden, isHidden, isEditMode}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState("#0a9a7d")
     const [option, setOption] = useState("")
@@ -36,7 +36,7 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
             }
         }
         handleStatusColor()
-    }, [statusColor])
+    }, [status])
 
     return (
         <Grid
@@ -75,6 +75,7 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
                     status={status}
                     setStatus={setStatus}
                     setIsHidden={setIsHidden}
+                    isEditMode={isEditMode}
                 />
             </Grid>
         </Grid>

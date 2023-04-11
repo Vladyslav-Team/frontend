@@ -3,7 +3,7 @@ import {CardContent, Grid, Typography} from "@mui/material"
 
 const ProofContent = ({title, data, description}) => {
     return (
-        <CardContent>
+        <CardContent sx={{flex: "1 0 auto"}}>
             <Grid
                 display={"flex"}
                 justifyContent={"space-between"}
@@ -17,7 +17,7 @@ const ProofContent = ({title, data, description}) => {
                 </Typography>
             </Grid>
             <Typography variant="body2" color="text.secondary">
-                {description && `${description.slice(0, 150)}...`}
+                {description}
             </Typography>
         </CardContent>
     )

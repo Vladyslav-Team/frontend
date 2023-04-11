@@ -3,7 +3,7 @@ import {Button, CardActions} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../ConfirmPopup"
 
-const ProofActivity = ({status, setIsHidden, setStatus}) => {
+const ProofActivity = ({isEditMode, status, setIsHidden, setStatus}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate()
 
@@ -14,22 +14,23 @@ const ProofActivity = ({status, setIsHidden, setStatus}) => {
     return (
         <CardActions
             sx={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                "& button": {minWidth: "80px"},
+                justifyContent: "flex-end",
+                gap: 1,
+                "& button": {minWidth: "90px"},
             }}>
-            {status === "Draft" && (
-                <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={() => navigate("/proof/edit")}>
+            {status === "Draft" && !isEditMode && (
+                <Button variant="outlined" onClick={() => navigate("/proof/edit")}>
                     Edit
+                </Button>
+            )}
+            {status === "Draft" && isEditMode && (
+                <Button type="submit" form="proof-form" variant="outlined">
+                    Save
                 </Button>
             )}
             {status !== "Published" && (
                 <>
-                    <Button variant="contained" size="small" onClick={handleShowConfirm}>
+                    <Button variant="contained" onClick={handleShowConfirm}>
                         Publish
                     </Button>
                     <ConfirmPopup
@@ -39,6 +40,7 @@ const ProofActivity = ({status, setIsHidden, setStatus}) => {
                         status={status}
                         setStatus={setStatus}
                         setIsHidden={setIsHidden}
+                        isEditMode={isEditMode}
                     />
                 </>
             )}
