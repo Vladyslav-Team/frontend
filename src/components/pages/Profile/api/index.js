@@ -7,16 +7,19 @@ export const GetAllInfoByID = createApi({
     endpoints: (build) => {
         return {
             GetAllInfoByID: build.query({
-                query: (id, token) => ({
+                query: (id) => ({
                     url: `/talents/${id}`,
                     method: "GET",
-                    headers: {
-                        Authorization: token && `Bearer ${token} `,
-                    },
+                }),
+            }),
+            GetAllProof: build.query({
+                query: (id) => ({
+                    url: `/proofs${id}`,
+                    method: "GET",
                 }),
             }),
         }
     },
 })
 
-export const {useGetAllInfoByIDQuery} = GetAllInfoByID
+export const {useGetAllInfoByIDQuery, useGetAllProofQuery} = GetAllInfoByID

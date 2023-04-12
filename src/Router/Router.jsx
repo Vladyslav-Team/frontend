@@ -7,13 +7,14 @@ import {Endpoints} from "../shared/api/constants/endpoints"
 import {EditPage} from "./../components/EditPage/EditPage"
 import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
+import {Proof} from "../components/Proof"
 
 const Router = ({isRegistered}) => {
     return (
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
-                <Route path="" element={<Main />} />
+                <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
                 <Route
                     path={"signup"}
                     element={
@@ -40,6 +41,14 @@ const Router = ({isRegistered}) => {
                 <Route path={":talentId"} element={<Profile />} />
                 <Route path=":talentId/edit" element={<EditPage />} />
             </Route>
+
+            <Route path={"/proofs"}>
+                <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} />
+            </Route>
+            <Route path={"/proof"}>
+                <Route path={":talentId"} element={<Proof />} />
+            </Route>
+
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
