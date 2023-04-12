@@ -23,7 +23,6 @@ const validateLocation = (value) => {
             }
         })
         .filter((el) => el === "This country available")
-    console.log(filterCountry)
     if (!filterCountry[0]) {
         return "This country not available"
     }
@@ -35,7 +34,6 @@ const validateDate = (value) => {
     if (birthDate.getTime() > today.getTime()) {
         return "Birth date cannot be later than today"
     }
-    console.log(birthDate.getYear())
     if (birthDate.getYear() < 0) {
         return "This date is too old. Please select a more recent date"
     }

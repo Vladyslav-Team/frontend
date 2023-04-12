@@ -29,7 +29,7 @@ const Header = () => {
             <nav className={styles.navigation}>
                 <ul>
                     <li>
-                        <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
+                        <NavLink to={"/talents?page=1"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isTalentsPage && styles.active
@@ -39,7 +39,7 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={"/proofs"}>
+                        <NavLink to={"/proofs?page=1"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isProofsPage && styles.active

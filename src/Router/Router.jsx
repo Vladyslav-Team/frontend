@@ -8,14 +8,16 @@ import {EditPage} from "./../components/EditPage/EditPage"
 import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
+import {Proof} from "../components/pages/Profile/components/Aside/components/Content/components/Proof"
 
 const Router = () => {
     return (
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
-                <Route path="" element={<Main />} />
+                <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
                 <Route path={"signup"} element={<SignUp />} />
+
                 <Route
                     path={`${Endpoints.POST_TALENT_SIGNIN}`}
                     element={<SigninPopup />}
@@ -24,6 +26,12 @@ const Router = () => {
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
                 <Route path=":talentId/edit" element={<EditPage />} />
+            </Route>
+            <Route path={"/proofs"}>
+                <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} />
+            </Route>
+            <Route path={"/proof"}>
+                <Route path={":talentId"} element={<Proof />} />
             </Route>
             <Route path={"/proof/edit"} element={<EditProofPage />} />
             <Route path="*" element={<PageNotFound />} />

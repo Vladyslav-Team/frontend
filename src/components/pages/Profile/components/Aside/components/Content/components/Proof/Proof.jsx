@@ -7,7 +7,7 @@ import {ProofForm} from "./components/ProofForm"
 import {ProofContent} from "./components/ProofContent"
 import {ProofActivity} from "./components/ProofActivity"
 
-const Proof = ({proof, isEditMode, styleObj}) => {
+const Proof = ({proof = {title: "", description: ""}, isEditMode, styleObj}) => {
     const {title, description, data} = proof
     const [isHidden, setIsHidden] = useState(false)
     const [status, setStatus] = useState("Draft")
