@@ -11,7 +11,7 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
     const [option, setOption] = useState("")
 
     const handleHiddenButton = () => {
-        if (status === "Draft") {
+        if (status === "DRAFT") {
             handleShowConfirm("hidden")
         } else if (status === "Hidden") {
             handleShowConfirm("published")
@@ -27,7 +27,7 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
 
     useEffect(() => {
         const handleStatusColor = () => {
-            if (status === "Draft") {
+            if (status === "DRAFT") {
                 setStatusColor("#007965")
             } else if (status === "Published") {
                 setStatusColor("#005079")

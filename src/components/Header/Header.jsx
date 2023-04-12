@@ -56,7 +56,7 @@ const Header = () => {
                 <div className={styles.button_wrap}>
                     {data ? (
                         <>
-                            <NavLink to={`profile/${data.id}`}>
+                            <NavLink to={`profile/${data.id}?page=1`}>
                                 <Avatar
                                     avatar={AvatarIMG.data && AvatarIMG.data.image}
                                     size={40}

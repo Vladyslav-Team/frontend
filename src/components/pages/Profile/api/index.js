@@ -18,8 +18,16 @@ export const GetAllInfoByID = createApi({
                     method: "GET",
                 }),
             }),
+            AddProof: build.mutation({
+                query: ({id, payload}) => ({
+                    url: `/talents/${id}/proofs`,
+                    method: "POST",
+                    data: payload,
+                }),
+            }),
         }
     },
 })
 
-export const {useGetAllInfoByIDQuery, useGetAllProofQuery} = GetAllInfoByID
+export const {useGetAllInfoByIDQuery, useGetAllProofQuery, useAddProofMutation} =
+    GetAllInfoByID
