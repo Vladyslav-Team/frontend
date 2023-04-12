@@ -36,7 +36,7 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
             }
         }
         handleStatusColor()
-    }, [statusColor])
+    }, [status])
 
     return (
         <Grid

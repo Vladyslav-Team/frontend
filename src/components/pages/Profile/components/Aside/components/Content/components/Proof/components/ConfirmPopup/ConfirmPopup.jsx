@@ -1,13 +1,6 @@
 import React from "react"
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from "@mui/material"
 import {getConfirmBody} from "./getConfirmBody"
+import {DialogPopup} from "./components"
 
 const ConfirmPopup = ({
     option,
@@ -17,7 +10,7 @@ const ConfirmPopup = ({
     setStatus,
     setIsHidden,
 }) => {
-    const confirmBody = getConfirmBody(option)
+    const confirmBody = getConfirmBody(option, status)
 
     const handlePositiveAnswer = () => {
         if (option === "delete") {
@@ -49,34 +42,13 @@ const ConfirmPopup = ({
     }
 
     return (
-        <div>
-            <Dialog
-                open={showConfirm}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">{confirmBody.title}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        {confirmBody.description}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        variant="outlined"
-                        onClick={handleNegativeAnswer}
-                        sx={{minWidth: 70}}>
-                        Disagree
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={handlePositiveAnswer}
-                        sx={{minWidth: 70}}>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        <DialogPopup
+            showConfirm={showConfirm}
+            handleClose={handleClose}
+            confirmBody={confirmBody}
+            handleNegativeAnswer={handleNegativeAnswer}
+            handlePositiveAnswer={handlePositiveAnswer}
+        />
     )
 }
 
