@@ -40,7 +40,6 @@ const ProofActivity = ({isEditMode, status, setIsHidden, setStatus}) => {
                         status={status}
                         setStatus={setStatus}
                         setIsHidden={setIsHidden}
-                        isEditMode={isEditMode}
                     />
                 </>
             )}

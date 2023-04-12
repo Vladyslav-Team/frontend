@@ -1,10 +1,10 @@
-import React from "react"
+import React, {useState} from "react"
 import {Grid, TextField} from "@mui/material"
 import {useForm} from "react-hook-form"
 import {useJwtCheck} from "../../../../../../../../../../../shared/api/hooks"
 import {useNavigate} from "react-router-dom"
 
-const ProofForm = () => {
+const ProofForm = ({title = "", description = ""}) => {
     const {
         register,
         handleSubmit,
@@ -12,9 +12,12 @@ const ProofForm = () => {
     } = useForm()
     const {data} = useJwtCheck()
     const navigate = useNavigate()
+    const [formTitle, setFormTitle] = useState(title)
+    const [formDescription, setFormDescription] = useState(description)
 
-    const onSubmit = (formData) => {
-        console.log(formData)
+    const onSubmit = () => {
+        console.log(formTitle)
+        console.log(formDescription)
         navigate(`/profile/${data.id}`)
     }
 
@@ -30,6 +33,10 @@ const ProofForm = () => {
                     error={errors.title}
                     helperText={errors.title && "Title is required"}
                     sx={{maxWidth: "60%"}}
+                    value={formTitle}
+                    onChange={(e) => {
+                        setFormTitle(e.target.value)
+                    }}
                 />
                 <TextField
                     label="Description"
@@ -42,6 +49,10 @@ const ProofForm = () => {
                     error={errors.text}
                     helperText={errors.text && "Text is required"}
                     sx={{minHeight: "100px"}}
+                    value={formDescription}
+                    onChange={(e) => {
+                        setFormDescription(e.target.value)
+                    }}
                 />
             </form>
         </Grid>

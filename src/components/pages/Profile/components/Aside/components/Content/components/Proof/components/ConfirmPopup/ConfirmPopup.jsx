@@ -3,34 +3,31 @@ import {getConfirmBody} from "./getConfirmBody"
 import {DialogPopup} from "./components"
 
 const ConfirmPopup = ({
-    option = "draft",
+    option,
     showConfirm,
     setShowConfirm,
     status,
     setStatus,
     setIsHidden,
-    isEditMode,
 }) => {
     const confirmBody = getConfirmBody(option, status)
 
     const handlePositiveAnswer = () => {
-        if (!isEditMode) {
-            if (option === "delete") {
-                console.log("proof removed")
-            } else if (status === "Draft") {
-                if (option === "hidden") {
-                    setStatus("Hidden")
-                    setIsHidden(true)
-                } else if (option === "published") {
-                    setStatus("Published")
-                }
-            } else if (status === "Hidden") {
-                setIsHidden(false)
-                setStatus("Published")
-            } else if (status === "Published") {
+        if (option === "delete") {
+            console.log("proof removed")
+        } else if (status === "Draft") {
+            if (option === "hidden") {
                 setStatus("Hidden")
                 setIsHidden(true)
+            } else if (option === "published") {
+                setStatus("Published")
             }
+        } else if (status === "Hidden") {
+            setIsHidden(false)
+            setStatus("Published")
+        } else if (status === "Published") {
+            setStatus("Hidden")
+            setIsHidden(true)
         }
 
         handleClose()

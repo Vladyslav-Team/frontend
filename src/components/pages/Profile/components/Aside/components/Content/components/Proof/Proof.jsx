@@ -35,7 +35,7 @@ const Proof = ({proof, isEditMode, styleObj}) => {
                 isEditMode={isEditMode}
             />
             {isEditMode ? (
-                <ProofForm status={status} setStatus={setStatus} />
+                <ProofForm title={title} description={description} />
             ) : (
                 <ProofContent title={title} data={data} description={description} />
             )}
