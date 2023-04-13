@@ -21,7 +21,7 @@ const Main = ({url, type}) => {
 
     useEffect(() => {
         if (!page) {
-            if (!url) navigate("/proofs?page=1")
+            if (!url) navigate("/talents?page=1")
             else {
                 navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}`)
                 setPage(+searchParams.get("page"))

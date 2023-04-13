@@ -16,11 +16,11 @@ const Router = ({AvatarIMG}) => {
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
-                <Route path={"signup"} element={<SignUp />} />
+                <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
 
                 <Route
                     path={`${Endpoints.POST_TALENT_SIGNIN}`}
-                    element={<SigninPopup />}
+                    element={<SigninPopup AvatarIMG={AvatarIMG} />}
                 />
             </Route>
             <Route path={"/profile"}>
@@ -31,7 +31,7 @@ const Router = ({AvatarIMG}) => {
                 />
             </Route>
             <Route path={"/proofs"}>
-                <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} />
+                {/* <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} /> */}
             </Route>
             {/* <Route path={"/proof"}>
                 <Route path={":talentId"} element={<Proof />} />

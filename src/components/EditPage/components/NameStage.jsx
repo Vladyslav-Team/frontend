@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import Divider from "@mui/material/Divider"
 import Typography from "@mui/material/Typography"
 import {useNavigate} from "react-router-dom"
-const NameStage = ({name, button = false}) => {
+const NameStage = ({name, button = false, id}) => {
     const navigate = useNavigate()
     return (
         <>
@@ -32,7 +32,7 @@ const NameStage = ({name, button = false}) => {
                         <>
                             <Grid item>
                                 <Button
-                                    onClick={() => navigate(-2)}
+                                    onClick={() => navigate(`/profile/${id}`)}
                                     size="medium"
                                     variant="outlined">
                                     CANCEL

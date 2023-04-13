@@ -58,7 +58,7 @@ const Proof = () => {
                                 sx={{width: 24, height: 24, marginRight: "6px"}}
                                 src={AvatarIMG.data && AvatarIMG.data.image}
                             />
-                            <NavLink to={`/profile/${data.talent_id}?page=1`}>
+                            <NavLink to={`/profile/${data.talent_id}`}>
                                 <span>
                                     {data.talent_name} {data.talent_surname}
                                 </span>

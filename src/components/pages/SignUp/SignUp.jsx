@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
 import jwtDecode from "jwt-decode"
 import {useJwtCheck} from "../../../shared/api/hooks"
-const SignUp = () => {
+const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
     const {data} = useJwtCheck()
@@ -23,6 +23,7 @@ const SignUp = () => {
         const res = data
         res.birthday = data.birthday.split("-").reverse().join("-")
         updatePost(JSON.stringify(res))
+        AvatarIMG.refetch()
     }
     useEffect(() => {
         if (result.data) {

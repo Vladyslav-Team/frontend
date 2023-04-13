@@ -29,7 +29,7 @@ const Info = ({talent}) => {
             {phone && (
                 <div>
                     <span>Phone : </span>
-                    <span>{phone}</span>
+                    <span>+{phone}</span>
                 </div>
             )}
             {education && (
