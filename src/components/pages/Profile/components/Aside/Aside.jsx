@@ -29,7 +29,6 @@ const Aside = ({talent}) => {
             navigate(`/profile/${idTalent}`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
-    console.log(allProofs)
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>
