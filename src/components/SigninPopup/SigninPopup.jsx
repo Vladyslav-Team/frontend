@@ -30,7 +30,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            id ? navigate(`/${type}/${id}`) : navigate("/talents?page=1")
+            id ? navigate(`/${"profile"}/${id}`) : navigate("/talents?page=1")
             id && setVisibilitySigninPopup({status: false})
         }
     }, [id, navigate, result.data, setVisibilitySigninPopup, type])
