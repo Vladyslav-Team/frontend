@@ -5,9 +5,8 @@ import {useChangeStatusProofMutation} from "../../../../../../../../api"
 
 const ConfirmPopup = ({option, showConfirm, setShowConfirm, status, id}) => {
     const confirmBody = getConfirmBody(option, status)
-    const [ChangeStatusProof, statusChanged] = useChangeStatusProofMutation()
+    const [ChangeStatusProof] = useChangeStatusProofMutation()
     const talentId = location.pathname.replace("/profile/", "")
-    console.log(id)
     const handlePositiveAnswer = () => {
         if (option === "delete") {
             console.log("proof removed")

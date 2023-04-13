@@ -4,7 +4,6 @@ import {Content} from "./components/Content"
 import {Place} from "@mui/icons-material"
 import {Biography} from "./components/Biography"
 import Button from "@mui/material/Button"
-import {useAddProofMutation} from "../../api"
 import {useGetProofsQuery} from "./components/Content/components/Proof/api"
 import {useLocation, useNavigate} from "react-router"
 import {Pagination} from "../../../../Main/Pagination"
@@ -28,7 +27,6 @@ const Aside = ({talent}) => {
             navigate(`/profile/${idTalent}?page=1`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
-    console.log(isAddProofPoopUP)
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>

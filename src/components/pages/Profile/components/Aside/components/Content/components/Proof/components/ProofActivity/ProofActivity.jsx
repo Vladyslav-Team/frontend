@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import {Button, CardActions} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../ConfirmPopup"
-import {useJwtCheck} from "../../../../../../../../../../../shared/api/hooks"
 
 const ProofActivity = ({
     isEditMode,
@@ -17,7 +16,6 @@ const ProofActivity = ({
 }) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate()
-    const {data} = useJwtCheck()
     const handleShowConfirm = async () => {
         setShowConfirm(true)
     }

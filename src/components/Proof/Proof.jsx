@@ -10,7 +10,7 @@ import {useGetAvatarTalentQuery} from "../Avatar/api"
 const Proof = () => {
     const location = useLocation()
     const idProof = location.pathname.replace("/proof", "")
-    const {data, error, isLoading, isError} = useGetAllProofQuery(idProof, {
+    const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
     const AvatarIMG = useGetAvatarTalentQuery(data && data.talent_id)

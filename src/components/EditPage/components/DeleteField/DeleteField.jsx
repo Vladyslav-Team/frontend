@@ -6,12 +6,7 @@ import {useDeleteAccountMutation} from "./api"
 import {Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
 
-const DeleteField = ({
-    isDeleted,
-    setIsDeleted,
-    setVisibilityConfirmationPopup,
-    visibilityConfirmationPopup,
-}) => {
+const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
     const navigate = useNavigate()
     const {data} = useJwtCheck()
     const [deleteAccount] = useDeleteAccountMutation()

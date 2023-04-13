@@ -1,7 +1,5 @@
 import React from "react"
-import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {Avatar} from "../../Avatar"
 import {Controller} from "react-hook-form"

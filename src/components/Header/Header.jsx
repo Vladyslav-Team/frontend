@@ -7,7 +7,6 @@ import {useLocation} from "react-router-dom"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
 import {useJwtCheck} from "../../shared/api/hooks"
-import {useGetAvatarTalentQuery} from "../Avatar/api"
 
 const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
