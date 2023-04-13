@@ -33,13 +33,13 @@ const Router = ({AvatarIMG}) => {
             <Route path={"/proofs"}>
                 {/* <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} /> */}
             </Route>
-            <Route path={"/proof"}>
-                {/* <Route path={":talentId"} element={<Proof />} /> */}
+            {/* <Route path={"/proof"}>
+                <Route path={":talentId"} element={<Proof />} />
             </Route>
             <Route
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
-            />
+            /> */}
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )

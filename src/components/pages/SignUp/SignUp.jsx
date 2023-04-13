@@ -7,10 +7,12 @@ import {useAddTalentsMutation} from "../../../shared/api/services/authentication
 import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
+import jwtDecode from "jwt-decode"
+import {useJwtCheck} from "../../../shared/api/hooks"
 const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
-
+    const {data} = useJwtCheck()
     const {
         register,
         handleSubmit,
@@ -26,7 +28,7 @@ const SignUp = ({AvatarIMG}) => {
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            navigate("/")
+            data && navigate(`/profile/${data.id}/edit`)
         }
     }, [navigate, result.data])
 
