@@ -116,7 +116,7 @@ const EditPage = ({AvatarIMG}) => {
                                 }}>
                                 Edit profile
                             </Typography>
-                            <NameStage name={"Basic info"} button={true} />
+                            <NameStage name={"Basic info"} button={true} id={data.id} />
                             <BasicInfoChange control={control} errors={errors} />
                             <NameStage name={"About Me"} errors={errors} />
                             <AboutMeChange control={control} errors={errors} />
