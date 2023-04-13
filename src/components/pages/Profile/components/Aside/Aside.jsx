@@ -9,11 +9,13 @@ import {useLocation, useNavigate} from "react-router"
 import {Pagination} from "../../../../Main/Pagination"
 import {useSearchParams} from "react-router-dom"
 import {PopUpProof} from "./components/PopUpProof"
+import {useJwtCheck} from "../../../../../shared/api/hooks"
 
 const Aside = ({talent}) => {
     const location = useLocation()
     const idTalent = location.pathname.replace("/profile/", "")
     const [searchParams] = useSearchParams()
+    const {data} = useJwtCheck()
     const pageURL = +searchParams.get("page")
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
     const allProofs = useGetProofsQuery({idTalent, page: pageURL})
@@ -27,6 +29,7 @@ const Aside = ({talent}) => {
             navigate(`/profile/${idTalent}?page=1`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
+    console.log(allProofs)
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>
@@ -45,10 +48,14 @@ const Aside = ({talent}) => {
                     <Biography biography={talent.about} />
                 </div>
             </div>
-            <Button onClick={() => handelAdd()} variant="contained">
-                Add Proof
-            </Button>
-            {allProofs.data && <Content allProofs={allProofs.data.proofs} />}
+            {+idTalent === data.id && (
+                <Button onClick={() => handelAdd()} variant="contained">
+                    Add Proof
+                </Button>
+            )}
+            {+idTalent === data.id && (
+                <Content allProofs={allProofs.data && allProofs.data.proofs} />
+            )}
             <PopUpProof
                 vis={isAddProofPoopUP}
                 setVis={setAddProofPoopUP}

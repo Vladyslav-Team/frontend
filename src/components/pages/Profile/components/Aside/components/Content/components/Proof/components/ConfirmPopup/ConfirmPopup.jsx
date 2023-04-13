@@ -8,21 +8,20 @@ const ConfirmPopup = ({option, showConfirm, setShowConfirm, status, id}) => {
     const [ChangeStatusProof] = useChangeStatusProofMutation()
     const talentId = location.pathname.replace("/profile/", "")
     const handlePositiveAnswer = () => {
-        if (option === "delete") {
-            console.log("proof removed")
-        } else if (status === "DRAFT") {
-            if (option === "hidden") {
-                id && ChangeStatusProof({talentId, proofId: id, status: "hide"})
-            } else if (option === "published") {
-                ChangeStatusProof({talentId, proofId: id, status: "publish"})
-            }
-        } else if (status === "HIDDEN") {
-            ChangeStatusProof({talentId, proofId: id, status: "hide"})
-        } else if (status === "PUBLISHED") {
-            ChangeStatusProof({talentId, proofId: id, status: "publish"})
-        }
-
-        handleClose()
+        // if (option === "delete") {
+        //     console.log("proof removed")
+        // } else if (status === "DRAFT") {
+        //     if (option === "hidden") {
+        //         id && ChangeStatusProof({talentId, proofId: id, status: "hide"})
+        //     } else if (option === "published") {
+        //         ChangeStatusProof({talentId, proofId: id, status: "publish"})
+        //     }
+        // } else if (status === "HIDDEN") {
+        //     ChangeStatusProof({talentId, proofId: id, status: "hide"})
+        // } else if (status === "PUBLISHED") {
+        //     ChangeStatusProof({talentId, proofId: id, status: "publish"})
+        // }
+        // handleClose()
     }
 
     const handleNegativeAnswer = () => {

@@ -8,6 +8,7 @@ import {ProofContent} from "./components/ProofContent"
 import {ProofActivity} from "./components/ProofActivity"
 import {useAddProofMutation, useChangeStatusProofMutation} from "../../../../../../api"
 import {useForm} from "react-hook-form"
+import {AlertError} from "../../../../../../../../../shared/components/AlertError"
 
 const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
     const {title, description, data, status, publication_date} = proof
@@ -37,10 +38,10 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
             proofId && ChangeStatusProof({talentId, proofId: proofId, status: "publish"})
             setVis(false)
         }
-    }, [result])
+    }, [ChangeStatusProof, result, setVis, talentId])
 
     useEffect(() => {
-        if (statusChanged.data) {
+        if (statusChanged.isSuccess) {
             allProofsRefetch()
         }
     }, [statusChanged])
@@ -56,7 +57,6 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
             minHeight: 200,
         },
     }))
-
     return (
         <StyledProof sx={styleObj}>
             {false && <div className={styles.die}></div>}
@@ -96,6 +96,9 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 allProofsRefetch={allProofsRefetch}
                 talentId={talentId}
             />
+            {result.isError && (
+                <AlertError defaultStatus={true} massageError={result.error.message} />
+            )}
         </StyledProof>
     )
 }

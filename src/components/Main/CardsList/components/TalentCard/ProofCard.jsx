@@ -25,7 +25,6 @@ const ProofCard = ({proof}) => {
                     <VisitButton
                         setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={proof.id}
-                        to="proof"
                         text="Show more"
                     />
                 )}

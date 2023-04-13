@@ -8,7 +8,7 @@ import {ConfirmPopup} from "../ConfirmPopup"
 const ProofHeader = ({status, statusVis, id}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
-    const [option, setOption] = useState("")
+    const [option, setOption] = useState()
     const handleHiddenButton = () => {
         if (status === "DRAFT") {
             handleShowConfirm("hidden")
@@ -34,8 +34,9 @@ const ProofHeader = ({status, statusVis, id}) => {
                 setStatusColor("#8A8A8A")
             }
         }
+
         handleStatusColor()
-    }, [statusColor])
+    }, [status, statusColor])
 
     return (
         <Grid
@@ -55,7 +56,7 @@ const ProofHeader = ({status, statusVis, id}) => {
                 {status}
             </Typography>
             <Grid>
-                <Button
+                {/* <Button
                     onClick={handleHiddenButton}
                     sx={{minWidth: "30px", color: "#ffffff", borderRadius: "50%"}}>
                     {statusVis !== "Added" &&
@@ -78,7 +79,7 @@ const ProofHeader = ({status, statusVis, id}) => {
                     setShowConfirm={setShowConfirm}
                     status={status}
                     id={id}
-                />
+                /> */}
             </Grid>
         </Grid>
     )

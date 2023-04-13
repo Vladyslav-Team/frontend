@@ -41,13 +41,13 @@ const ProofActivity = ({
                 gap: 1,
                 "& button": {minWidth: "90px"},
             }}>
-            {status === "DRAFT" && !isEditMode && (
+            {/* {status === "DRAFT" && !isEditMode && (
                 <Button
                     variant="outlined"
                     onClick={() => id && navigate(`proof/${id}/edit`)}>
                     Edit
                 </Button>
-            )}
+            )} */}
             {statusVis === "Added" && (
                 <>
                     <Button
@@ -64,23 +64,24 @@ const ProofActivity = ({
                         variant="outlined">
                         Cancel
                     </Button>
+                    <>
+                        <Button variant="contained" onClick={handleShowConfirm}>
+                            Publish
+                        </Button>
+                        <ConfirmPopup
+                            option={"published"}
+                            showConfirm={showConfirm}
+                            setShowConfirm={setShowConfirm}
+                            status={"DRAFT"}
+                            id={id}
+                        />
+                    </>
                 </>
             )}
 
-            {status !== "PUBLISHED" && (
-                <>
-                    <Button variant="contained" onClick={handleShowConfirm}>
-                        Publish
-                    </Button>
-                    <ConfirmPopup
-                        option={"published"}
-                        showConfirm={showConfirm}
-                        setShowConfirm={setShowConfirm}
-                        status={"DRAFT"}
-                        id={id}
-                    />
-                </>
-            )}
+            {/* {status !== "PUBLISHED" && (
+                
+            )} */}
         </CardActions>
     )
 }
