@@ -7,16 +7,37 @@ export const GetAllInfoByID = createApi({
     endpoints: (build) => {
         return {
             GetAllInfoByID: build.query({
-                query: (id, token) => ({
+                query: (id) => ({
                     url: `/talents/${id}`,
                     method: "GET",
-                    headers: {
-                        Authorization: token && `Bearer ${token} `,
-                    },
+                }),
+            }),
+            GetAllProof: build.query({
+                query: (id) => ({
+                    url: `/proofs${id}`,
+                    method: "GET",
+                }),
+            }),
+            AddProof: build.mutation({
+                query: ({id, payload}) => ({
+                    url: `/talents/${id}/proofs`,
+                    method: "POST",
+                    data: payload,
+                }),
+            }),
+            ChangeStatusProof: build.mutation({
+                query: ({talentId, proofId, status}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/${status}`,
+                    method: "PATCH",
                 }),
             }),
         }
     },
 })
 
-export const {useGetAllInfoByIDQuery} = GetAllInfoByID
+export const {
+    useGetAllInfoByIDQuery,
+    useGetAllProofQuery,
+    useAddProofMutation,
+    useChangeStatusProofMutation,
+} = GetAllInfoByID

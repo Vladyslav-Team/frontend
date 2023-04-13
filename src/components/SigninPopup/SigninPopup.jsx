@@ -7,8 +7,9 @@ import {useSigninTalentMutation} from "../../shared/api/services/authentication"
 import {useNavigate} from "react-router-dom"
 import {useEffect} from "react"
 import {AlertError} from "../../shared/components"
+import jwtDecode from "jwt-decode"
 
-const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status, type, AvatarIMG}) => {
     const [updatePost, result] = useSigninTalentMutation()
 
     const navigate = useNavigate()
@@ -30,10 +31,13 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            id ? navigate(`/profile/${id}`) : navigate("/")
+            jwtDecode(result.data["jwt-token"]) &&
+                navigate(`/profile/${jwtDecode(result.data["jwt-token"]).id}`)
+            id && navigate(`/profile/${id}`)
             id && setVisibilitySigninPopup({status: false})
+            // id && AvatarIMG.refetch()
         }
-    }, [id, navigate, result.data, setVisibilitySigninPopup])
+    }, [id, navigate, result.data, setVisibilitySigninPopup, type])
 
     const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}

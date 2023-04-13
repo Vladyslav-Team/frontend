@@ -25,6 +25,7 @@ const TalentCard = ({talent}) => {
                     <VisitButton
                         setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={talent.id}
+                        to="profile"
                     />
                 )}
             </SigninPopupContext.Consumer>
