@@ -5,17 +5,16 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import DeleteIcon from "@mui/icons-material/Delete"
 import {ConfirmPopup} from "../ConfirmPopup"
 
-const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
+const ProofHeader = ({status, statusVis, id}) => {
     const [showConfirm, setShowConfirm] = useState(false)
-    const [statusColor, setStatusColor] = useState("#0a9a7d")
+    const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState("")
-
     const handleHiddenButton = () => {
         if (status === "DRAFT") {
             handleShowConfirm("hidden")
-        } else if (status === "Hidden") {
-            handleShowConfirm("published")
-        } else if (status === "Published") {
+        } else if (status === "HIDDEN") {
+            handleShowConfirm("PUBLISHED")
+        } else if (status === "PUBLISHED") {
             handleShowConfirm("hidden")
         }
     }
@@ -29,9 +28,9 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
         const handleStatusColor = () => {
             if (status === "DRAFT") {
                 setStatusColor("#007965")
-            } else if (status === "Published") {
+            } else if (status === "PUBLISHED") {
                 setStatusColor("#005079")
-            } else if (status === "Hidden") {
+            } else if (status === "HIDDEN") {
                 setStatusColor("#8A8A8A")
             }
         }
@@ -59,22 +58,26 @@ const ProofHeader = ({status, setStatus, setIsHidden, isHidden}) => {
                 <Button
                     onClick={handleHiddenButton}
                     sx={{minWidth: "30px", color: "#ffffff", borderRadius: "50%"}}>
-                    {isHidden ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    {statusVis !== "Added" &&
+                        (status === "HIDDEN" ? (
+                            <VisibilityOffIcon />
+                        ) : (
+                            <VisibilityIcon />
+                        ))}
                 </Button>
                 <Button
                     onClick={() => {
                         handleShowConfirm("delete")
                     }}
                     sx={{minWidth: "30px", color: "#ffffff", borderRadius: "50%"}}>
-                    <DeleteIcon />
+                    {statusVis !== "Added" && <DeleteIcon />}
                 </Button>
                 <ConfirmPopup
                     option={option}
                     showConfirm={showConfirm}
                     setShowConfirm={setShowConfirm}
                     status={status}
-                    setStatus={setStatus}
-                    setIsHidden={setIsHidden}
+                    id={id}
                 />
             </Grid>
         </Grid>

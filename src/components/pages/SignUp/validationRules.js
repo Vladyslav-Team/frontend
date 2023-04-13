@@ -134,6 +134,12 @@ const registerOptions = {
             message: "Experience must have maximum 200 characters",
         },
     },
+    link: {
+        pattern: {
+            value: /^https:\/\/(?:[\w-]+\.)+[a-z]{2,}(?:\/[\w-]*)*(?:\?[^\s]*)?$/,
+            message: "Not a valid HTTPS link.",
+        },
+    },
 }
 
 export {registerOptions}

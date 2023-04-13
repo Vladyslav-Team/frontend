@@ -48,7 +48,7 @@ const filterDataForDate = (data) => {
     return res
 }
 
-const EditPage = () => {
+const EditPage = ({AvatarIMG}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const {data} = useJwtCheck()
@@ -76,6 +76,7 @@ const EditPage = () => {
     const onSubmit = (data) => {
         const payload = filterResForm(filterDataForDate(data), AllInfo.data)
         updateTalentInfo({payload, idTalent})
+        AvatarIMG.refetch()
     }
     useEffect(() => {
         result.data && navigate(`/profile/${data.id}`)
@@ -94,7 +95,11 @@ const EditPage = () => {
                             setIsDeleted={setIsDeleted}
                         />
                     )}
-                    <AvatarChange avatar={AllInfo.data && AllInfo.data.image} />
+                    <AvatarChange
+                        avatar={AllInfo.data && AllInfo.data.image}
+                        control={control}
+                        errors={errors}
+                    />
                     <Grid
                         item
                         xs={matches ? 1.5 : 2}

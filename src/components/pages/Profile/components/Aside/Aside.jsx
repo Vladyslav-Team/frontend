@@ -16,18 +16,11 @@ const Aside = ({talent}) => {
     const idTalent = location.pathname.replace("/profile/", "")
     const [searchParams] = useSearchParams()
     const pageURL = +searchParams.get("page")
-    const [addProof, result] = useAddProofMutation()
+    const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
     const allProofs = useGetProofsQuery({idTalent, page: pageURL})
     const navigate = useNavigate()
     const handelAdd = () => {
-        addProof({
-            id: idTalent,
-            payload: {
-                title: "test1",
-                description: "testDesc",
-            },
-        })
-        allProofs.refetch()
+        setAddProofPoopUP(true)
     }
 
     useEffect(() => {
@@ -35,7 +28,7 @@ const Aside = ({talent}) => {
             navigate(`/profile/${idTalent}?page=1`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
-
+    console.log(isAddProofPoopUP)
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>
@@ -58,13 +51,19 @@ const Aside = ({talent}) => {
                 Add Proof
             </Button>
             {allProofs.data && <Content allProofs={allProofs.data.proofs} />}
-            <PopUpProof />
-            <Pagination
-                totalPages={allProofs.data && allProofs.data.totalPages}
-                currentPage={pageURL}
-                url={"profile/28?page"}
-                sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
+            <PopUpProof
+                vis={isAddProofPoopUP}
+                setVis={setAddProofPoopUP}
+                allProofsRefetch={allProofs.refetch}
             />
+            {(allProofs.data && allProofs.data.totalPages) > 1 && (
+                <Pagination
+                    totalPages={allProofs.data && allProofs.data.totalPages}
+                    currentPage={pageURL}
+                    url={`profile/${idTalent}?page`}
+                    sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
+                />
+            )}
         </div>
     )
 }

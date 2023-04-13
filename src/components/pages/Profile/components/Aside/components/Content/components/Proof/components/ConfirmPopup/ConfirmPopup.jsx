@@ -1,40 +1,26 @@
 import React from "react"
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from "@mui/material"
 import {getConfirmBody} from "./getConfirmBody"
+import {DialogPopup} from "./components"
+import {useChangeStatusProofMutation} from "../../../../../../../../api"
 
-const ConfirmPopup = ({
-    option,
-    showConfirm,
-    setShowConfirm,
-    status,
-    setStatus,
-    setIsHidden,
-}) => {
-    const confirmBody = getConfirmBody(option)
-
+const ConfirmPopup = ({option, showConfirm, setShowConfirm, status, id}) => {
+    const confirmBody = getConfirmBody(option, status)
+    const [ChangeStatusProof, statusChanged] = useChangeStatusProofMutation()
+    const talentId = location.pathname.replace("/profile/", "")
+    console.log(id)
     const handlePositiveAnswer = () => {
         if (option === "delete") {
             console.log("proof removed")
-        } else if (status === "Draft") {
+        } else if (status === "DRAFT") {
             if (option === "hidden") {
-                setStatus("Hidden")
-                setIsHidden(true)
+                id && ChangeStatusProof({talentId, proofId: id, status: "hide"})
             } else if (option === "published") {
-                setStatus("Published")
+                ChangeStatusProof({talentId, proofId: id, status: "publish"})
             }
-        } else if (status === "Hidden") {
-            setIsHidden(false)
-            setStatus("Published")
-        } else if (status === "Published") {
-            setStatus("Hidden")
-            setIsHidden(true)
+        } else if (status === "HIDDEN") {
+            ChangeStatusProof({talentId, proofId: id, status: "hide"})
+        } else if (status === "PUBLISHED") {
+            ChangeStatusProof({talentId, proofId: id, status: "publish"})
         }
 
         handleClose()
@@ -49,34 +35,13 @@ const ConfirmPopup = ({
     }
 
     return (
-        <div>
-            <Dialog
-                open={showConfirm}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">{confirmBody.title}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        {confirmBody.description}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        variant="outlined"
-                        onClick={handleNegativeAnswer}
-                        sx={{minWidth: 70}}>
-                        Disagree
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={handlePositiveAnswer}
-                        sx={{minWidth: 70}}>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        <DialogPopup
+            showConfirm={showConfirm}
+            handleClose={handleClose}
+            confirmBody={confirmBody}
+            handleNegativeAnswer={handleNegativeAnswer}
+            handlePositiveAnswer={handlePositiveAnswer}
+        />
     )
 }
 

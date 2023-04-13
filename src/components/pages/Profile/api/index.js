@@ -25,9 +25,19 @@ export const GetAllInfoByID = createApi({
                     data: payload,
                 }),
             }),
+            ChangeStatusProof: build.mutation({
+                query: ({talentId, proofId, status}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/${status}`,
+                    method: "PATCH",
+                }),
+            }),
         }
     },
 })
 
-export const {useGetAllInfoByIDQuery, useGetAllProofQuery, useAddProofMutation} =
-    GetAllInfoByID
+export const {
+    useGetAllInfoByIDQuery,
+    useGetAllProofQuery,
+    useAddProofMutation,
+    useChangeStatusProofMutation,
+} = GetAllInfoByID

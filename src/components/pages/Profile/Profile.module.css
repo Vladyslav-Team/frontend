@@ -2,10 +2,10 @@
     display: flex;
     align-items: flex-start;
     gap: 30px;
-    max-width: 1100px;
+    max-width: 1140px;
     height: 100%;
     margin: 0 auto;
-    padding-top: 105px;
+    padding: 105px 20px 10px;
 }
 
 .plug {
