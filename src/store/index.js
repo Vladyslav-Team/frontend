@@ -5,6 +5,7 @@ import {GetAllInfoByID} from "../components/pages/Profile/api"
 import {EditApi} from "../components/EditPage/api"
 import {HeaderApi} from "../components/Avatar/api"
 import {DeleteAccount} from "../components/EditPage/components/DeleteField/api"
+import {ProofApi} from "../components/pages/Profile/components/Aside/components/Content/components/Proof/api"
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         [EditApi.reducerPath]: EditApi.reducer,
         [HeaderApi.reducerPath]: HeaderApi.reducer,
         [DeleteAccount.reducerPath]: DeleteAccount.reducer,
+        [ProofApi.reducerPath]: ProofApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -22,6 +24,7 @@ export const store = configureStore({
             GetAllInfoByID.middleware,
             EditApi.middleware,
             HeaderApi.middleware,
-            DeleteAccount.middleware
+            DeleteAccount.middleware,
+            ProofApi.middleware
         ),
 })

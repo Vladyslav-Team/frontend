@@ -22,10 +22,12 @@ const DialogPopup = ({
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">{confirmBody.title}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">
+                    {confirmBody && confirmBody.title}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {confirmBody.description}
+                        {confirmBody && confirmBody.description}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

@@ -1,7 +1,7 @@
 import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
 
-const ProofContent = ({title, data, description}) => {
+const ProofContent = ({title, data, description, publication_date}) => {
     return (
         <CardContent sx={{flex: "1 0 auto"}}>
             <Grid
@@ -18,6 +18,9 @@ const ProofContent = ({title, data, description}) => {
             </Grid>
             <Typography variant="body2" color="text.secondary">
                 {description}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+                {publication_date}
             </Typography>
         </CardContent>
     )

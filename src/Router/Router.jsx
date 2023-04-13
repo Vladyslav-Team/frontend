@@ -10,7 +10,7 @@ import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
 import {Proof} from "../components/pages/Profile/components/Aside/components/Content/components/Proof"
 
-const Router = () => {
+const Router = ({AvatarIMG}) => {
     return (
         <Routes>
             <Route path="/" element={<Main />} />
@@ -25,7 +25,10 @@ const Router = () => {
             </Route>
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
-                <Route path=":talentId/edit" element={<EditPage />} />
+                <Route
+                    path=":talentId/edit"
+                    element={<EditPage AvatarIMG={AvatarIMG} />}
+                />
             </Route>
             <Route path={"/proofs"}>
                 <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} />
@@ -33,7 +36,10 @@ const Router = () => {
             <Route path={"/proof"}>
                 <Route path={":talentId"} element={<Proof />} />
             </Route>
-            <Route path={"/proof/edit"} element={<EditProofPage />} />
+            <Route
+                path={"profile/:talentId/proof/:proofId/edit"}
+                element={<EditProofPage />}
+            />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )

@@ -10,7 +10,7 @@ import {useGetAvatarTalentQuery} from "../Avatar/api"
 const Proof = () => {
     const location = useLocation()
     const idProof = location.pathname.replace("/proof", "")
-    const {data, error, isLoading, isError} = useGetAllProofQuery(idProof, {
+    const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
     const AvatarIMG = useGetAvatarTalentQuery(data && data.talent_id)
@@ -58,7 +58,7 @@ const Proof = () => {
                                 sx={{width: 24, height: 24, marginRight: "6px"}}
                                 src={AvatarIMG.data && AvatarIMG.data.image}
                             />
-                            <NavLink to={`/profile/${data.talent_id}`}>
+                            <NavLink to={`/profile/${data.talent_id}?page=1`}>
                                 <span>
                                     {data.talent_name} {data.talent_surname}
                                 </span>

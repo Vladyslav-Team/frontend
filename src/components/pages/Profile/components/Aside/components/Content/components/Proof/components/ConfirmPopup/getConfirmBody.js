@@ -11,7 +11,7 @@ const getConfirmBody = (option, status) => {
             description:
                 "Are you sure you want to delete the proof without being able to restore it?",
         }
-    } else if (status === "Draft") {
+    } else if (status === "DRAFT") {
         if (option === "hidden") {
             return {
                 title: "Change status to Hidden?",
@@ -31,7 +31,7 @@ const getConfirmBody = (option, status) => {
             description:
                 "Are you sure you want to convert proof to Published status? This information will be visible to all users.",
         }
-    } else if (status === "Published") {
+    } else if (status === "PUBLISHED") {
         return {
             title: "Change status to Hidden?",
             description:

@@ -3,12 +3,35 @@ import {Button, CardActions} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../ConfirmPopup"
 
-const ProofActivity = ({isEditMode, status, setIsHidden, setStatus}) => {
+const ProofActivity = ({
+    isEditMode,
+    id,
+    statusVis,
+    setVis,
+    addProof,
+    watch,
+    allProofsRefetch,
+    talentId,
+    status,
+}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate()
-
     const handleShowConfirm = async () => {
         setShowConfirm(true)
+    }
+    const handleSave = (e) => {
+        const watchAllFields = watch()
+        addProof(
+            addProof({
+                id: talentId,
+                payload: {
+                    title: watchAllFields.title,
+                    description: watchAllFields.description,
+                },
+            })
+        )
+        setVis(false)
+        allProofsRefetch()
     }
 
     return (
@@ -18,31 +41,47 @@ const ProofActivity = ({isEditMode, status, setIsHidden, setStatus}) => {
                 gap: 1,
                 "& button": {minWidth: "90px"},
             }}>
-            {status === "Draft" && !isEditMode && (
-                <Button variant="outlined" onClick={() => navigate("/proof/edit")}>
+            {/* {status === "DRAFT" && !isEditMode && (
+                <Button
+                    variant="outlined"
+                    onClick={() => id && navigate(`proof/${id}/edit`)}>
                     Edit
                 </Button>
-            )}
-            {status === "Draft" && isEditMode && (
-                <Button type="submit" form="proof-form" variant="outlined">
-                    Save
-                </Button>
-            )}
-            {status !== "Published" && (
+            )} */}
+            {statusVis === "Added" && (
                 <>
-                    <Button variant="contained" onClick={handleShowConfirm}>
-                        Publish
+                    <Button
+                        type="submit"
+                        form="proof-form"
+                        onClick={() => handleSave()}
+                        variant="outlined">
+                        Save
                     </Button>
-                    <ConfirmPopup
-                        option={"published"}
-                        showConfirm={showConfirm}
-                        setShowConfirm={setShowConfirm}
-                        status={status}
-                        setStatus={setStatus}
-                        setIsHidden={setIsHidden}
-                    />
+                    <Button
+                        type="submit"
+                        onClick={() => setVis(false)}
+                        form="proof-form"
+                        variant="outlined">
+                        Cancel
+                    </Button>
+                    <>
+                        <Button variant="contained" onClick={handleShowConfirm}>
+                            Publish
+                        </Button>
+                        <ConfirmPopup
+                            option={"published"}
+                            showConfirm={showConfirm}
+                            setShowConfirm={setShowConfirm}
+                            status={"DRAFT"}
+                            id={id}
+                        />
+                    </>
                 </>
             )}
+
+            {/* {status !== "PUBLISHED" && (
+                
+            )} */}
         </CardActions>
     )
 }

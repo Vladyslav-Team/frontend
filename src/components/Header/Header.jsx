@@ -7,9 +7,8 @@ import {useLocation} from "react-router-dom"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
 import {useJwtCheck} from "../../shared/api/hooks"
-import {useGetAvatarTalentQuery} from "../Avatar/api"
 
-const Header = () => {
+const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
     let location = useLocation()
     const isSignup =
@@ -17,7 +16,6 @@ const Header = () => {
 
     const isTalentsPage = location.pathname === "/talents"
     const isProofsPage = location.pathname === "/proofs"
-    const AvatarIMG = useGetAvatarTalentQuery(data && data.id)
 
     return (
         <header className={styles.header}>
@@ -38,7 +36,7 @@ const Header = () => {
                             </span>
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to={"/proofs?page=1"}>
                             <span
                                 className={`${styles.navItem} ${
@@ -47,7 +45,7 @@ const Header = () => {
                                 Proofs
                             </span>
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
             {isSignup ? (
@@ -56,7 +54,7 @@ const Header = () => {
                 <div className={styles.button_wrap}>
                     {data ? (
                         <>
-                            <NavLink to={`profile/${data.id}`}>
+                            <NavLink to={`profile/${data.id}?page=1`}>
                                 <Avatar
                                     avatar={AvatarIMG.data && AvatarIMG.data.image}
                                     size={40}
