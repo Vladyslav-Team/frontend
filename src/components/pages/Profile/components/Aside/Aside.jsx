@@ -18,7 +18,12 @@ const Aside = ({talent}) => {
     const {data} = useJwtCheck()
     const pageURL = +searchParams.get("page")
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
-    const allProofs = useGetProofsQuery({idTalent, page: pageURL})
+    const allProofs = useGetProofsQuery(
+        {idTalent, page: pageURL},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
     const navigate = useNavigate()
     const handelAdd = () => {
         setAddProofPoopUP(true)
@@ -29,7 +34,7 @@ const Aside = ({talent}) => {
             navigate(`/profile/${idTalent}?page=1`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
-    console.log(allProofs)
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>
