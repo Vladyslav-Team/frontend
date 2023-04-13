@@ -7,7 +7,7 @@ import {useAddTalentsMutation} from "../../../shared/api/services/authentication
 import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
-const SignUp = () => {
+const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
 
@@ -21,6 +21,7 @@ const SignUp = () => {
         const res = data
         res.birthday = data.birthday.split("-").reverse().join("-")
         updatePost(JSON.stringify(res))
+        AvatarIMG.refetch()
     }
     useEffect(() => {
         if (result.data) {

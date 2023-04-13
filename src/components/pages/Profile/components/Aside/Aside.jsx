@@ -26,7 +26,7 @@ const Aside = ({talent}) => {
 
     useEffect(() => {
         if (allProofs.isError || isNaN(pageURL) === true) {
-            navigate(`/profile/${idTalent}?page=1`)
+            navigate(`/profile/${idTalent}`)
         }
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
     console.log(allProofs)
@@ -48,11 +48,11 @@ const Aside = ({talent}) => {
                     <Biography biography={talent.about} />
                 </div>
             </div>
-            {+idTalent === data.id && (
+            {/* {+idTalent === data.id && (
                 <Button onClick={() => handelAdd()} variant="contained">
                     Add Proof
                 </Button>
-            )}
+            )} */}
             {+idTalent === data.id && (
                 <Content allProofs={allProofs.data && allProofs.data.proofs} />
             )}
@@ -61,14 +61,14 @@ const Aside = ({talent}) => {
                 setVis={setAddProofPoopUP}
                 allProofsRefetch={allProofs.refetch}
             />
-            {(allProofs.data && allProofs.data.totalPages) > 1 && (
+            {/* {(allProofs.data && allProofs.data.totalPages) > 1 && (
                 <Pagination
                     totalPages={allProofs.data && allProofs.data.totalPages}
                     currentPage={pageURL}
                     url={`profile/${idTalent}?page`}
                     sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
                 />
-            )}
+            )} */}
         </div>
     )
 }
