@@ -28,7 +28,8 @@ const SignUp = ({AvatarIMG}) => {
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            data && navigate(`/profile/${data.id}/edit`)
+            result.data &&
+                navigate(`/profile/${jwtDecode(result.data["jwt-token"]).id}/edit`)
         }
     }, [navigate, result.data])
 
