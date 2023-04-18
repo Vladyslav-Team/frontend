@@ -10,7 +10,7 @@ const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visi
     const navigate = useNavigate()
     const handleClick = () => {
         if (data) {
-            navigate(`/profile/${id}`)
+            navigate(`/${to}/${id}`)
         } else {
             setVisibilitySigninPopup({status: true, id: id, type: "proof"})
         }

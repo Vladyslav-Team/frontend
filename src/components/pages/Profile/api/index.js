@@ -25,10 +25,23 @@ export const GetAllInfoByID = createApi({
                     data: payload,
                 }),
             }),
+            ChangeProof: build.mutation({
+                query: ({talentId, proofId, payload}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}`,
+                    method: "PATCH",
+                    data: payload,
+                }),
+            }),
             ChangeStatusProof: build.mutation({
                 query: ({talentId, proofId, status}) => ({
                     url: `/talents/${talentId}/proofs/${proofId}/${status}`,
                     method: "PATCH",
+                }),
+            }),
+            DeleteProof: build.mutation({
+                query: ({talentId, proofId}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}`,
+                    method: "DELETE",
                 }),
             }),
         }
@@ -40,4 +53,6 @@ export const {
     useGetAllProofQuery,
     useAddProofMutation,
     useChangeStatusProofMutation,
+    useChangeProofMutation,
+    useDeleteProofMutation,
 } = GetAllInfoByID
