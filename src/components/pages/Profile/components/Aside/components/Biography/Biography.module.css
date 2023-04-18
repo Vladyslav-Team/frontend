@@ -1,4 +1,5 @@
 .biography {
-    display: inline-block;
     cursor: pointer;
+    width: 50vw;
+    display: block;
 }

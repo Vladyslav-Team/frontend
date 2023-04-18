@@ -168,43 +168,16 @@ export const page3 = {
 }
 
 export const page4 = {
-    totalPages: 10,
-    currentPage: 4,
-    talents: [
-        {
-            id: 27,
-            image: "image-path/27",
-            name: "Natalia",
-            surname: "Melnik",
-            location: "Lviv",
-        },
-        {
-            id: 28,
-            image: "image-path/28",
-            name: "Roman",
-            surname: "Shevchenko",
-            location: "Dnipro",
-        },
-        {
-            id: 29,
-            image: "image-path/29",
-            name: "Iryna",
-            surname: "Lysenko",
-            location: "Kharkiv",
-        },
-        {
-            id: 30,
-            image: "image-path/30",
-            name: "Oleksandr",
-            surname: "Ponomarenko",
-            location: "Kyiv",
-        },
-        {
-            id: 31,
-            image: "image-path/31",
-            name: "Viktor",
-            surname: "Kovalchuk",
-            location: "Odessa",
-        },
-    ],
+    name: "dsd",
+    surname: "dsadsa",
+    phone: "4343243243",
+    location: "Ukraine",
+    experience: "dsadsa",
+    about: "dsadsadsa",
+    education: "dsadsa",
+    birthDate: "11-05-2005",
+    gitHub: "dsadsadas",
+    linkedIn: "dsadsadas",
+    twitter: "dsadsadas",
+    instagram: "dsadsadas",
 }

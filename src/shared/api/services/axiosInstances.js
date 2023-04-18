@@ -9,13 +9,20 @@ const axiosInstance = axios.create({
 })
 
 export const axiosBaseQuery =
-    ({baseUrl} = {}) =>
-    async ({url, method}) => {
-        try {
-            const response = await axiosInstance({url: url, method: method})
+    // eslint-disable-next-line no-unused-vars
+
+        ({baseUrl} = {}) =>
+        async ({url, method, data, auth}) => {
+            const response = await axiosInstance({
+                url: url,
+                method: method,
+                data: data,
+                auth: auth,
+                headers: {
+                    Authorization:
+                        localStorage.getItem("jwt-token") &&
+                        `Bearer ${localStorage.getItem("jwt-token")}`,
+                },
+            })
             return {data: response.data}
-        } catch (error) {
-            console.error(error)
-            throw error
         }
-    }

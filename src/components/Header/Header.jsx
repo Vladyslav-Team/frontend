@@ -6,8 +6,10 @@ import {Endpoints} from "../../shared/api/constants/endpoints"
 import {useLocation} from "react-router-dom"
 import {Avatar} from "../Avatar"
 import {ArrowButton} from "./components/ArrowButton"
+import {useJwtCheck} from "../../shared/api/hooks"
 
-const Header = ({isRegistered}) => {
+const Header = ({AvatarIMG}) => {
+    const {data} = useJwtCheck()
     let location = useLocation()
     const isSignup =
         location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
@@ -25,7 +27,7 @@ const Header = ({isRegistered}) => {
             <nav className={styles.navigation}>
                 <ul>
                     <li>
-                        <NavLink to={`${Endpoints.GET_ALL_TALENTS}`}>
+                        <NavLink to={"/talents?page=1"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isTalentsPage && styles.active
@@ -35,7 +37,7 @@ const Header = ({isRegistered}) => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={"/proofs"}>
+                        <NavLink to={"/proofs?page=1"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isProofsPage && styles.active
@@ -50,12 +52,16 @@ const Header = ({isRegistered}) => {
                 <></>
             ) : (
                 <div className={styles.button_wrap}>
-                    {isRegistered ? (
+                    {data ? (
                         <>
-                            <NavLink to={`${Endpoints.GET_TALENT_BY_ID}/id`}>
-                                <Avatar avatar={""} size={40} style={styles.avatar} />
+                            <NavLink to={`profile/${data.id}`}>
+                                <Avatar
+                                    avatar={AvatarIMG.data && AvatarIMG.data.image}
+                                    size={40}
+                                    style={styles.avatar}
+                                />
                             </NavLink>
-                            <ArrowButton />
+                            <ArrowButton id={data.id} />
                         </>
                     ) : (
                         <>
