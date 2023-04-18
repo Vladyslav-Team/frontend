@@ -8,11 +8,9 @@ import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
 import jwtDecode from "jwt-decode"
-import {useJwtCheck} from "../../../shared/api/hooks"
 const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
-    const {data} = useJwtCheck()
     const {
         register,
         handleSubmit,
