@@ -22,6 +22,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header AvatarIMG={AvatarIMG} />
+            <main>
             <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
                 <Router AvatarIMG={AvatarIMG} />
             </SigninPopupContext.Provider>
@@ -33,6 +34,8 @@ const App = () => {
                     type={visibilitySigninPopup.type}
                 />
             )}
+            </main>
+            <Footer />
         </ThemeProvider>
     )
 }
