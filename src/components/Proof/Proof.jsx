@@ -1,11 +1,13 @@
 import React from "react"
+
+import styles from "../pages/Profile/Profile.module.css"
 import Avatar from "@mui/material/Avatar"
 import {NavLink, useLocation} from "react-router-dom"
 import {useGetAllProofQuery} from "../pages/Profile/api"
 import {Grid} from "@mui/material"
 import {useGetAvatarTalentQuery} from "../Avatar/api"
 
-const ProofAllInfo = () => {
+const Proof = () => {
     const location = useLocation()
     const idProof = location.pathname.replace("/proof", "")
     const {data} = useGetAllProofQuery(idProof, {
@@ -69,4 +71,4 @@ const ProofAllInfo = () => {
     )
 }
 
-export {ProofAllInfo}
+export {Proof}

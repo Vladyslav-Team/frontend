@@ -7,7 +7,6 @@ import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
 import {useGetAvatarTalentQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
-import {Footer} from "./components/Footer"
 
 const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
@@ -23,7 +22,6 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header AvatarIMG={AvatarIMG} />
-            <main>
             <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
                 <Router AvatarIMG={AvatarIMG} />
             </SigninPopupContext.Provider>
@@ -35,8 +33,6 @@ const App = () => {
                     type={visibilitySigninPopup.type}
                 />
             )}
-            </main>
-            <Footer />
         </ThemeProvider>
     )
 }

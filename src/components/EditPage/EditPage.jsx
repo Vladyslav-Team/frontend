@@ -6,6 +6,7 @@ import {
     NameStage,
     BasicInfoChange,
     AboutMeChange,
+    ExternalLinksChange,
     SecurityChange,
 } from "./components"
 import {useForm} from "react-hook-form"
@@ -119,7 +120,8 @@ const EditPage = ({AvatarIMG}) => {
                             <BasicInfoChange control={control} errors={errors} />
                             <NameStage name={"About Me"} errors={errors} />
                             <AboutMeChange control={control} errors={errors} />
-
+                            {/* <NameStage name={"External Links"} errors={errors} />
+                            <ExternalLinksChange control={control} errors={errors} /> */}
                             <NameStage name={"Security"} errors={errors} />
                             <SecurityChange
                                 control={control}

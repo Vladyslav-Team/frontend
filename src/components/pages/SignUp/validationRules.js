@@ -140,13 +140,6 @@ const registerOptions = {
             message: "Not a valid HTTPS link.",
         },
     },
-    onlyLatin: {
-        required: "This field is required",
-        pattern: {
-            value: /^[a-zA-Z0-9]+$/,
-            message: "Must be written in Latin",
-        },
-    },
 }
 
 export {registerOptions}

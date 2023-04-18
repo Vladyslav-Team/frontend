@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from "react"
-import {Grid, Typography} from "@mui/material"
-import {useJwtCheck} from "../../../../../../../../../../../shared/api/hooks"
-import {ActionHeaderProofButtons} from "./components"
+import {Button, Grid, Typography} from "@mui/material"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import DeleteIcon from "@mui/icons-material/Delete"
+import {ConfirmPopup} from "../ConfirmPopup"
 
-const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) => {
-    const {data} = useJwtCheck()
-    const isYourAccount = +talentId === data.id
+const ProofHeader = ({status, statusVis, id}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState()
+    const handleHiddenButton = () => {
+        if (status === "DRAFT") {
+            handleShowConfirm("hidden")
+        } else if (status === "HIDDEN") {
+            handleShowConfirm("PUBLISHED")
+        } else if (status === "PUBLISHED") {
+            handleShowConfirm("hidden")
+        }
+    }
 
     const handleShowConfirm = (option) => {
         setShowConfirm(true)
@@ -25,19 +34,10 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) =
                 setStatusColor("#8A8A8A")
             }
         }
+
         handleStatusColor()
     }, [status, statusColor])
 
-    const propsActionHeaderProofButtons = {
-        statusVis,
-        status,
-        handleShowConfirm,
-        option,
-        showConfirm,
-        setShowConfirm,
-        proofId,
-        allProofsRefetch,
-    }
     return (
         <Grid
             container
@@ -55,9 +55,32 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) =
             <Typography variant="h6" zIndex={20}>
                 {status}
             </Typography>
-            {isYourAccount && (
-                <ActionHeaderProofButtons {...propsActionHeaderProofButtons} />
-            )}
+            <Grid>
+                {/* <Button
+                    onClick={handleHiddenButton}
+                    sx={{minWidth: "30px", color: "#ffffff", borderRadius: "50%"}}>
+                    {statusVis !== "Added" &&
+                        (status === "HIDDEN" ? (
+                            <VisibilityOffIcon />
+                        ) : (
+                            <VisibilityIcon />
+                        ))}
+                </Button>
+                <Button
+                    onClick={() => {
+                        handleShowConfirm("delete")
+                    }}
+                    sx={{minWidth: "30px", color: "#ffffff", borderRadius: "50%"}}>
+                    {statusVis !== "Added" && <DeleteIcon />}
+                </Button>
+                <ConfirmPopup
+                    option={option}
+                    showConfirm={showConfirm}
+                    setShowConfirm={setShowConfirm}
+                    status={status}
+                    id={id}
+                /> */}
+            </Grid>
         </Grid>
     )
 }
