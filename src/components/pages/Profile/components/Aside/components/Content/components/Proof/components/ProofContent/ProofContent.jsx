@@ -19,11 +19,7 @@ const ProofContent = ({title, data, description, publication_date}) => {
             <Typography variant="body2" color="text.secondary">
                 {description}
             </Typography>
-            <Typography
-                variant="body2"
-                color="text.secondary"
-                position={"absolute"}
-                bottom={"10px"}>
+            <Typography variant="body2" color="text.secondary">
                 {publication_date}
             </Typography>
         </CardContent>

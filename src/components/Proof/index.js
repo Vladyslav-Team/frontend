@@ -1,1 +1,1 @@
-export {ProofAllInfo} from "./Proof"
+export {Proof} from "./Proof"

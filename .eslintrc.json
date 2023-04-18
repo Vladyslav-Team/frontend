@@ -17,7 +17,7 @@
     "plugins": ["react", "react-hooks"],
     "rules": {
         "no-dupe-else-if": "warn",
-        "max-lines": ["warn", 200],
+        "max-lines": ["warn", 100],
         "max-depth": ["warn", 2],
         "no-restricted-syntax": ["warn", "FunctionExpression", "FunctionDeclaration"],
         "no-unused-vars": "warn",

@@ -25,7 +25,7 @@ const getConfirmBody = (option, status) => {
                     "Are you sure you want to convert proof to Published status? This information will be visible to all users.",
             }
         }
-    } else if (status === "HIDDEN") {
+    } else if (status === "Hidden") {
         return {
             title: "Change status to Published?",
             description:

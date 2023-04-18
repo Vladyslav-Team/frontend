@@ -1,1 +1,0 @@
-export {AddProof} from "./AddProof"

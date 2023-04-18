@@ -1,52 +1,33 @@
-import React, {useEffect} from "react"
+import React from "react"
 import {getConfirmBody} from "./getConfirmBody"
 import {DialogPopup} from "./components"
-import {
-    useChangeStatusProofMutation,
-    useDeleteProofMutation,
-} from "../../../../../../../../api"
+import {useChangeStatusProofMutation} from "../../../../../../../../api"
 
-const ConfirmPopup = ({
-    option,
-    showConfirm,
-    setShowConfirm,
-    status,
-    id,
-    statusVis,
-    allProofsRefetch,
-}) => {
+const ConfirmPopup = ({option, showConfirm, setShowConfirm, status, id}) => {
     const confirmBody = getConfirmBody(option, status)
-    const [DeleteProof, deletedData] = useDeleteProofMutation()
-    const [ChangeStatusProof, proof] = useChangeStatusProofMutation()
+    const [ChangeStatusProof] = useChangeStatusProofMutation()
     const talentId = location.pathname.replace("/profile/", "")
-
-    const ChangeStatus = (status, option, toStatus, toOption, toOptionToServer) => {
-        if (status === toStatus && option === toOption && !statusVis) {
-            id && ChangeStatusProof({talentId, proofId: id, status: toOptionToServer})
-        }
-    }
-
     const handlePositiveAnswer = () => {
-        ChangeStatus(status, option, "DRAFT", "published", "publish")
-        ChangeStatus(status, option, "PUBLISHED", "hidden", "hide")
-        ChangeStatus(status, option, "HIDDEN", "published", "publish")
-        ChangeStatus(status, option, "DRAFT", "hidden", "hide")
-        if (option === "delete") {
-            id && DeleteProof({talentId, proofId: id})
-        }
-        handleClose()
+        // if (option === "delete") {
+        //     console.log("proof removed")
+        // } else if (status === "DRAFT") {
+        //     if (option === "hidden") {
+        //         id && ChangeStatusProof({talentId, proofId: id, status: "hide"})
+        //     } else if (option === "published") {
+        //         ChangeStatusProof({talentId, proofId: id, status: "publish"})
+        //     }
+        // } else if (status === "HIDDEN") {
+        //     ChangeStatusProof({talentId, proofId: id, status: "hide"})
+        // } else if (status === "PUBLISHED") {
+        //     ChangeStatusProof({talentId, proofId: id, status: "publish"})
+        // }
+        // handleClose()
     }
-
-    useEffect(() => {
-        if (proof.data || deletedData.data) {
-            allProofsRefetch()
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [deletedData.data, proof.data])
 
     const handleNegativeAnswer = () => {
         handleClose()
     }
+
     const handleClose = () => {
         setShowConfirm(false)
     }
