@@ -26,6 +26,7 @@ const ProofCard = ({proof}) => {
                         setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={proof.id}
                         text="Show more"
+                        to="proof"
                     />
                 )}
             </SigninPopupContext.Consumer>

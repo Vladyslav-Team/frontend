@@ -9,7 +9,7 @@ import {useEffect} from "react"
 import {AlertError} from "../../shared/components"
 import jwtDecode from "jwt-decode"
 
-const SigninPopup = ({setVisibilitySigninPopup, id, status, type, AvatarIMG}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
     const [updatePost, result] = useSigninTalentMutation()
 
     const navigate = useNavigate()
@@ -27,13 +27,12 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, type, AvatarIMG}) =>
     const onSubmit = (data) => {
         updatePost(data)
     }
-
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
             jwtDecode(result.data["jwt-token"]) &&
                 navigate(`/profile/${jwtDecode(result.data["jwt-token"]).id}`)
-            id && navigate(`/profile/${id}`)
+            id && navigate(`/${type}/${id}`)
             id && setVisibilitySigninPopup({status: false})
             // id && AvatarIMG.refetch()
         }
