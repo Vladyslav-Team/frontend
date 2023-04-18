@@ -7,6 +7,7 @@ import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
 import {useGetAvatarTalentQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
+import {Footer} from "./components/Footer"
 
 const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
