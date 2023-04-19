@@ -29,7 +29,7 @@ const ProofAllInfo = () => {
                             justifyContent={"space-between"}
                             width={"100%"}
                             alignItems={"flex-end"}>
-                            <h1>TestTitle</h1>
+                            <h1>{data.title}</h1>
                             <span>{data.publication_date}</span>
                         </Grid>
                         <Grid
