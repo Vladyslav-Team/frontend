@@ -24,14 +24,19 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
     const isDraft = status === "DRAFT" && !statusVis
     const isPublish = status === "PUBLISHED" && !statusVis
-    const CardActionsStyle = {
+    const CardActionsStyleDraft = {
+        justifyContent: "flex-end",
+        gap: 1,
+        "& button": {minWidth: "90px"},
+    }
+    const CardActionsStylePublished = {
         justifyContent: "space-between",
         gap: 1,
         "& button": {minWidth: "90px"},
     }
 
     return (
-        <CardActions sx={CardActionsStyle}>
+        <CardActions sx={isPublish ? CardActionsStylePublished : CardActionsStyleDraft}>
             {isDraft && <Edit proofId={proofId} />}
             {isEditOrAdded && (
                 <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis} />
