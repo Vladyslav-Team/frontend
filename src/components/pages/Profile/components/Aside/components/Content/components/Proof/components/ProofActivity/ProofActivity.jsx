@@ -6,6 +6,7 @@ import {
     ActionsButtonDraft,
     ActionsButtonShowMore,
 } from "./components"
+import {Kudos} from "../../../../../../../../../../Kudos"
 
 const Edit = ({proofId}) => {
     const navigate = useNavigate()
@@ -24,7 +25,7 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
     const isDraft = status === "DRAFT" && !statusVis
     const isPublish = status === "PUBLISHED" && !statusVis
     const CardActionsStyle = {
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         gap: 1,
         "& button": {minWidth: "90px"},
     }
@@ -44,6 +45,7 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
                     allProofsRefetch={allProofsRefetch}
                 />
             )}
+            {isPublish && <Kudos />}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>
     )
