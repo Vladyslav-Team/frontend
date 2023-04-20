@@ -147,7 +147,7 @@ const registerOptions = {
             message: "Title have maximum characters",
         },
         pattern: {
-            value: /^[a-zA-Z0-9\s!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
+            value: /^[a-zA-Z0-9\s!"#$%&№'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
             message: "Not a valid title",
         },
     },
@@ -157,7 +157,7 @@ const registerOptions = {
             message: "Description have maximum characters",
         },
         pattern: {
-            value: /^[a-zA-Z0-9\s!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
+            value: /^[a-zA-Z0-9\s!"#$%&№'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
             message: "Not a valid description",
         },
     },

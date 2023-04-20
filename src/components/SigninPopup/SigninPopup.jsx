@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import {useForm} from "react-hook-form"
 import styles from "./SigninPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
@@ -12,7 +12,11 @@ import {useLocation} from "react-router-dom"
 
 const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
     const [updatePost, result] = useSigninTalentMutation()
-    const {pathname} = useLocation()
+
+    const location = useLocation()
+    const [prevUrn, setPrevUrn] = useState(
+        location.pathname + location.search + location.hash
+    )
 
     const navigate = useNavigate()
     const {
@@ -30,15 +34,20 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
         updatePost(data)
     }
     useEffect(() => {
+        const currentUrn = location.pathname + location.search + location.hash
         if (result.data) {
             const jwt = jwtDecode(result.data["jwt-token"])
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            jwt && pathname.includes("/talents") && navigate(`/profile/${jwt.id}`)
-            id && pathname === "/proofs" && navigate(`/proof/${id}`)
+            jwt &&
+                location.pathname.includes("/talents") &&
+                navigate(`/profile/${jwt.id}`)
+            id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
             // id && AvatarIMG.refetch()
         }
-    }, [id, navigate, result.data, setVisibilitySigninPopup])
+
+        currentUrn !== prevUrn && setVisibilitySigninPopup({status: false})
+    }, [id, navigate, result.data, setVisibilitySigninPopup, location, prevUrn])
 
     const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}
@@ -101,7 +110,14 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
                 </p>
             </form>
             {result.error && (
-                <AlertError defaultStatus={true} massageError={result.error.message} />
+                <AlertError
+                    defaultStatus={true}
+                    massageError={
+                        result.error.message === "Request failed with status code 401"
+                            ? "The email address and password you entered do not match."
+                            : result.error.message
+                    }
+                />
             )}
         </>
     )
