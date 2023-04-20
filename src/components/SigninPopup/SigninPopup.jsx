@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import {useForm} from "react-hook-form"
 import styles from "./SigninPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
@@ -8,9 +8,15 @@ import {useNavigate} from "react-router-dom"
 import {useEffect} from "react"
 import {AlertError} from "../../shared/components"
 import jwtDecode from "jwt-decode"
+import {useLocation} from "react-router-dom"
 
-const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
     const [updatePost, result] = useSigninTalentMutation()
+
+    const location = useLocation()
+    const [prevUrn, setPrevUrn] = useState(
+        location.pathname + location.search + location.hash
+    )
 
     const navigate = useNavigate()
     const {
@@ -28,15 +34,20 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
         updatePost(data)
     }
     useEffect(() => {
+        const currentUrn = location.pathname + location.search + location.hash
         if (result.data) {
+            const jwt = jwtDecode(result.data["jwt-token"])
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            jwtDecode(result.data["jwt-token"]) &&
-                navigate(`/profile/${jwtDecode(result.data["jwt-token"]).id}`)
-            id && navigate(`/${type}/${id}`)
+            jwt &&
+                location.pathname.includes("/talents") &&
+                navigate(`/profile/${jwt.id}`)
+            id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
             // id && AvatarIMG.refetch()
         }
-    }, [id, navigate, result.data, setVisibilitySigninPopup, type])
+
+        currentUrn !== prevUrn && setVisibilitySigninPopup({status: false})
+    }, [id, navigate, result.data, setVisibilitySigninPopup, location, prevUrn])
 
     const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}
@@ -99,7 +110,14 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, type}) => {
                 </p>
             </form>
             {result.error && (
-                <AlertError defaultStatus={true} massageError={result.error.message} />
+                <AlertError
+                    defaultStatus={true}
+                    massageError={
+                        result.error.message === "Request failed with status code 401"
+                            ? "The email address and password you entered do not match."
+                            : result.error.message
+                    }
+                />
             )}
         </>
     )

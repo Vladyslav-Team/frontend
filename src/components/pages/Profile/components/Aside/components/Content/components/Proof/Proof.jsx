@@ -37,7 +37,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 id: id[0],
                 payload: {
                     title: e.title,
-                    description: e.description,
+                    description: e.description || "",
                 },
             })
         }
