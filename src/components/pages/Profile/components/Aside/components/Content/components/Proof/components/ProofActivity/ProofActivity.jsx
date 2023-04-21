@@ -19,7 +19,7 @@ const Edit = ({proofId}) => {
     )
 }
 
-const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) => {
+const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status, talentId}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
     const isDraft = status === "DRAFT" && !statusVis
@@ -50,7 +50,7 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
                     allProofsRefetch={allProofsRefetch}
                 />
             )}
-            {isPublish && <Kudos />}
+            {isPublish && <Kudos talentId={talentId}/>}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>
     )
