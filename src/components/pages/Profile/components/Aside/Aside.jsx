@@ -35,11 +35,13 @@ const Aside = ({talent}) => {
     return (
         <div className={styles.wrapper}>
             <Info talent={talent} />
-            <AddProof
-                idTalent={idTalent}
-                localTalentID={data.id}
-                setPoopUP={setAddProofPoopUP}
-            />
+            {data.id && (
+                <AddProof
+                    idTalent={idTalent}
+                    localTalentID={data.id}
+                    setPoopUP={setAddProofPoopUP}
+                />
+            )}
             {allProofs.isSuccess && <Content allProofs={allProofs.data && allProofs} />}
             <PopUpProof
                 vis={isAddProofPoopUP}

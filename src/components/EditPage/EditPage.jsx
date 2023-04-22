@@ -83,10 +83,10 @@ const EditPage = ({AvatarIMG}) => {
     useEffect(() => {
         if (result.data) {
             navigate(`/profile/${data.id}`)
-        } else {
+        } else if (data) {
             data.id !== parseInt(idTalent) && navigate(`/profile/${data.id}/edit`)
         }
-    }, [data.id, idTalent, navigate, result, result.data])
+    }, [data, idTalent, navigate, result, result.data])
 
     return (
         <>

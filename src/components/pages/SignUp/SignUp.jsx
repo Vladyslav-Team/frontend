@@ -16,19 +16,19 @@ const SignUp = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
     } = useForm()
-
     const onSubmit = (data) => {
         const res = data
         res.birthday = data.birthday.split("-").reverse().join("-")
         updatePost(JSON.stringify(res))
-        AvatarIMG.refetch()
     }
     useEffect(() => {
         if (result.data) {
             localStorage.setItem("jwt-token", result.data["jwt-token"])
             result.data &&
                 navigate(`/profile/${jwtDecode(result.data["jwt-token"]).id}/edit`)
+            AvatarIMG.refetch()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate, result.data])
 
     return (
