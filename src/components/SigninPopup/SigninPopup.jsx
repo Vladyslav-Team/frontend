@@ -10,13 +10,11 @@ import {AlertError} from "../../shared/components"
 import jwtDecode from "jwt-decode"
 import {useLocation} from "react-router-dom"
 
-const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
+const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
     const [updatePost, result] = useSigninTalentMutation()
 
     const location = useLocation()
-    const [prevUrn, setPrevUrn] = useState(
-        location.pathname + location.search + location.hash
-    )
+    const [prevUrn] = useState(location.pathname + location.search + location.hash)
 
     const navigate = useNavigate()
     const {
@@ -43,10 +41,10 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
                 navigate(`/profile/${jwt.id}`)
             id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
-            // id && AvatarIMG.refetch()
         }
-
+        AvatarIMG && AvatarIMG.refetch()
         currentUrn !== prevUrn && setVisibilitySigninPopup({status: false})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, navigate, result.data, setVisibilitySigninPopup, location, prevUrn])
 
     const SigninStyle = !status

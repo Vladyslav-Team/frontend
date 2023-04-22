@@ -15,20 +15,22 @@ const ProfileSidebar = ({talent, idTalentURL}) => {
         <div className={styles.sidebar}>
             <Avatar avatar={talent.image} size={180} style={styles.avatar} />
             <Info talent={talent} />
-            <NavLink to={`/profile/${talent.id}/edit`}>
-                {data.id === +idTalentURL && (
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        sx={{
-                            width: theme.spacing(30),
-                            marginTop: theme.spacing(5),
-                            borderRadius: theme.shape.borderRadius,
-                        }}>
-                        Edit
-                    </Button>
-                )}
-            </NavLink>
+            {talent && (
+                <NavLink to={`/profile/${talent.id}/edit`}>
+                    {data.id === +idTalentURL && (
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            sx={{
+                                width: theme.spacing(30),
+                                marginTop: theme.spacing(5),
+                                borderRadius: theme.shape.borderRadius,
+                            }}>
+                            Edit
+                        </Button>
+                    )}
+                </NavLink>
+            )}
         </div>
     )
 }

@@ -17,7 +17,6 @@ const Router = ({AvatarIMG}) => {
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
                 <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
-
                 <Route
                     path={`${Endpoints.POST_TALENT_SIGNIN}`}
                     element={<SigninPopup AvatarIMG={AvatarIMG} />}

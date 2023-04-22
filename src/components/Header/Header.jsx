@@ -37,7 +37,7 @@ const Header = ({AvatarIMG}) => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={"/proofs?page=1"}>
+                        <NavLink to={"/proofs?page=1&sort=newest"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isProofsPage && styles.active

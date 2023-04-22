@@ -2,9 +2,11 @@ import React, {useState, useEffect} from "react"
 import {PaginationUI, WrapperPagination} from "./styles"
 import {useNavigate} from "react-router-dom"
 
-const Pagination = ({totalPages, currentPage, url}) => {
+const Pagination = ({totalPages, currentPage, url, sort = null}) => {
     const [value, setValue] = useState(null)
     const navigate = useNavigate()
+    const defaultSort = sort !== false ? sort : "newest"
+    const sortParams = `${sort !== null ? `&sort=${defaultSort}` : ""}`
 
     useEffect(() => {
         setValue(+currentPage)
@@ -16,7 +18,7 @@ const Pagination = ({totalPages, currentPage, url}) => {
     }, [value, currentPage])
 
     const handleChange = (e, value) => {
-        navigate(`/${url}=${value}`)
+        navigate(`/${url}=${value}${sortParams}`)
     }
 
     return (
