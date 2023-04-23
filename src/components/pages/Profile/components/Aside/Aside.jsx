@@ -18,12 +18,7 @@ const Aside = ({talent}) => {
     const idTalent = +location.pathname.replace("/profile/", "")
     const pageURL = +searchParams.get("page")
     const {data} = useJwtCheck()
-    const allProofs = useGetProofsQuery(
-        {idTalent, page: pageURL},
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    )
+    const allProofs = useGetProofsQuery({idTalent, page: pageURL})
     const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
 
     useEffect(() => {
@@ -42,7 +37,7 @@ const Aside = ({talent}) => {
                     setPoopUP={setAddProofPoopUP}
                 />
             )}
-            {allProofs.isSuccess && <Content allProofs={allProofs.data && allProofs} />}
+            {!allProofs.isError && <Content allProofs={allProofs.data && allProofs} />}
             <PopUpProof
                 vis={isAddProofPoopUP}
                 setVis={setAddProofPoopUP}
