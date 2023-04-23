@@ -11,7 +11,7 @@ const Time = ({time}) => {
             alignItems={"center"}
             padding={"5px"}>
             <AccessTimeIcon sx={{width: "17px"}} />
-            <Typography paddingLeft={"2px"} variant="body2">
+            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
                 {time}
             </Typography>
         </Grid>
@@ -19,8 +19,8 @@ const Time = ({time}) => {
 }
 
 const ProofContent = ({title, data, description, publication_date}) => {
-    const time = publication_date.split(" ")[0]
-    const date = publication_date.split(" ")[1]
+    const time = publication_date && publication_date.split(" ")[0]
+    const date = publication_date && publication_date.split(" ")[1]
     return (
         <CardContent sx={{flex: "1 0 auto"}}>
             <Grid
