@@ -52,6 +52,8 @@ const Main = ({url, type}) => {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, "sort")
         } else if (type === "talents") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, null)
+        } else {
+            navigate("/talents?page=1")
         }
     }, [GetData.isError, navigate, page, pageURL, searchParams, type, url])
 

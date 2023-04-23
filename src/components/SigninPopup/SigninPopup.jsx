@@ -31,6 +31,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
     const onSubmit = (data) => {
         updatePost(data)
     }
+
     useEffect(() => {
         const currentUrn = location.pathname + location.search + location.hash
         if (result.data) {

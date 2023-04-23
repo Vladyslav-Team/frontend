@@ -73,7 +73,7 @@ const registerOptions = {
     email: {
         required: "Email is required",
         pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
             message: "Not valid email. Must be examp@gmail.com",
         },
         minLength: {
