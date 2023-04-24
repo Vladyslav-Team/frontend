@@ -1,70 +1,75 @@
-import React, {useState, useEffect} from "react"
-import {Card} from "@mui/material"
+import React, {useEffect} from "react"
 import styles from "./Proof.module.css"
-import styled from "@emotion/styled"
 import {ProofHeader} from "./components/ProofHeader"
 import {ProofForm} from "./components/ProofForm"
 import {ProofContent} from "./components/ProofContent"
 import {ProofActivity} from "./components/ProofActivity"
-import {useAddProofMutation, useChangeStatusProofMutation} from "../../../../../../api"
+import {useAddProofMutation, useChangeProofMutation} from "../../../../../../api"
 import {useForm} from "react-hook-form"
 import {AlertError} from "../../../../../../../../../shared/components/AlertError"
+import {StyledProof} from "./StyledProof"
+import {useRefetchAndClose} from "./hooks"
+import {useNavigate} from "react-router"
 
 const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
     const {title, description, data, status, publication_date} = proof
-
-    const talentId = location.pathname.replace("/profile/", "")
+    const navigate = useNavigate()
+    const id = location.pathname.replace("/profile/", "").split("/")
     const [addProof, result] = useAddProofMutation()
-    const [ChangeStatusProof, statusChanged] = useChangeStatusProofMutation()
+    const [changeProof, changeProofResult] = useChangeProofMutation()
     const {
         register,
         handleSubmit,
         watch,
         formState: {errors},
+        setValue,
     } = useForm()
 
+    useEffect(() => {
+        if (title) {
+            setValue("title", title)
+            setValue("description", description)
+        }
+    }, [description, setValue, title])
     const onSubmit = (e) => {
-        addProof({
-            id: talentId,
-            payload: {
-                title: e.title,
-                description: e.description,
-            },
-        })
+        if (statusVis === "Added") {
+            addProof({
+                id: id[0],
+                payload: {
+                    title: e.title,
+                    description: e.description || "",
+                },
+            })
+        }
+        if (statusVis === "Edit") {
+            changeProof({
+                talentId: id[0],
+                proofId: id[2],
+                payload: {
+                    title: e.title,
+                    description: e.description,
+                },
+            })
+        }
     }
-    useEffect(() => {
-        if (result.data) {
-            const proofId = result.data && result.data.id
-            proofId && ChangeStatusProof({talentId, proofId: proofId, status: "publish"})
-            setVis(false)
-        }
-    }, [ChangeStatusProof, result, setVis, talentId])
 
     useEffect(() => {
-        if (statusChanged.isSuccess) {
-            allProofsRefetch()
+        if (changeProofResult.data) {
+            navigate(-1)
         }
-    }, [statusChanged])
+    }, [changeProofResult.data, navigate])
 
-    const StyledProof = styled(Card)(({theme}) => ({
-        display: "flex",
-        position: "relative",
-        flexDirection: "column",
-        width: "370px !important",
-        minHeight: 260,
-        [theme.breakpoints.down("lg")]: {
-            minWidth: "100%",
-            minHeight: 200,
-        },
-    }))
+    useRefetchAndClose(result, setVis, allProofsRefetch)
     return (
         <StyledProof sx={styleObj}>
-            {false && <div className={styles.die}></div>}
+            {status === "HIDDEN" && <div className={styles.die}></div>}
             <ProofHeader
                 status={status}
                 isEditMode={isEditMode}
                 statusVis={statusVis}
-                id={proof.data && proof.data.id}
+                proofId={proof && proof.id}
+                allProofsRefetch={allProofsRefetch}
+                talentId={id[0]}
             />
             {isEditMode ? (
                 <ProofForm
@@ -87,14 +92,14 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
             )}
             <ProofActivity
                 isEditMode={isEditMode}
-                id={proof.id}
+                proofId={proof && proof.id}
                 statusVis={statusVis}
                 status={status}
                 setVis={setVis}
                 addProof={addProof}
                 watch={watch}
                 allProofsRefetch={allProofsRefetch}
-                talentId={talentId}
+                talentId={id[0]}
             />
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />

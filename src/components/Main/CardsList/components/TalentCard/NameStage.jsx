@@ -4,10 +4,24 @@ import Select from "@mui/material/Select"
 import Grid from "@mui/material/Grid"
 import IconButton from "@mui/material/IconButton"
 import RefreshIcon from "@mui/icons-material/Refresh"
-const NameStage = ({type, setSort, sort, refetch}) => {
+import {useLocation, useNavigate} from "react-router-dom"
+
+const NameStage = ({type, refetch}) => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const sort =
+        location.search.split("&")[1] &&
+        location.search.split("&")[1].replace("sort=", "")
+    const typeSort = location.search.split("&")[1] ? sort : "newest"
     const handleChange = (event) => {
-        setSort(event.target.value)
+        if (!location.search.includes("sort")) {
+            navigate(`${location.pathname}?page=1&sort=${event.target.value}`)
+        }
+        if (location.search.includes("sort")) {
+            navigate(`${location.pathname}?page=1&sort=${event.target.value}`)
+        }
     }
+
     return (
         <Grid
             container
@@ -33,14 +47,13 @@ const NameStage = ({type, setSort, sort, refetch}) => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Age"
-                        defaultValue={1}
-                        value={sort}
+                        value={typeSort}
                         autoWidth
                         MenuProps={{disableScrollLock: true}}
                         sx={{marginLeft: "25px"}}
                         onChange={handleChange}>
-                        <MenuItem value={false}>From new to old</MenuItem>
-                        <MenuItem value={true}>From old to new</MenuItem>
+                        <MenuItem value={"newest"}>From new to old</MenuItem>
+                        <MenuItem value={"oldest"}>From old to new</MenuItem>
                     </Select>
                 </Grid>
             )}

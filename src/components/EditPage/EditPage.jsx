@@ -6,7 +6,6 @@ import {
     NameStage,
     BasicInfoChange,
     AboutMeChange,
-    ExternalLinksChange,
     SecurityChange,
 } from "./components"
 import {useForm} from "react-hook-form"
@@ -41,8 +40,11 @@ const setDefaultValueForm = (data, setter) => {
 const filterDataForDate = (data) => {
     let res = JSON.stringify(data)
     res = JSON.parse(res)
+
     if (res.birthday) {
-        res.birthday = res.birthday.split("T")[0].split("-").reverse().join("-")
+        const dateArr = res.birthday.slice(0, 10).split("-")
+        dateArr[2] = parseInt(dateArr[2]) + 1
+        res.birthday = dateArr.reverse().join("-")
     }
 
     return res
@@ -79,9 +81,12 @@ const EditPage = ({AvatarIMG}) => {
         AvatarIMG.refetch()
     }
     useEffect(() => {
-        result.data && navigate(`/profile/${data.id}`)
-        if (!result.data && data.id !== idTalent) navigate(`/profile/${data.id}/edit`)
-    }, [data.id, idTalent, navigate, result, result.data])
+        if (result.data) {
+            navigate(`/profile/${data.id}`)
+        } else if (data) {
+            data.id !== parseInt(idTalent) && navigate(`/profile/${data.id}/edit`)
+        }
+    }, [data, idTalent, navigate, result, result.data])
 
     return (
         <>
@@ -120,8 +125,6 @@ const EditPage = ({AvatarIMG}) => {
                             <BasicInfoChange control={control} errors={errors} />
                             <NameStage name={"About Me"} errors={errors} />
                             <AboutMeChange control={control} errors={errors} />
-                            {/* <NameStage name={"External Links"} errors={errors} />
-                            <ExternalLinksChange control={control} errors={errors} /> */}
                             <NameStage name={"Security"} errors={errors} />
                             <SecurityChange
                                 control={control}

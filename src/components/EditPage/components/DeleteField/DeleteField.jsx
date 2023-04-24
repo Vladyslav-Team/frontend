@@ -35,6 +35,7 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) 
             deleteTalent()
             setIsDeleted(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isDeleted])
 
     const handleMouseDown = async () => {

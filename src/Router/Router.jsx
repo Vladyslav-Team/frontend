@@ -8,7 +8,7 @@ import {EditPage} from "./../components/EditPage/EditPage"
 import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
-import {Proof} from "../components/pages/Profile/components/Aside/components/Content/components/Proof"
+import {ProofAllInfo} from "../components/Proof"
 
 const Router = ({AvatarIMG}) => {
     return (
@@ -17,7 +17,6 @@ const Router = ({AvatarIMG}) => {
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
                 <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
-
                 <Route
                     path={`${Endpoints.POST_TALENT_SIGNIN}`}
                     element={<SigninPopup AvatarIMG={AvatarIMG} />}
@@ -31,15 +30,15 @@ const Router = ({AvatarIMG}) => {
                 />
             </Route>
             <Route path={"/proofs"}>
-                {/* <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} /> */}
+                <Route path="" element={<Main url={"proofs?page"} type={"proofs"} />} />
             </Route>
-            {/* <Route path={"/proof"}>
-                <Route path={":talentId"} element={<Proof />} />
+            <Route path={"/proof"}>
+                <Route path={":proofId"} element={<ProofAllInfo />} />
             </Route>
             <Route
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
-            /> */}
+            />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )

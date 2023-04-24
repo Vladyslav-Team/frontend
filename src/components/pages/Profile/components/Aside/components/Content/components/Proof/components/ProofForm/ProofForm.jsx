@@ -1,5 +1,6 @@
 import React from "react"
 import {Grid, TextField} from "@mui/material"
+import {registerOptions} from "../../../../../../../../../SignUp/validationRules"
 
 const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
     return (
@@ -10,9 +11,9 @@ const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    {...register("title", {required: true})}
+                    {...register("title", registerOptions.proofTitle)}
                     error={errors.title}
-                    helperText={errors.title && "Title is required"}
+                    helperText={errors.title && errors.title.message}
                     sx={{maxWidth: "60%"}}
                 />
                 <TextField
@@ -22,9 +23,9 @@ const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    {...register("description", {required: true})}
-                    error={errors.text}
-                    helperText={errors.text && "Text is required"}
+                    {...register("description", registerOptions.proofDescription)}
+                    error={errors.description}
+                    helperText={errors.description && errors.description.message}
                     sx={{minHeight: "100px"}}
                 />
             </form>

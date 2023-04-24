@@ -1,14 +1,7 @@
-.signup {
-    position: absolute;
-    top: 55px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .signup > h1 {
+    position: relative;
     text-align: center;
-    margin: 20px 0 50px 0;
-    top: -25px;
+    margin: 75px 0 50px 0;
 }
 
 .form_wrap {
