@@ -77,6 +77,7 @@ const EditPage = ({AvatarIMG}) => {
 
     const onSubmit = (data) => {
         const payload = filterResForm(filterDataForDate(data), AllInfo.data)
+        console.log(payload)
         updateTalentInfo({payload, idTalent})
         AvatarIMG.refetch()
     }
