@@ -105,7 +105,7 @@ const registerOptions = {
             message: validateLocation,
         },
     },
-    birthDate: {
+    birthday: {
         required: "Birth date is required",
         validate: {
             message: validateDate,
