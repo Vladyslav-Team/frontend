@@ -1,0 +1,8 @@
+.buttonClicker:hover {
+    transition: 1s;
+    box-shadow: inset 5px 0px 10px 5px rgba(0, 0, 0, 0.35) !important;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+}

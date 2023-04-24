@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 export const axiosBaseQuery =
     // eslint-disable-next-line no-unused-vars
 
+
         ({baseUrl} = {}) =>
         async ({url, method, data, auth}) => {
             const isParamsTrue = url.split("/").at(-1) !== "undefined"
