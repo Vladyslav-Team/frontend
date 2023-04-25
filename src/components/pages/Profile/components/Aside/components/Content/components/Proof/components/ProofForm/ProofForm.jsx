@@ -11,7 +11,7 @@ const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    {...register("title", registerOptions.onlyLatin)}
+                    {...register("title", registerOptions.proofTitle)}
                     error={errors.title}
                     helperText={errors.title && errors.title.message}
                     sx={{maxWidth: "60%"}}
@@ -23,7 +23,7 @@ const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    {...register("description", registerOptions.onlyLatin)}
+                    {...register("description", registerOptions.proofDescription)}
                     error={errors.description}
                     helperText={errors.description && errors.description.message}
                     sx={{minHeight: "100px"}}

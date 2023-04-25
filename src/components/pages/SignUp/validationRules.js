@@ -140,6 +140,27 @@ const registerOptions = {
             message: "Not a valid HTTPS link.",
         },
     },
+    proofTitle: {
+        required: "This field is required",
+        maxLength: {
+            value: 100,
+            message: "Title have maximum characters",
+        },
+        pattern: {
+            value: /^[a-zA-Z0-9\s!"#$%&№'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
+            message: "Not a valid title",
+        },
+    },
+    proofDescription: {
+        maxLength: {
+            value: 2000,
+            message: "Description have maximum characters",
+        },
+        pattern: {
+            value: /^[a-zA-Z0-9\s!"#$%&№'()*+,./:;<=>?@[\]^_`{|}~\\-]*$/,
+            message: "Not a valid description",
+        },
+    },
     onlyLatin: {
         required: "This field is required",
         pattern: {

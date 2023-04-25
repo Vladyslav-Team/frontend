@@ -13,7 +13,6 @@ const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
         status: false,
         id: null,
-        type: "talent",
     })
     const {data} = useJwtCheck()
     const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
@@ -32,7 +31,6 @@ const App = () => {
                         setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={visibilitySigninPopup.id}
                         status={visibilitySigninPopup.status}
-                        type={visibilitySigninPopup.type}
                     />
                 )}
             </main>
