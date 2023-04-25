@@ -24,17 +24,17 @@ const App = () => {
             <CssBaseline />
             <Header AvatarIMG={AvatarIMG} />
             <main>
-            <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
-                <Router AvatarIMG={AvatarIMG} />
-            </SigninPopupContext.Provider>
-            {visibilitySigninPopup.status && (
-                <SigninPopup
-                    setVisibilitySigninPopup={setVisibilitySigninPopup}
-                    id={visibilitySigninPopup.id}
-                    status={visibilitySigninPopup.status}
-                    type={visibilitySigninPopup.type}
-                />
-            )}
+                <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
+                    <Router AvatarIMG={AvatarIMG} />
+                </SigninPopupContext.Provider>
+                {visibilitySigninPopup.status && (
+                    <SigninPopup
+                        setVisibilitySigninPopup={setVisibilitySigninPopup}
+                        id={visibilitySigninPopup.id}
+                        status={visibilitySigninPopup.status}
+                        type={visibilitySigninPopup.type}
+                    />
+                )}
             </main>
             <Footer />
         </ThemeProvider>

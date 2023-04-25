@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./Footer.module.css"
-import { Logo } from "../Header/components/Logo"
+import {Logo} from "../Header/components/Logo"
 
 const Footer = () => {
     return (
@@ -44,4 +44,4 @@ const Footer = () => {
     )
 }
 
-export { Footer }
+export {Footer}
