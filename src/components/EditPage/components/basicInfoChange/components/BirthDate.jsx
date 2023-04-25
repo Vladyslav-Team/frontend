@@ -14,9 +14,11 @@ const BirthDate = ({control, errors}) => {
                 render={({field: {onChange, ...restField}}) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
-                            format="DD-MM-YYYY"
+                            format="DD/MM/YYYY"
                             label="New birth date"
                             onChange={(date) => {
+                                const newdate = Date.now()
+                                console.log(JSON.stringify(date), newdate)
                                 onChange(date)
                             }}
                             sx={{
