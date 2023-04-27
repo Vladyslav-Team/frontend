@@ -7,10 +7,9 @@ export const KudosApi = createApi({
     endpoints: (build) => {
         return {
             AddKudos: build.mutation({
-                query: ({body, proofId}) => ({
+                query: ({proofId}) => ({
                     url: `/proofs/${proofId}/kudos`,
                     method: "POST",
-                    data: body,
                 }),
             }),
             GetKudos: build.query({

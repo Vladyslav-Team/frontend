@@ -7,11 +7,10 @@ import Like from "./img/like.png"
 import Unlike from "./img/unlike.png"
 
 const Kudos = ({talentId, proofId}) => {
-    const [isClicked, setIsClicked] = useState(false)
     const {data} = useJwtCheck()
-    const isHome = talentId == data.id
+    const isHome = +talentId === data.id
 
-    const [updateKudos] = useAddKudosMutation()
+    const [updateKudos, result] = useAddKudosMutation()
     const KudosInfo = useGetKudosQuery(
         {proofId},
         {
@@ -19,21 +18,13 @@ const Kudos = ({talentId, proofId}) => {
         }
     )
 
-    const addingKudos = () => {
-        const newAmountOfKudos = {
-            data: {
-                amount_of_kudos: KudosInfo.data.amount_of_kudos + 1,
-            },
-        }
-        updateKudos({newAmountOfKudos, proofId})
-
+    useEffect(() => {
         KudosInfo.refetch()
-    }
+    }, [result.status])
 
     const handleClick = () => {
-        if (!isClicked) {
-            setIsClicked(true)
-            addingKudos()
+        if (!KudosInfo.data.is_clicked) {
+            updateKudos({proofId})
         }
     }
 
@@ -47,7 +38,7 @@ const Kudos = ({talentId, proofId}) => {
             {!KudosInfo.isLoading ? (
                 <div className={styles.flex_container}>
                     <div className={styles.kudos_img}>
-                        {isClicked ? (
+                        {KudosInfo.data.is_clicked ? (
                             <img
                                 className={styles.kudos_img}
                                 src={Like}
