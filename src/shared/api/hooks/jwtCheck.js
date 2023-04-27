@@ -6,8 +6,7 @@ const useJwtCheck = () => {
     if (!jwtDecodeData) {
         localStorage.removeItem("jwt-token")
         return false
-    }
-    if (Date.now() >= jwtDecodeData.exp * 1000) {
+    } else if (Date.now() >= jwtDecodeData.exp * 1000) {
         localStorage.removeItem("jwt-token")
         return {
             data: false,
