@@ -38,13 +38,12 @@ const setDefaultValueForm = (data, setter) => {
 }
 
 const filterDataForDate = (data) => {
-    let res = JSON.stringify(data)
-    res = JSON.parse(res)
-    if (res.birthday) {
-        res.birthday = res.birthday.split("T")[0].split("-").reverse().join("-")
+    if (data.birthday) {
+        const date = new Date(data.birthday.$y, data.birthday.$M, data.birthday.$D + 1)
+        data.birthday = date.toISOString().slice(0, 10).split("-").reverse().join("-")
     }
 
-    return res
+    return data
 }
 
 const EditPage = ({AvatarIMG}) => {
@@ -78,9 +77,12 @@ const EditPage = ({AvatarIMG}) => {
         AvatarIMG.refetch()
     }
     useEffect(() => {
-        result.data && navigate(`/profile/${data.id}`)
-        if (!result.data && data.id !== idTalent) navigate(`/profile/${data.id}/edit`)
-    }, [data.id, idTalent, navigate, result, result.data])
+        if (result.data) {
+            navigate(`/profile/${data.id}`)
+        } else if (data) {
+            data.id !== parseInt(idTalent) && navigate(`/profile/${data.id}/edit`)
+        }
+    }, [data, idTalent, navigate, result, result.data])
 
     return (
         <>
@@ -119,7 +121,6 @@ const EditPage = ({AvatarIMG}) => {
                             <BasicInfoChange control={control} errors={errors} />
                             <NameStage name={"About Me"} errors={errors} />
                             <AboutMeChange control={control} errors={errors} />
-
                             <NameStage name={"Security"} errors={errors} />
                             <SecurityChange
                                 control={control}

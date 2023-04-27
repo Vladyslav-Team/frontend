@@ -9,18 +9,25 @@ import Loader from "../../../shared/components/Loader"
 const Profile = () => {
     const location = useLocation()
     const idTalent = location.pathname.replace("/profile/", "")
-    const {data, error, isLoading, isError} = useGetAllInfoByIDQuery(idTalent, {
-        refetchOnMountOrArgChange: true,
-    })
+    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(
+        idTalent,
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
 
     return (
         <>
-            {data ? (
+            {isSuccess ? (
                 <>
                     <div className={styles.plug}></div>
                     <div className={styles.wrapper}>
-                        <ProfileSidebar talent={data} idTalentURL={idTalent} />
-                        <Aside talent={data} />
+                        {isSuccess && (
+                            <>
+                                <ProfileSidebar talent={data} idTalentURL={idTalent} />
+                                <Aside talent={data} />
+                            </>
+                        )}
                     </div>
                 </>
             ) : (

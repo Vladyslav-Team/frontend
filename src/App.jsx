@@ -7,13 +7,12 @@ import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
 import {useGetAvatarTalentQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
-import {Footer} from "./components/Footer"
+import {Footer} from "./components/Footer/Footer"
 
 const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
         status: false,
         id: null,
-        type: "talent",
     })
     const {data} = useJwtCheck()
     const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
@@ -24,17 +23,16 @@ const App = () => {
             <CssBaseline />
             <Header AvatarIMG={AvatarIMG} />
             <main>
-            <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
-                <Router AvatarIMG={AvatarIMG} />
-            </SigninPopupContext.Provider>
-            {visibilitySigninPopup.status && (
-                <SigninPopup
-                    setVisibilitySigninPopup={setVisibilitySigninPopup}
-                    id={visibilitySigninPopup.id}
-                    status={visibilitySigninPopup.status}
-                    type={visibilitySigninPopup.type}
-                />
-            )}
+                <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
+                    <Router AvatarIMG={AvatarIMG} />
+                </SigninPopupContext.Provider>
+                {visibilitySigninPopup.status && (
+                    <SigninPopup
+                        setVisibilitySigninPopup={setVisibilitySigninPopup}
+                        id={visibilitySigninPopup.id}
+                        status={visibilitySigninPopup.status}
+                    />
+                )}
             </main>
             <Footer />
         </ThemeProvider>

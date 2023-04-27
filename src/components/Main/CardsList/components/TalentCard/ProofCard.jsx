@@ -11,7 +11,14 @@ const ProofCard = ({proof}) => {
                 className={styles.background}>
                 <h1 style={{color: "#ffff", fontSize: "20px"}}>{proof.title}</h1>
             </div>
-            <div className={styles.content} style={{height: "100px", overflow: "hidden"}}>
+            <div
+                className={styles.content}
+                style={{
+                    height: "100px",
+                    textAlign: "left",
+                    width: "80%",
+                    wordBreak: "break-word",
+                }}>
                 <Typography variant="body1" gutterBottom>
                     {proof.description}
                 </Typography>
