@@ -5,10 +5,13 @@ import {useAddKudosMutation, useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
 import Like from "./img/like.png"
 import Unlike from "./img/unlike.png"
+import {useLocation} from "react-router-dom"
 
 const Kudos = ({talentId, proofId}) => {
     const {data} = useJwtCheck()
-    const isHome = +talentId === data.id
+    const isHome = data && +talentId === data.id
+
+    const {pathname} = useLocation()
 
     const [updateKudos, result] = useAddKudosMutation()
     const KudosInfo = useGetKudosQuery(
@@ -29,8 +32,8 @@ const Kudos = ({talentId, proofId}) => {
     }
 
     const imgStyle = {
-        pointerEvents: isHome ? "none" : "auto",
-        cursor: isHome ? "none" : "pointer",
+        pointerEvents: isHome || pathname === "/proofs" ? "none" : "auto",
+        cursor: isHome || pathname === "/proofs" ? "none" : "pointer",
     }
 
     return (
