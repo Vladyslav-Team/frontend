@@ -19,7 +19,14 @@ const Edit = ({proofId}) => {
     )
 }
 
-const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status, talentId}) => {
+const ProofActivity = ({
+    proofId,
+    statusVis,
+    setVis,
+    allProofsRefetch,
+    status,
+    talentId,
+}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
     const isDraft = status === "DRAFT" && !statusVis

@@ -42,7 +42,6 @@ const filterDataForDate = (data) => {
         const date = new Date(data.birthday.$y, data.birthday.$M, data.birthday.$D + 1)
         data.birthday = date.toISOString().slice(0, 10).split("-").reverse().join("-")
     }
-
     return data
 }
 

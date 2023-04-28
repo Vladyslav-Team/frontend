@@ -9,7 +9,7 @@ import {useLocation} from "react-router-dom"
 
 const Kudos = ({talentId, proofId}) => {
     const {data} = useJwtCheck()
-    const isHome = +talentId === data.id
+    const isHome = data && +talentId === data.id
 
     const {pathname} = useLocation()
 
