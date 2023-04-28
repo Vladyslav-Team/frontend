@@ -38,16 +38,12 @@ const setDefaultValueForm = (data, setter) => {
 }
 
 const filterDataForDate = (data) => {
-    let res = JSON.stringify(data)
-    res = JSON.parse(res)
-
-    if (res.birthday) {
-        const dateArr = res.birthday.slice(0, 10).split("-")
-        dateArr[2] = parseInt(dateArr[2]) + 1
-        res.birthday = dateArr.reverse().join("-")
+    if (data.birthday) {
+        const date = new Date(data.birthday.$y, data.birthday.$M, data.birthday.$D + 1)
+        data.birthday = date.toISOString().slice(0, 10).split("-").reverse().join("-")
     }
 
-    return res
+    return data
 }
 
 const EditPage = ({AvatarIMG}) => {

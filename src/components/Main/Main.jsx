@@ -5,9 +5,9 @@ import {CardsList} from "./CardsList"
 import {useNavigate, useSearchParams} from "react-router-dom"
 import styles from "./Main.module.css"
 
-const redirectReset = (type, pageURL, url, navigate, setPage) => {
+const redirectReset = (type, pageURL, url, navigate, setPage, sortURL) => {
     if (type === "sort") {
-        navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}&sort=newest`)
+        navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}&sort=${sortURL}`)
         setPage(pageURL)
     } else if (type === null) {
         navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}`)
@@ -15,12 +15,12 @@ const redirectReset = (type, pageURL, url, navigate, setPage) => {
     }
 }
 
-const forAllCard = (page, url, setPage, pageURL, isError, navigate, type) => {
+const forAllCard = (page, url, setPage, pageURL, isError, navigate, type, sortURL) => {
     if (!page) {
         if (!url) {
             navigate("/talents?page=1")
         } else {
-            redirectReset(type, pageURL, url, navigate, setPage)
+            redirectReset(type, pageURL, url, navigate, setPage, sortURL)
         }
     } else if (isError || isNaN(pageURL) === true) {
         if (type === "sort") {
@@ -35,7 +35,6 @@ const forAllCard = (page, url, setPage, pageURL, isError, navigate, type) => {
 const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
-    const [sort, setSort] = useState(false)
     const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
     const sortURL = searchParams.get("sort") && searchParams.get("sort")
@@ -49,23 +48,26 @@ const Main = ({url, type}) => {
     )
     useEffect(() => {
         if (type === "proofs") {
-            forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, "sort")
+            forAllCard(
+                page,
+                url,
+                setPage,
+                pageURL,
+                GetData.isError,
+                navigate,
+                "sort",
+                sortURL
+            )
         } else if (type === "talents") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, null)
         } else {
             navigate("/talents?page=1")
         }
-    }, [GetData.isError, navigate, page, pageURL, searchParams, type, url])
+    }, [GetData.isError, navigate, page, pageURL, searchParams, sortURL, type, url])
 
     return (
         <div className={styles.wrapper}>
-            <CardsList
-                GetData={GetData}
-                className={styles.content}
-                type={type}
-                setSort={setSort}
-                sort={sort}
-            />
+            <CardsList GetData={GetData} className={styles.content} type={type} />
             <Pagination
                 totalPages={GetData.data && GetData.data.totalPages}
                 currentPage={pageURL}
