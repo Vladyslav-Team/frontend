@@ -50,7 +50,7 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status, ta
                     allProofsRefetch={allProofsRefetch}
                 />
             )}
-            {isPublish && <Kudos talentId={talentId}/>}
+            {isPublish && <Kudos talentId={talentId} proofId={proofId} />}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>
     )
