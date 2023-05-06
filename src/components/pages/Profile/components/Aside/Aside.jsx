@@ -14,23 +14,30 @@ const Aside = ({talent}) => {
     const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
-    const idTalent = +location.pathname.replace("/profile/", "")
+    const id = +location.pathname.replace("/profile/", "")
     const pageURL = +searchParams.get("page")
     const {data} = useJwtCheck()
+
+    const role =
+        data.role === "ROLE_TALENT" || (data.role === "ROLE_SPONSOR" && data.id !== +id)
+            ? "talents"
+            : "sponsors"
+
     const allProofs = useGetProofsQuery(
-        {idTalent, page: pageURL},
+        {id, role, page: pageURL},
         {
             refetchOnMountOrArgChange: true,
         }
     )
+
     const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
 
     return (
         <div className={styles.wrapper}>
             <Info talent={talent} />
-            {data.id && (
+            {data.id && data.role === "ROLE_TALENT" && (
                 <AddProof
-                    idTalent={idTalent}
+                    idTalent={id}
                     localTalentID={data.id}
                     setPoopUP={setAddProofPoopUP}
                 />
@@ -45,7 +52,7 @@ const Aside = ({talent}) => {
                 <Pagination
                     totalPages={allProofs.data && allProofs.data.totalPages}
                     currentPage={pageURL}
-                    url={`profile/${idTalent}?page`}
+                    url={`profile/${id}?page`}
                     sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
                 />
             )}

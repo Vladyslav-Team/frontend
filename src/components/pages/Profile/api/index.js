@@ -7,8 +7,8 @@ export const GetAllInfoByID = createApi({
     endpoints: (build) => {
         return {
             GetAllInfoByID: build.query({
-                query: (id) => ({
-                    url: `/talents/${id}`,
+                query: ({id, role}) => ({
+                    url: `/${role}/${id}`,
                     method: "GET",
                 }),
             }),

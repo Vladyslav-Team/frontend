@@ -5,12 +5,21 @@ import {Aside} from "./components/Aside"
 import {useLocation} from "react-router-dom"
 import {useGetAllInfoByIDQuery} from "./api"
 import Loader from "../../../shared/components/Loader"
+import {useJwtCheck} from "../../../shared/api/hooks"
 
 const Profile = () => {
     const location = useLocation()
-    const idTalent = location.pathname.replace("/profile/", "")
+    const id = location.pathname.replace("/profile/", "")
+    const jwt = useJwtCheck()
+
+    const role =
+        jwt.data.role === "ROLE_TALENT" ||
+        (jwt.data.role === "ROLE_SPONSOR" && jwt.data.id !== +id)
+            ? "talents"
+            : "sponsors"
+
     const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(
-        idTalent,
+        {id, role},
         {
             refetchOnMountOrArgChange: true,
         }
@@ -24,7 +33,7 @@ const Profile = () => {
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>
-                                <ProfileSidebar talent={data} idTalentURL={idTalent} />
+                                <ProfileSidebar talent={data} idTalentURL={id} />
                                 <Aside talent={data} />
                             </>
                         )}

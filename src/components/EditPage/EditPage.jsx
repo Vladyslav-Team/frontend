@@ -50,9 +50,11 @@ const EditPage = ({AvatarIMG}) => {
     const location = useLocation()
     const {data} = useJwtCheck()
     const matches = useMediaQuery("(min-width:750px)")
-    const idTalent = location.pathname.replace(/[^0-9\\.]+/g, "")
+    const id = location.pathname.replace(/[^0-9\\.]+/g, "")
     const [updateTalentInfo, result] = useEditTalentMutation()
-    const AllInfo = useGetAllInfoByIDQuery(idTalent)
+
+    const role = data.role === "ROLE_TALENT" ? "talents" : "sponsors"
+    const AllInfo = useGetAllInfoByIDQuery({id, role})
 
     const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)
@@ -72,16 +74,16 @@ const EditPage = ({AvatarIMG}) => {
 
     const onSubmit = (data) => {
         const payload = filterResForm(filterDataForDate(data), AllInfo.data)
-        updateTalentInfo({payload, idTalent})
+        updateTalentInfo({payload, id})
         AvatarIMG.refetch()
     }
     useEffect(() => {
         if (result.data) {
             navigate(`/profile/${data.id}`)
         } else if (data) {
-            data.id !== parseInt(idTalent) && navigate(`/profile/${data.id}/edit`)
+            data.id !== parseInt(id) && navigate(`/profile/${data.id}/edit`)
         }
-    }, [data, idTalent, navigate, result, result.data])
+    }, [data, id, navigate, result, result.data])
 
     return (
         <>

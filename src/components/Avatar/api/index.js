@@ -7,8 +7,8 @@ export const HeaderApi = createApi({
     endpoints: (build) => {
         return {
             GetAvatarTalent: build.query({
-                query: (idTalent) => ({
-                    url: `/talent/image/${idTalent}`,
+                query: ({id, role}) => ({
+                    url: `/${role}/image/${id}`,
                     method: "GET",
                 }),
             }),

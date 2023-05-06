@@ -15,9 +15,16 @@ const App = () => {
         id: null,
     })
     const {data} = useJwtCheck()
-    const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
-        refetchOnMountOrArgChange: true,
-    })
+
+    const id = data && data.id
+    const role = data && data.role === "ROLE_TALENT" ? "talent" : "sponsor"
+
+    const AvatarIMG = useGetAvatarTalentQuery(
+        {id, role},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
