@@ -6,9 +6,9 @@ export const HeaderApi = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => {
         return {
-            GetAvatarTalent: build.query({
-                query: (idTalent) => ({
-                    url: `/talent/image/${idTalent}`,
+            GetUserAvatar: build.query({
+                query: ({id, role}) => ({
+                    url: `/${role}/image/${id}`,
                     method: "GET",
                 }),
             }),
@@ -16,4 +16,4 @@ export const HeaderApi = createApi({
     },
 })
 
-export const {useGetAvatarTalentQuery} = HeaderApi
+export const {useGetUserAvatarQuery} = HeaderApi

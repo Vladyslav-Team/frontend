@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import styles from "./Kudos.module.css"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {useAddKudosMutation, useGetKudosQuery} from "./api"
@@ -31,10 +31,16 @@ const Kudos = ({talentId, proofId}) => {
         }
     }
 
-    const imgStyle = {
-        pointerEvents: isHome || pathname === "/proofs" ? "none" : "auto",
-        cursor: isHome || pathname === "/proofs" ? "none" : "pointer",
-    }
+    const imgStyle =
+        isHome || pathname === "/proofs" || data.role === "ROLE_TALENT"
+            ? {
+                  pointerEvents: "none",
+                  cursor: "none",
+              }
+            : {
+                  pointerEvents: "auto",
+                  cursor: "pointer",
+              }
 
     return (
         <>
