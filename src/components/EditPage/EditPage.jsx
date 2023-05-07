@@ -11,7 +11,7 @@ import {
 import {useForm} from "react-hook-form"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {useLocation, useNavigate} from "react-router-dom"
-import {useGetAllInfoByIDQuery} from "../pages/Profile/api"
+import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
 import Loader from "../../shared/components/Loader"
 import {useEditTalentMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
@@ -54,7 +54,7 @@ const EditPage = ({AvatarIMG}) => {
     const [updateTalentInfo, result] = useEditTalentMutation()
 
     const role = data.role === "ROLE_TALENT" ? "talents" : "sponsors"
-    const AllInfo = useGetAllInfoByIDQuery({id, role})
+    const AllInfo = useGetAllUserInfoByIDQuery({id, role})
 
     const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)

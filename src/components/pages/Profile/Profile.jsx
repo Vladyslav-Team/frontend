@@ -3,7 +3,7 @@ import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"
 import {useLocation} from "react-router-dom"
-import {useGetAllInfoByIDQuery} from "./api"
+import {useGetAllUserInfoByIDQuery} from "./api"
 import Loader from "../../../shared/components/Loader"
 import {useJwtCheck} from "../../../shared/api/hooks"
 
@@ -18,7 +18,7 @@ const Profile = () => {
             ? "talents"
             : "sponsors"
 
-    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(
+    const {data, error, isLoading, isError, isSuccess} = useGetAllUserInfoByIDQuery(
         {id, role},
         {
             refetchOnMountOrArgChange: true,

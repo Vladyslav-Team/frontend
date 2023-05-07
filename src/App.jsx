@@ -5,7 +5,7 @@ import {theme} from "./Theme"
 import {Router} from "./Router"
 import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
-import {useGetAvatarTalentQuery} from "./components/Avatar/api"
+import {useGetUserAvatarQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
 import {Footer} from "./components/Footer/Footer"
 
@@ -19,7 +19,7 @@ const App = () => {
     const id = data && data.id
     const role = data && data.role === "ROLE_TALENT" ? "talent" : "sponsor"
 
-    const AvatarIMG = useGetAvatarTalentQuery(
+    const AvatarIMG = useGetUserAvatarQuery(
         {id, role},
         {
             refetchOnMountOrArgChange: true,
