@@ -8,8 +8,8 @@
     position: relative;
     display: flex;
     width: 320px;
-    height: 550px;
     margin: auto;
+    padding: 20px 0;
     background: rgba(10, 110, 154, 0.3);
     border-radius: 30px;
     align-items: center;
@@ -27,6 +27,13 @@ select {
     border: 2px solid rgba(62, 62, 62, 0.76);
     border-radius: 7px;
     padding: 0 10px;
+}
+
+ .checkbox{
+    display:inline-block;
+    vertical-align: middle;
+    width: 25px;
+    margin-left: 20px;
 }
 
 form .error {
