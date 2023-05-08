@@ -43,7 +43,8 @@ const ProofContent = ({title, data, description, publication_date}) => {
                     variant="body2"
                     color="text.secondary"
                     position={"absolute"}
-                    bottom={"10px"}>
+                    bottom={"15px"}
+                    left="30%">
                     {date}
                 </Typography>
             </Tooltip>

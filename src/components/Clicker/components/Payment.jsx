@@ -9,9 +9,10 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 
 const Payment = ({open, data, setOpenPayment}) => {
+    console.log(data.redirect_url)
     const handleNext = () => {
         window.open(
-            data.redirectUrl,
+            data.redirect_url,
             "_blank",
             "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=700,height=700"
         )
@@ -46,6 +47,7 @@ const Payment = ({open, data, setOpenPayment}) => {
                             <TableRow>
                                 <TableCell>Name</TableCell>
                                 <TableCell align="right">Price</TableCell>
+                                <TableCell align="right">Payment System</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -55,6 +57,13 @@ const Payment = ({open, data, setOpenPayment}) => {
                                     Reset Time
                                 </TableCell>
                                 <TableCell align="right">5$</TableCell>
+                                <TableCell align="right" sx={{paddingRight: "40px"}}>
+                                    <img
+                                        width={"50px"}
+                                        src="https://cdn-icons-png.flaticon.com/512/196/196566.png"
+                                        alt=""
+                                    />
+                                </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

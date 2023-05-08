@@ -2,8 +2,8 @@ import React from "react"
 import Avatar from "@mui/material/Avatar"
 import {NavLink, useLocation} from "react-router-dom"
 import {useGetAllProofQuery} from "../pages/Profile/api"
-import {Grid} from "@mui/material"
-import {useGetAvatarTalentQuery} from "../Avatar/api"
+import {Grid, Typography} from "@mui/material"
+import {useGetUserAvatarQuery} from "../Avatar/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
@@ -11,7 +11,7 @@ const ProofAllInfo = () => {
     const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
-    const AvatarIMG = useGetAvatarTalentQuery(data && data.talent_id)
+    const AvatarIMG = useGetUserAvatarQuery(data && data.talent_id)
 
     return (
         <>
@@ -21,16 +21,16 @@ const ProofAllInfo = () => {
                 justifyContent={"center"}
                 paddingTop={"90px"}>
                 {data && (
-                    <Grid container width={"700px"} paddingBottom={"20px"}>
-                        <Grid
-                            item
-                            display={"flex"}
-                            flexDirection={"row"}
-                            justifyContent={"space-between"}
-                            width={"100%"}
-                            alignItems={"flex-end"}>
-                            <h1>{data.title}</h1>
-                            <span>{data.publication_date}</span>
+                    <Grid container width={"700px"} paddingBottom={"20px"} gap={3}>
+                        <Grid item width={"100%"}>
+                            <Typography
+                                component={"div"}
+                                sx={{fontSize: "32px", fontWeight: "bold"}}>
+                                {data.title}
+                            </Typography>
+                            <Typography component={"div"}>
+                                {data.publication_date}
+                            </Typography>
                         </Grid>
                         <Grid
                             item

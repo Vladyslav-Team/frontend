@@ -1,0 +1,16 @@
+.flex_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 60px;
+    justify-content: space-around;
+}
+
+.kudos_img {
+    height: 30px;
+    width: 30px;
+}
+
+.kudos_counter {
+    font-size: 18px;
+}

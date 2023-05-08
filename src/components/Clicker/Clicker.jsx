@@ -31,6 +31,14 @@ const Clicker = () => {
         return () => clearInterval(intervalId)
     }, [isRunning, time])
 
+    const root = {
+        backgroundColor: "#FFF",
+        "&:hover": {
+            //you want this to be the same as the backgroundColor above
+            backgroundColor: "#FFF",
+        },
+    }
+
     return (
         <Grid
             container
@@ -58,7 +66,7 @@ const Clicker = () => {
                     loading={result.isLoading}
                     onClick={handleInit}
                     variant="contained">
-                    RESET TIMER
+                    BUY RESET TIMER
                 </LoadingButton>
             </Grid>
             {result.data && (

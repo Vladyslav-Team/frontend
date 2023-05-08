@@ -1,20 +1,19 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
+import {createApi} from "@reduxjs/toolkit/query/react"
+import {axiosBaseQuery} from "../../../../shared/api/services"
 
 export const PaymentApi = createApi({
     reducerPath: "newsApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080/",
-    }),
+    baseQuery: axiosBaseQuery(),
     endpoints: (builder) => ({
         Init: builder.mutation({
             query: () => ({
-                url: "paypal/init?sum=5",
+                url: "sponsors/28/kudos/checkout?sum=5",
                 method: "POST",
             }),
         }),
         Capture: builder.mutation({
             query: ({token, PayerID}) => ({
-                url: `paypal/capture?token=${token}&PayerID=${PayerID}`,
+                url: `sponsors/28/kudos/capture?token=${token}&PayerID=${PayerID}`,
                 method: "POST",
             }),
         }),

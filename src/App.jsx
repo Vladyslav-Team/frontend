@@ -5,7 +5,7 @@ import {theme} from "./Theme"
 import {Router} from "./Router"
 import {SigninPopup} from "./components/SigninPopup"
 import {SigninPopupContext} from "./context"
-import {useGetAvatarTalentQuery} from "./components/Avatar/api"
+import {useGetUserAvatarQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
 import {Footer} from "./components/Footer/Footer"
 import {Payment} from "./components/Payment"
@@ -18,10 +18,16 @@ const App = () => {
     })
     const location = useLocation()
     const {data} = useJwtCheck()
-    const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
-        refetchOnMountOrArgChange: true,
-    })
-    console.log(location.pathname === "/capture")
+
+    const id = data && data.id
+    const role = data && data.role === "ROLE_TALENT" ? "talent" : "sponsor"
+
+    const AvatarIMG = useGetUserAvatarQuery(
+        {id, role},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
     return (
         <>
             {location.pathname !== "/capture" ? (
