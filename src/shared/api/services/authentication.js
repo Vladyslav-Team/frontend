@@ -7,8 +7,8 @@ export const authenticationApi = createApi({
     endpoints: (build) => {
         return {
             AddTalents: build.mutation({
-                query: (body) => ({
-                    url: "/talents",
+                query: ({role, body}) => ({
+                    url: `/${role}`,
                     method: "POST",
                     data: body,
                 }),
