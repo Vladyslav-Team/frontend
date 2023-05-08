@@ -13,7 +13,7 @@ import useMediaQuery from "@mui/material/useMediaQuery"
 import {useLocation, useNavigate} from "react-router-dom"
 import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
 import Loader from "../../shared/components/Loader"
-import {useEditTalentMutation} from "./api"
+import {useEditUserInfoMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {DeleteField} from "./components/DeleteField/DeleteField"
 import {ConfirmationPopup} from "./components/DeleteField/components/ConfirmationPopup/ConfirmationPopup"
@@ -51,7 +51,7 @@ const EditPage = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
     const matches = useMediaQuery("(min-width:750px)")
     const id = location.pathname.replace(/[^0-9\\.]+/g, "")
-    const [updateTalentInfo, result] = useEditTalentMutation()
+    const [updateUserInfo, result] = useEditUserInfoMutation()
 
     const role = data.role === "ROLE_TALENT" ? "talents" : "sponsors"
     const AllInfo = useGetAllUserInfoByIDQuery({id, role})
@@ -74,7 +74,7 @@ const EditPage = ({AvatarIMG}) => {
 
     const onSubmit = (data) => {
         const payload = filterResForm(filterDataForDate(data), AllInfo.data)
-        updateTalentInfo({payload, id})
+        updateUserInfo({payload, id, role})
         AvatarIMG.refetch()
     }
     useEffect(() => {
@@ -119,9 +119,17 @@ const EditPage = ({AvatarIMG}) => {
                                 Edit profile
                             </Typography>
                             <NameStage name={"Basic info"} button={true} id={data.id} />
-                            <BasicInfoChange control={control} errors={errors} />
-                            <NameStage name={"About Me"} errors={errors} />
-                            <AboutMeChange control={control} errors={errors} />
+                            <BasicInfoChange
+                                control={control}
+                                errors={errors}
+                                role={role}
+                            />
+                            {role === "talents" && (
+                                <>
+                                    <NameStage name={"About Me"} errors={errors} />
+                                    <AboutMeChange control={control} errors={errors} />
+                                </>
+                            )}
                             <NameStage name={"Security"} errors={errors} />
                             <SecurityChange
                                 control={control}
@@ -136,6 +144,7 @@ const EditPage = ({AvatarIMG}) => {
                                 setVisibilityConfirmationPopup
                             }
                             visibilityConfirmationPopup={visibilityConfirmationPopup}
+                            role={role}
                         />
                     </Grid>
                 </Grid>

@@ -1,10 +1,10 @@
 import React from "react"
 import Grid from "@mui/material/Grid"
 import {Controller} from "react-hook-form"
-import {FullName, BirthDate, Location, Phone} from "./components"
+import {FullName, BirthDate, Location, Phone, Email} from "./components"
 import {registerOptions} from "../../../pages/SignUp/validationRules"
 
-const BasicInfoChange = ({control, errors}) => {
+const BasicInfoChange = ({control, errors, role}) => {
     return (
         <Grid
             container
@@ -17,6 +17,7 @@ const BasicInfoChange = ({control, errors}) => {
             <FullName control={control} errors={errors} />
             <Grid item width={"100%"}>
                 <BirthDate control={control} errors={errors} />
+                {role === "sponsors" && <Email control={control} errors={errors} />}
                 <Location control={control} errors={errors} />
                 <Controller
                     name="phone"

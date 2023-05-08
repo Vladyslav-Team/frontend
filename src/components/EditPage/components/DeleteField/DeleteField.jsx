@@ -6,7 +6,7 @@ import {useDeleteAccountMutation} from "./api"
 import {Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
 
-const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
+const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup, role}) => {
     const navigate = useNavigate()
     const {data} = useJwtCheck()
     const [deleteAccount] = useDeleteAccountMutation()
@@ -19,7 +19,7 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) 
     const deleteTalent = async () => {
         setIsLoading(true)
         try {
-            await deleteAccount(data?.id)
+            await deleteAccount(data?.id, role)
             localStorage.removeItem("jwt-token")
             setIsLoading(false)
             navigate("/")
