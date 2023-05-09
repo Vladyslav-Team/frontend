@@ -29,8 +29,8 @@ select {
     padding: 0 10px;
 }
 
-.checkbox {
-    display: inline-block;
+ .checkbox{
+    display:inline-block;
     vertical-align: middle;
     width: 25px;
     margin-left: 20px;
