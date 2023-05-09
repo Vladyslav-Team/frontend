@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react"
 import Grid from "@mui/material/Grid"
 import {ClickerBtn, Result, handleClose, Rules, Payment} from "./components"
-import {Button} from "@mui/material"
 import {useInitMutation} from "./components/api"
 import LoadingButton from "@mui/lab/LoadingButton"
+import {useJwtCheck} from "../../shared/api/hooks"
 
 const Clicker = () => {
     const [count, setCount] = useState(0)
@@ -12,9 +12,9 @@ const Clicker = () => {
     const [open, setOpen] = useState(false)
     const [openPayment, setOpenPayment] = useState(false)
     const [initBuy, result] = useInitMutation()
-
+    const jwt = useJwtCheck()
     const handleInit = () => {
-        initBuy()
+        jwt.data && initBuy(jwt.data.id)
     }
     useEffect(() => {
         setOpenPayment(true)
@@ -30,14 +30,6 @@ const Clicker = () => {
         }
         return () => clearInterval(intervalId)
     }, [isRunning, time])
-
-    const root = {
-        backgroundColor: "#FFF",
-        "&:hover": {
-            //you want this to be the same as the backgroundColor above
-            backgroundColor: "#FFF",
-        },
-    }
 
     return (
         <Grid

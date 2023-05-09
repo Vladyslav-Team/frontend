@@ -10,23 +10,25 @@ import Paper from "@mui/material/Paper"
 import loadingGIF from "../../source/img/animation_500_lhe137sd.gif"
 import {Grid, Typography} from "@mui/material"
 import {useLocation} from "react-router-dom"
+import {useJwtCheck} from "../../shared/api/hooks"
 
 const Payment = () => {
     const [updatePost, result] = useCaptureMutation()
+
     const query = window.location.search.replace("?", "").split("&")
     const token = query[0].split("=")[1]
     const PayerID = query[1].split("=")[1]
     const location = useLocation()
+    const jwt = useJwtCheck()
     useEffect(() => {
         if (token && PayerID) {
-            updatePost({token, PayerID: PayerID})
+            updatePost({token, PayerID: PayerID, sponsorID: jwt.data.id})
         }
         if (location.pathname === "/cancel") {
             window.close()
         }
         //
     }, [token, PayerID, updatePost, location.pathname])
-    console.log(result.fulfilledTimeStamp)
     return (
         <div>
             {result.fulfilledTimeStamp ? (

@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 
 const Payment = ({open, data, setOpenPayment}) => {
-    console.log(data.redirect_url)
     const handleNext = () => {
         window.open(
             data.redirect_url,
