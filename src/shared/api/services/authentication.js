@@ -15,7 +15,7 @@ export const authenticationApi = createApi({
             }),
             SigninTalent: build.mutation({
                 query: (body) => ({
-                    url: "/talents/login",
+                    url: "/sponsors/login",
                     method: "POST",
                     auth: body,
                 }),
