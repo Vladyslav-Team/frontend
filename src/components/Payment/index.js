@@ -9,21 +9,23 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import loadingGIF from "../../source/img/animation_500_lhe137sd.gif"
 import {Grid, Typography} from "@mui/material"
+import {useLocation} from "react-router-dom"
 
 const Payment = () => {
     const [updatePost, result] = useCaptureMutation()
     const query = window.location.search.replace("?", "").split("&")
     const token = query[0].split("=")[1]
     const PayerID = query[1].split("=")[1]
+    const location = useLocation()
     useEffect(() => {
         if (token && PayerID) {
             updatePost({token, PayerID: PayerID})
-            //  setTimeout(() =>{
-            //     window.close();
-            //  }, 2000)
+        }
+        if (location.pathname === "/cancel") {
+            window.close()
         }
         //
-    }, [token, PayerID, updatePost])
+    }, [token, PayerID, updatePost, location.pathname])
     console.log(result.fulfilledTimeStamp)
     return (
         <div>
