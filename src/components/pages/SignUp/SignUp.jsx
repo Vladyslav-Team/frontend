@@ -109,8 +109,7 @@ const SignUp = ({AvatarIMG}) => {
                         </div>
                         <div className={styles.input_wrap}>
                             <label htmlFor="roles">Sponsor:</label>
-                            <input
-                                className={styles.checkbox}
+                            <input className={styles.checkbox}
                                 type="checkbox"
                                 {...register("roles", {})}
                             />
