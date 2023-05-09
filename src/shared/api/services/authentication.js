@@ -14,15 +14,15 @@ export const authenticationApi = createApi({
                 }),
             }),
             SigninTalent: build.mutation({
-                query: (body) => ({
-                    url: "/sponsors/login",
+                query: ({role, body}) => ({
+                    url: `/${role}/login`,
                     method: "POST",
                     auth: body,
                 }),
             }),
             SignOutTalent: build.mutation({
-                query: () => ({
-                    url: "/talents/logout",
+                query: (role) => ({
+                    url: `/${role}/logout`,
                     method: "GET",
                 }),
             }),

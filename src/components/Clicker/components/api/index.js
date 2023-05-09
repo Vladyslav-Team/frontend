@@ -6,14 +6,14 @@ export const PaymentApi = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (builder) => ({
         Init: builder.mutation({
-            query: () => ({
-                url: "sponsors/28/kudos/checkout?sum=5",
+            query: (sponsorID) => ({
+                url: `sponsors/${sponsorID}/kudos/checkout?sum=5`,
                 method: "POST",
             }),
         }),
         Capture: builder.mutation({
-            query: ({token, PayerID}) => ({
-                url: `sponsors/28/kudos/capture?token=${token}&PayerID=${PayerID}`,
+            query: ({token, PayerID, sponsorID}) => ({
+                url: `sponsors/${sponsorID}/kudos/capture?token=${token}&PayerID=${PayerID}`,
                 method: "POST",
             }),
         }),

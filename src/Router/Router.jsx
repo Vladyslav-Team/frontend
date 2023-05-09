@@ -42,6 +42,10 @@ const Router = ({AvatarIMG}) => {
             />
             <Route path={"/game"} element={<Clicker />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route
+                path={"/sponsors/signin"}
+                element={<SigninPopup AvatarIMG={AvatarIMG} />}
+            />
         </Routes>
     )
 }
