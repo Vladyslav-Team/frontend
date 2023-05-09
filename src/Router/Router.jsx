@@ -9,6 +9,7 @@ import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
 import {ProofAllInfo} from "../components/Proof"
+import {Clicker} from "../components/Clicker"
 
 const Router = ({AvatarIMG}) => {
     return (
@@ -39,7 +40,12 @@ const Router = ({AvatarIMG}) => {
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
             />
+            <Route path={"/game"} element={<Clicker />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route
+                path={"/sponsors/signin"}
+                element={<SigninPopup AvatarIMG={AvatarIMG} />}
+            />
         </Routes>
     )
 }

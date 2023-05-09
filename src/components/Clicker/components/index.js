@@ -1,0 +1,5 @@
+export {Payment} from "./Payment"
+export {Rules} from "./Rules"
+export {ClickerBtn} from "./ClickerBtn"
+export {handleClick, handleClose} from "./snippets"
+export {Result} from "./Result"
