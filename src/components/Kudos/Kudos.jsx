@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Kudos.module.css"
 import { useJwtCheck } from "../../shared/api/hooks"
 import { useAddKudosMutation, useGetKudosQuery } from "./api"
@@ -7,6 +7,13 @@ import Unlike from "./img/unlike.png"
 import { useLocation } from "react-router-dom"
 import { Button, TextField, Tooltip, Grid, Typography } from "@mui/material"
 import { useForm } from "react-hook-form"
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from "@mui/material"
 
 const SponsorKudoses = ({ amount }) => {
     return (
@@ -29,6 +36,14 @@ const Kudos = ({ talentId, proofId }) => {
     const isSponsor = data.role === "ROLE_SPONSOR"
     const isOnProfile = pathname.includes("/profile")
 
+    const [show, setShow] = useState(false)
+
+    const confirmBody = { title: "Add Kudos", description: "Are you sure you want to add kudoses on that proof?" }
+
+    const handleClose = () => {
+        setShow(false)
+    }
+
     const {
         register,
         handleSubmit,
@@ -46,13 +61,11 @@ const Kudos = ({ talentId, proofId }) => {
     const onSubmit = (data) => {
         const res = data
         res.amount = +data.amount
-        console.log(JSON.stringify(res))
-        updateKudos({ proofId, body: JSON.stringify(res)})
+        updateKudos({ proofId, body: JSON.stringify(res) })
     }
 
     useEffect(() => {
         KudosInfo.refetch()
-        console.log(KudosInfo.data)
     }, [result.status])
 
     return (
@@ -91,11 +104,42 @@ const Kudos = ({ talentId, proofId }) => {
                             variant="outlined"
                             type="number"
                             size="small"
-                            InputProps={{ inputProps: { min: 0, max: 10 } }}
+                            InputProps={{ inputProps: { min: 1 } }}
                             {...register("amount", {})}
                             error={errors.amount}
-                            helperText={errors.amount && errors.amount.message}/>
-                        <Button type="submit" variant="contained">Add</Button>
+                            helperText={errors.amount && errors.amount.message} />
+                        <Button variant="contained" onClick={()=>{setShow(true)}}>Add</Button>
+                        <Dialog
+                            open={show}
+                            onClose={() => {
+                                setShow(false)
+                            }}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description">
+                            <DialogTitle id="alert-dialog-title">
+                                {confirmBody && confirmBody.title}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    {confirmBody && confirmBody.description}
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button
+                                    variant="outlined"
+                                    onClick={handleClose}
+                                    sx={{ minWidth: 70 }}>
+                                    Disagree
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    onClick={handleClose}
+                                    sx={{ minWidth: 70 }}>
+                                    Agree
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </form>
                 </>
             )}
