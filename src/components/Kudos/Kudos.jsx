@@ -33,7 +33,7 @@ const Kudos = ({ talentId, proofId }) => {
     const { data } = useJwtCheck()
     const { pathname } = useLocation()
 
-    const isSponsor = data.role === "ROLE_SPONSOR"
+    const isSponsor = data.role === "SCOPE_SPONSOR"
     const isOnProfile = pathname.includes("/profile")
 
     const [show, setShow] = useState(false)
