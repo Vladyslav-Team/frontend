@@ -31,7 +31,6 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
     }
     const onSubmit = (data) => {
         const role = data.role ? "sponsors" : "talents"
-        console.log(role)
         updatePost({body: data, role})
     }
 

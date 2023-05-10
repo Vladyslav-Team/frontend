@@ -20,7 +20,6 @@ const SignUp = ({AvatarIMG}) => {
         const res = data
         const isSponsor = data.roles
         const role = isSponsor ? "sponsors" : "talents"
-        console.log(role)
         res.birthday = data.birthday.split("-").reverse().join("-")
         res.roles = Array(isSponsor ? "SPONSOR" : "TALENT")
         updatePost({role, body: JSON.stringify(res)})

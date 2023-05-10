@@ -34,12 +34,12 @@ const ProofActivity = ({
     const CardActionsStyleDraft = {
         justifyContent: "flex-end",
         gap: 1,
-        "& button": {minWidth: "90px"},
+        "& button": {minWidth: "60px"},
     }
     const CardActionsStylePublished = {
         justifyContent: "space-between",
         gap: 1,
-        "& button": {minWidth: "90px"},
+        "& button": {minWidth: "60px"},
     }
 
     return (

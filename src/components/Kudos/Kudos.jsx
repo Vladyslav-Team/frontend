@@ -1,73 +1,77 @@
-import React, {useEffect} from "react"
+import React, { useEffect } from "react"
 import styles from "./Kudos.module.css"
-import {useJwtCheck} from "../../shared/api/hooks"
-import {useAddKudosMutation, useGetKudosQuery} from "./api"
+import { useJwtCheck } from "../../shared/api/hooks"
+import { useAddKudosMutation, useGetKudosQuery } from "./api"
 import Loader from "../../shared/components/Loader"
-import Like from "./img/like.png"
 import Unlike from "./img/unlike.png"
-import {useLocation} from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import { Button, TextField, Tooltip, Grid, Typography } from "@mui/material"
+import { useForm } from "react-hook-form"
 
-const Kudos = ({talentId, proofId}) => {
-    const {data} = useJwtCheck()
-    const isHome = data && +talentId === data.id
+const SponsorKudoses = ({ amount }) => {
+    return (
+        <Grid
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            padding={"5px"}>
+            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{ fontSize: "13px" }}>
+                {amount}
+            </Typography>
+        </Grid>
+    )
+}
 
-    const {pathname} = useLocation()
+const Kudos = ({ talentId, proofId }) => {
+    const { data } = useJwtCheck()
+    const { pathname } = useLocation()
+
+    const isSponsor = data.role === "ROLE_SPONSOR"
+    const isOnProfile = pathname.includes("/profile")
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
 
     const [updateKudos, result] = useAddKudosMutation()
     const KudosInfo = useGetKudosQuery(
-        {proofId},
+        { proofId },
         {
             refetchOnMountOrArgChange: true,
         }
     )
 
-    useEffect(() => {
-        KudosInfo.refetch()
-    }, [result.status])
-
-    const handleClick = () => {
-        if (!KudosInfo.data.is_clicked) {
-            updateKudos({proofId})
-        }
+    const onSubmit = (data) => {
+        const res = data
+        res.amount = +data.amount
+        console.log(JSON.stringify(res))
+        updateKudos({ proofId, body: JSON.stringify(res)})
     }
 
-    const imgStyle =
-        isHome || pathname === "/proofs" || data.role === "ROLE_TALENT"
-            ? {
-                  pointerEvents: "none",
-                  cursor: "none",
-              }
-            : {
-                  pointerEvents: "auto",
-                  cursor: "pointer",
-              }
+    useEffect(() => {
+        KudosInfo.refetch()
+        console.log(KudosInfo.data)
+    }, [result.status])
 
     return (
         <>
             {!KudosInfo.isLoading ? (
-                <div className={styles.flex_container}>
-                    <div className={styles.kudos_img}>
-                        {KudosInfo.data.is_clicked ? (
-                            <img
-                                className={styles.kudos_img}
-                                src={Like}
-                                onClick={handleClick}
-                                style={imgStyle}
-                            />
-                        ) : (
+                <Tooltip title={<SponsorKudoses amount={KudosInfo.data.amount_of_kudos_current_user} />} arrow>
+                    <div className={styles.flex_container}>
+                        <div className={styles.kudos_img}>
                             <img
                                 className={styles.kudos_img}
                                 src={Unlike}
-                                onClick={handleClick}
-                                style={imgStyle}
                             />
-                        )}
+                        </div>
+                        <div
+                            className={
+                                styles.kudos_counter
+                            }>{`${KudosInfo.data.amount_of_kudos}`}</div>
                     </div>
-                    <div
-                        className={
-                            styles.kudos_counter
-                        }>{`${KudosInfo.data.amount_of_kudos}`}</div>
-                </div>
+                </Tooltip>
             ) : (
                 <Loader
                     isLoading={KudosInfo.isLoading}
@@ -75,8 +79,28 @@ const Kudos = ({talentId, proofId}) => {
                     error={KudosInfo.error}
                 />
             )}
+            {(isOnProfile && isSponsor) && (
+                <>
+                    <form id="proof-form" onSubmit={handleSubmit(onSubmit)}>
+                        <TextField sx={{
+                            width: "85px",
+                            marginRight: "5px"
+                        }}
+                            id="outlined-basic"
+                            label="Add kudos"
+                            variant="outlined"
+                            type="number"
+                            size="small"
+                            InputProps={{ inputProps: { min: 0, max: 10 } }}
+                            {...register("amount", {})}
+                            error={errors.amount}
+                            helperText={errors.amount && errors.amount.message}/>
+                        <Button type="submit" variant="contained">Add</Button>
+                    </form>
+                </>
+            )}
         </>
     )
 }
 
-export {Kudos}
+export { Kudos }

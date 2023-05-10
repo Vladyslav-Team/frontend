@@ -70,6 +70,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 proofId={proof && proof.id}
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
+                publication_date={publication_date}
             />
             {isEditMode ? (
                 <ProofForm
@@ -87,7 +88,6 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                     title={title}
                     data={data}
                     description={description}
-                    publication_date={publication_date}
                 />
             )}
             <ProofActivity
