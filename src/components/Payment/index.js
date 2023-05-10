@@ -9,24 +9,22 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import loadingGIF from "../../source/img/animation_500_lhe137sd.gif"
 import {Grid, Typography} from "@mui/material"
-import {useLocation} from "react-router-dom"
+import {NavLink, useLocation} from "react-router-dom"
 import {useJwtCheck} from "../../shared/api/hooks"
 
 const Payment = () => {
+    const location = useLocation()
     const [updatePost, result] = useCaptureMutation()
     const query = window.location.search.replace("?", "").split("&")
     const token = query[0].split("=")[1]
     const PayerID = query[1].split("=")[1]
-    const location = useLocation()
     const jwt = useJwtCheck()
+
     useEffect(() => {
         if (token && PayerID) {
             updatePost({token, PayerID: PayerID, sponsorID: jwt.data.id})
         }
-        if (location.pathname === "/cancel") {
-            window.close()
-        }
-        //
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, PayerID, updatePost, location.pathname])
 
     return (
@@ -106,6 +104,17 @@ const Payment = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
+                        <NavLink
+                            to={`http://localhost:3000/profile/${jwt.data.id}/KudosFarming`}>
+                            <Typography
+                                variant={"h6"}
+                                fontWeight={"800"}
+                                fontSize={"20px"}
+                                color={"#0A6E9A"}
+                                textAlign={"center"}>
+                                Go to back
+                            </Typography>
+                        </NavLink>
                     </div>
                 </>
             ) : (

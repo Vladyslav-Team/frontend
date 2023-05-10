@@ -25,6 +25,7 @@ const Router = ({AvatarIMG}) => {
             </Route>
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
+                <Route path={":sponsorId/KudosFarming"} element={<Clicker />} />
                 <Route
                     path=":talentId/edit"
                     element={<EditPage AvatarIMG={AvatarIMG} />}
@@ -40,12 +41,8 @@ const Router = ({AvatarIMG}) => {
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
             />
-            <Route path={"/game"} element={<Clicker />} />
+
             <Route path="*" element={<PageNotFound />} />
-            <Route
-                path={"/sponsors/signin"}
-                element={<SigninPopup AvatarIMG={AvatarIMG} />}
-            />
         </Routes>
     )
 }

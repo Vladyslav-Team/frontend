@@ -23,6 +23,7 @@ const Kudos = ({talentId, proofId}) => {
 
     useEffect(() => {
         KudosInfo.refetch()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.status])
 
     const handleClick = () => {
@@ -32,7 +33,7 @@ const Kudos = ({talentId, proofId}) => {
     }
 
     const imgStyle =
-        isHome || pathname === "/proofs" || data.role === "ROLE_TALENT"
+        isHome || pathname === "/proofs" || data.scope === "ROLE_TALENT"
             ? {
                   pointerEvents: "none",
                   cursor: "none",

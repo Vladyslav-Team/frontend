@@ -30,8 +30,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         maxLength: registerOptions.password.maxLength,
     }
     const onSubmit = (data) => {
-        const role = data.role ? "sponsors" : "talents"
-        console.log(role)
+        const role = data.scope ? "sponsors" : "talents"
         updatePost({body: data, role})
     }
 

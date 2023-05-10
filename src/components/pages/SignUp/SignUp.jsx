@@ -18,9 +18,9 @@ const SignUp = ({AvatarIMG}) => {
     } = useForm()
     const onSubmit = (data) => {
         const res = data
-        const isSponsor = data.roles
+        const isSponsor = data.scopes
         const role = isSponsor ? "sponsors" : "talents"
-        console.log(role)
+
         res.birthday = data.birthday.split("-").reverse().join("-")
         res.roles = Array(isSponsor ? "SPONSOR" : "TALENT")
         updatePost({role, body: JSON.stringify(res)})
@@ -115,7 +115,9 @@ const SignUp = ({AvatarIMG}) => {
                                 {...register("roles", {})}
                             />
                         </div>
-                        <button type="submit">SIGN UP</button>
+                        <button className="action" type="submit">
+                            SIGN UP
+                        </button>
                     </form>
                     <p className={styles.or}>or</p>
                     <p className={styles.signin_check}>

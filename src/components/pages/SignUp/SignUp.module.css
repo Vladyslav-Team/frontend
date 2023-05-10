@@ -103,5 +103,4 @@ button:disabled,
 button[disabled]:hover {
     border: 1px solid #ffffff;
     background: #ffffff;
-    color: #0a6e9a;
 }
