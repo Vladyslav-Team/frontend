@@ -13,7 +13,7 @@ const Clicker = () => {
     const [openPayment, setOpenPayment] = useState(false)
     const [initBuy, result] = useInitMutation()
     const jwt = useJwtCheck()
-    const {data, isSuccess} = useGetStatusQuery(jwt.data.id, {
+    const {data} = useGetStatusQuery(jwt.data.id, {
         refetchOnMountOrArgChange: true,
     })
     const handleInit = () => {
