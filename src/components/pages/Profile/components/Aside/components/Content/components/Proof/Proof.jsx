@@ -11,7 +11,15 @@ import {StyledProof} from "./StyledProof"
 import {useRefetchAndClose} from "./hooks"
 import {useNavigate} from "react-router"
 
-const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
+const Proof = ({
+    proof,
+    isEditMode,
+    styleObj,
+    statusVis,
+    setVis,
+    allProofsRefetch,
+    refetch,
+}) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
     const id = location.pathname.replace("/profile/", "").split("/")
@@ -84,11 +92,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                     errors={errors}
                 />
             ) : (
-                <ProofContent
-                    title={title}
-                    data={data}
-                    description={description}
-                />
+                <ProofContent title={title} data={data} description={description} />
             )}
             <ProofActivity
                 isEditMode={isEditMode}
@@ -100,6 +104,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 watch={watch}
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
+                refetch={refetch}
             />
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />

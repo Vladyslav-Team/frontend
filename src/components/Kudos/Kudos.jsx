@@ -14,7 +14,7 @@ import {
     DialogContentText,
     DialogTitle,
 } from "@mui/material"
-import { AlertError } from "../../shared/components"
+import {AlertError} from "../../shared/components"
 
 const SponsorKudoses = ({amount}) => {
     return (
@@ -30,11 +30,11 @@ const SponsorKudoses = ({amount}) => {
     )
 }
 
-const Kudos = ({talentId, proofId}) => {
+const Kudos = ({proofId, refetch}) => {
     const {data} = useJwtCheck()
     const {pathname} = useLocation()
 
-    const isSponsor = data.scope === "ROLE_SPONSOR"
+    const isSponsor = data && data.scope === "ROLE_SPONSOR"
     const isOnProfile = pathname.includes("/profile")
 
     const [show, setShow] = useState(false)
@@ -71,6 +71,7 @@ const Kudos = ({talentId, proofId}) => {
 
     useEffect(() => {
         KudosInfo.refetch()
+        result.data && refetch()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.status])
 
@@ -80,7 +81,10 @@ const Kudos = ({talentId, proofId}) => {
                 <Tooltip
                     title={
                         <SponsorKudoses
-                            amount={KudosInfo.data.amount_of_kudos_current_user}
+                            amount={
+                                KudosInfo.data &&
+                                KudosInfo.data.amount_of_kudos_current_user
+                            }
                         />
                     }
                     arrow>
@@ -88,10 +92,9 @@ const Kudos = ({talentId, proofId}) => {
                         <div className={styles.kudos_img}>
                             <img className={styles.kudos_img} src={Unlike} />
                         </div>
-                        <div
-                            className={
-                                styles.kudos_counter
-                            }>{`${KudosInfo.data.amount_of_kudos}`}</div>
+                        <div className={styles.kudos_counter}>{`${
+                            KudosInfo.data && KudosInfo.data.amount_of_kudos
+                        }`}</div>
                     </div>
                 </Tooltip>
             ) : (

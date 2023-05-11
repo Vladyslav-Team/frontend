@@ -10,7 +10,7 @@ import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
 
-const Aside = ({user}) => {
+const Aside = ({user, refetch}) => {
     const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
@@ -42,7 +42,9 @@ const Aside = ({user}) => {
                     setPoopUP={setAddProofPoopUP}
                 />
             )}
-            {allProofs.isSuccess && <Content allProofs={allProofs.data && allProofs} />}
+            {allProofs.isSuccess && (
+                <Content allProofs={allProofs.data && allProofs} refetch={refetch} />
+            )}
             <PopUpProof
                 vis={isAddProofPoopUP}
                 setVis={setAddProofPoopUP}

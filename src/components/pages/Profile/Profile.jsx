@@ -18,12 +18,13 @@ const Profile = () => {
             ? "talents"
             : "sponsors"
 
-    const {data, error, isLoading, isError, isSuccess} = useGetAllUserInfoByIDQuery(
-        {id, role},
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    )
+    const {data, error, isLoading, isError, isSuccess, refetch} =
+        useGetAllUserInfoByIDQuery(
+            {id, role},
+            {
+                refetchOnMountOrArgChange: true,
+            }
+        )
 
     return (
         <>
@@ -34,7 +35,7 @@ const Profile = () => {
                         {isSuccess && (
                             <>
                                 <ProfileSidebar user={data} idTalentURL={id} />
-                                <Aside user={data} />
+                                <Aside user={data} refetch={refetch} />
                             </>
                         )}
                     </div>

@@ -62,7 +62,7 @@ const Clicker = () => {
         }
         return () => clearInterval(intervalId)
     }, [isRunning, time])
-
+    const newCount = Math.floor(count / 15) > 60 ? 60 : Math.floor(count / 15)
     return (
         <Grid
             container
@@ -97,7 +97,7 @@ const Clicker = () => {
                 />
             )}
             <Result
-                count={Math.floor(count / 15)}
+                count={newCount}
                 handleClose={() => handleClose(setOpen, setIsRunning, setCount, setTime)}
                 open={open}
             />

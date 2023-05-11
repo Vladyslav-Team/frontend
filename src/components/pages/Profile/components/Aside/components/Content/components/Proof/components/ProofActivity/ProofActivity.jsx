@@ -26,6 +26,7 @@ const ProofActivity = ({
     allProofsRefetch,
     status,
     talentId,
+    refetch,
 }) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
@@ -57,7 +58,9 @@ const ProofActivity = ({
                     allProofsRefetch={allProofsRefetch}
                 />
             )}
-            {isPublish && <Kudos talentId={talentId} proofId={proofId} />}
+            {isPublish && (
+                <Kudos talentId={talentId} proofId={proofId} refetch={refetch} />
+            )}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>
     )
