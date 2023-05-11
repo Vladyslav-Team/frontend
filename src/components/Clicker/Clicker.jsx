@@ -4,7 +4,6 @@ import {ClickerBtn, Result, handleClose, Rules, Payment, BanClicker} from "./com
 import {useGetStatusQuery, useInitMutation} from "./components/api"
 import LoadingButton from "@mui/lab/LoadingButton"
 import {useJwtCheck} from "../../shared/api/hooks"
-import Loader from "../../shared/components/Loader"
 
 const Clicker = () => {
     const [count, setCount] = useState(0)
@@ -46,13 +45,6 @@ const Clicker = () => {
                 </>
             )
         }
-        if (!isSuccess) {
-            return (
-                <>
-                    <Loader isLoading={true} />
-                </>
-            )
-        }
     }
 
     useEffect(() => {
@@ -80,21 +72,23 @@ const Clicker = () => {
             height={"100%"}
             paddingTop={"120px"}
             paddingBottom={"120px"}>
-            <Grid
-                item
-                sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
-                width={"480px"}
-                maxHeight={"580px"}
-                paddingLeft={"30px"}
-                paddingRight={"30px"}
-                paddingBottom={"30px"}
-                display={"flex"}
-                justifyContent={"flex-start"}
-                alignItems={"center"}
-                flexDirection={"column"}
-                paddingTop={"80px"}>
-                {Content()}
-            </Grid>
+            {isSuccess && (
+                <Grid
+                    item
+                    sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
+                    width={"480px"}
+                    paddingLeft={"30px"}
+                    paddingRight={"30px"}
+                    paddingBottom={"30px"}
+                    display={"flex"}
+                    justifyContent={"flex-start"}
+                    alignItems={"center"}
+                    flexDirection={"column"}
+                    paddingTop={"80px"}>
+                    {Content()}
+                </Grid>
+            )}
+
             {result.data && (
                 <Payment
                     open={openPayment}

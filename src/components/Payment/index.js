@@ -104,8 +104,7 @@ const Payment = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        <NavLink
-                            to={`http://localhost:3000/profile/${jwt.data.id}/KudosFarming`}>
+                        <NavLink to={`/profile/${jwt.data.id}/KudosFarming`}>
                             <Typography
                                 variant={"h6"}
                                 fontWeight={"800"}
