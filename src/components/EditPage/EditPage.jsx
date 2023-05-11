@@ -53,7 +53,7 @@ const EditPage = ({AvatarIMG}) => {
     const id = location.pathname.replace(/[^0-9\\.]+/g, "")
     const [updateUserInfo, result] = useEditUserInfoMutation()
 
-    const role = data.role === "ROLE_TALENT" ? "talents" : "sponsors"
+    const role = data.scope === "ROLE_TALENT" ? "talents" : "sponsors"
     const AllInfo = useGetAllUserInfoByIDQuery({id, role})
 
     const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)

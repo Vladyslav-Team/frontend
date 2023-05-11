@@ -1,3 +1,16 @@
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js"
+import {Line} from "react-chartjs-2"
+import React from "react"
+
 const createParticle = (x, y) => {
     const particle = document.createElement("particle")
     document.body.appendChild(particle)
@@ -58,4 +71,54 @@ export const handleClick = (e, setIsRunning, setCount) => {
             createParticle(700, 400)
         }
     }
+}
+
+let dataD = {}
+export const statistic = Object.keys(localStorage)
+    .filter((keys) => keys.split("-")[0] === "kudosFarmDate" && keys)
+    .map((el) => {
+        return (dataD[[el.split("-")[1]]] = localStorage.getItem(el))
+    })
+
+const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: "top",
+        },
+        title: {
+            display: true,
+            text: "Kudos",
+        },
+    },
+}
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+)
+
+const keysSorted = Object.entries(dataD)
+let sorted = keysSorted.sort((a, b) => a[0] - b[0])
+const labels = sorted.map((el) => new Date(+el[0]).toLocaleDateString("en-US"))
+
+const data = {
+    labels,
+    datasets: [
+        {
+            label: "Kudos score",
+            data: sorted.map((el) => +el[1]),
+            borderColor: "#0a6f9a",
+            backgroundColor: "#09658c",
+        },
+    ],
+}
+
+export const Chart = () => {
+    return <Line data={data} options={options} />
 }

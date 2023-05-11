@@ -10,26 +10,44 @@ import {useJwtCheck} from "../../../../../shared/api/hooks/jwtCheck"
 const ProfileSidebar = ({talent, idTalentURL}) => {
     const {data} = useJwtCheck()
     const theme = useTheme()
-
     return (
         <div className={styles.sidebar}>
             <Avatar avatar={talent.image} size={180} style={styles.avatar} />
             <Info talent={talent} />
             {talent && (
-                <NavLink to={`/profile/${talent.id}/edit`}>
-                    {data.id === +idTalentURL && (
-                        <Button
-                            variant="outlined"
-                            size="large"
-                            sx={{
-                                width: theme.spacing(30),
-                                marginTop: theme.spacing(5),
-                                borderRadius: theme.shape.borderRadius,
-                            }}>
-                            Edit
-                        </Button>
+                <>
+                    <NavLink to={`/profile/${talent.id}/edit`}>
+                        {data.id === +idTalentURL && (
+                            <Button
+                                variant="outlined"
+                                size="large"
+                                sx={{
+                                    width: theme.spacing(30),
+                                    marginTop: theme.spacing(5),
+                                    borderRadius: theme.shape.borderRadius,
+                                }}>
+                                Edit
+                            </Button>
+                        )}
+                    </NavLink>
+
+                    {data.scope === "ROLE_SPONSOR" && (
+                        <NavLink to={`/profile/${talent.id}/KudosFarming`}>
+                            {data.id === +idTalentURL && (
+                                <Button
+                                    variant="outlined"
+                                    size="large"
+                                    sx={{
+                                        width: theme.spacing(30),
+                                        marginTop: theme.spacing(5),
+                                        borderRadius: theme.shape.borderRadius,
+                                    }}>
+                                    Farm Kudos
+                                </Button>
+                            )}
+                        </NavLink>
                     )}
-                </NavLink>
+                </>
             )}
         </div>
     )
