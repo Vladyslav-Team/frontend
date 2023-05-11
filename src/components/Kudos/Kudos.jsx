@@ -14,6 +14,7 @@ import {
     DialogContentText,
     DialogTitle,
 } from "@mui/material"
+import { AlertError } from "../../shared/components"
 
 const SponsorKudoses = ({amount}) => {
     return (
@@ -157,6 +158,12 @@ const Kudos = ({talentId, proofId}) => {
                         </Dialog>
                     </form>
                 </>
+            )}
+            {result.error && (
+                <AlertError
+                    defaultStatus={true}
+                    massageError={"Not enough Kudos on your balance"}
+                />
             )}
         </>
     )
