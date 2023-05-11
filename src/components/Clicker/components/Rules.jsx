@@ -32,7 +32,7 @@ const Rules = () => {
                         <br />
                         4. You can participate in Kudos farming only once per day. After
                         that, you will be able to use the farming feature again on the
-                        next day, or pay $5 to reset the timer.
+                        next day, or pay $5.99 to reset the timer.
                         <br />
                     </Typography>
                 </>

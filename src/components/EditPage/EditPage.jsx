@@ -126,12 +126,12 @@ const EditPage = ({AvatarIMG}) => {
                                     <AboutMeChange control={control} errors={errors} />
                                 </>
                             )}
-                            <NameStage name={"Security"} errors={errors} />
+                            {/* <NameStage name={"Security"} errors={errors} />
                             <SecurityChange
                                 control={control}
                                 errors={errors}
                                 password={password}
-                            />
+                            /> */}
                         </form>
                         <DeleteField
                             isDeleted={isDeleted}
