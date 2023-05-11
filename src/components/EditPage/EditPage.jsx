@@ -1,13 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import {
-    AvatarChange,
-    NameStage,
-    BasicInfoChange,
-    AboutMeChange,
-    SecurityChange,
-} from "./components"
+import {AvatarChange, NameStage, BasicInfoChange, AboutMeChange} from "./components"
 import {useForm} from "react-hook-form"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {useLocation, useNavigate} from "react-router-dom"
@@ -52,10 +46,8 @@ const EditPage = ({AvatarIMG}) => {
     const matches = useMediaQuery("(min-width:750px)")
     const id = location.pathname.replace(/[^0-9\\.]+/g, "")
     const [updateUserInfo, result] = useEditUserInfoMutation()
-
     const role = data.scope === "ROLE_TALENT" ? "talents" : "sponsors"
     const AllInfo = useGetAllUserInfoByIDQuery({id, role})
-
     const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)
 
@@ -64,9 +56,7 @@ const EditPage = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
         setValue,
-        watch,
     } = useForm()
-    const password = watch("password")
 
     useEffect(() => {
         setDefaultValueForm(AllInfo.data, setValue)

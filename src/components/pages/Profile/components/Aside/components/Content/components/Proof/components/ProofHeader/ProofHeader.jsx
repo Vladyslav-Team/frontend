@@ -20,7 +20,14 @@ const Time = ({time}) => {
     )
 }
 
-const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId, publication_date}) => {
+const ProofHeader = ({
+    status,
+    statusVis,
+    proofId,
+    allProofsRefetch,
+    talentId,
+    publication_date,
+}) => {
     const {data} = useJwtCheck()
     const isYourAccount = +talentId === data.id
     const [showConfirm, setShowConfirm] = useState(false)
@@ -75,9 +82,7 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId, pu
                 {status}
             </Typography>
             <Tooltip title={<Time time={time} />} arrow>
-                <Typography
-                    variant="body2" 
-                    color="#ffffff">
+                <Typography variant="body2" color="#ffffff">
                     {date}
                 </Typography>
             </Tooltip>

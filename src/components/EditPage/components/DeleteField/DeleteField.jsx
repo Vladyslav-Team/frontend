@@ -19,7 +19,7 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup, r
     const deleteTalent = async () => {
         setIsLoading(true)
         try {
-            await deleteAccount(data?.id, role)
+            await deleteAccount({id: data.id, role})
             localStorage.removeItem("jwt-token")
             setIsLoading(false)
             navigate("/")
