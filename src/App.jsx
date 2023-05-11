@@ -9,7 +9,7 @@ import {useGetUserAvatarQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
 import {Footer} from "./components/Footer/Footer"
 import {Payment} from "./components/Payment"
-import {useLocation} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 
 const App = () => {
     const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
@@ -17,10 +17,10 @@ const App = () => {
         id: null,
     })
     const location = useLocation()
+    const navigate = useNavigate()
     const {data} = useJwtCheck()
-
     const id = data && data.id
-    const role = data && data.role === "ROLE_TALENT" ? "talent" : "sponsor"
+    const role = data && data.scope === "ROLE_TALENT" ? "talent" : "sponsor"
 
     const AvatarIMG = useGetUserAvatarQuery(
         {id, role},
@@ -28,6 +28,10 @@ const App = () => {
             refetchOnMountOrArgChange: true,
         }
     )
+
+    if (location.pathname === "/cancel") {
+        navigate("../")
+    }
     return (
         <>
             {location.pathname !== "/capture" ? (

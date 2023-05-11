@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, {useEffect, useState} from "react"
 import styles from "./Kudos.module.css"
-import { useJwtCheck } from "../../shared/api/hooks"
-import { useAddKudosMutation, useGetKudosQuery } from "./api"
+import {useJwtCheck} from "../../shared/api/hooks"
+import {useAddKudosMutation, useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
 import Unlike from "./img/unlike.png"
-import { useLocation } from "react-router-dom"
-import { Button, TextField, Tooltip, Grid, Typography } from "@mui/material"
-import { useForm } from "react-hook-form"
+import {useLocation} from "react-router-dom"
+import {Button, TextField, Tooltip, Grid, Typography} from "@mui/material"
+import {useForm} from "react-hook-form"
 import {
     Dialog,
     DialogActions,
@@ -15,30 +15,33 @@ import {
     DialogTitle,
 } from "@mui/material"
 
-const SponsorKudoses = ({ amount }) => {
+const SponsorKudoses = ({amount}) => {
     return (
         <Grid
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
             padding={"5px"}>
-            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{ fontSize: "13px" }}>
+            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
                 {amount}
             </Typography>
         </Grid>
     )
 }
 
-const Kudos = ({ talentId, proofId }) => {
-    const { data } = useJwtCheck()
-    const { pathname } = useLocation()
+const Kudos = ({talentId, proofId}) => {
+    const {data} = useJwtCheck()
+    const {pathname} = useLocation()
 
-    const isSponsor = data.role === "SCOPE_SPONSOR"
+    const isSponsor = data.scope === "ROLE_SPONSOR"
     const isOnProfile = pathname.includes("/profile")
 
     const [show, setShow] = useState(false)
 
-    const confirmBody = { title: "Add Kudos", description: "Are you sure you want to add kudoses on that proof?" }
+    const confirmBody = {
+        title: "Add Kudos",
+        description: "Are you sure you want to add kudoses on that proof?",
+    }
 
     const handleClose = () => {
         setShow(false)
@@ -47,12 +50,12 @@ const Kudos = ({ talentId, proofId }) => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
     } = useForm()
 
     const [updateKudos, result] = useAddKudosMutation()
     const KudosInfo = useGetKudosQuery(
-        { proofId },
+        {proofId},
         {
             refetchOnMountOrArgChange: true,
         }
@@ -61,23 +64,28 @@ const Kudos = ({ talentId, proofId }) => {
     const onSubmit = (data) => {
         const res = data
         res.amount = +data.amount
-        updateKudos({ proofId, body: JSON.stringify(res) })
+        updateKudos({proofId, body: JSON.stringify(res)})
+        setShow(false)
     }
 
     useEffect(() => {
         KudosInfo.refetch()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.status])
 
     return (
         <>
             {!KudosInfo.isLoading ? (
-                <Tooltip title={<SponsorKudoses amount={KudosInfo.data.amount_of_kudos_current_user} />} arrow>
+                <Tooltip
+                    title={
+                        <SponsorKudoses
+                            amount={KudosInfo.data.amount_of_kudos_current_user}
+                        />
+                    }
+                    arrow>
                     <div className={styles.flex_container}>
                         <div className={styles.kudos_img}>
-                            <img
-                                className={styles.kudos_img}
-                                src={Unlike}
-                            />
+                            <img className={styles.kudos_img} src={Unlike} />
                         </div>
                         <div
                             className={
@@ -92,23 +100,31 @@ const Kudos = ({ talentId, proofId }) => {
                     error={KudosInfo.error}
                 />
             )}
-            {(isOnProfile && isSponsor) && (
+            {isOnProfile && isSponsor && (
                 <>
                     <form id="proof-form" onSubmit={handleSubmit(onSubmit)}>
-                        <TextField sx={{
-                            width: "85px",
-                            marginRight: "5px"
-                        }}
+                        <TextField
+                            sx={{
+                                width: "85px",
+                                marginRight: "5px",
+                            }}
                             id="outlined-basic"
                             label="Add kudos"
                             variant="outlined"
                             type="number"
                             size="small"
-                            InputProps={{ inputProps: { min: 1 } }}
+                            InputProps={{inputProps: {min: 1}}}
                             {...register("amount", {})}
                             error={errors.amount}
-                            helperText={errors.amount && errors.amount.message} />
-                        <Button variant="contained" onClick={()=>{setShow(true)}}>Add</Button>
+                            helperText={errors.amount && errors.amount.message}
+                        />
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                setShow(true)
+                            }}>
+                            Add
+                        </Button>
                         <Dialog
                             open={show}
                             onClose={() => {
@@ -128,14 +144,13 @@ const Kudos = ({ talentId, proofId }) => {
                                 <Button
                                     variant="outlined"
                                     onClick={handleClose}
-                                    sx={{ minWidth: 70 }}>
+                                    sx={{minWidth: 70}}>
                                     Disagree
                                 </Button>
                                 <Button
-                                    type="submit"
+                                    onClick={handleSubmit(onSubmit)}
                                     variant="contained"
-                                    onClick={handleClose}
-                                    sx={{ minWidth: 70 }}>
+                                    sx={{minWidth: 70}}>
                                     Agree
                                 </Button>
                             </DialogActions>
@@ -147,4 +162,4 @@ const Kudos = ({ talentId, proofId }) => {
     )
 }
 
-export { Kudos }
+export {Kudos}

@@ -9,13 +9,8 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 
 const Payment = ({open, data, setOpenPayment}) => {
-    console.log(data.redirect_url)
     const handleNext = () => {
-        window.open(
-            data.redirect_url,
-            "_blank",
-            "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=700,height=700"
-        )
+        window.location = data.redirect_url
     }
     const handleСancel = () => {
         setOpenPayment(false)

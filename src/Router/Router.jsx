@@ -17,14 +17,15 @@ const Router = ({AvatarIMG}) => {
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
-                <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
-                <Route
-                    path={`${Endpoints.POST_TALENT_SIGNIN}`}
-                    element={<SigninPopup AvatarIMG={AvatarIMG} />}
-                />
             </Route>
+            <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
+            <Route
+                path={`${Endpoints.POST_TALENT_SIGNIN}`}
+                element={<SigninPopup AvatarIMG={AvatarIMG} />}
+            />
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
+                <Route path={":sponsorId/KudosFarming"} element={<Clicker />} />
                 <Route
                     path=":talentId/edit"
                     element={<EditPage AvatarIMG={AvatarIMG} />}
@@ -40,12 +41,8 @@ const Router = ({AvatarIMG}) => {
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
             />
-            <Route path={"/game"} element={<Clicker />} />
+
             <Route path="*" element={<PageNotFound />} />
-            <Route
-                path={"/sponsors/signin"}
-                element={<SigninPopup AvatarIMG={AvatarIMG} />}
-            />
         </Routes>
     )
 }

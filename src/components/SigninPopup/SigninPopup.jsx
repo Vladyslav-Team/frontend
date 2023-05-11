@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Controller, useForm} from "react-hook-form"
+import {useForm} from "react-hook-form"
 import styles from "./SigninPopup.module.css"
 import {registerOptions} from "../pages/SignUp/validationRules.js"
 import {NavLink} from "react-router-dom"
@@ -9,19 +9,16 @@ import {useEffect} from "react"
 import {AlertError} from "../../shared/components"
 import jwtDecode from "jwt-decode"
 import {useLocation} from "react-router-dom"
-import {Checkbox, FormControlLabel, Typography} from "@mui/material"
 
 const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
     const [updatePost, result] = useSigninTalentMutation()
-
     const location = useLocation()
     const [prevUrn] = useState(location.pathname + location.search + location.hash)
-
     const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
-        control,
         formState: {errors},
     } = useForm()
     const registerOptionsPassword = {
@@ -30,8 +27,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         maxLength: registerOptions.password.maxLength,
     }
     const onSubmit = (data) => {
-        const role = data.role ? "sponsors" : "talents"
-        updatePost({body: data, role})
+        updatePost({body: data})
     }
 
     //refactor me
@@ -40,9 +36,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         if (result.data) {
             const jwt = jwtDecode(result.data["jwt-token"])
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            jwt &&
-                location.pathname.includes("/talents") &&
-                navigate(`/profile/${jwt.id}`)
+            jwt && navigate(`/profile/${jwt.id}`)
             id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
             AvatarIMG && AvatarIMG.refetch()
@@ -51,6 +45,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         currentUrn !== prevUrn && setVisibilitySigninPopup({status: false})
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, navigate, result.data, setVisibilitySigninPopup, location, prevUrn])
+
     // ----
 
     const SigninStyle = !status
@@ -101,26 +96,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
                     SIGN IN
                 </button>
                 <p className={styles.signin_form_elem}>or</p>
-                <Typography fontWeight={800} textAlign={"center"}>
-                    Your Sponsor
-                </Typography>
-                <Controller
-                    name="role"
-                    control={control}
-                    render={({field: {onChange, value}}) => (
-                        <>
-                            <FormControlLabel
-                                sx={{paddingLeft: "30px"}}
-                                control={
-                                    <Checkbox
-                                        checked={value || false}
-                                        onChange={onChange}
-                                    />
-                                }
-                            />
-                        </>
-                    )}
-                />
+
                 <p>
                     Want to join SkillScope?{" "}
                     <NavLink
@@ -128,7 +104,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
                         onClick={() =>
                             setVisibilitySigninPopup && setVisibilitySigninPopup(false)
                         }
-                        to={"/talents/signup"}>
+                        to={"/signup"}>
                         <b>Sign up</b>
                     </NavLink>
                 </p>

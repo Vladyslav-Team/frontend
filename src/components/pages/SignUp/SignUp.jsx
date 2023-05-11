@@ -16,6 +16,7 @@ const SignUp = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
     } = useForm()
+
     const onSubmit = (data) => {
         const res = data
         const isSponsor = data.roles
@@ -114,7 +115,9 @@ const SignUp = ({AvatarIMG}) => {
                                 {...register("roles", {})}
                             />
                         </div>
-                        <button type="submit">SIGN UP</button>
+                        <button className="action" type="submit">
+                            SIGN UP
+                        </button>
                     </form>
                     <p className={styles.or}>or</p>
                     <p className={styles.signin_check}>

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react"
 import Grid from "@mui/material/Grid"
-import {ClickerBtn, Result, handleClose, Rules, Payment} from "./components"
-import {Button} from "@mui/material"
-import {useInitMutation} from "./components/api"
+import {ClickerBtn, Result, handleClose, Rules, Payment, BanClicker} from "./components"
+import {useGetStatusQuery, useInitMutation} from "./components/api"
 import LoadingButton from "@mui/lab/LoadingButton"
 import {useJwtCheck} from "../../shared/api/hooks"
 
@@ -14,12 +13,44 @@ const Clicker = () => {
     const [openPayment, setOpenPayment] = useState(false)
     const [initBuy, result] = useInitMutation()
     const jwt = useJwtCheck()
+    const {data, isSuccess} = useGetStatusQuery(jwt.data.id, {
+        refetchOnMountOrArgChange: true,
+    })
     const handleInit = () => {
         jwt.data && initBuy(jwt.data.id)
     }
+    const Content = () => {
+        if (isSuccess === true && data === true) {
+            return (
+                <>
+                    <ClickerBtn
+                        setIsRunning={setIsRunning}
+                        setCount={setCount}
+                        time={time}
+                    />
+                    <Rules open={open} />
+                </>
+            )
+        }
+        if (isSuccess === true && data === false) {
+            return (
+                <>
+                    <BanClicker />
+                    <LoadingButton
+                        loading={result.isLoading}
+                        onClick={handleInit}
+                        variant="contained">
+                        BUY RESET TIMER
+                    </LoadingButton>
+                </>
+            )
+        }
+    }
+
     useEffect(() => {
         setOpenPayment(true)
     }, [result.data])
+
     useEffect(() => {
         let intervalId
         if (isRunning) {
@@ -32,14 +63,6 @@ const Clicker = () => {
         return () => clearInterval(intervalId)
     }, [isRunning, time])
 
-    const root = {
-        backgroundColor: "#FFF",
-        "&:hover": {
-            //you want this to be the same as the backgroundColor above
-            backgroundColor: "#FFF",
-        },
-    }
-
     return (
         <Grid
             container
@@ -49,27 +72,23 @@ const Clicker = () => {
             height={"100%"}
             paddingTop={"120px"}
             paddingBottom={"120px"}>
-            <Grid
-                item
-                sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
-                width={"480px"}
-                paddingLeft={"30px"}
-                paddingRight={"30px"}
-                paddingBottom={"30px"}
-                display={"flex"}
-                justifyContent={"flex-start"}
-                alignItems={"center"}
-                flexDirection={"column"}
-                paddingTop={"80px"}>
-                <ClickerBtn setIsRunning={setIsRunning} setCount={setCount} time={time} />
-                <Rules open={open} />
-                <LoadingButton
-                    loading={result.isLoading}
-                    onClick={handleInit}
-                    variant="contained">
-                    BUY RESET TIMER
-                </LoadingButton>
-            </Grid>
+            {isSuccess && (
+                <Grid
+                    item
+                    sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
+                    width={"480px"}
+                    paddingLeft={"30px"}
+                    paddingRight={"30px"}
+                    paddingBottom={"30px"}
+                    display={"flex"}
+                    justifyContent={"flex-start"}
+                    alignItems={"center"}
+                    flexDirection={"column"}
+                    paddingTop={"80px"}>
+                    {Content()}
+                </Grid>
+            )}
+
             {result.data && (
                 <Payment
                     open={openPayment}
@@ -78,7 +97,7 @@ const Clicker = () => {
                 />
             )}
             <Result
-                count={count}
+                count={Math.floor(count / 15)}
                 handleClose={() => handleClose(setOpen, setIsRunning, setCount, setTime)}
                 open={open}
             />

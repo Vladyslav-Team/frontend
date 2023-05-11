@@ -1,74 +1,8 @@
 import {Typography} from "@mui/material"
-import React, {useEffect, useRef} from "react"
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from "chart.js"
-import {Line} from "react-chartjs-2"
-let dataD = {}
-const statistic = Object.keys(localStorage)
-    .filter((keys) => keys.split("-")[0] === "kudosFarmDate" && keys)
-    .map((el, i) => {
-        return (dataD[[el.split("-")[1]]] = localStorage.getItem(el))
-    })
+import React from "react"
+import {Chart, statistic} from "./snippets"
 
-const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: "top",
-        },
-        title: {
-            display: true,
-            text: "Kudos",
-        },
-    },
-}
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-)
-
-const keysSorted = Object.entries(dataD)
-let sorted = keysSorted.sort((a, b) => a[0] - b[0])
-const labels = sorted.map((el) => new Date(+el[0]).toLocaleDateString("en-US"))
-
-sorted.map((el) => console.log())
-
-const data = {
-    labels,
-    datasets: [
-        {
-            label: "Kudos score",
-            data: sorted.map((el) => +el[1]),
-            borderColor: "#0a6f9a",
-            backgroundColor: "#09658c",
-        },
-    ],
-}
-
-const Rules = ({open}) => {
-    const chart = useRef()
-    useEffect(() => {
-        //  if(!open && chart.current ){
-        //     setTimeout(() => {
-        //         chart.current.chartInstance.update();
-        //       }, 0);
-        //  }
-    }, [open])
-
+const Rules = () => {
     return (
         <>
             {!statistic[0] ? (
@@ -96,18 +30,15 @@ const Rules = ({open}) => {
                         all points you have earned will be tallied and entered into the
                         results table.
                         <br />
-                        4. If you press the Kudos button too often or too slowly, it may
-                        result in the temporary blocking of your account or the
-                        cancellation of your points.
-                        <br />
-                        5. You can participate in Kudos farming multiple times per day,
-                        but each time a new time period will be set for farming.
+                        4. You can participate in Kudos farming only once per day. After
+                        that, you will be able to use the farming feature again on the
+                        next day, or pay $5 to reset the timer.
                         <br />
                     </Typography>
                 </>
             ) : (
                 <>
-                    <Line ref={chart} data={data} options={options} />
+                    <Chart />
                 </>
             )}
         </>

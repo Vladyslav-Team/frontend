@@ -19,7 +19,7 @@ const Aside = ({talent}) => {
     const {data} = useJwtCheck()
 
     const role =
-        data.role === "ROLE_TALENT" || (data.role === "ROLE_SPONSOR" && data.id !== +id)
+        data.scope === "ROLE_TALENT" || (data.scope === "ROLE_SPONSOR" && data.id !== +id)
             ? "talents"
             : "sponsors"
 
@@ -35,7 +35,7 @@ const Aside = ({talent}) => {
     return (
         <div className={styles.wrapper}>
             <Info talent={talent} />
-            {data.id && data.role === "ROLE_TALENT" && (
+            {data.id && data.scope === "ROLE_TALENT" && (
                 <AddProof
                     idTalent={id}
                     localTalentID={data.id}

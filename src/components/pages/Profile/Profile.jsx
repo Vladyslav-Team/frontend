@@ -13,8 +13,8 @@ const Profile = () => {
     const jwt = useJwtCheck()
 
     const role =
-        jwt.data.role === "ROLE_TALENT" ||
-        (jwt.data.role === "ROLE_SPONSOR" && jwt.data.id !== +id)
+        jwt.data.scope === "ROLE_TALENT" ||
+        (jwt.data.scope === "ROLE_SPONSOR" && jwt.data.id !== +id)
             ? "talents"
             : "sponsors"
 
