@@ -33,8 +33,8 @@ const Profile = () => {
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>
-                                <ProfileSidebar talent={data} idTalentURL={id} />
-                                <Aside talent={data} />
+                                <ProfileSidebar user={data} idTalentURL={id} />
+                                <Aside user={data} />
                             </>
                         )}
                     </div>

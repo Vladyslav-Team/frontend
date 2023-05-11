@@ -10,7 +10,7 @@ import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
 
-const Aside = ({talent}) => {
+const Aside = ({user}) => {
     const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
@@ -34,7 +34,7 @@ const Aside = ({talent}) => {
 
     return (
         <div className={styles.wrapper}>
-            <Info talent={talent} />
+            <Info user={user} />
             {data.id && data.scope === "ROLE_TALENT" && (
                 <AddProof
                     idTalent={id}
