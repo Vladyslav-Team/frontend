@@ -16,11 +16,11 @@ const SignUp = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
     } = useForm()
+
     const onSubmit = (data) => {
         const res = data
-        const isSponsor = data.scopes
+        const isSponsor = data.roles
         const role = isSponsor ? "sponsors" : "talents"
-
         res.birthday = data.birthday.split("-").reverse().join("-")
         res.roles = Array(isSponsor ? "SPONSOR" : "TALENT")
         updatePost({role, body: JSON.stringify(res)})

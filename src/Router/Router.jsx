@@ -17,12 +17,12 @@ const Router = ({AvatarIMG}) => {
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
-                <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
-                <Route
-                    path={`${Endpoints.POST_TALENT_SIGNIN}`}
-                    element={<SigninPopup AvatarIMG={AvatarIMG} />}
-                />
             </Route>
+            <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
+            <Route
+                path={`${Endpoints.POST_TALENT_SIGNIN}`}
+                element={<SigninPopup AvatarIMG={AvatarIMG} />}
+            />
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
                 <Route path={":sponsorId/KudosFarming"} element={<Clicker />} />

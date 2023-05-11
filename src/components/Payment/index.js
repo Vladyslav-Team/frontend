@@ -60,7 +60,7 @@ const Payment = () => {
                                         <TableCell component="th" scope="row">
                                             Total
                                         </TableCell>
-                                        <TableCell align="right">5$</TableCell>
+                                        <TableCell align="right">5.99$</TableCell>
                                     </TableRow>
                                     <TableRow
                                         sx={{

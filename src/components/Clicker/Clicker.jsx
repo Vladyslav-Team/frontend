@@ -4,6 +4,7 @@ import {ClickerBtn, Result, handleClose, Rules, Payment, BanClicker} from "./com
 import {useGetStatusQuery, useInitMutation} from "./components/api"
 import LoadingButton from "@mui/lab/LoadingButton"
 import {useJwtCheck} from "../../shared/api/hooks"
+import Loader from "../../shared/components/Loader"
 
 const Clicker = () => {
     const [count, setCount] = useState(0)
@@ -13,29 +14,45 @@ const Clicker = () => {
     const [openPayment, setOpenPayment] = useState(false)
     const [initBuy, result] = useInitMutation()
     const jwt = useJwtCheck()
-    const {data} = useGetStatusQuery(jwt.data.id, {
+    const {data, isSuccess} = useGetStatusQuery(jwt.data.id, {
         refetchOnMountOrArgChange: true,
     })
     const handleInit = () => {
         jwt.data && initBuy(jwt.data.id)
     }
     const Content = () => {
-        return data !== false ? (
-            <>
-                <ClickerBtn setIsRunning={setIsRunning} setCount={setCount} time={time} />
-                <Rules open={open} />
-            </>
-        ) : (
-            <>
-                <BanClicker />
-                <LoadingButton
-                    loading={result.isLoading}
-                    onClick={handleInit}
-                    variant="contained">
-                    BUY RESET TIMER
-                </LoadingButton>
-            </>
-        )
+        if (isSuccess === true && data === true) {
+            return (
+                <>
+                    <ClickerBtn
+                        setIsRunning={setIsRunning}
+                        setCount={setCount}
+                        time={time}
+                    />
+                    <Rules open={open} />
+                </>
+            )
+        }
+        if (isSuccess === true && data === false) {
+            return (
+                <>
+                    <BanClicker />
+                    <LoadingButton
+                        loading={result.isLoading}
+                        onClick={handleInit}
+                        variant="contained">
+                        BUY RESET TIMER
+                    </LoadingButton>
+                </>
+            )
+        }
+        if (!isSuccess) {
+            return (
+                <>
+                    <Loader isLoading={true} />
+                </>
+            )
+        }
     }
 
     useEffect(() => {
@@ -67,6 +84,7 @@ const Clicker = () => {
                 item
                 sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
                 width={"480px"}
+                maxHeight={"580px"}
                 paddingLeft={"30px"}
                 paddingRight={"30px"}
                 paddingBottom={"30px"}
