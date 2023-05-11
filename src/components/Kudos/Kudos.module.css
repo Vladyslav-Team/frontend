@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 60px;
+   
     justify-content: space-around;
 }
 
 .kudos_img {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
+    margin-right: 3px;
 }
 
 .kudos_counter {

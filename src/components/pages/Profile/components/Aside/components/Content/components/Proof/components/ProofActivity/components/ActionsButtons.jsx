@@ -79,7 +79,7 @@ export const ActionsButtonShowMore = ({proofId}) => {
     return (
         <>
             <Button variant="contained" onClick={ShowMore}>
-                Show more
+                More
             </Button>
         </>
     )
