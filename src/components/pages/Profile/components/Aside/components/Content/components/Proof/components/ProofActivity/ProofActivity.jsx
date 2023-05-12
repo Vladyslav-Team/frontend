@@ -26,6 +26,7 @@ const ProofActivity = ({
     allProofsRefetch,
     status,
     talentId,
+    refetch,
 }) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
@@ -34,12 +35,12 @@ const ProofActivity = ({
     const CardActionsStyleDraft = {
         justifyContent: "flex-end",
         gap: 1,
-        "& button": {minWidth: "90px"},
+        "& button": {minWidth: "60px"},
     }
     const CardActionsStylePublished = {
         justifyContent: "space-between",
         gap: 1,
-        "& button": {minWidth: "90px"},
+        "& button": {minWidth: "60px"},
     }
 
     return (
@@ -57,7 +58,9 @@ const ProofActivity = ({
                     allProofsRefetch={allProofsRefetch}
                 />
             )}
-            {isPublish && <Kudos talentId={talentId} proofId={proofId} />}
+            {isPublish && (
+                <Kudos talentId={talentId} proofId={proofId} refetch={refetch} />
+            )}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>
     )

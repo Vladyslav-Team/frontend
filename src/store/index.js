@@ -6,6 +6,7 @@ import {EditApi} from "../components/EditPage/api"
 import {HeaderApi} from "../components/Avatar/api"
 import {DeleteAccount} from "../components/EditPage/components/DeleteField/api"
 import {ProofApi} from "../components/pages/Profile/components/Aside/components/Content/components/Proof/api"
+import {PaymentApi} from "../components/Clicker/components/api"
 import {KudosApi} from "../components/Kudos/api"
 
 export const store = configureStore({
@@ -17,6 +18,7 @@ export const store = configureStore({
         [HeaderApi.reducerPath]: HeaderApi.reducer,
         [DeleteAccount.reducerPath]: DeleteAccount.reducer,
         [ProofApi.reducerPath]: ProofApi.reducer,
+        [PaymentApi.reducerPath]: PaymentApi.reducer,
         [KudosApi.reducerPath]: KudosApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
@@ -28,6 +30,7 @@ export const store = configureStore({
             HeaderApi.middleware,
             DeleteAccount.middleware,
             ProofApi.middleware,
+            PaymentApi.middleware,
             KudosApi.middleware
         ),
 })

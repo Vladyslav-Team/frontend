@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar"
 import {NavLink, useLocation} from "react-router-dom"
 import {useGetAllProofQuery} from "../pages/Profile/api"
 import {Grid, Typography} from "@mui/material"
-import {useGetAvatarTalentQuery} from "../Avatar/api"
+import {useGetUserAvatarQuery} from "../Avatar/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
@@ -11,7 +11,7 @@ const ProofAllInfo = () => {
     const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
-    const AvatarIMG = useGetAvatarTalentQuery(data && data.talent_id)
+    const AvatarIMG = useGetUserAvatarQuery(data && data.talent_id)
 
     return (
         <>

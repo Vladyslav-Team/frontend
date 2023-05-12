@@ -3,18 +3,28 @@ import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"
 import {useLocation} from "react-router-dom"
-import {useGetAllInfoByIDQuery} from "./api"
+import {useGetAllUserInfoByIDQuery} from "./api"
 import Loader from "../../../shared/components/Loader"
+import {useJwtCheck} from "../../../shared/api/hooks"
 
 const Profile = () => {
     const location = useLocation()
-    const idTalent = location.pathname.replace("/profile/", "")
-    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(
-        idTalent,
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    )
+    const id = location.pathname.replace("/profile/", "")
+    const jwt = useJwtCheck()
+
+    const role =
+        jwt.data.scope === "ROLE_TALENT" ||
+        (jwt.data.scope === "ROLE_SPONSOR" && jwt.data.id !== +id)
+            ? "talents"
+            : "sponsors"
+
+    const {data, error, isLoading, isError, isSuccess, refetch} =
+        useGetAllUserInfoByIDQuery(
+            {id, role},
+            {
+                refetchOnMountOrArgChange: true,
+            }
+        )
 
     return (
         <>
@@ -24,8 +34,8 @@ const Profile = () => {
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>
-                                <ProfileSidebar talent={data} idTalentURL={idTalent} />
-                                <Aside talent={data} />
+                                <ProfileSidebar user={data} idTalentURL={id} />
+                                <Aside user={data} refetch={refetch} />
                             </>
                         )}
                     </div>

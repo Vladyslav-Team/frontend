@@ -7,22 +7,22 @@ export const authenticationApi = createApi({
     endpoints: (build) => {
         return {
             AddTalents: build.mutation({
-                query: (body) => ({
-                    url: "/talents",
+                query: ({role, body}) => ({
+                    url: `/${role}`,
                     method: "POST",
                     data: body,
                 }),
             }),
             SigninTalent: build.mutation({
-                query: (body) => ({
-                    url: "/talents/login",
+                query: ({body}) => ({
+                    url: "/login",
                     method: "POST",
                     auth: body,
                 }),
             }),
             SignOutTalent: build.mutation({
                 query: () => ({
-                    url: "/talents/logout",
+                    url: "/logout",
                     method: "GET",
                 }),
             }),
