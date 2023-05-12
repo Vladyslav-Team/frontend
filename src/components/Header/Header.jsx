@@ -65,7 +65,7 @@ const Header = ({AvatarIMG}) => {
                         </>
                     ) : (
                         <>
-                            <NavLink className={styles.button_in} to="/signup">
+                            <NavLink className={styles.button_in} to="/talents/signup">
                                 SIGN UP
                             </NavLink>
                             <NavLink

@@ -1,29 +1,16 @@
 import {Button} from "@mui/material"
-import React, {useState} from "react"
+import React from "react"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../../ConfirmPopup"
-import {ConfirmationPopup} from "../../../../../../../../../../../ConfirmationPopup"
 
 export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
-    const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate()
     const handleCancel = () => {
         if (statusVis === "Edit") {
-            setShowConfirm(true)
+            navigate(-1)
         } else {
             setVis && setVis(false)
         }
-    }
-
-    const confirmBody = {
-        title: "You want to undo the changes?",
-        description:
-            "All changes you have made before will not be saved and you will not be able to restore them. Continue operation?",
-    }
-
-    const handlePositiveAnswer = () => {
-        setShowConfirm(false)
-        navigate(-1)
     }
 
     return (
@@ -34,12 +21,6 @@ export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
             <Button onClick={handleCancel} form="proof-form" variant="outlined">
                 Cancel
             </Button>
-            <ConfirmationPopup
-                confirmBody={confirmBody}
-                showConfirm={showConfirm}
-                setShowConfirm={setShowConfirm}
-                handlePositiveAnswer={handlePositiveAnswer}
-            />
         </>
     )
 }
@@ -79,7 +60,7 @@ export const ActionsButtonShowMore = ({proofId}) => {
     return (
         <>
             <Button variant="contained" onClick={ShowMore}>
-                More
+                Show more
             </Button>
         </>
     )

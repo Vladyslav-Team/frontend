@@ -4,7 +4,6 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider"
 import {DatePicker} from "@mui/x-date-pickers/DatePicker"
 import {Controller} from "react-hook-form"
 import {registerOptions} from "../../../../pages/SignUp/validationRules"
-
 const BirthDate = ({control, errors}) => {
     return (
         <>
@@ -15,10 +14,10 @@ const BirthDate = ({control, errors}) => {
                 render={({field: {onChange, ...restField}}) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
-                            format="MM/DD/YYYY"
+                            format="DD-MM-YYYY"
                             label="New birth date"
-                            onChange={(newDate) => {
-                                onChange(newDate)
+                            onChange={(date) => {
+                                onChange(date)
                             }}
                             sx={{
                                 width: "100%",

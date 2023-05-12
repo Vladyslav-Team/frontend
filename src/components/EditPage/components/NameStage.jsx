@@ -4,21 +4,28 @@ import Grid from "@mui/material/Grid"
 import Divider from "@mui/material/Divider"
 import Typography from "@mui/material/Typography"
 import {useNavigate} from "react-router-dom"
-import {ConfirmationPopup} from "../../ConfirmationPopup"
-
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from "@mui/material"
 const NameStage = ({name, button = false, id}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const navigate = useNavigate()
 
-    const confirmBody = {
-        title: "You want to undo the changes?",
-        description:
-            "All changes you have made before will not be saved and you will not be able to restore them. Continue operation?",
+    const handlePositiveAnswer = () => {
+        handleClose()
+        navigate(`/profile/${id}`)
     }
 
-    const handlePositiveAnswer = () => {
+    const handleNegativeAnswer = () => {
+        handleClose()
+    }
+
+    const handleClose = () => {
         setShowConfirm(false)
-        navigate(`/profile/${id}`)
     }
     return (
         <>
@@ -61,12 +68,37 @@ const NameStage = ({name, button = false, id}) => {
                     )}
                 </Grid>
             </Grid>
-            <ConfirmationPopup
-                confirmBody={confirmBody}
-                showConfirm={showConfirm}
-                setShowConfirm={setShowConfirm}
-                handlePositiveAnswer={handlePositiveAnswer}
-            />
+            <Dialog
+                open={showConfirm}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description">
+                <DialogTitle id="alert-dialog-title">
+                    You want to undo the changes?
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        All changes you have made before will not be saved and you will
+                        not be able to restore them. Continue operation?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        variant="outlined"
+                        onClick={handleNegativeAnswer}
+                        sx={{minWidth: 70}}>
+                        Disagree
+                    </Button>
+                    <Button
+                        type="submit"
+                        form="proof-form"
+                        variant="contained"
+                        onClick={handlePositiveAnswer}
+                        sx={{minWidth: 70}}>
+                        Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
             <Divider sx={{width: "96%"}} />
         </>
     )

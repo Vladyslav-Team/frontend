@@ -6,9 +6,9 @@ export const EditApi = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => {
         return {
-            EditUserInfo: build.mutation({
-                query: ({payload, id, role}) => ({
-                    url: `/${role}/${id}`,
+            EditTalent: build.mutation({
+                query: ({payload, idTalent}) => ({
+                    url: `/talents/${idTalent}`,
                     method: "PATCH",
                     data: payload,
                 }),
@@ -17,4 +17,4 @@ export const EditApi = createApi({
     },
 })
 
-export const {useEditUserInfoMutation} = EditApi
+export const {useEditTalentMutation} = EditApi

@@ -5,8 +5,8 @@ import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import GitHub from "@mui/icons-material/GitHub"
 
-const Info = ({user}) => {
-    const {education, age, email, phone, socials} = {...user}
+const Info = ({talent}) => {
+    const {education, age, email, phone, socials} = {...talent}
     const {facebook, twitter, github, linkedin} = {...socials}
 
     return (

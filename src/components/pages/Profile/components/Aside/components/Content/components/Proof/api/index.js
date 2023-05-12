@@ -7,8 +7,10 @@ export const ProofApi = createApi({
     endpoints: (build) => {
         return {
             GetProofs: build.query({
-                query: ({id, role, page}) => ({
-                    url: `/${role}/${id}/proofs?page=${page ? page : 1}&newest=true`,
+                query: ({idTalent, page}) => ({
+                    url: `/talents/${idTalent}/proofs?page=${
+                        page ? page : 1
+                    }&newest=true`,
                     method: "GET",
                 }),
             }),

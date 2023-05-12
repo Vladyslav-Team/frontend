@@ -6,7 +6,6 @@ import {
     ActionsButtonDraft,
     ActionsButtonShowMore,
 } from "./components"
-import {Kudos} from "../../../../../../../../../../Kudos"
 
 const Edit = ({proofId}) => {
     const navigate = useNavigate()
@@ -19,32 +18,19 @@ const Edit = ({proofId}) => {
     )
 }
 
-const ProofActivity = ({
-    proofId,
-    statusVis,
-    setVis,
-    allProofsRefetch,
-    status,
-    talentId,
-    refetch,
-}) => {
+const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
     const isDraft = status === "DRAFT" && !statusVis
     const isPublish = status === "PUBLISHED" && !statusVis
-    const CardActionsStyleDraft = {
+    const CardActionsStyle = {
         justifyContent: "flex-end",
         gap: 1,
-        "& button": {minWidth: "60px"},
-    }
-    const CardActionsStylePublished = {
-        justifyContent: "space-between",
-        gap: 1,
-        "& button": {minWidth: "60px"},
+        "& button": {minWidth: "90px"},
     }
 
     return (
-        <CardActions sx={isPublish ? CardActionsStylePublished : CardActionsStyleDraft}>
+        <CardActions sx={CardActionsStyle}>
             {isDraft && <Edit proofId={proofId} />}
             {isEditOrAdded && (
                 <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis} />
@@ -57,9 +43,6 @@ const ProofActivity = ({
                     statusVis={statusVis}
                     allProofsRefetch={allProofsRefetch}
                 />
-            )}
-            {isPublish && (
-                <Kudos talentId={talentId} proofId={proofId} refetch={refetch} />
             )}
             {isPublish && <ActionsButtonShowMore proofId={proofId} />}
         </CardActions>

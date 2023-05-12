@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./Content.module.css"
 import {Proof} from "./components/Proof"
 
-const Content = ({allProofs, refetch}) => {
+const Content = ({allProofs}) => {
     return (
         <div className={styles.wrapper}>
             {allProofs &&
@@ -12,7 +12,6 @@ const Content = ({allProofs, refetch}) => {
                             key={index}
                             proof={proof}
                             allProofsRefetch={allProofs.refetch}
-                            refetch={refetch}
                         />
                     )
                 })}

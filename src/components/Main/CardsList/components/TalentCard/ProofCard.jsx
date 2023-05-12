@@ -3,7 +3,6 @@ import styles from "./TalentCard.module.css"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
-import {Kudos} from "../../../../Kudos"
 const ProofCard = ({proof}) => {
     return (
         <div style={{width: "470px", textOverflow: "ellipsis"}} className={styles.card}>
@@ -25,16 +24,7 @@ const ProofCard = ({proof}) => {
                 </Typography>
             </div>
 
-            <Typography
-                variant="subtitle2"
-                gutterBottom
-                sx={{
-                    display: "flex",
-                    width: "70%",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                }}>
-                <Kudos proofId={proof.id} />
+            <Typography variant="subtitle2" gutterBottom>
                 {proof.publication_date}
             </Typography>
             <SigninPopupContext.Consumer>
@@ -43,7 +33,6 @@ const ProofCard = ({proof}) => {
                         setVisibilitySigninPopup={setVisibilitySigninPopup}
                         id={proof.id}
                         text="Show more"
-                        to="proof"
                     />
                 )}
             </SigninPopupContext.Consumer>

@@ -9,7 +9,6 @@ import {PageNotFound} from "../components/404"
 import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
 import {ProofAllInfo} from "../components/Proof"
-import {Clicker} from "../components/Clicker"
 
 const Router = ({AvatarIMG}) => {
     return (
@@ -17,15 +16,14 @@ const Router = ({AvatarIMG}) => {
             <Route path="/" element={<Main />} />
             <Route path={`${Endpoints.GET_ALL_TALENTS}`}>
                 <Route path="" element={<Main url={"talents?page"} type={"talents"} />} />
+                <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
+                <Route
+                    path={`${Endpoints.POST_TALENT_SIGNIN}`}
+                    element={<SigninPopup AvatarIMG={AvatarIMG} />}
+                />
             </Route>
-            <Route path={"signup"} element={<SignUp AvatarIMG={AvatarIMG} />} />
-            <Route
-                path={`${Endpoints.POST_TALENT_SIGNIN}`}
-                element={<SigninPopup AvatarIMG={AvatarIMG} />}
-            />
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
-                <Route path={":sponsorId/KudosFarming"} element={<Clicker />} />
                 <Route
                     path=":talentId/edit"
                     element={<EditPage AvatarIMG={AvatarIMG} />}
@@ -41,7 +39,6 @@ const Router = ({AvatarIMG}) => {
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
             />
-
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
