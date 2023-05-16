@@ -1,12 +1,12 @@
 import React, {useState} from "react"
-import {Button, CardActions} from "@mui/material"
+import {Button, CardActions, Grid, Chip, Tooltip} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 import {
     ActionsButtonsEditAndAdded,
     ActionsButtonDraft,
     ActionsButtonShowMore,
+    ProofSkills,
 } from "./components"
-
 const Edit = ({proofId}) => {
     const navigate = useNavigate()
     return (
@@ -28,24 +28,25 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
         gap: 1,
         "& button": {minWidth: "90px"},
     }
-
     return (
-        <CardActions sx={CardActionsStyle}>
-            {isDraft && <Edit proofId={proofId} />}
-            {isEditOrAdded && (
-                <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis} />
-            )}
-            {isDraft && (
-                <ActionsButtonDraft
-                    setShowConfirm={setShowConfirm}
-                    showConfirm={showConfirm}
-                    proofId={proofId}
-                    statusVis={statusVis}
-                    allProofsRefetch={allProofsRefetch}
-                />
-            )}
-            {isPublish && <ActionsButtonShowMore proofId={proofId} />}
-        </CardActions>
+        <>
+            <CardActions sx={CardActionsStyle}>
+                {isDraft && <Edit proofId={proofId} />}
+                {isEditOrAdded && (
+                    <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis} />
+                )}
+                {isDraft && (
+                    <ActionsButtonDraft
+                        setShowConfirm={setShowConfirm}
+                        showConfirm={showConfirm}
+                        proofId={proofId}
+                        statusVis={statusVis}
+                        allProofsRefetch={allProofsRefetch}
+                    />
+                )}
+                {isPublish && <ActionsButtonShowMore proofId={proofId} />}
+            </CardActions>
+        </>
     )
 }
 

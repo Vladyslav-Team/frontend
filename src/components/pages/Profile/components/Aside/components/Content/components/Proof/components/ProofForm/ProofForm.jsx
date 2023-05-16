@@ -1,6 +1,7 @@
 import React from "react"
 import {Grid, TextField} from "@mui/material"
 import {registerOptions} from "../../../../../../../../../SignUp/validationRules"
+import {ProofSkills} from "../ProofActivity/components"
 
 const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
     return (
