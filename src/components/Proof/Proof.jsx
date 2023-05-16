@@ -40,7 +40,6 @@ const ProofAllInfo = () => {
                             }}>
                             <p>{data.description}</p>
                         </Grid>
-
                         <Grid
                             item
                             display={"flex"}

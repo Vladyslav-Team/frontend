@@ -29,7 +29,10 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         maxLength: registerOptions.password.maxLength,
     }
     const onSubmit = (data) => {
-        updatePost(data)
+        let res = data
+        res.roles = ["TALENT"]
+        console.log(res)
+        updatePost(res)
     }
 
     useEffect(() => {

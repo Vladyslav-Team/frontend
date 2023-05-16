@@ -2,6 +2,7 @@ import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
 import Tooltip from "@mui/material/Tooltip"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
+import {ProofSkills} from "../ProofActivity/components"
 
 const Time = ({time}) => {
     return (
@@ -18,7 +19,7 @@ const Time = ({time}) => {
     )
 }
 
-const ProofContent = ({title, data, description, publication_date}) => {
+const ProofContent = ({title, data, description, publication_date, proofId}) => {
     const time = publication_date && publication_date.split(" ")[0]
     const date = publication_date && publication_date.split(" ")[1]
     return (
@@ -38,12 +39,9 @@ const ProofContent = ({title, data, description, publication_date}) => {
             <Typography variant="body2" color="text.secondary">
                 {description}
             </Typography>
+
             <Tooltip title={<Time time={time} />} arrow>
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    position={"absolute"}
-                    bottom={"10px"}>
+                <Typography variant="body2" color="text.secondary" position={"absolute"}>
                     {date}
                 </Typography>
             </Tooltip>
