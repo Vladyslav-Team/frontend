@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import GitHub from "@mui/icons-material/GitHub"
+import {Skills} from "./components"
 
 const Info = ({talent}) => {
     const {education, age, email, phone, socials} = {...talent}
@@ -25,7 +26,6 @@ const Info = ({talent}) => {
                     <span>{email}</span>
                 </div>
             )}
-
             {phone && (
                 <div>
                     <span>Phone : </span>
@@ -37,6 +37,7 @@ const Info = ({talent}) => {
                     <span>Education :</span> <p>{education}</p>
                 </div>
             )}
+            <Skills />
             <div className={styles.socialMedia}>
                 {facebook && (
                     <a href={facebook}>
