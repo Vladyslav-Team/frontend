@@ -10,6 +10,7 @@ import {
     MenuItem,
 } from "@mui/material"
 import React, {useState} from "react"
+import {useGetSkillsQuery} from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
 
 const data = [
     "Paris",
@@ -24,13 +25,14 @@ const data = [
     "Dublin",
 ]
 
-const filterData = (query, data) => {
-    if (!query) {
-        return data
-    } else {
-        return data.filter((d) => d.toLowerCase().includes(query.toLowerCase()))
-    }
-}
+
+// const filterData = (query, data) => {
+//     if (!query) {
+//         return data
+//     } else {
+//         return data.filter((d) => d.toLowerCase().includes(query.toLowerCase()))
+//     }
+// }
 
 const SearchInput = ({setSearchQuery, searchQuery}) => {
     const handleChange = (e) => {
@@ -58,14 +60,15 @@ const SearchInput = ({setSearchQuery, searchQuery}) => {
 
 const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery}) => {
     const open = Boolean(anchorEl)
+    const datas = useGetSkillsQuery(searchQuery)
+    const datasArray = datas.data.skills
 
     const handleClose = () => {
         setAnchorEl(null)
     }
-    const dataFiltered = filterData(searchQuery, data)
 
-    const menuItems = dataFiltered.map((el, i) => {
-        return <MenuItem key={i}>{el}</MenuItem>
+    const menuItems =  data && datasArray.map((obj, id) => {
+        return <MenuItem key={obj.id}>{obj.title}</MenuItem>
     })
     return (
         <Menu
