@@ -13,6 +13,9 @@ const ProofSkills = ({proofId, talentId, status, isEditMode}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
+    const {data} = useGetSkillsByProofsQuery(proofId, {
+            refetchOnMountOrArgChange: true,
+        })
     const isAddSkills =
         skillsData.skills.length < 4 && status !== "PUBLISHED" && status !== "HIDDEN"
     const isHidden = status !== "HIDDEN"
@@ -21,7 +24,7 @@ const ProofSkills = ({proofId, talentId, status, isEditMode}) => {
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
     }
-    const {data} = useGetSkillsByProofsQuery(proofId)
+
 
     let skills
     if (data && data.skills[0]) {

@@ -30,7 +30,7 @@ export const ProofApi = createApi({
                 query: ({talentId, proofId, body}) => ({
                     url: `/talents/${talentId}/proofs/${proofId}/skills`,
                     method: "POST",
-                    auth: body,
+                    data: body,
                 }),
             }),
         }

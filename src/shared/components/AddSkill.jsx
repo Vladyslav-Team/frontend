@@ -40,8 +40,9 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, 
     const open = Boolean(anchorEl)
     const [selectedIndex, setSelectedIndex] = React.useState(1);
     const data = useGetSkillsQuery(searchQuery)
+    console.log(data)
     const [updateSkill, result] = useAddSkillMutation()
-    const dataArray = data && data.data.skills
+    const dataArray = data.isSuccess && data.data.skills
 
     const handleClose = () => {
         setAnchorEl(null)
@@ -56,7 +57,7 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, 
         setAnchorEl(null);
       }
 
-    const menuItems =  data && dataArray.map((obj, id) => {
+    const menuItems =  data.isSuccess && dataArray.map((obj, id) => {
         return <MenuItem key={obj.id} 
         onClick={(event) => handleMenuItemClick(event, id, obj.title)}
         >
