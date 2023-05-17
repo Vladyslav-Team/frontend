@@ -26,8 +26,15 @@ export const ProofApi = createApi({
                     method: "GET",
                 }),
             }),
+            AddSkill: build.mutation({
+                query: ({talentId, proofId, body}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/skills`,
+                    method: "POST",
+                    auth: body,
+                }),
+            }),
         }
     },
 })
 
-export const {useGetProofsQuery, useGetSkillsByProofsQuery, useGetSkillsQuery} = ProofApi
+export const {useGetProofsQuery, useGetSkillsByProofsQuery, useGetSkillsQuery, useAddSkillMutation} = ProofApi

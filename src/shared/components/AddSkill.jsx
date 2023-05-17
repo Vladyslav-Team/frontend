@@ -10,29 +10,7 @@ import {
     MenuItem,
 } from "@mui/material"
 import React, {useState} from "react"
-import {useGetSkillsQuery} from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
-
-const data = [
-    "Paris",
-    "London",
-    "New York",
-    "Tokyo",
-    "Berlin",
-    "Buenos Aires",
-    "Cairo",
-    "Canberra",
-    "Rio de Janeiro",
-    "Dublin",
-]
-
-
-// const filterData = (query, data) => {
-//     if (!query) {
-//         return data
-//     } else {
-//         return data.filter((d) => d.toLowerCase().includes(query.toLowerCase()))
-//     }
-// }
+import {useGetSkillsQuery, useAddSkillMutation} from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
 
 const SearchInput = ({setSearchQuery, searchQuery}) => {
     const handleChange = (e) => {
@@ -58,17 +36,32 @@ const SearchInput = ({setSearchQuery, searchQuery}) => {
     )
 }
 
-const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery}) => {
+const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, talentId}) => {
     const open = Boolean(anchorEl)
-    const datas = useGetSkillsQuery(searchQuery)
-    const datasArray = datas.data.skills
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const data = useGetSkillsQuery(searchQuery)
+    const [updateSkill, result] = useAddSkillMutation()
+    const dataArray = data && data.data.skills
 
     const handleClose = () => {
         setAnchorEl(null)
     }
 
-    const menuItems =  data && datasArray.map((obj, id) => {
-        return <MenuItem key={obj.id}>{obj.title}</MenuItem>
+    const handleMenuItemClick = (event, index, title) => {
+        const res = {skills: Array(title)}
+        //console.log(JSON.stringify(res))
+        updateSkill({ talentId, proofId, body: JSON.stringify(res)})
+
+        setSelectedIndex(index);
+        setAnchorEl(null);
+      }
+
+    const menuItems =  data && dataArray.map((obj, id) => {
+        return <MenuItem key={obj.id} 
+        onClick={(event) => handleMenuItemClick(event, id, obj.title)}
+        >
+            {obj.title}
+            </MenuItem>
     })
     return (
         <Menu

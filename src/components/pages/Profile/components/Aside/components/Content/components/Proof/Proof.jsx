@@ -105,6 +105,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
             />
             <ProofSkills
                 proofId={proof && proof.id}
+                talentId={id[0]}
                 status={status}
                 isEditMode={isEditMode}
             />

@@ -9,7 +9,7 @@ const skillsData = {
     skills: [],
 }
 
-const ProofSkills = ({proofId, status, isEditMode}) => {
+const ProofSkills = ({proofId, talentId, status, isEditMode}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
@@ -93,6 +93,8 @@ const ProofSkills = ({proofId, status, isEditMode}) => {
                         setAnchorEl={setAnchorEl}
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
+                        proofId={proofId}
+                        talentId={talentId}
                     />
                 </>
             )}
