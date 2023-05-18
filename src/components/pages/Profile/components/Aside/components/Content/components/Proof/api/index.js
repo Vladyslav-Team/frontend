@@ -14,14 +14,8 @@ export const ProofApi = createApi({
                     method: "GET",
                 }),
             }),
-            GetSkillsByProofs: build.query({
-                query: (idProof) => ({
-                    url: `/proofs/${idProof}/skills`,
-                    method: "GET",
-                }),
-            }),
         }
     },
 })
 
-export const {useGetProofsQuery, useGetSkillsByProofsQuery} = ProofApi
+export const {useGetProofsQuery} = ProofApi

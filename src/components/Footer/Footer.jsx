@@ -1,14 +1,23 @@
 import React from "react"
 import styles from "./Footer.module.css"
 import {Logo} from "../Header/components/Logo"
+import {Grid} from "@mui/material"
 
 const Footer = () => {
     return (
-        <footer className={styles.footer_wrap}>
+        <Grid
+            container
+            sx={{
+                padding: "10px 0",
+                alignItems: "flex-start",
+                justifyContent: "space-around",
+                backgroundColor: "#313131",
+                color: "white",
+            }}>
             <div className={styles.footer_column}>
                 <Logo />
                 <p className={styles.moto}>Scoup out your skills</p>
-                <p className={styles.main_text}>@Copyright</p>
+                <p className={styles.main_text}>@Vladyslav Khrychov</p>
             </div>
             <div className={styles.line}></div>
             <div className={styles.footer_column}>
@@ -17,7 +26,7 @@ const Footer = () => {
                     <li>Kirill Serebryakov</li>
                     <li>Yaroslav Usenko</li>
                     <li>Oleksandra Hryshchenko</li>
-                    <li>Vladislav Zabilskiy</li>
+                    <li>Vladyslav Zabilskiy</li>
                 </ul>
             </div>
             <div className={styles.line}></div>
@@ -35,12 +44,12 @@ const Footer = () => {
                 <ul className={styles.main_text}>
                     <li>Daria Hontar</li>
                     <li>Bohdan Anashkin</li>
-                    <li>Yurii Mykhailov</li>
+                    <li>Yuriy Mykhailov</li>
                     <li>Olesia Polexhai</li>
                     <li>Anastasia Pidlisna</li>
                 </ul>
             </div>
-        </footer>
+        </Grid>
     )
 }
 

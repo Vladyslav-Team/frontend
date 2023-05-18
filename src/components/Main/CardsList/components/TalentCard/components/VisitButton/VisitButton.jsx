@@ -4,6 +4,7 @@ import styles from "./VisitButton.module.css"
 
 import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {useNavigate} from "react-router-dom"
+import {Button, Typography} from "@mui/material"
 
 const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visit"}) => {
     const {data} = useJwtCheck()
@@ -17,9 +18,20 @@ const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visi
     }
     return (
         <>
-            <button className={styles.visitButton} onClick={handleClick}>
-                <span className={styles.link}>{text}</span>
-            </button>
+            <Button
+                variant="contained"
+                sx={{
+                    bottom: "0",
+                    width: "100%",
+                    height: "40px",
+                    borderRadius: 0,
+                }}
+                onClick={handleClick}>
+                <Typography
+                    sx={{fontWeight: "bold", fontSize: "14px", textTransform: "none"}}>
+                    {text}
+                </Typography>
+            </Button>
         </>
     )
 }

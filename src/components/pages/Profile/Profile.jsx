@@ -16,6 +16,8 @@ const Profile = () => {
         }
     )
 
+    console.log(location)
+
     return (
         <>
             {isSuccess ? (

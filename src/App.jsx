@@ -1,41 +1,29 @@
-import React, {useState} from "react"
+import React from "react"
 import {Header} from "./components/Header"
 import {CssBaseline, ThemeProvider} from "@mui/material"
-import {theme} from "./Theme"
-import {Router} from "./Router"
-import {SigninPopup} from "./components/SigninPopup"
-import {SigninPopupContext} from "./context"
+import {useMode} from "./themeSettings/hooks"
+import {ColorModeContext} from "./themeSettings"
 import {useGetAvatarTalentQuery} from "./components/Avatar/api"
 import {useJwtCheck} from "./shared/api/hooks"
 import {Footer} from "./components/Footer/Footer"
+import {Layout} from "./components/Layout"
 
 const App = () => {
-    const [visibilitySigninPopup, setVisibilitySigninPopup] = useState({
-        status: false,
-        id: null,
-    })
     const {data} = useJwtCheck()
     const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
         refetchOnMountOrArgChange: true,
     })
+    const [theme, colorMode] = useMode()
+
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Header AvatarIMG={AvatarIMG} />
-            <main>
-                <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
-                    <Router AvatarIMG={AvatarIMG} />
-                </SigninPopupContext.Provider>
-                {visibilitySigninPopup.status && (
-                    <SigninPopup
-                        setVisibilitySigninPopup={setVisibilitySigninPopup}
-                        id={visibilitySigninPopup.id}
-                        status={visibilitySigninPopup.status}
-                    />
-                )}
-            </main>
-            <Footer />
-        </ThemeProvider>
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Header AvatarIMG={AvatarIMG} />
+                <Layout AvatarIMG={AvatarIMG} />
+                <Footer />
+            </ThemeProvider>
+        </ColorModeContext.Provider>
     )
 }
 

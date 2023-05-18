@@ -105,7 +105,7 @@ const registerOptions = {
             message: validateLocation,
         },
     },
-    birthDate: {
+    birthday: {
         required: "Birth date is required",
         validate: {
             message: validateDate,
@@ -153,7 +153,7 @@ const registerOptions = {
     },
     proofDescription: {
         maxLength: {
-            value: 2000,
+            value: 250,
             message: "Description have maximum characters",
         },
         pattern: {
