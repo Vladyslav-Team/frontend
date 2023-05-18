@@ -22,6 +22,7 @@
         "react-phone-input-2": "^2.15.1",
         "react-router-dom": "^6.9.0",
         "react-scripts": "5.0.1",
+        "use-debounce": "^9.0.4",
         "web-vitals": "^2.1.4"
     },
     "scripts": {

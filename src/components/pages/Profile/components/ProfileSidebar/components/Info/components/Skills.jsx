@@ -13,21 +13,22 @@ const Skill = ({name, color}) => {
     )
 }
 
-const Skills = () => {
+const Skills = ({skills, status}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
     }
+    const skillsMap =
+        skills &&
+        skills.map((skill) => {
+            return <Skill name={skill.title} color="primary" key={skill.id} />
+        })
     return (
         <>
             <Stack direction="colum" spacing={"20px"} flexWrap={"wrap"}>
-                <Skill name={"JAVA"} color="primary" />
-                <Skill name={"JAVASCRIPT"} color="primary" />
-                <Skill name={"GIT"} />
-                <Skill name={"KOTLIN"} color="primary" />
-                <Skill name={"GO"} color="primary" />
+                {skillsMap}
                 <IconButton
                     onClick={handleOpen}
                     id="basic-button"
@@ -45,6 +46,8 @@ const Skills = () => {
                 setAnchorEl={setAnchorEl}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
+                skills={skills}
+                status={status}
             />
         </>
     )

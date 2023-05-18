@@ -43,4 +43,10 @@ export const ProofApi = createApi({
     },
 })
 
-export const {useGetProofsQuery, useGetSkillsByProofsQuery, useGetSkillsQuery, useAddSkillMutation, useDeleteSkillMutation} = ProofApi
+export const {
+    useGetProofsQuery,
+    useGetSkillsByProofsQuery,
+    useGetSkillsQuery,
+    useAddSkillMutation,
+    useDeleteSkillMutation,
+} = ProofApi
