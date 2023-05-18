@@ -39,8 +39,7 @@ const ProofAllInfo = () => {
                             <Typography
                                 component={"div"}
                                 sx={{
-                                    fontSize: "32px",
-                                    fontWeight: "bold",
+                                    fontSize: "28px",
                                     bgcolor: palette.primary.main,
                                     padding: "5px 20px",
                                     color: "#ffffff",

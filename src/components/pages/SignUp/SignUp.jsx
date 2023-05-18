@@ -18,12 +18,8 @@ const SignUp = ({AvatarIMG}) => {
     } = useForm()
     const onSubmit = (data) => {
         const res = data
-        const isSponsor = data.roles
-        const role = isSponsor ? "sponsors" : "talents"
-        console.log(role)
         res.birthday = data.birthday.split("-").reverse().join("-")
-        res.roles = Array(isSponsor ? "SPONSOR" : "TALENT")
-        updatePost({role, body: JSON.stringify(res)})
+        updatePost(JSON.stringify(res))
     }
     useEffect(() => {
         if (result.data) {
@@ -106,13 +102,6 @@ const SignUp = ({AvatarIMG}) => {
                             {errors.birthday && (
                                 <p className={styles.error}>{errors.birthday.message}</p>
                             )}
-                        </div>
-                        <div className={styles.input_wrap}>
-                            <label htmlFor="roles">Sponsor:</label>
-                            <input className={styles.checkbox}
-                                type="checkbox"
-                                {...register("roles", {})}
-                            />
                         </div>
                         <button type="submit">SIGN UP</button>
                     </form>

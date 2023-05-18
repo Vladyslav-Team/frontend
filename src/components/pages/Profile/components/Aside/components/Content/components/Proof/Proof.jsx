@@ -10,6 +10,7 @@ import {AlertError} from "../../../../../../../../../shared/components/AlertErro
 import {StyledProof} from "./StyledProof"
 import {useRefetchAndClose} from "./hooks"
 import {useNavigate} from "react-router"
+import {ProofSkills} from "./components/ProofActivity/components"
 
 const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
     const {title, description, data, status, publication_date} = proof
@@ -88,6 +89,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                     data={data}
                     description={description}
                     publication_date={publication_date}
+                    proofId={proof && proof.id}
                 />
             )}
             <ProofActivity
@@ -100,6 +102,11 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 watch={watch}
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
+            />
+            <ProofSkills
+                proofId={proof && proof.id}
+                status={status}
+                isEditMode={isEditMode}
             />
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />

@@ -2,6 +2,7 @@ import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
 import Tooltip from "@mui/material/Tooltip"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
+import {ProofSkills} from "../ProofActivity/components"
 
 const Time = ({time}) => {
     return (
@@ -18,9 +19,10 @@ const Time = ({time}) => {
     )
 }
 
-const ProofContent = ({title, data, description, publication_date}) => {
+const ProofContent = ({title, data, description, publication_date, proofId}) => {
     const time = publication_date && publication_date.split(" ")[0]
     const date = publication_date && publication_date.split(" ")[1]
+
     return (
         <CardContent sx={{flex: "1 0 auto"}}>
             <Grid

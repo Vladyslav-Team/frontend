@@ -1,8 +1,8 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import styles from "./Aside.module.css"
 import {Content} from "./components/Content"
 import {useGetProofsQuery} from "./components/Content/components/Proof/api"
-import {useLocation} from "react-router"
+import {useLocation, useNavigate} from "react-router"
 import {Pagination} from "../../../../Main/Pagination"
 import {useSearchParams} from "react-router-dom"
 import {PopUpProof} from "./components/PopUpProof"
@@ -12,18 +12,20 @@ import {AddProof} from "./components/AddProof"
 
 const Aside = ({talent}) => {
     const location = useLocation()
+    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
     const idTalent = +location.pathname.replace("/profile/", "")
     const pageURL = +searchParams.get("page")
     const {data} = useJwtCheck()
-    const allProofs = useGetProofsQuery(
-        {idTalent, page: pageURL},
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    )
+    const allProofs = useGetProofsQuery({idTalent, page: pageURL})
     const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
+
+    useEffect(() => {
+        if (allProofs.isError || isNaN(pageURL) === true) {
+            navigate(`/profile/${idTalent}`)
+        }
+    }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
 
     return (
         <div className={styles.wrapper}>
@@ -35,7 +37,7 @@ const Aside = ({talent}) => {
                     setPoopUP={setAddProofPoopUP}
                 />
             )}
-            {allProofs.isSuccess && <Content allProofs={allProofs.data && allProofs} />}
+            {!allProofs.isError && <Content allProofs={allProofs.data && allProofs} />}
             <PopUpProof
                 vis={isAddProofPoopUP}
                 setVis={setAddProofPoopUP}

@@ -3,7 +3,6 @@ import styles from "./TalentCard.module.css"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
-import {Kudos} from "../../../../Kudos"
 import {Grid} from "@mui/material"
 import {useTheme} from "@emotion/react"
 
@@ -57,12 +56,9 @@ const ProofCard = ({proof}) => {
                 <Grid
                     variant="subtitle2"
                     sx={{
-                        display: "flex",
                         width: "100%",
                         alignItems: "center",
-                        justifyContent: "space-between",
                     }}>
-                    <Kudos proofId={proof.id} />
                     {proof.publication_date}
                 </Grid>
             </Grid>

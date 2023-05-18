@@ -13,6 +13,7 @@ const App = () => {
     const AvatarIMG = useGetAvatarTalentQuery(data && data.id, {
         refetchOnMountOrArgChange: true,
     })
+
     const [theme, colorMode] = useMode()
 
     return (
