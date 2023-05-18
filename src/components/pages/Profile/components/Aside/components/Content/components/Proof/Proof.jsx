@@ -108,6 +108,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 talentId={id[0]}
                 status={status}
                 isEditMode={isEditMode}
+                statusVis={statusVis}
             />
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />

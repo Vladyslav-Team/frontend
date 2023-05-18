@@ -33,8 +33,14 @@ export const ProofApi = createApi({
                     data: body,
                 }),
             }),
+            DeleteSkill: build.mutation({
+                query: ({talentId, proofId, skillId}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/skills/${skillId}`,
+                    method: "DELETE",
+                }),
+            }),
         }
     },
 })
 
-export const {useGetProofsQuery, useGetSkillsByProofsQuery, useGetSkillsQuery, useAddSkillMutation} = ProofApi
+export const {useGetProofsQuery, useGetSkillsByProofsQuery, useGetSkillsQuery, useAddSkillMutation, useDeleteSkillMutation} = ProofApi

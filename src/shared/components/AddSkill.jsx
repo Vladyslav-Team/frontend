@@ -1,4 +1,4 @@
-import {Search} from "@mui/icons-material"
+import { Search } from "@mui/icons-material"
 import {
     Box,
     FormControl,
@@ -9,16 +9,16 @@ import {
     Menu,
     MenuItem,
 } from "@mui/material"
-import React, {useState} from "react"
-import {useGetSkillsQuery, useAddSkillMutation} from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
+import React, { useEffect, useState } from "react"
+import { useGetSkillsQuery, useAddSkillMutation } from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
 
-const SearchInput = ({setSearchQuery, searchQuery}) => {
+const SearchInput = ({ setSearchQuery, searchQuery }) => {
     const handleChange = (e) => {
         setSearchQuery(e.target.value)
     }
     return (
         <FormControl
-            sx={{m: 1, width: "25ch", marginLeft: "40px", marginRight: "40px"}}
+            sx={{ m: 1, width: "25ch", marginLeft: "40px", marginRight: "40px" }}
             variant="standard">
             <InputLabel>Search</InputLabel>
             <Input
@@ -36,11 +36,10 @@ const SearchInput = ({setSearchQuery, searchQuery}) => {
     )
 }
 
-const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, talentId}) => {
+const AddSkill = ({ anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, talentId, refetch }) => {
     const open = Boolean(anchorEl)
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(1);
     const data = useGetSkillsQuery(searchQuery)
-    console.log(data)
     const [updateSkill, result] = useAddSkillMutation()
     const dataArray = data.isSuccess && data.data.skills
 
@@ -49,20 +48,27 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, 
     }
 
     const handleMenuItemClick = (event, index, title) => {
-        const res = {skills: Array(title)}
+        const res = { skills: Array(title) }
         //console.log(JSON.stringify(res))
-        updateSkill({ talentId, proofId, body: JSON.stringify(res)})
+        updateSkill({ talentId, proofId, body: JSON.stringify(res) })
 
         setSelectedIndex(index);
         setAnchorEl(null);
-      }
+    }
 
-    const menuItems =  data.isSuccess && dataArray.map((obj, id) => {
-        return <MenuItem key={obj.id} 
-        onClick={(event) => handleMenuItemClick(event, id, obj.title)}
+    useEffect(() => {
+        if (result.data) {
+            refetch()
+        }
+    }, [refetch, result])
+
+
+    const menuItems = data.isSuccess && dataArray.map((obj, id) => {
+        return <MenuItem key={obj.id}
+            onClick={(event) => handleMenuItemClick(event, id, obj.title)}
         >
             {obj.title}
-            </MenuItem>
+        </MenuItem>
     })
     return (
         <Menu
@@ -70,7 +76,7 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, 
             open={open}
             onClose={handleClose}
             anchorEl={anchorEl}
-            sx={{maxHeight: "300px"}}>
+            sx={{ maxHeight: "300px" }}>
             <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
                 {menuItems}
@@ -79,4 +85,4 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery, proofId, 
     )
 }
 
-export {AddSkill}
+export { AddSkill }
