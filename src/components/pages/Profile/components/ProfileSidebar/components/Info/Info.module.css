@@ -7,17 +7,11 @@
     gap: 5px;
     overflow: hidden;
     font-size: 16px;
-    /* text-align: center; */
 }
 
 .wrapper > * {
     width: 250px;
     padding: 10px;
-}
-
-.wrapper > *:not(:last-child) {
-    border-bottom: 1px solid #0a6f9a;
-    word-wrap: break-word;
 }
 
 .education > p {

@@ -3,8 +3,9 @@ import styles from "./DeleteField.module.css"
 import {useNavigate} from "react-router-dom"
 import {useJwtCheck} from "../../../../shared/api/hooks"
 import {useDeleteAccountMutation} from "./api"
-import {Divider, Grid, Typography} from "@mui/material"
+import {Box, Button, Divider, Grid, Typography} from "@mui/material"
 import {AlertError} from "../../../../shared/components"
+import {useTheme} from "@emotion/react"
 
 const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) => {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) 
     const [isFilling, setIsFilling] = useState(false)
     const [isError, setIsError] = useState(false)
     const timerIdRef = useRef(null)
+    const {palette} = useTheme()
 
     const deleteTalent = async () => {
         setIsLoading(true)
@@ -76,20 +78,40 @@ const DeleteField = ({isDeleted, setIsDeleted, setVisibilityConfirmationPopup}) 
                 justifyContent={"center"}
                 margin={"20px 0px"}
                 width={"100%"}>
-                <button
+                <Button
                     onMouseDown={handleMouseDown}
                     onMouseUp={handleMouseUp}
                     onTouchStart={handleMouseDown}
                     onTouchEnd={handleMouseUp}
-                    className={styles.waveBtn}>
-                    <span className={styles.waveBtnText}>
+                    className={styles.waveBtn}
+                    disableFocusRipple={true}>
+                    <Typography
+                        sx={{
+                            color:
+                                palette.mode === "dark"
+                                    ? palette.neutral.secondary
+                                    : "#000000",
+                        }}
+                        className={styles.waveBtnText}>
                         {isLoading ? "Loading..." : "Hold to delete"}
-                    </span>
-                    <span
-                        className={`${styles.waveBtnWaves} ${
-                            isFilling && styles.active
-                        }`}></span>
-                </button>
+                    </Typography>
+                    <Box
+                        className={`${styles.waveBtnWaves} ${isFilling && styles.active}`}
+                        sx={{
+                            "&::before": {
+                                backgroundColor:
+                                    palette.mode === "dark"
+                                        ? palette.neutral.main
+                                        : "#ffffff",
+                                borderRadius: "47%",
+                            },
+                            "&::after": {
+                                backgroundColor:
+                                    palette.mode === "dark" ? "#6565655d" : "#ffffff5d",
+                                borderRadius: "43%",
+                            },
+                        }}></Box>
+                </Button>
             </Grid>
             {isError && (
                 <AlertError

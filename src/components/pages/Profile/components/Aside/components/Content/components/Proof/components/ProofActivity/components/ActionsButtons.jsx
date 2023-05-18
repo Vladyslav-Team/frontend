@@ -2,6 +2,7 @@ import {Button} from "@mui/material"
 import React from "react"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../../ConfirmPopup"
+import {useTheme} from "@emotion/react"
 
 export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
     const navigate = useNavigate()
@@ -15,11 +16,11 @@ export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
 
     return (
         <>
-            <Button type="submit" form="proof-form" variant="outlined">
-                Save
-            </Button>
             <Button onClick={handleCancel} form="proof-form" variant="outlined">
                 Cancel
+            </Button>
+            <Button type="submit" form="proof-form" variant="contained">
+                Save
             </Button>
         </>
     )
@@ -35,6 +36,7 @@ export const ActionsButtonDraft = ({
     const handleShowConfirm = async () => {
         setShowConfirm(true)
     }
+
     return (
         <>
             <Button variant="contained" onClick={handleShowConfirm}>

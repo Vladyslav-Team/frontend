@@ -9,6 +9,7 @@ import {PopUpProof} from "./components/PopUpProof"
 import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
+import {Box} from "@mui/material"
 
 const Aside = ({talent}) => {
     const location = useLocation()
@@ -28,7 +29,7 @@ const Aside = ({talent}) => {
     }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
 
     return (
-        <div className={styles.wrapper}>
+        <Box className={styles.wrapper}>
             <Info talent={talent} />
             {data.id && (
                 <AddProof
@@ -51,7 +52,7 @@ const Aside = ({talent}) => {
                     sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
                 />
             )}
-        </div>
+        </Box>
     )
 }
 

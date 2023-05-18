@@ -33,23 +33,18 @@ const ProofContent = ({title, data, description, publication_date, proofId}) => 
                 <Typography gutterBottom variant="h5" noWrap={true} maxWidth={"60%"}>
                     {title}
                 </Typography>
-                <Typography gutterBottom variant="h8">
-                    {data}
-                </Typography>
+                <Tooltip title={<Time time={time} />} arrow>
+                    <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{cursor: "default"}}>
+                        {date}
+                    </Typography>
+                </Tooltip>
             </Grid>
             <Typography variant="body2" color="text.secondary">
                 {description}
             </Typography>
-            <Tooltip title={<Time time={time} />} arrow>
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    position={"absolute"}
-                    bottom={"15px"}
-                    left="30%">
-                    {date}
-                </Typography>
-            </Tooltip>
         </CardContent>
     )
 }

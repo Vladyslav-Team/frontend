@@ -5,13 +5,27 @@ import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import GitHub from "@mui/icons-material/GitHub"
 import {Skills} from "./components"
+import {Box} from "@mui/material"
+import {useTheme} from "@emotion/react"
 
 const Info = ({talent}) => {
     const {education, age, email, phone, socials} = {...talent}
     const {facebook, twitter, github, linkedin} = {...socials}
+    const {palette} = useTheme()
 
     return (
-        <div className={styles.wrapper}>
+        <Box
+            sx={{
+                "& > *:not(:last-child)": {
+                    borderBottom: `1px solid ${
+                        palette.mode === "dark"
+                            ? palette.neutral.secondary
+                            : palette.primary.main
+                    }`,
+                    wordWrap: "break-word",
+                },
+            }}
+            className={styles.wrapper}>
             {age ? (
                 <div>
                     <span>Age : </span>
@@ -70,7 +84,7 @@ const Info = ({talent}) => {
                     </a>
                 )}
             </div>
-        </div>
+        </Box>
     )
 }
 

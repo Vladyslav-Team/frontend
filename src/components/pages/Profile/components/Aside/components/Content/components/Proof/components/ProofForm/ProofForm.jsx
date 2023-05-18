@@ -5,7 +5,7 @@ import {ProofSkills} from "../ProofActivity/components"
 
 const ProofForm = ({register, errors, onSubmit, handleSubmit}) => {
     return (
-        <Grid padding={"5px 20px 0"}>
+        <Grid padding={"5px 15px 0"}>
             <form id="proof-form" onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                     label="Title"

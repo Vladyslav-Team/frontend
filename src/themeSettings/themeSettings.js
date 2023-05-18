@@ -14,7 +14,7 @@ const themeSettings = (mode) => {
                           main: colors.mercury.DEFAULT,
                       },
                       neutral: {
-                          main: colors.white[400],
+                          main: colors.white[600],
                           secondary: colors.white[100],
                       },
                   }
@@ -55,6 +55,24 @@ const themeSettings = (mode) => {
         spacing: 5,
         shape: {
             borderRadius: 10,
+        },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    contained: {
+                        color: mode === "dark" ? "#000000" : "#ffffff",
+                        backgroundColor: mode === "dark" ? "#efefef" : "none",
+                        "&:hover": {
+                            backgroundColor: mode === "dark" ? "#a4a4a4" : "none",
+                        },
+                    },
+                    outlined: {
+                        color: mode === "dark" ? "#efefef" : "#0a6e9a",
+                        backgroundColor: mode === "dark" ? "#313131" : "none",
+                        border: `1px solid ${mode === "dark" ? "#efefef" : "#0a6e9a"}`,
+                    },
+                },
+            },
         },
     }
 }

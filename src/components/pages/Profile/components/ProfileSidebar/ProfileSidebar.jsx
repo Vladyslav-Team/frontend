@@ -25,6 +25,17 @@ const ProfileSidebar = ({talent, idTalentURL}) => {
                                 width: theme.spacing(30),
                                 marginTop: theme.spacing(5),
                                 borderRadius: theme.shape.borderRadius,
+                                color: theme.palette.primary.main,
+                                bgcolor:
+                                    theme.palette.mode === "dark"
+                                        ? theme.palette.neutral.secondary
+                                        : "",
+                                "&:hover": {
+                                    color:
+                                        theme.palette.mode === "dark"
+                                            ? theme.palette.neutral.secondary
+                                            : theme.palette.primary.main,
+                                },
                             }}>
                             Edit
                         </Button>

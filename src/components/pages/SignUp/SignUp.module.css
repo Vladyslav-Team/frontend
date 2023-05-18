@@ -4,18 +4,10 @@
     margin: 75px 0 50px 0;
 }
 
-.form_wrap {
-    position: relative;
+.signup > div > form {
     display: flex;
-    width: 320px;
-    height: 550px;
-    margin: auto;
-    background: rgba(10, 110, 154, 0.3);
-    border-radius: 30px;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    top: -30px;
+    gap: 17px;
 }
 
 form input,
@@ -37,7 +29,6 @@ form .error {
 
 .input_wrap {
     display: block;
-    margin: 15px;
 }
 
 .form_wrap button {
@@ -66,7 +57,7 @@ form .error {
 }
 .or {
     display: grid;
-    margin: 15px 0;
+    margin: 10px 0;
     grid-template-columns: 80px max-content 80px;
     grid-column-gap: 20px;
     align-items: center;

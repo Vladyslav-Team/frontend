@@ -17,6 +17,7 @@ import {useEditTalentMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {DeleteField} from "./components/DeleteField/DeleteField"
 import {ConfirmationPopup} from "./components/DeleteField/components/ConfirmationPopup/ConfirmationPopup"
+import {Box} from "@mui/material"
 
 const filterResForm = (res, data) => {
     let dataRes = {}
@@ -106,26 +107,41 @@ const EditPage = ({AvatarIMG}) => {
                         display="flex"
                         flexDirection={"column"}
                         paddingTop={15}
+                        gap={2}
                         paddingLeft={matches ? "0" : "20px"}>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <Typography
+                            <Box
                                 sx={{
-                                    fontWeight: 600,
-                                    fontSize: 30,
-                                    textAlign: !matches && "center",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: 2,
+                                    "& > div": {
+                                        gap: 2,
+                                    },
                                 }}>
-                                Edit profile
-                            </Typography>
-                            <NameStage name={"Basic info"} button={true} id={data.id} />
-                            <BasicInfoChange control={control} errors={errors} />
-                            <NameStage name={"About Me"} errors={errors} />
-                            <AboutMeChange control={control} errors={errors} />
-                            <NameStage name={"Security"} errors={errors} />
-                            <SecurityChange
-                                control={control}
-                                errors={errors}
-                                password={password}
-                            />
+                                <Typography
+                                    sx={{
+                                        fontWeight: 600,
+                                        fontSize: 30,
+                                        textAlign: !matches && "center",
+                                    }}>
+                                    Edit profile
+                                </Typography>
+                                <NameStage
+                                    name={"Basic info"}
+                                    button={true}
+                                    id={data.id}
+                                />
+                                <BasicInfoChange control={control} errors={errors} />
+                                <NameStage name={"About Me"} errors={errors} />
+                                <AboutMeChange control={control} errors={errors} />
+                                <NameStage name={"Security"} errors={errors} />
+                                <SecurityChange
+                                    control={control}
+                                    errors={errors}
+                                    password={password}
+                                />
+                            </Box>
                         </form>
                         <DeleteField
                             isDeleted={isDeleted}

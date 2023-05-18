@@ -5,6 +5,9 @@ import {Aside} from "./components/Aside"
 import {useLocation} from "react-router-dom"
 import {useGetAllInfoByIDQuery} from "./api"
 import Loader from "../../../shared/components/Loader"
+import {Box} from "@mui/material"
+import bgImage from "../../../source/img/profileBaner.jpg"
+import {useTheme} from "@emotion/react"
 
 const Profile = () => {
     const location = useLocation()
@@ -15,12 +18,23 @@ const Profile = () => {
             refetchOnMountOrArgChange: true,
         }
     )
+    const {palette} = useTheme()
 
     return (
         <>
             {isSuccess ? (
                 <>
-                    <div className={styles.plug}></div>
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "55px",
+                            left: 0,
+                            width: "100%",
+                            height: "150px",
+                            background: `url(${bgImage}) no-repeat center`,
+                            filter: palette.mode === "dark" ? "brightness(0.4)" : "none",
+                            backgroundSize: "cover",
+                        }}></Box>
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>

@@ -1,9 +1,13 @@
 import {createTheme} from "@mui/material"
-import {useMemo, useState} from "react"
+import {useMemo, useState, useEffect} from "react"
 import {themeSettings} from "../index"
 
 const useMode = () => {
-    const [mode, setMode] = useState("light")
+    const [mode, setMode] = useState(localStorage.getItem("mode") || "light")
+
+    useEffect(() => {
+        localStorage.setItem("mode", mode)
+    }, [mode])
 
     const colorMode = useMemo(
         () => ({
