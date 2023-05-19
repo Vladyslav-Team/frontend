@@ -7,7 +7,7 @@ import GitHub from "@mui/icons-material/GitHub"
 import {Skills} from "./components"
 
 const Info = ({talent}) => {
-    const {education, age, email, phone, socials} = {...talent}
+    const {education, age, email, phone, socials, skills} = {...talent}
     const {facebook, twitter, github, linkedin} = {...socials}
 
     return (
@@ -37,7 +37,7 @@ const Info = ({talent}) => {
                     <span>Education :</span> <p>{education}</p>
                 </div>
             )}
-            <Skills />
+            <Skills skills={skills} status={"Profile"} />
             <div className={styles.socialMedia}>
                 {facebook && (
                     <a href={facebook}>

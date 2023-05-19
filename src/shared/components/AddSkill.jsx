@@ -9,28 +9,13 @@ import {
     Menu,
     MenuItem,
 } from "@mui/material"
-import React, {useState} from "react"
-
-const data = [
-    "Paris",
-    "London",
-    "New York",
-    "Tokyo",
-    "Berlin",
-    "Buenos Aires",
-    "Cairo",
-    "Canberra",
-    "Rio de Janeiro",
-    "Dublin",
-]
-
-const filterData = (query, data) => {
-    if (!query) {
-        return data
-    } else {
-        return data.filter((d) => d.toLowerCase().includes(query.toLowerCase()))
-    }
-}
+import React, {useEffect, useState} from "react"
+import {
+    useGetSkillsQuery,
+    useAddSkillMutation,
+} from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
+import {useDebounce} from "use-debounce"
+import {useGetAllInfoByIDQuery} from "../../components/pages/Profile/api"
 
 const SearchInput = ({setSearchQuery, searchQuery}) => {
     const handleChange = (e) => {
@@ -56,17 +41,91 @@ const SearchInput = ({setSearchQuery, searchQuery}) => {
     )
 }
 
-const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery}) => {
+const AddSkill = ({
+    anchorEl,
+    setAnchorEl,
+    searchQuery,
+    setSearchQuery,
+    proofId,
+    talentId,
+    refetch,
+    skills,
+    status,
+    skillsByProof,
+}) => {
     const open = Boolean(anchorEl)
+    const idTalent = location.pathname.replace("/profile/", "")
+    const talent = useGetAllInfoByIDQuery(idTalent)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [value] = useDebounce(searchQuery, 1000, {trailing: true})
+    const data = useGetSkillsQuery(value)
+    const [updateSkill, result] = useAddSkillMutation()
+    let dataArray = data.isSuccess && data.data.skills
 
     const handleClose = () => {
         setAnchorEl(null)
     }
-    const dataFiltered = filterData(searchQuery, data)
 
-    const menuItems = dataFiltered.map((el, i) => {
-        return <MenuItem key={i}>{el}</MenuItem>
-    })
+    const handleMenuItemClick = (event, index, title) => {
+        const res = {skills: Array(title)}
+        updateSkill({talentId, proofId, body: JSON.stringify(res)})
+        setSelectedIndex(index)
+        setAnchorEl(null)
+    }
+
+    useEffect(() => {
+        if (result.data) {
+            refetch()
+        }
+    }, [refetch, result])
+
+    const menuItems = () => {
+        const isProfilePageSearch =
+            (data.isSuccess && Boolean(value) && data.data.skills.length > 0) ||
+            (data.isSuccess && status === "Profile" && data.data.skills.length > 0)
+        if (isProfilePageSearch) {
+            return dataArray.map((obj, id) => {
+                return (
+                    <MenuItem
+                        key={obj.id}
+                        onClick={(event) => handleMenuItemClick(event, id, obj.title)}>
+                        {obj.title}
+                    </MenuItem>
+                )
+            })
+        } else if (
+            data.isSuccess &&
+            status !== "Profile" &&
+            talent.data &&
+            !talent.data.skills[0]
+        ) {
+            return dataArray.map((obj, id) => {
+                return (
+                    <MenuItem
+                        key={obj.id}
+                        onClick={(event) => handleMenuItemClick(event, id, obj.title)}>
+                        {obj.title}
+                    </MenuItem>
+                )
+            })
+        } else {
+            return (
+                talent.data &&
+                talent.data.skills.map((obj, id) => {
+                    return (
+                        <MenuItem
+                            key={obj.id}
+                            onClick={(event) =>
+                                handleMenuItemClick(event, id, obj.title)
+                            }>
+                            {obj.title}
+                        </MenuItem>
+                    )
+                })
+            )
+        }
+    }
+
     return (
         <Menu
             id="basic-menu"
@@ -76,7 +135,7 @@ const AddSkill = ({anchorEl, setAnchorEl, searchQuery, setSearchQuery}) => {
             sx={{maxHeight: "300px"}}>
             <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
-                {menuItems}
+                {menuItems()}
             </Box>
         </Menu>
     )
