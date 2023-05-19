@@ -9,12 +9,7 @@ import Loader from "../../../shared/components/Loader"
 const Profile = () => {
     const location = useLocation()
     const idTalent = location.pathname.replace("/profile/", "")
-    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(
-        idTalent,
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    )
+    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(idTalent)
 
     return (
         <>
