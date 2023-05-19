@@ -5,6 +5,7 @@ import styles from "./CardsList.module.css"
 
 const CardsList = ({GetData, type, setSort, sort}) => {
     const {data, currentData, refetch} = GetData
+
     const Cards = useMemo(() => {
         return (
             currentData &&

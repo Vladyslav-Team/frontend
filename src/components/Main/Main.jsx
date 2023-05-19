@@ -39,14 +39,16 @@ const Main = ({url, type}) => {
     const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
     const sortURL = searchParams.get("sort") && searchParams.get("sort")
+    const skills = ["java", "html", "postman", "C#/.net"]
 
     const navigate = useNavigate()
     const GetData = useGetTalentsQuery(
-        {pageURL, typeCards, sortURL},
+        {pageURL, typeCards, sortURL, skills},
         {
             refetchOnMountOrArgChange: true,
         }
     )
+
     useEffect(() => {
         if (type === "proofs") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, "sort")
