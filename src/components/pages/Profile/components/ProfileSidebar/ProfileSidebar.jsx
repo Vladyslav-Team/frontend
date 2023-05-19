@@ -7,14 +7,14 @@ import {useTheme} from "@emotion/react"
 import {NavLink} from "react-router-dom"
 import {useJwtCheck} from "../../../../../shared/api/hooks/jwtCheck"
 
-const ProfileSidebar = ({talent, idTalentURL}) => {
+const ProfileSidebar = ({talent, idTalentURL, refetch}) => {
     const {data} = useJwtCheck()
     const theme = useTheme()
 
     return (
         <div className={styles.sidebar}>
             <Avatar avatar={talent.image} size={180} style={styles.avatar} />
-            <Info talent={talent} />
+            <Info talent={talent} refetch={refetch}/>
             {talent && (
                 <NavLink to={`/profile/${talent.id}/edit`}>
                     {data.id === +idTalentURL && (

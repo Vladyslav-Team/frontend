@@ -1,4 +1,4 @@
-import {Search} from "@mui/icons-material"
+import { Search } from "@mui/icons-material"
 import {
     Box,
     FormControl,
@@ -9,21 +9,22 @@ import {
     Menu,
     MenuItem,
 } from "@mui/material"
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import {
     useGetSkillsQuery,
     useAddSkillMutation,
 } from "../../components/pages/Profile/components/Aside/components/Content/components/Proof/api/index"
-import {useDebounce} from "use-debounce"
-import {useGetAllInfoByIDQuery} from "../../components/pages/Profile/api"
+import { useAddSkillProfileMutation } from "../../components/pages/Profile/api/index"
+import { useDebounce } from "use-debounce"
+import { useGetAllInfoByIDQuery } from "../../components/pages/Profile/api"
 
-const SearchInput = ({setSearchQuery, searchQuery}) => {
+const SearchInput = ({ setSearchQuery, searchQuery }) => {
     const handleChange = (e) => {
         setSearchQuery(e.target.value)
     }
     return (
         <FormControl
-            sx={{m: 1, width: "25ch", marginLeft: "40px", marginRight: "40px"}}
+            sx={{ m: 1, width: "25ch", marginLeft: "40px", marginRight: "40px" }}
             variant="standard">
             <InputLabel>Search</InputLabel>
             <Input
@@ -57,18 +58,25 @@ const AddSkill = ({
     const idTalent = location.pathname.replace("/profile/", "")
     const talent = useGetAllInfoByIDQuery(idTalent)
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [value] = useDebounce(searchQuery, 1000, {trailing: true})
+    const [value] = useDebounce(searchQuery, 1000, { trailing: true })
     const data = useGetSkillsQuery(value)
-    const [updateSkill, result] = useAddSkillMutation()
     let dataArray = data.isSuccess && data.data.skills
+    const isProfile = status === "Profile"
+    let updateSkill, result
+
+    if (isProfile) {
+        [updateSkill, result] = useAddSkillProfileMutation();
+    } else {
+        [updateSkill, result] = useAddSkillMutation();
+    }
 
     const handleClose = () => {
         setAnchorEl(null)
     }
 
     const handleMenuItemClick = (event, index, title) => {
-        const res = {skills: Array(title)}
-        updateSkill({talentId, proofId, body: JSON.stringify(res)})
+        const res = { skills: Array(title) }
+        isProfile ? updateSkill({ talentId, body: JSON.stringify(res) }) : updateSkill({ talentId, proofId, body: JSON.stringify(res) })
         setSelectedIndex(index)
         setAnchorEl(null)
     }
@@ -82,7 +90,7 @@ const AddSkill = ({
     const menuItems = () => {
         const isProfilePageSearch =
             (data.isSuccess && Boolean(value) && data.data.skills.length > 0) ||
-            (data.isSuccess && status === "Profile" && data.data.skills.length > 0)
+            (data.isSuccess && isProfile && data.data.skills.length > 0)
         if (isProfilePageSearch) {
             return dataArray.map((obj, id) => {
                 return (
@@ -95,7 +103,7 @@ const AddSkill = ({
             })
         } else if (
             data.isSuccess &&
-            status !== "Profile" &&
+            !isProfile &&
             talent.data &&
             !talent.data.skills[0]
         ) {
@@ -132,7 +140,7 @@ const AddSkill = ({
             open={open}
             onClose={handleClose}
             anchorEl={anchorEl}
-            sx={{maxHeight: "300px"}}>
+            sx={{ maxHeight: "300px" }}>
             <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
                 {menuItems()}
@@ -141,4 +149,4 @@ const AddSkill = ({
     )
 }
 
-export {AddSkill}
+export { AddSkill }
