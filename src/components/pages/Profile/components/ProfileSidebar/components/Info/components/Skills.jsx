@@ -5,8 +5,10 @@ import { Grid, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { AddSkill } from "../../../../../../../../shared/components/AddSkill"
 import { useDeleteSkillProfileMutation } from "../../../../../api"
+import { useLocation } from "react-router-dom"
+import { useJwtCheck } from "../../../../../../../../shared/api/hooks"
 
-const Skill = ({ name, color, skillId, talentId, refetch }) => {
+const Skill = ({ name, color, skillId, talentId, refetch, isHome }) => {
     const [deleteSkill, result] = useDeleteSkillProfileMutation()
 
     const handleDelete = (skillId) => {
@@ -27,15 +29,10 @@ const Skill = ({ name, color, skillId, talentId, refetch }) => {
                     marginRight: "5px",
                     marginBottom: "5px",
                     "& .MuiChip-deleteIcon": {
-                        display: "none",
+                        display: isHome ? "block" : "none",
                     },
                     "&:hover": {
-                        "& .MuiChip-deleteIcon": {
-                            display: "block",
-                            position: "absolute",
-                            right: "0px",
-                        },
-                        backgroundColor: "red",
+                        backgroundColor: isHome ? "red" : "primary",
                     },
                 }}
                 onDelete={() => handleDelete(skillId)}
@@ -49,18 +46,23 @@ const Skills = ({ skills, status, talentId, refetch }) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
+    const location = useLocation()
+    const {data} = useJwtCheck()
+    const idTalent = location.pathname.replace("/profile/", "")
+    const isHome = +data.id===+idTalent
+
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
     }
     const skillsMap =
         skills &&
         skills.map((skill) => {
-            return <Skill name={skill.title} color="primary" key={skill.id} skillId={skill.id} talentId={talentId} refetch={refetch} />
+            return <Skill name={skill.title} color="primary" key={skill.id} skillId={skill.id} talentId={talentId} refetch={refetch} isHome={isHome} />
         })
     return (
         <>
             <Stack direction="colum" spacing={"20px"} flexWrap={"wrap"}>
-                <IconButton
+                {isHome && (<IconButton
                     onClick={handleOpen}
                     id="basic-button"
                     color="primary"
@@ -70,7 +72,7 @@ const Skills = ({ skills, status, talentId, refetch }) => {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}>
                     <AddIcon />
-                </IconButton>
+                </IconButton>)}
                 {skillsMap}
             </Stack>
             <AddSkill

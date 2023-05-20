@@ -9,9 +9,8 @@ import { Skills } from "./components"
 const Info = ({ talent, refetch }) => {
     const { education, age, email, phone, socials, skills: originalSkills, id } = { ...talent };
     const skills = [...originalSkills].sort((a, b) => a.title.localeCompare(b.title));
-    console.log(skills)
 
-    const { facebook, twitter, github, linkedin } = { ...socials }
+    // const { facebook, twitter, github, linkedin } = { ...socials }
 
     return (
         <div className={styles.wrapper}>
@@ -41,7 +40,7 @@ const Info = ({ talent, refetch }) => {
                 </div>
             )}
             <Skills skills={skills} status={"Profile"} talentId={id} refetch={refetch} />
-            <div className={styles.socialMedia}>
+            {/* <div className={styles.socialMedia}>
                 {facebook && (
                     <a href={facebook}>
                         <FacebookIcon
@@ -72,7 +71,7 @@ const Info = ({ talent, refetch }) => {
                         />
                     </a>
                 )}
-            </div>
+            </div> */}
         </div>
     )
 }
