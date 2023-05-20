@@ -48,5 +48,5 @@ export const {
     useGetSkillsByProofsQuery,
     useGetSkillsQuery,
     useAddSkillMutation,
-    useDeleteSkillMutation,
+    useDeleteSkillMutation
 } = ProofApi

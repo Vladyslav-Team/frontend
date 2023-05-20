@@ -9,7 +9,7 @@ import Loader from "../../../shared/components/Loader"
 const Profile = () => {
     const location = useLocation()
     const idTalent = location.pathname.replace("/profile/", "")
-    const {data, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(idTalent)
+    const {data, refetch, error, isLoading, isError, isSuccess} = useGetAllInfoByIDQuery(idTalent)
 
     return (
         <>
@@ -19,8 +19,8 @@ const Profile = () => {
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>
-                                <ProfileSidebar talent={data} idTalentURL={idTalent} />
-                                <Aside talent={data} />
+                                <ProfileSidebar talent={data} idTalentURL={idTalent} refetch={refetch} />
+                                <Aside talent={data}/>
                             </>
                         )}
                     </div>

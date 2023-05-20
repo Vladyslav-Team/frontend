@@ -39,7 +39,6 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
         marginBottomForGridWrapper = -12
     }
 
-    console.log()
     let skills
     if (data && data.skills[0]) {
         skills =

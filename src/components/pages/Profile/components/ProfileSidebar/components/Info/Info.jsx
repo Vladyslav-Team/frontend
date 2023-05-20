@@ -4,11 +4,13 @@ import FacebookIcon from "@mui/icons-material/Facebook"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import GitHub from "@mui/icons-material/GitHub"
-import {Skills} from "./components"
+import { Skills } from "./components"
 
-const Info = ({talent}) => {
-    const {education, age, email, phone, socials, skills} = {...talent}
-    const {facebook, twitter, github, linkedin} = {...socials}
+const Info = ({ talent, refetch }) => {
+    const { education, age, email, phone, socials, skills: originalSkills, id } = { ...talent };
+    const skills = [...originalSkills].sort((a, b) => a.title.localeCompare(b.title));
+
+    // const { facebook, twitter, github, linkedin } = { ...socials }
 
     return (
         <div className={styles.wrapper}>
@@ -37,12 +39,12 @@ const Info = ({talent}) => {
                     <span>Education :</span> <p>{education}</p>
                 </div>
             )}
-            <Skills skills={skills} status={"Profile"} />
-            <div className={styles.socialMedia}>
+            <Skills skills={skills} status={"Profile"} talentId={id} refetch={refetch} />
+            {/* <div className={styles.socialMedia}>
                 {facebook && (
                     <a href={facebook}>
                         <FacebookIcon
-                            sx={{color: "#3b5998", width: "38px", height: "38px"}}
+                            sx={{ color: "#3b5998", width: "38px", height: "38px" }}
                         />
                     </a>
                 )}
@@ -59,19 +61,19 @@ const Info = ({talent}) => {
                 )}
                 {github && (
                     <a href={github}>
-                        <GitHub sx={{width: "35px", height: "35px"}} />
+                        <GitHub sx={{ width: "35px", height: "35px" }} />
                     </a>
                 )}
                 {linkedin && (
                     <a href={linkedin}>
                         <LinkedInIcon
-                            sx={{color: "#0077b5", width: "38px", height: "38px"}}
+                            sx={{ color: "#0077b5", width: "38px", height: "38px" }}
                         />
                     </a>
                 )}
-            </div>
+            </div> */}
         </div>
     )
 }
 
-export {Info}
+export { Info }
