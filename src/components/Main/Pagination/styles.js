@@ -2,6 +2,7 @@ import {alpha, styled} from "@mui/material/styles"
 import Pagination from "@mui/material/Pagination"
 
 export const WrapperPagination = styled("div")(() => ({
+    marginTop: 20,
     width: "max-content",
     border: "0.4px solid #A4A7A7",
     borderRadius: "11px",
