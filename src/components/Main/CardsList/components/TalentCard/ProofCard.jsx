@@ -3,6 +3,8 @@ import styles from "./TalentCard.module.css"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
+import {SkillsOnProof} from "../../../../Proof/components"
+
 const ProofCard = ({proof}) => {
     return (
         <div style={{width: "470px", textOverflow: "ellipsis"}} className={styles.card}>
@@ -22,6 +24,9 @@ const ProofCard = ({proof}) => {
                 <Typography variant="body1" gutterBottom>
                     {proof.description}
                 </Typography>
+            </div>
+            <div>
+                <SkillsOnProof idProof={proof.id} />
             </div>
 
             <Typography variant="subtitle2" gutterBottom>
