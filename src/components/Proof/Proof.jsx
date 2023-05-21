@@ -4,6 +4,7 @@ import {NavLink, useLocation} from "react-router-dom"
 import {useGetAllProofQuery} from "../pages/Profile/api"
 import {Grid} from "@mui/material"
 import {useGetAvatarTalentQuery} from "../Avatar/api"
+import {SkillsOnProof} from "./components"
 
 const ProofAllInfo = () => {
     const location = useLocation()
@@ -44,22 +45,36 @@ const ProofAllInfo = () => {
                             item
                             display={"flex"}
                             flexDirection={"row"}
-                            sx={{
-                                background: "none",
-                                borderRadius: "10px",
-                                padding: "5px",
-                                border: "1px solid #0a6f9a",
-                            }}>
-                            <Avatar
-                                alt="Remy Sharp"
-                                sx={{width: 24, height: 24, marginRight: "6px"}}
-                                src={AvatarIMG.data && AvatarIMG.data.image}
-                            />
-                            <NavLink to={`/profile/${data.talent_id}`}>
-                                <span>
-                                    {data.talent_name} {data.talent_surname}
-                                </span>
-                            </NavLink>
+                            justifyContent={"space-between"}
+                            width={"100%"}>
+                            <Grid
+                                item
+                                display={"flex"}
+                                flexDirection={"row"}
+                                sx={{
+                                    background: "none",
+                                    borderRadius: "10px",
+                                    padding: "5px",
+                                    border: "1px solid #0a6f9a",
+                                }}>
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    sx={{width: 24, height: 24, marginRight: "6px"}}
+                                    src={AvatarIMG.data && AvatarIMG.data.image}
+                                />
+                                <NavLink to={`/profile/${data.talent_id}`}>
+                                    <span>
+                                        {data.talent_name} {data.talent_surname}
+                                    </span>
+                                </NavLink>
+                            </Grid>
+                            <Grid
+                                item
+                                display={"flex"}
+                                flexDirection={"row"}
+                                alignItems={"flex-end"}>
+                                <SkillsOnProof idProof={idProof.replace("/", "")} />
+                            </Grid>
                         </Grid>
                     </Grid>
                 )}
