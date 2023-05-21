@@ -9,7 +9,6 @@ import {useParams} from "react-router-dom"
 const Info = ({user}) => {
     const {talentId} = useParams()
     const {data} = useJwtCheck()
-
     return (
         <div className={styles.info}>
             <div className={styles.generalInfo}>

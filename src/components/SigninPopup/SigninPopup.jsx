@@ -12,41 +12,41 @@ import {useLocation} from "react-router-dom"
 
 const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
     const [updatePost, result] = useSigninTalentMutation()
+
     const location = useLocation()
     const [prevUrn] = useState(location.pathname + location.search + location.hash)
-    const navigate = useNavigate()
 
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: {errors},
     } = useForm()
+
     const registerOptionsPassword = {
         required: registerOptions.password.required,
         minLength: registerOptions.password.minLength,
         maxLength: registerOptions.password.maxLength,
     }
     const onSubmit = (data) => {
-        updatePost({body: data})
+        updatePost(data)
     }
 
-    //refactor me
     useEffect(() => {
         const currentUrn = location.pathname + location.search + location.hash
         if (result.data) {
             const jwt = jwtDecode(result.data["jwt-token"])
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            jwt && navigate(`/profile/${jwt.id}`)
+            jwt &&
+                location.pathname.includes("/talents") &&
+                navigate(`/profile/${jwt.id}`)
             id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
-            AvatarIMG && AvatarIMG.refetch()
         }
-
+        AvatarIMG && AvatarIMG.refetch()
         currentUrn !== prevUrn && setVisibilitySigninPopup({status: false})
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, navigate, result.data, setVisibilitySigninPopup, location, prevUrn])
-
-    // ----
 
     const SigninStyle = !status
         ? {position: "absolute", zIndex: 99}
@@ -96,7 +96,6 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
                     SIGN IN
                 </button>
                 <p className={styles.signin_form_elem}>or</p>
-
                 <p>
                     Want to join SkillScope?{" "}
                     <NavLink
@@ -104,12 +103,11 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
                         onClick={() =>
                             setVisibilitySigninPopup && setVisibilitySigninPopup(false)
                         }
-                        to={"/signup"}>
+                        to={"/talents/signup"}>
                         <b>Sign up</b>
                     </NavLink>
                 </p>
             </form>
-
             {result.error && (
                 <AlertError
                     defaultStatus={true}

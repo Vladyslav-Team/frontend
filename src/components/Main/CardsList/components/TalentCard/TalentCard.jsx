@@ -4,6 +4,7 @@ import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
 import styles from "./TalentCard.module.css"
 import {SigninPopupContext} from "../../../../../context"
+import {Chip} from "@mui/material"
 
 const TalentCard = ({talent}) => {
     return (
@@ -14,12 +15,25 @@ const TalentCard = ({talent}) => {
             <div className={styles.content}>
                 <div>{`${talent.name} ${talent.surname}`}</div>
                 <div className={styles.location}>{talent.location}</div>
+                <span>{talent.experience}</span>
                 <div className={styles.proof}>
-                    {" "}
-                    <span>{talent.experience}</span>{" "}
+                    {talent.skills &&
+                        talent.skills.slice(0, 10).map((skill) => {
+                            return (
+                                <Chip
+                                    size="small"
+                                    label={skill.title}
+                                    key={skill.id}
+                                    sx={{
+                                        bgcolor: "rgba(10, 110, 154,1)",
+                                        color: "#ffffff",
+                                        fontSize: "12px",
+                                    }}
+                                />
+                            )
+                        })}
                 </div>
             </div>
-
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (
                     <VisitButton

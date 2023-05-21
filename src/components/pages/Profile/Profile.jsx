@@ -34,7 +34,11 @@ const Profile = () => {
                     <div className={styles.wrapper}>
                         {isSuccess && (
                             <>
-                                <ProfileSidebar user={data} idTalentURL={id} />
+                                <ProfileSidebar
+                                    user={data}
+                                    idTalentURL={id}
+                                    refetch={refetch}
+                                />
                                 <Aside user={data} refetch={refetch} />
                             </>
                         )}
