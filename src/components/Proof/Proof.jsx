@@ -1,17 +1,32 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import Avatar from "@mui/material/Avatar"
 import {NavLink, useLocation} from "react-router-dom"
 import {useGetAllProofQuery} from "../pages/Profile/api"
 import {Grid, Typography} from "@mui/material"
 import {useGetUserAvatarQuery} from "../Avatar/api"
+import {AddKudosForm} from "../AddKudosForm"
+import {SkillsOnProof} from "./components/SkillsOnProof"
+import {useGetSkillsByProofsQuery} from "../pages/Profile/components/Aside/components/Content/components/Proof/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
-    const idProof = location.pathname.replace("/proof", "")
+    const idProof = location.pathname.replace("/proof/", "")
     const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
+    const [skillsSet, setSkillsSet] = useState([])
+    const skills = useGetSkillsByProofsQuery(idProof)
     const AvatarIMG = useGetUserAvatarQuery(data && data.talent_id)
+
+    useEffect(() => {
+        const skillsSet =
+            !skills.isLoading &&
+            skills.data.skills.map((skill) => {
+                return {...skill, amount: 0}
+            })
+
+        setSkillsSet(skillsSet)
+    }, [skills])
 
     return (
         <>
@@ -40,7 +55,6 @@ const ProofAllInfo = () => {
                             }}>
                             <p>{data.description}</p>
                         </Grid>
-
                         <Grid
                             item
                             display={"flex"}
@@ -62,6 +76,12 @@ const ProofAllInfo = () => {
                                 </span>
                             </NavLink>
                         </Grid>
+                        <AddKudosForm
+                            proofId={idProof}
+                            skills={skillsSet}
+                            setSkills={setSkillsSet}
+                        />
+                        <SkillsOnProof idProof={idProof} />
                     </Grid>
                 )}
             </Grid>

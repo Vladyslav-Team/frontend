@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Button, CardActions, Grid, Chip, Tooltip} from "@mui/material"
+import {Button, CardActions} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 import {
     ActionsButtonsEditAndAdded,
@@ -7,7 +7,7 @@ import {
     ActionsButtonShowMore,
     ProofSkills,
 } from "./components"
-import {Kudos} from "../../../../../../../../../../Kudos"
+
 const Edit = ({proofId}) => {
     const navigate = useNavigate()
     return (
@@ -52,9 +52,6 @@ const ProofActivity = ({
                         statusVis={statusVis}
                         allProofsRefetch={allProofsRefetch}
                     />
-                )}
-                {isPublish && (
-                    <Kudos talentId={talentId} proofId={proofId} refetch={refetch} />
                 )}
                 {isPublish && <ActionsButtonShowMore proofId={proofId} />}
             </CardActions>

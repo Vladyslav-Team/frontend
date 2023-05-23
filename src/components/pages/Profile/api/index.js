@@ -14,7 +14,7 @@ export const GetAllInfoByID = createApi({
             }),
             GetAllProof: build.query({
                 query: (id) => ({
-                    url: `/proofs${id}`,
+                    url: `/proofs/${id}`,
                     method: "GET",
                 }),
             }),

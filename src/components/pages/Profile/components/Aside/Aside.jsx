@@ -22,7 +22,7 @@ const Aside = ({user, refetch}) => {
         data.scope === "ROLE_TALENT" || (data.scope === "ROLE_SPONSOR" && data.id !== +id)
             ? "talents"
             : "sponsors"
-    console.log(id)
+
     const allProofs = useGetProofsQuery(
         {id, role, page: pageURL},
         {
