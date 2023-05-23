@@ -7,6 +7,7 @@ import {
     ActionsButtonShowMore,
     ProofSkills,
 } from "./components"
+import {Kudos} from "../../../../../../../../../../Kudos"
 const Edit = ({proofId}) => {
     const navigate = useNavigate()
     return (
@@ -18,7 +19,15 @@ const Edit = ({proofId}) => {
     )
 }
 
-const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) => {
+const ProofActivity = ({
+    proofId,
+    statusVis,
+    setVis,
+    allProofsRefetch,
+    status,
+    talentId,
+    refetch,
+}) => {
     const [showConfirm, setShowConfirm] = useState(false)
     const isEditOrAdded = statusVis === "Added" || statusVis === "Edit"
     const isDraft = status === "DRAFT" && !statusVis
@@ -43,6 +52,9 @@ const ProofActivity = ({proofId, statusVis, setVis, allProofsRefetch, status}) =
                         statusVis={statusVis}
                         allProofsRefetch={allProofsRefetch}
                     />
+                )}
+                {isPublish && (
+                    <Kudos talentId={talentId} proofId={proofId} refetch={refetch} />
                 )}
                 {isPublish && <ActionsButtonShowMore proofId={proofId} />}
             </CardActions>

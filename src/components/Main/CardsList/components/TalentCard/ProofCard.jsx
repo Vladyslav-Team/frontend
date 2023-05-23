@@ -4,10 +4,13 @@ import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
 import {SkillsOnProof} from "../../../../Proof/components"
+import {Box} from "@mui/material"
 
 const ProofCard = ({proof}) => {
     return (
-        <div style={{width: "470px", textOverflow: "ellipsis"}} className={styles.card}>
+        <div
+            style={{width: "470px", textOverflow: "ellipsis", position: "relative"}}
+            className={styles.card}>
             <div
                 style={{display: "flex", justifyContent: "center", alignItems: "center"}}
                 className={styles.background}>
@@ -16,7 +19,7 @@ const ProofCard = ({proof}) => {
             <div
                 className={styles.content}
                 style={{
-                    height: "100px",
+                    maxHeight: "100px",
                     textAlign: "left",
                     width: "80%",
                     wordBreak: "break-word",
@@ -25,13 +28,13 @@ const ProofCard = ({proof}) => {
                     {proof.description}
                 </Typography>
             </div>
-            <div>
+            <Box position={"absolute"} bottom={"42px"}>
                 <SkillsOnProof idProof={proof.id} />
-            </div>
+                <Typography variant="subtitle2" gutterBottom>
+                    {proof.publication_date}
+                </Typography>
+            </Box>
 
-            <Typography variant="subtitle2" gutterBottom>
-                {proof.publication_date}
-            </Typography>
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (
                     <VisitButton

@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import styles from "./Aside.module.css"
 import {Content} from "./components/Content"
 import {useGetProofsQuery} from "./components/Content/components/Proof/api"
-import {useLocation, useNavigate} from "react-router"
+import {useLocation} from "react-router"
 import {Pagination} from "../../../../Main/Pagination"
 import {useSearchParams} from "react-router-dom"
 import {PopUpProof} from "./components/PopUpProof"
@@ -10,34 +10,41 @@ import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
 
-const Aside = ({talent}) => {
+const Aside = ({user, refetch}) => {
     const location = useLocation()
-    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
-    const idTalent = +location.pathname.replace("/profile/", "")
+    const id = +location.pathname.replace("/profile/", "")
     const pageURL = +searchParams.get("page")
     const {data} = useJwtCheck()
-    const allProofs = useGetProofsQuery({idTalent, page: pageURL})
-    const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
 
-    useEffect(() => {
-        if (allProofs.isError || isNaN(pageURL) === true) {
-            navigate(`/profile/${idTalent}`)
+    const role =
+        data.scope === "ROLE_TALENT" || (data.scope === "ROLE_SPONSOR" && data.id !== +id)
+            ? "talents"
+            : "sponsors"
+    console.log(id)
+    const allProofs = useGetProofsQuery(
+        {id, role, page: pageURL},
+        {
+            refetchOnMountOrArgChange: true,
         }
-    }, [allProofs.isError, idTalent, navigate, pageURL, searchParams])
+    )
+
+    const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
 
     return (
         <div className={styles.wrapper}>
-            <Info talent={talent} />
-            {data.id && (
+            <Info user={user} />
+            {data.id && data.scope === "ROLE_TALENT" && (
                 <AddProof
-                    idTalent={idTalent}
+                    idTalent={id}
                     localTalentID={data.id}
                     setPoopUP={setAddProofPoopUP}
                 />
             )}
-            {!allProofs.isError && <Content allProofs={allProofs.data && allProofs} />}
+            {allProofs.isSuccess && (
+                <Content allProofs={allProofs.data && allProofs} refetch={refetch} />
+            )}
             <PopUpProof
                 vis={isAddProofPoopUP}
                 setVis={setAddProofPoopUP}
@@ -47,7 +54,7 @@ const Aside = ({talent}) => {
                 <Pagination
                     totalPages={allProofs.data && allProofs.data.totalPages}
                     currentPage={pageURL}
-                    url={`profile/${idTalent}?page`}
+                    url={`profile/${id}?page`}
                     sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
                 />
             )}

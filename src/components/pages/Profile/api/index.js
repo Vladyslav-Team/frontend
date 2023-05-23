@@ -6,9 +6,9 @@ export const GetAllInfoByID = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => {
         return {
-            GetAllInfoByID: build.query({
-                query: (id) => ({
-                    url: `/talents/${id}`,
+            GetAllUserInfoByID: build.query({
+                query: ({id, role}) => ({
+                    url: `/${role}/${id}`,
                     method: "GET",
                 }),
             }),
@@ -62,12 +62,12 @@ export const GetAllInfoByID = createApi({
 })
 
 export const {
-    useGetAllInfoByIDQuery,
+    useGetAllUserInfoByIDQuery,
     useGetAllProofQuery,
     useAddProofMutation,
     useChangeStatusProofMutation,
     useChangeProofMutation,
     useDeleteProofMutation,
     useAddSkillProfileMutation,
-    useDeleteSkillProfileMutation
+    useDeleteSkillProfileMutation,
 } = GetAllInfoByID
