@@ -11,8 +11,7 @@ import {useJwtCheck} from "../../shared/api/hooks"
 const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
     let location = useLocation()
-    const isSignup =
-        location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
+    const isSignup = location.pathname === "/signup" || location.pathname === "/signin"
 
     const isTalentsPage = location.pathname === "/talents"
     const isProofsPage = location.pathname === "/proofs"

@@ -17,6 +17,7 @@ import {
 import {useAddSkillProfileMutation} from "../../components/pages/Profile/api/index"
 import {useDebounce} from "use-debounce"
 import {useGetAllUserInfoByIDQuery} from "../../components/pages/Profile/api"
+import {useJwtCheck} from "../api/hooks"
 
 const SearchInput = ({setSearchQuery, searchQuery}) => {
     const handleChange = (e) => {
@@ -50,14 +51,14 @@ const AddSkill = ({
     proofId,
     talentId,
     refetch,
-    skills,
     status,
-    skillsByProof,
 }) => {
     const open = Boolean(anchorEl)
     const idTalent = location.pathname.replace("/profile/", "")
-    const talent = useGetAllUserInfoByIDQuery(idTalent)
-    const [selectedIndex, setSelectedIndex] = useState(1)
+    const jwt = useJwtCheck()
+    const role = jwt.data.scope.split("_")[1].toLowerCase() + "s"
+    const talent = useGetAllUserInfoByIDQuery({id: idTalent, role})
+    const [setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
     const data = useGetSkillsQuery(value)
     let dataArray = data.isSuccess && data.data.skills
