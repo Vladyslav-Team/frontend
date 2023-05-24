@@ -122,9 +122,7 @@ const SignUp = ({AvatarIMG}) => {
                     <p className={styles.or}>or</p>
                     <p className={styles.signin_check}>
                         Already on SkillScope?{" "}
-                        <NavLink
-                            className={styles.signin_form_elem}
-                            to={"/talents/signin"}>
+                        <NavLink className={styles.signin_form_elem} to={"/signin"}>
                             Sign in
                         </NavLink>
                     </p>

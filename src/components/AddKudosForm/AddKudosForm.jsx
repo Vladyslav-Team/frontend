@@ -3,26 +3,12 @@ import styles from "./AddKudosForm.module.css"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {useAddKudosMutation, useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
-import Unlike from "./img/unlike.png"
-import {Button, TextField, Tooltip, Grid, Typography} from "@mui/material"
+import {Button, TextField, Tooltip} from "@mui/material"
 import {useForm} from "react-hook-form"
 import {AlertError} from "../../shared/components"
 import {DialogForm} from "./components/DialogForm/DialogForm"
 import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
-
-const SponsorKudoses = ({amount}) => {
-    return (
-        <Grid
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            padding={"5px"}>
-            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
-                {amount}
-            </Typography>
-        </Grid>
-    )
-}
+import {SponsorKudoses} from "./components/SponsorKudoses"
 
 const AddKudosForm = ({proofId, skills, setSkills}) => {
     const jwt = useJwtCheck()
@@ -71,6 +57,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
                 })
         })
 
+        setAmount(0)
         setShow(false)
     }
 
@@ -103,25 +90,9 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
     return (
         <>
             {!KudosInfo.isLoading ? (
-                <Tooltip
-                    title={
-                        <SponsorKudoses
-                            amount={
-                                KudosInfo.data &&
-                                KudosInfo.data.amount_of_kudos_current_user
-                            }
-                        />
-                    }
-                    arrow>
-                    <div className={styles.flex_container}>
-                        <div className={styles.kudos_img}>
-                            <img className={styles.kudos_img} src={Unlike} />
-                        </div>
-                        <div className={styles.kudos_counter}>{`${
-                            KudosInfo.data && KudosInfo.data.amount_of_kudos
-                        }`}</div>
-                    </div>
-                </Tooltip>
+                {
+                    /* <SponsorKudoses KudosInfo={KudosInfo} /> */
+                }
             ) : (
                 <Loader
                     isLoading={KudosInfo.isLoading}

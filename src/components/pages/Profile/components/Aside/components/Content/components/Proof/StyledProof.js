@@ -6,7 +6,7 @@ export const StyledProof = styled(Card)(({theme}) => ({
     position: "relative",
     flexDirection: "column",
     width: "370px !important",
-    minHeight: 260,
+    minHeight: 280,
     [theme.breakpoints.down("lg")]: {
         minWidth: "100%",
         minHeight: 200,

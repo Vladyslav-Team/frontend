@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Biography} from "../Biography"
 import styles from "./info.module.css"
 import {Place} from "@mui/icons-material"
@@ -6,9 +6,14 @@ import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {Box} from "@mui/material"
 import {useParams} from "react-router-dom"
 
-const Info = ({user}) => {
+const Info = ({user, refetch, isSuccess}) => {
     const {talentId} = useParams()
     const {data} = useJwtCheck()
+
+    useEffect(() => {
+        isSuccess && refetch()
+    }, [isSuccess, refetch])
+
     return (
         <div className={styles.info}>
             <div className={styles.generalInfo}>

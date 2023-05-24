@@ -38,6 +38,7 @@ const Profile = () => {
                                     user={data}
                                     idTalentURL={id}
                                     refetch={refetch}
+                                    isSuccess={isSuccess}
                                 />
                                 <Aside user={data} refetch={refetch} />
                             </>
