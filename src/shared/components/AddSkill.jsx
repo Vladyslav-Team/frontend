@@ -52,6 +52,8 @@ const AddSkill = ({
     talentId,
     refetch,
     status,
+    skillsByProof,
+    skills
 }) => {
     const open = Boolean(anchorEl)
     const idTalent = location.pathname.replace("/profile/", "")
@@ -64,6 +66,8 @@ const AddSkill = ({
     let dataArray = data.isSuccess && data.data.skills
     const isProfile = status === "Profile"
     let updateSkill, result
+    const skillTitles = skillsByProof && skillsByProof.map((skill) => skill.title)
+    const skillTitleProfile = skills && skills.map((skill) => skill.title)
 
     if (isProfile) {
         ;[updateSkill, result] = useAddSkillProfileMutation()
@@ -96,9 +100,11 @@ const AddSkill = ({
             (data.isSuccess && isProfile && data.data.skills.length > 0)
         if (isProfilePageSearch) {
             return dataArray.map((obj, id) => {
+                const isDisabled = skillTitleProfile && skillTitleProfile.includes(obj.title)
                 return (
                     <MenuItem
                         key={obj.id}
+                        disabled={isDisabled}
                         onClick={(event) => handleMenuItemClick(event, id, obj.title)}>
                         {obj.title}
                     </MenuItem>
@@ -111,9 +117,11 @@ const AddSkill = ({
             !talent.data.skills[0]
         ) {
             return dataArray.map((obj, id) => {
+                const isDisabled = skillTitles && skillTitles.includes(obj.title)
                 return (
                     <MenuItem
                         key={obj.id}
+                        disabled={isDisabled}
                         onClick={(event) => handleMenuItemClick(event, id, obj.title)}>
                         {obj.title}
                     </MenuItem>
@@ -124,9 +132,11 @@ const AddSkill = ({
                 role !== "sponsors" &&
                 talent.data &&
                 talent.data.skills.map((obj, id) => {
+                    const isDisabled = skillTitles && skillTitles.includes(obj.title)
                     return (
                         <MenuItem
                             key={obj.id}
+                            disabled={isDisabled}
                             onClick={(event) =>
                                 handleMenuItemClick(event, id, obj.title)
                             }>

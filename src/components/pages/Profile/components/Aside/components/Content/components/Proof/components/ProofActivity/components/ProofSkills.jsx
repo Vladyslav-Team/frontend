@@ -21,7 +21,6 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     const jwt = useJwtCheck()
     let marginBottomForGridWrapper = 0
     const isHaveSkills = data === undefined || data.skills.length < 1
-
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
     }

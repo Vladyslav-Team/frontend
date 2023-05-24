@@ -41,7 +41,7 @@ const ProofContent = ({title, data, description, publication_date, proofId}) => 
             </Typography>
 
             <Tooltip title={<Time time={time} />} arrow>
-                <Typography variant="body2" color="text.secondary" position={"absolute"}>
+                <Typography variant="body2" color="text.secondary" position={"absolute"} >
                     {date}
                 </Typography>
             </Tooltip>
