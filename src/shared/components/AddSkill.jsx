@@ -58,7 +58,7 @@ const AddSkill = ({
     const jwt = useJwtCheck()
     const role = jwt.data.scope.split("_")[1].toLowerCase() + "s"
     const talent = useGetAllUserInfoByIDQuery({id: idTalent, role})
-    const [setSelectedIndex] = useState(1)
+    const [selectedIndex, setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
     const data = useGetSkillsQuery(value)
     let dataArray = data.isSuccess && data.data.skills
@@ -121,6 +121,7 @@ const AddSkill = ({
             })
         } else {
             return (
+                role !== "sponsors" &&
                 talent.data &&
                 talent.data.skills.map((obj, id) => {
                     return (

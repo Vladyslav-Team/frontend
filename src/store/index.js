@@ -7,7 +7,7 @@ import {HeaderApi} from "../components/Avatar/api"
 import {DeleteAccount} from "../components/EditPage/components/DeleteField/api"
 import {ProofApi} from "../components/pages/Profile/components/Aside/components/Content/components/Proof/api"
 import {PaymentApi} from "../components/Clicker/components/api"
-import {KudosApi} from "../components/Kudos/api"
+import {KudosApi} from "../components/AddKudosForm/api"
 
 export const store = configureStore({
     reducer: {

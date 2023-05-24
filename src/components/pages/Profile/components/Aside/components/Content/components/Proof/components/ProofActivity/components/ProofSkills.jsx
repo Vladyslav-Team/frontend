@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react"
 import {useGetSkillsByProofsQuery, useDeleteSkillMutation} from "../../../api"
 import {AddSkill} from "../../../../../../../../../../../../shared/components/AddSkill"
 import AddIcon from "@mui/icons-material/Add"
+import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
 
 const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -17,6 +18,7 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     const isPublished = status === "PUBLISHED"
     const isAdded = statusVis === "Added"
     const isEdit = statusVis === "Edit"
+    const jwt = useJwtCheck()
     let marginBottomForGridWrapper = 0
     const isHaveSkills = data === undefined || data.skills.length < 1
 
@@ -81,7 +83,7 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
             width={"max-content"}
             alignItems={"center"}>
             {skills}
-            {isAddSkills && (
+            {jwt.data.scope !== "ROLE_SPONSOR" && isAddSkills && (
                 <>
                     <Button
                         variant="outlined"
