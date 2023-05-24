@@ -1,14 +1,15 @@
 import {
+    Box,
     Button,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     Grid,
     TextField,
 } from "@mui/material"
 import React from "react"
+import {DialogFormDescription} from "./components/DialogFormDescription"
 
 const DialogForm = ({
     show,
@@ -18,6 +19,7 @@ const DialogForm = ({
     onSubmit,
     handleSubmit,
     errors,
+    balance,
 }) => {
     const handleClose = () => {
         setShow(false)
@@ -41,23 +43,28 @@ const DialogForm = ({
                 setShow(false)
             }}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description">
-            <DialogTitle id="alert-dialog-title">Add Kudos</DialogTitle>
+            aria-describedby="alert-dialog-description"
+            sx={{
+                width: "537px",
+                m: "0 auto",
+                "& > .MuiDialog-container > .MuiPaper-root": {
+                    width: "537px",
+                },
+            }}>
+            <DialogTitle
+                id="alert-dialog-title"
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}>
+                <Box>Add Kudos</Box> <Box sx={{fontSize: "18px"}}>balance: {balance}</Box>
+            </DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description" sx={{mb: 4}}>
-                    {`Are you sure you want to add ${
-                        skills
-                            ? skills.reduce(
-                                  (sum, skill) => sum + parseInt(skill.amount || 0),
-                                  0
-                              )
-                            : 0
-                    }
-                    kudoses on that proof?`}
-                </DialogContentText>
+                <DialogFormDescription skills={skills} balance={balance} />
                 {skills && (
                     <form id="proof-form" onSubmit={handleSubmit(onSubmit)}>
-                        <Grid container sx={{maxWidth: "470px", gap: 5}}>
+                        <Grid container sx={{gap: 5}}>
                             {skills.map((skill, id) => {
                                 return (
                                     <TextField
@@ -74,6 +81,9 @@ const DialogForm = ({
                                             errors.amount && errors.amount.message
                                         }
                                         key={skill.id}
+                                        sx={{
+                                            width: "200px",
+                                        }}
                                     />
                                 )
                             })}
