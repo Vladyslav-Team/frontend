@@ -59,10 +59,10 @@ const Skills = ({skills, status, talentId, refetch}) => {
         skills.map((skill) => {
             return (
                 <Skill
-                    name={skill.title}
+                    name={skill.skill.title}
                     color="primary"
-                    key={skill.id}
-                    skillId={skill.id}
+                    key={skill.skill.id}
+                    skillId={skill.skill.id}
                     talentId={talentId}
                     refetch={refetch}
                     isHome={isHome}

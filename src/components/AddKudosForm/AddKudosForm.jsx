@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {useJwtCheck} from "../../shared/api/hooks"
-import {useAddKudosMutation, useGetKudosQuery} from "./api"
+import {useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
 import {Button, TextField} from "@mui/material"
 import {useForm} from "react-hook-form"
@@ -9,13 +9,13 @@ import {DialogForm} from "./components/DialogForm/DialogForm"
 import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
 import {SponsorKudoses} from "./components/SponsorKudoses"
 
-const AddKudosForm = ({proofId, skills, setSkills}) => {
+const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
     const jwt = useJwtCheck()
     const isSponsor = jwt.data && jwt.data.scope === "ROLE_SPONSOR"
     const [amount, setAmount] = useState(0)
     const [totalCount, setTotalCount] = useState(skills ? skills.length * amount : 0)
     const [show, setShow] = useState(false)
-    const [updateKudos, result] = useAddKudosMutation()
+
     const id = jwt.data.id
     const role = "sponsors"
 
@@ -38,10 +38,6 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
             refetchOnMountOrArgChange: true,
         }
     )
-
-    useEffect(() => {
-        SponsorInfo.data && SponsorInfo.refetch()
-    }, [SponsorInfo])
 
     const onSubmit = () => {
         skills.map((skill) => {
