@@ -7,7 +7,11 @@ const BanClicker = () => {
 
     return (
         <div>
-            <Typography variant="h2" fontSize={"20px"} fontWeight={"700"}>
+            <Typography
+                variant="h2"
+                fontSize={"20px"}
+                fontWeight={"700"}
+                sx={{color: "#000000"}}>
                 {
                     "You can't use farm kudos today, come back tomorrow or you can reset the timer for only"
                 }
@@ -16,7 +20,7 @@ const BanClicker = () => {
             <div style={{display: "flex", justifyContent: "center"}}>
                 <strong
                     style={{
-                        color: palette.mode === "dark" ? "lightgreen" : "green",
+                        color: "green",
                         textDecoration: "underline",
                         textAlign: "center",
                         fontSize: "25px",

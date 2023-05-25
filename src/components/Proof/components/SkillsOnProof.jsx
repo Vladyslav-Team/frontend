@@ -1,30 +1,28 @@
 import React from "react"
 import {useGetSkillsByProofsQuery} from "../../pages/Profile/components/Aside/components/Content/components/Proof/api"
-import {Chip, Tooltip} from "@mui/material"
+import {Skill} from "./components/Skill"
+import {useJwtCheck} from "../../../shared/api/hooks"
 
-const SkillsOnProof = ({idProof}) => {
+const SkillsOnProof = ({idProof, result}) => {
     const skills = useGetSkillsByProofsQuery(idProof)
+    const {data} = useJwtCheck()
+    const isSponsor = data && data.scope === "ROLE_SPONSOR"
 
     return (
         <>
             {!skills.isLoading &&
-                skills.data.skills.map((el) => {
+                skills.data.skills.map((skill) => {
                     return (
-                        <Tooltip arrow title={el.title} key={el.id}>
-                            <Chip
-                                label={el.title}
-                                sx={{
-                                    marginRight: "5px",
-                                    marginBottom: "5px",
-                                    maxWidth: "70px",
-                                }}
-                                color={"primary"}
-                            />
-                        </Tooltip>
+                        <Skill
+                            result={result}
+                            idProof={idProof}
+                            skill={skill}
+                            isSponsor={isSponsor}
+                            key={skill.id}
+                        />
                     )
                 })}
         </>
     )
 }
-
 export {SkillsOnProof}

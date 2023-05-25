@@ -1,37 +1,21 @@
 import React, {useEffect, useState} from "react"
-import styles from "./AddKudosForm.module.css"
 import {useJwtCheck} from "../../shared/api/hooks"
-import {useAddKudosMutation, useGetKudosQuery} from "./api"
+import {useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
-import Unlike from "./img/unlike.png"
-import {Button, TextField, Tooltip, Grid, Typography} from "@mui/material"
+import {Button, TextField} from "@mui/material"
 import {useForm} from "react-hook-form"
 import {AlertError} from "../../shared/components"
 import {DialogForm} from "./components/DialogForm/DialogForm"
 import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
+import {SponsorKudoses} from "./components/SponsorKudoses"
 
-const SponsorKudoses = ({amount}) => {
-    return (
-        <Grid
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            padding={"5px"}>
-            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
-                {amount}
-            </Typography>
-        </Grid>
-    )
-}
-
-const AddKudosForm = ({proofId, skills, setSkills}) => {
+const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
     const jwt = useJwtCheck()
-
     const isSponsor = jwt.data && jwt.data.scope === "ROLE_SPONSOR"
     const [amount, setAmount] = useState(0)
     const [totalCount, setTotalCount] = useState(skills ? skills.length * amount : 0)
     const [show, setShow] = useState(false)
-    const [updateKudos, result] = useAddKudosMutation()
+
     const id = jwt.data.id
     const role = "sponsors"
 
@@ -55,14 +39,11 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
         }
     )
 
-    useEffect(() => {
-        SponsorInfo.data && SponsorInfo.refetch()
-    }, [SponsorInfo])
-
     const onSubmit = () => {
         skills.map((skill) => {
             const skillId = +skill.id
             const skillAmount = +skill.amount
+
             !!skillAmount &&
                 updateKudos({
                     proofId,
@@ -71,6 +52,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
                 })
         })
 
+        setAmount(0)
         setShow(false)
     }
 
@@ -89,7 +71,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
     }
 
     useEffect(() => {
-        result.data && KudosInfo.refetch()
+        result.data && KudosInfo.isSuccess && KudosInfo.refetch()
     }, [result.status])
 
     useEffect(() => {
@@ -103,25 +85,10 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
     return (
         <>
             {!KudosInfo.isLoading ? (
-                <Tooltip
-                    title={
-                        <SponsorKudoses
-                            amount={
-                                KudosInfo.data &&
-                                KudosInfo.data.amount_of_kudos_current_user
-                            }
-                        />
-                    }
-                    arrow>
-                    <div className={styles.flex_container}>
-                        <div className={styles.kudos_img}>
-                            <img className={styles.kudos_img} src={Unlike} />
-                        </div>
-                        <div className={styles.kudos_counter}>{`${
-                            KudosInfo.data && KudosInfo.data.amount_of_kudos
-                        }`}</div>
-                    </div>
-                </Tooltip>
+                <SponsorKudoses
+                    KudosInfo={KudosInfo}
+                    isHaveSkills={skills.length !== 0}
+                />
             ) : (
                 <Loader
                     isLoading={KudosInfo.isLoading}
@@ -129,23 +96,14 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
                     error={KudosInfo.error}
                 />
             )}
-            {isSponsor && (
+            {isSponsor && skills && skills.length !== 0 && (
                 <>
                     <TextField
                         sx={{
                             width: "85px",
                             marginRight: "5px",
-                            "& > label": {
-                                color: "rgba(0, 0, 0, 0.87)",
-                            },
                             "& > div": {
-                                color: "rgba(0, 0, 0, 0.87)",
-                                "& > fieldset": {
-                                    borderColor: "rgba(0, 0, 0, 0.87)",
-                                },
-                                "& > fieldset:hover": {
-                                    color: "#ff0000",
-                                },
+                                color: "#000000",
                             },
                         }}
                         id="outlined-basic"
@@ -153,6 +111,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
                         variant="outlined"
                         type="number"
                         size="small"
+                        focused
                         value={amount}
                         onChange={handleAmountChange}
                         inputProps={{min: 0}}
@@ -185,3 +144,4 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
 }
 
 export {AddKudosForm}
+

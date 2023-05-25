@@ -8,6 +8,7 @@ import {AddKudosForm} from "../AddKudosForm"
 import {SkillsOnProof} from "./components/SkillsOnProof"
 import {useGetSkillsByProofsQuery} from "../pages/Profile/components/Aside/components/Content/components/Proof/api"
 import {useTheme} from "@emotion/react"
+import {useAddKudosMutation} from "../AddKudosForm/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
@@ -19,6 +20,7 @@ const ProofAllInfo = () => {
     const [skillsSet, setSkillsSet] = useState([])
     const skills = useGetSkillsByProofsQuery(idProof)
     const AvatarIMG = useGetUserAvatarQuery(data && data.talent_id)
+    const [updateKudos, result] = useAddKudosMutation()
 
     useEffect(() => {
         const skillsSet =
@@ -41,7 +43,6 @@ const ProofAllInfo = () => {
                     <Grid
                         container
                         width={"700px"}
-                        paddingBottom={"10px"}
                         gap={3}
                         sx={{
                             borderRadius: "20px",
@@ -109,34 +110,42 @@ const ProofAllInfo = () => {
                                 width={"100%"}
                                 sx={{
                                     mt: 2,
-                                    mb: 5,
+                                    mb: 3,
                                     wordWrap: "break-word",
                                 }}>
                                 <p>{data.description}</p>
                             </Grid>
-                            <Grid
-                                container
-                                sx={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                }}>
-                                <Box>
-                                    <SkillsOnProof idProof={idProof} />
-                                </Box>
+                            {skills.isSuccess && skills?.data.skills && skillsSet && (
                                 <Grid
+                                    container
                                     sx={{
-                                        display: "flex",
                                         flexDirection: "row",
-                                        gap: 4,
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        mb: 2,
                                     }}>
-                                    <AddKudosForm
-                                        proofId={idProof}
-                                        skills={skillsSet}
-                                        setSkills={setSkillsSet}
-                                    />
+                                    <Box>
+                                        <SkillsOnProof
+                                            result={result}
+                                            idProof={idProof}
+                                        />
+                                    </Box>
+                                    <Grid
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            gap: 4,
+                                        }}>
+                                        <AddKudosForm
+                                            proofId={idProof}
+                                            skills={skillsSet}
+                                            setSkills={setSkillsSet}
+                                            updateKudos={updateKudos}
+                                            result={result}
+                                        />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
+                            )}
                         </Grid>
                     </Grid>
                 )}

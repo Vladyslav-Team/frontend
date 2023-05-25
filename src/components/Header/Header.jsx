@@ -44,14 +44,14 @@ const Header = ({AvatarIMG}) => {
                 bgcolor: palette.primary.main,
             }}>
             <Grid className={styles.logo_wrap}>
-                <NavLink to={"/talents?page=1"}>
+                <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                     <Logo />
                 </NavLink>
             </Grid>
             <Box component={"nav"} className={styles.navigation}>
                 <ul>
                     <li>
-                        <NavLink to={"/talents?page=1"}>
+                        <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                             <Typography
                                 variant="h8"
                                 className={`${styles.navItem} ${

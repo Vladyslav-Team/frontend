@@ -56,7 +56,7 @@ const ArrowButton = ({id}) => {
                 <NavLink to={id && `/profile/${id}/edit`}>
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
                 </NavLink>
-                <NavLink onClick={SignOut} to={"/talents?page=1"}>
+                <NavLink onClick={SignOut} to={"/talents?page=1&filterBySkills=nofilter"}>
                     <MenuItem onClick={handleClose}>Sign out</MenuItem>
                 </NavLink>
             </Menu>

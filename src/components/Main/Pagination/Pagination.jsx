@@ -18,7 +18,12 @@ const Pagination = ({totalPages, currentPage, url, sort = null}) => {
     }, [value, currentPage])
 
     const handleChange = (e, value) => {
-        navigate(`/${url}=${value}${sortParams}`)
+        navigate(
+            `/${url}=${value}${sortParams}&filterBySkills=${window.location.href
+                .split("&")[1]
+                .split("=")[1]
+                .split(",")}`
+        )
     }
 
     return (

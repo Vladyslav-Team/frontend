@@ -1,3 +1,4 @@
+import React, {useState} from "react"
 import {
     Box,
     Button,
@@ -8,7 +9,6 @@ import {
     Grid,
     TextField,
 } from "@mui/material"
-import React from "react"
 import {DialogFormDescription} from "./components/DialogFormDescription"
 
 const DialogForm = ({
@@ -21,6 +21,7 @@ const DialogForm = ({
     errors,
     balance,
 }) => {
+    const [isCanGiveKudos, setIsCanGiveKudos] = useState(true)
     const handleClose = () => {
         setShow(false)
     }
@@ -61,7 +62,11 @@ const DialogForm = ({
                 <Box>Add Kudos</Box> <Box sx={{fontSize: "18px"}}>balance: {balance}</Box>
             </DialogTitle>
             <DialogContent>
-                <DialogFormDescription skills={skills} balance={balance} />
+                <DialogFormDescription
+                    skills={skills}
+                    balance={balance}
+                    setIsCanGiveKudos={setIsCanGiveKudos}
+                />
                 {skills && (
                     <form id="proof-form" onSubmit={handleSubmit(onSubmit)}>
                         <Grid container sx={{gap: 5}}>
@@ -96,9 +101,13 @@ const DialogForm = ({
                     Disagree
                 </Button>
                 <Button
+                    disabled={!isCanGiveKudos}
                     onClick={handleSubmit(onSubmit)}
                     variant="contained"
-                    sx={{minWidth: 70}}>
+                    sx={{
+                        minWidth: 70,
+                        "&[disabled]:hover": {},
+                    }}>
                     Agree
                 </Button>
             </DialogActions>

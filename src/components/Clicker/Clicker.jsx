@@ -4,6 +4,7 @@ import {ClickerBtn, Result, handleClose, Rules, Payment, BanClicker} from "./com
 import {useGetStatusQuery, useInitMutation} from "./components/api"
 import LoadingButton from "@mui/lab/LoadingButton"
 import {useJwtCheck} from "../../shared/api/hooks"
+import {useTheme} from "@emotion/react"
 
 const Clicker = () => {
     const [count, setCount] = useState(0)
@@ -13,6 +14,7 @@ const Clicker = () => {
     const [openPayment, setOpenPayment] = useState(false)
     const [initBuy, result] = useInitMutation()
     const jwt = useJwtCheck()
+    const {palette} = useTheme()
     const {data, isSuccess} = useGetStatusQuery(jwt.data.id, {
         refetchOnMountOrArgChange: true,
     })
@@ -75,7 +77,10 @@ const Clicker = () => {
             {isSuccess && (
                 <Grid
                     item
-                    sx={{boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)"}}
+                    sx={{
+                        boxShadow: "-1px 68px 41px -11px rgba(0,0,0,0.44)",
+                        bgcolor: palette.neutral.secondary,
+                    }}
                     width={"480px"}
                     paddingLeft={"30px"}
                     paddingRight={"30px"}

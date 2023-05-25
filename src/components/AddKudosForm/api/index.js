@@ -19,8 +19,14 @@ export const KudosApi = createApi({
                     method: "GET",
                 }),
             }),
+            GetSkillKudos: build.query({
+                query: ({idProof, skillId}) => ({
+                    url: `/proofs/${idProof}/skills/${skillId}/kudos`,
+                    method: "GET",
+                }),
+            }),
         }
     },
 })
 
-export const {useAddKudosMutation, useGetKudosQuery} = KudosApi
+export const {useAddKudosMutation, useGetKudosQuery, useGetSkillKudosQuery} = KudosApi

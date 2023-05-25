@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"
@@ -17,8 +17,9 @@ const Profile = () => {
     const {palette} = useTheme()
 
     const role =
-        jwt.data.scope === "ROLE_TALENT" ||
-        (jwt.data.scope === "ROLE_SPONSOR" && jwt.data.id !== +id)
+        jwt &&
+        (jwt.data.scope === "ROLE_TALENT" ||
+            (jwt.data.scope === "ROLE_SPONSOR" && jwt.data.id !== +id))
             ? "talents"
             : "sponsors"
 
@@ -29,6 +30,10 @@ const Profile = () => {
                 refetchOnMountOrArgChange: true,
             }
         )
+
+    useEffect(() => {
+        isSuccess && refetch()
+    }, [isSuccess, refetch])
 
     return (
         <>
@@ -52,6 +57,7 @@ const Profile = () => {
                                     user={data}
                                     idTalentURL={id}
                                     refetch={refetch}
+                                    isSuccess={isSuccess}
                                 />
                                 <Aside user={data} refetch={refetch} />
                             </>

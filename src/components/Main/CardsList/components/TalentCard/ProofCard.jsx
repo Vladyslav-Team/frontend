@@ -2,13 +2,24 @@ import React from "react"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
-import {Grid} from "@mui/material"
 import {useTheme} from "@emotion/react"
 import {SkillsOnProof} from "../../../../Proof/components"
-import {Box} from "@mui/material"
+import {Box, Grid} from "@mui/material"
+import {useGetKudosQuery} from "../../../../AddKudosForm/api"
+import {SponsorKudoses} from "../../../../AddKudosForm/components/SponsorKudoses"
+import {useGetSkillsByProofsQuery} from "../../../../pages/Profile/components/Aside/components/Content/components/Proof/api"
 
 const ProofCard = ({proof}) => {
+    const proofId = proof?.id
+    const idProof = proof?.id
+    const skills = useGetSkillsByProofsQuery(idProof)
     const {palette} = useTheme()
+    const KudosInfo = useGetKudosQuery(
+        {proofId},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
 
     return (
         <Grid
@@ -32,33 +43,53 @@ const ProofCard = ({proof}) => {
             <Grid
                 sx={{
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
                     alignItems: "center",
-                    height: "50px",
+                    p: "10px 30px",
+                    height: "45px",
                     bgcolor: palette.primary.main,
+                    "& > div ": {
+                        color: "#ffff",
+                    },
                 }}>
-                <Typography sx={{color: "#ffffff", fontSize: "20px"}}>
-                    {proof.title}
-                </Typography>
+                <Grid>
+                    <Typography sx={{fontSize: "20px"}}>{proof.title}</Typography>
+                </Grid>
+                <Grid>
+                    <Typography sx={{fontSize: "14px"}}>
+                        {proof.publication_date}
+                    </Typography>
+                </Grid>
             </Grid>
+            <Box
+                sx={{
+                    maxHeight: "155px",
+                    textAlign: "left",
+                    width: "90%",
+                    wordBreak: "break-word",
+                    padding: "10px 8px 6px",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    m: "0 auto",
+                }}>
+                <Typography variant="body1">{proof.description}</Typography>
+            </Box>
             <Grid
                 container
                 sx={{
-                    width: "100%",
-                    wordBreak: "break-word",
-                    flex: "1 0 auto",
-                    flexDirection: "column",
-                    alignContent: "center",
-                    padding: 4,
+                    justifyContent: "space-between",
+                    position: "absolute",
+                    bottom: "42px",
+                    p: "0px 30px",
                 }}>
-                <Grid sx={{flex: "1 0 auto"}}>
-                    <Typography variant="body1">{proof.description}</Typography>
-                </Grid>
                 <Box>
                     <SkillsOnProof idProof={proof.id} />
-                    <Typography variant="subtitle2" gutterBottom>
-                        {proof.publication_date}
-                    </Typography>
+                </Box>
+                <Box>
+                    <SponsorKudoses
+                        KudosInfo={KudosInfo}
+                        isHaveSkills={skills.isSuccess && skills.data.skills.length !== 0}
+                    />
                 </Box>
             </Grid>
             <SigninPopupContext.Consumer>
