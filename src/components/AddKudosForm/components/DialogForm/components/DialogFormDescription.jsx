@@ -1,12 +1,20 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {DialogContentText} from "@mui/material"
 
-const DialogFormDescription = ({skills, balance}) => {
+const DialogFormDescription = ({skills, balance, setIsCanGiveKudos}) => {
     const amount = skills
         ? skills.reduce((sum, skill) => sum + parseInt(skill.amount || 0), 0)
         : 0
 
     let message
+
+    useEffect(() => {
+        if (amount <= balance) {
+            setIsCanGiveKudos(true)
+        } else {
+            setIsCanGiveKudos(false)
+        }
+    }, [amount, balance, setIsCanGiveKudos])
 
     if (amount <= balance) {
         message = `Are you sure you want to add ${amount} kudos on that proof?`
@@ -16,7 +24,7 @@ const DialogFormDescription = ({skills, balance}) => {
     }
 
     return (
-        <DialogContentText id="alert-dialog-description" sx={{mb: 1, height: 60}}>
+        <DialogContentText id="alert-dialog-description" sx={{mb: 2, height: 55}}>
             {message}
         </DialogContentText>
     )

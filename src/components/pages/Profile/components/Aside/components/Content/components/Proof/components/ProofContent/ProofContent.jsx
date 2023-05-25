@@ -2,7 +2,6 @@ import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
 import Tooltip from "@mui/material/Tooltip"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
-import {ProofSkills} from "../ProofActivity/components"
 
 const Time = ({time}) => {
     return (
@@ -29,22 +28,23 @@ const ProofContent = ({title, data, description, publication_date, proofId}) => 
                 justifyContent={"space-between"}
                 alignItems={"center"}
                 flex={"1 0 auto"}>
-                <Typography gutterBottom variant="h5" noWrap={true} maxWidth={"60%"}>
+                <Typography gutterBottom variant="h5" noWrap={true} maxWidth={"65%"}>
                     {title}
                 </Typography>
-                <Typography gutterBottom variant="h8">
-                    {data}
+                <Tooltip title={<Time time={time} />} arrow>
+                    <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{cursor: "default"}}>
+                        {date}
+                    </Typography>
+                </Tooltip>
+            </Grid>
+            <Grid sx={{maxHeight: "100px", overflow: "hidden"}}>
+                <Typography variant="body2" color="text.secondary">
+                    {description}
                 </Typography>
             </Grid>
-            <Typography variant="body2" color="text.secondary">
-                {description}
-            </Typography>
-
-            <Tooltip title={<Time time={time} />} arrow>
-                <Typography variant="body2" color="text.secondary" position={"absolute"} >
-                    {date}
-                </Typography>
-            </Tooltip>
         </CardContent>
     )
 }

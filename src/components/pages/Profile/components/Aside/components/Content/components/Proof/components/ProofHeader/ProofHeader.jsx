@@ -20,9 +20,17 @@ const Time = ({time}) => {
     )
 }
 
-const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId, publication_date}) => {
+const ProofHeader = ({
+    status,
+    statusVis,
+    proofId,
+    allProofsRefetch,
+    talentId,
+    publication_date,
+}) => {
     const {data} = useJwtCheck()
     const isYourAccount = +talentId === data.id
+    const isSponsor = data.scope === "ROLE_SPONSOR"
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState()
@@ -74,14 +82,7 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId, pu
             <Typography variant="h6" zIndex={20}>
                 {status}
             </Typography>
-            <Tooltip title={<Time time={time} />} arrow>
-                <Typography
-                    variant="body2" 
-                    color="#ffffff">
-                    {date}
-                </Typography>
-            </Tooltip>
-            {isYourAccount && (
+            {isYourAccount && !isSponsor && (
                 <ActionHeaderProofButtons {...propsActionHeaderProofButtons} />
             )}
         </Grid>
