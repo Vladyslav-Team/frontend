@@ -4,7 +4,7 @@ import Select from "@mui/material/Select"
 import Grid from "@mui/material/Grid"
 import IconButton from "@mui/material/IconButton"
 import RefreshIcon from "@mui/icons-material/Refresh"
-import {useLocation, useNavigate} from "react-router-dom"
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
 import {SkillSearch} from "./SkillSearch"
 import {Chip} from "@mui/material"
 
@@ -30,14 +30,17 @@ const Skill = ({title, handleRemoveSkill}) => {
     )
 }
 
-const NameStage = ({type, refetch, skillsSet, setSkillsSet}) => {
+const NameStage = ({type, refetch, skills}) => {
     const navigate = useNavigate()
     const location = useLocation()
+    const [searchParams] = useSearchParams()
     const sort =
         location.search.split("&")[1] &&
         location.search.split("&")[1].replace("sort=", "")
     const typeSort = location.search.split("&")[1] ? sort : "newest"
+
     const [isFiltered, setIsFiltered] = useState(false)
+    let filterQuery = []
     const handleChange = (event) => {
         if (!location.search.includes("sort")) {
             navigate(`${location.pathname}?page=1&sort=${event.target.value}`)
@@ -48,17 +51,31 @@ const NameStage = ({type, refetch, skillsSet, setSkillsSet}) => {
     }
 
     const handleRemoveSkill = (e, title) => {
-        const updatedSet = new Set(skillsSet)
-        updatedSet.delete(title)
-        setSkillsSet(updatedSet)
+        let remove = window.location.href
+            .split("&")[1]
+            .split("=")[1]
+            .split(",")
+            .filter((el) => decodeURIComponent(el) !== title)
+        navigate(
+            `${location.pathname}?page=${
+                window.location.href.split("&")[0].split("=")[1]
+            }&filterBySkills=${remove}`
+        )
     }
 
     useEffect(() => {
-        if (skillsSet.size === 0) {
+        if (!location.search.split("&")[1]) {
+            navigate(
+                `${location.pathname}?page=${
+                    window.location.href.split("&")[0].split("=")[1]
+                }&filterBySkills=nofilter`
+            )
             setIsFiltered(false)
+        } else if (location.search.split("&")[1]) {
+            setIsFiltered(true)
         }
-    }, [skillsSet])
-
+    }, [location.search])
+    // setSkillsSet(updatedSet)
     return (
         <Grid p={2}>
             <Grid
@@ -84,9 +101,8 @@ const NameStage = ({type, refetch, skillsSet, setSkillsSet}) => {
                 </h1>
                 {type === "talents" && (
                     <SkillSearch
-                        skillsSet={skillsSet}
-                        setSkillsSet={setSkillsSet}
                         setIsFiltered={setIsFiltered}
+                        filterQuery={filterQuery}
                     />
                 )}
                 {type === "proofs" && (
@@ -111,12 +127,12 @@ const NameStage = ({type, refetch, skillsSet, setSkillsSet}) => {
             </Grid>
             {isFiltered && type === "talents" && (
                 <Grid>
-                    {skillsSet.size !== 0 &&
-                        Array.from(skillsSet).map((title, id) => {
+                    {skills[0] !== "" &&
+                        skills.map((title, id) => {
                             return (
                                 <Skill
                                     handleRemoveSkill={handleRemoveSkill}
-                                    title={title}
+                                    title={decodeURIComponent(title)}
                                     key={id}
                                 />
                             )

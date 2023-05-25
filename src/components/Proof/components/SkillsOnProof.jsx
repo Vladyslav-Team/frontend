@@ -4,7 +4,6 @@ import {Chip, Tooltip} from "@mui/material"
 
 const SkillsOnProof = ({idProof}) => {
     const skills = useGetSkillsByProofsQuery(idProof)
-
     return (
         <>
             {!skills.isLoading &&
@@ -26,5 +25,4 @@ const SkillsOnProof = ({idProof}) => {
         </>
     )
 }
-
 export {SkillsOnProof}

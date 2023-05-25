@@ -5,28 +5,33 @@ import {CardsList} from "./CardsList"
 import {useNavigate, useSearchParams} from "react-router-dom"
 import styles from "./Main.module.css"
 
-const redirectReset = (type, pageURL, url, navigate, setPage) => {
+const redirectReset = (type, pageURL, url, navigate, setPage, skills) => {
     if (type === "sort") {
         navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}&sort=newest`)
         setPage(pageURL)
     } else if (type === null) {
-        navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}`)
+        navigate(
+            `/${url}=${pageURL !== 0 ? pageURL : 1}&filterBySkills=${window.location.href
+                .split("&")[1]
+                .split("=")[1]
+                .split(",")}`
+        )
         setPage(pageURL)
     }
 }
 
-const forAllCard = (page, url, setPage, pageURL, isError, navigate, type) => {
+const forAllCard = (page, url, setPage, pageURL, isError, navigate, type, skills) => {
     if (!page) {
         if (!url) {
-            navigate("/talents?page=1")
+            navigate("/talents?page=1&filterBySkills=nofilter")
         } else {
-            redirectReset(type, pageURL, url, navigate, setPage)
+            redirectReset(type, pageURL, url, navigate, setPage, skills)
         }
     } else if (isError || isNaN(pageURL) === true) {
         if (type === "sort") {
             navigate(`/${url}=1&sort=newest`)
         } else {
-            navigate(`/${url}=1`)
+            // navigate(`/${url}=1&filterBySkills=nofilter`)
             setPage(1)
         }
     }
@@ -36,8 +41,11 @@ const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
     const [sort, setSort] = useState(false)
-    const [skillsSet, setSkillsSet] = useState(new Set())
-    const skills = Array.from(skillsSet)
+    const skills =
+        window.location.href.split("&")[1] &&
+        window.location.href.split("&")[1].split("=")[1] !== "nofilter"
+            ? window.location.href.split("&")[1].split("=")[1].split(",")
+            : []
     const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
     const sortURL = searchParams.get("sort") && searchParams.get("sort")
@@ -56,7 +64,12 @@ const Main = ({url, type}) => {
         } else if (type === "talents") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, null)
         } else {
-            navigate("/talents?page=1")
+            navigate("/talents?page=1&filterBySkills=nofilter")
+        }
+        if (type === "talents" && !searchParams.get("filterBySkills")) {
+            navigate(
+                `/talents?page=${pageURL !== 0 ? pageURL : 1}&filterBySkills=nofilter`
+            )
         }
     }, [GetData.isError, navigate, page, pageURL, searchParams, type, url])
 
@@ -68,8 +81,7 @@ const Main = ({url, type}) => {
                 type={type}
                 setSort={setSort}
                 sort={sort}
-                skillsSet={skillsSet}
-                setSkillsSet={setSkillsSet}
+                skills={skills}
             />
             <Pagination
                 totalPages={GetData.data && GetData.data.totalPages}

@@ -11,13 +11,16 @@ import {
 import {useGetSkillsQuery} from "../../../../pages/Profile/components/Aside/components/Content/components/Proof/api"
 import {useDebounce} from "use-debounce"
 import {Search} from "@mui/icons-material"
+import {useLocation, useNavigate} from "react-router-dom"
 
-const SkillSearch = ({skillsSet, setSkillsSet, setIsFiltered}) => {
+const SkillSearch = ({setIsFiltered}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
-    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
     const data = useGetSkillsQuery(value)
+    const location = useLocation()
+    const navigate = useNavigate()
     let dataArray = data.isSuccess && data.data.skills
 
     const handleClick = (event) => {
@@ -26,16 +29,46 @@ const SkillSearch = ({skillsSet, setSkillsSet, setIsFiltered}) => {
     const handleClose = () => {
         setAnchorEl(null)
     }
-
     const handleMenuItemClick = (event, index, title) => {
-        setSelectedIndex(index)
-        const updatedSet = new Set(skillsSet)
-        updatedSet.add(title)
-        setSkillsSet(updatedSet)
+        if (
+            window.location.href.split("&")[1] &&
+            window.location.href.split("&")[1].split("=")[1].split(",").length < 4
+        ) {
+            if (
+                !window.location.href
+                    .split("&")[1]
+                    .split("=")[1]
+                    .split(",")
+                    .includes(encodeURIComponent(title))
+            ) {
+                navigate(
+                    `${location.pathname}?page=${1}&filterBySkills=${
+                        window.location.href.split("&")[1].split("=")[1] &&
+                        window.location.href.split("&")[1].split("=")[1] !== "nofilter"
+                            ? window.location.href
+                                  .split("&")[1]
+                                  .split("=")[1]
+                                  .split(",") +
+                              "," +
+                              title
+                            : title
+                    }`
+                )
+            }
+        } else if (
+            window.location.href
+                .split("&")
+                [window.location.href.split("&")[0].split("=")[1]].split("=")[1]
+                .split(",").length === 0
+        ) {
+            navigate(`${location.pathname}?page=${1}&filterBySkills=nofilter`)
+        }
+
         setIsFiltered(true)
     }
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         setSearchQuery(e.target.value)
     }
 
@@ -62,7 +95,7 @@ const SkillSearch = ({skillsSet, setSkillsSet, setIsFiltered}) => {
                 <FormControl
                     sx={{m: 1, width: "25ch", marginLeft: "40px", marginRight: "40px"}}
                     variant="standard">
-                    <InputLabel>Search</InputLabel>
+                    <InputLabel>Search Skill</InputLabel>
                     <Input onChange={handleChange} value={searchQuery || ""} />
                 </FormControl>
                 <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
