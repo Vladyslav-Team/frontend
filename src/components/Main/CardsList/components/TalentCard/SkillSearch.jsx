@@ -18,11 +18,12 @@ const SkillSearch = ({setIsFiltered}) => {
     const [searchQuery, setSearchQuery] = useState("")
     const [setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
+
     const data = useGetSkillsQuery(value)
     const location = useLocation()
     const navigate = useNavigate()
     let dataArray = data.isSuccess && data.data.skills
-
+    const skillArray = window.location.href.split("&")[1].split("=")[1].split(",")
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -100,15 +101,20 @@ const SkillSearch = ({setIsFiltered}) => {
                 </FormControl>
                 <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
                     {dataArray &&
-                        dataArray.map((skill, id) => (
-                            <MenuItem
-                                key={skill.id}
-                                onClick={(event) =>
-                                    handleMenuItemClick(event, id, skill.title)
-                                }>
-                                {skill.title}
-                            </MenuItem>
-                        ))}
+                        dataArray.map((skill, id) => {
+                            const isDisabled =
+                                skillArray && skillArray.includes(skill.title)
+                            return (
+                                <MenuItem
+                                    key={skill.id}
+                                    disabled={isDisabled}
+                                    onClick={(event) =>
+                                        handleMenuItemClick(event, id, skill.title)
+                                    }>
+                                    {skill.title}
+                                </MenuItem>
+                            )
+                        })}
                 </Box>
             </Menu>
         </>

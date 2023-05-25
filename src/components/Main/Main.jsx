@@ -64,7 +64,9 @@ const Main = ({url, type}) => {
         } else if (type === "talents") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, null)
         } else {
-            navigate("/talents?page=1&filterBySkills=nofilter")
+            navigate(
+                `/talents?page=${pageURL !== 0 ? pageURL : 1}&filterBySkills=nofilter`
+            )
         }
         if (type === "talents" && !searchParams.get("filterBySkills")) {
             navigate(
@@ -83,13 +85,15 @@ const Main = ({url, type}) => {
                 sort={sort}
                 skills={skills}
             />
-            <Pagination
-                totalPages={GetData.data && GetData.data.totalPages}
-                currentPage={pageURL}
-                url={url}
-                sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
-                sort={sortURL}
-            />
+            {GetData.isSuccess && (
+                <Pagination
+                    totalPages={GetData.data && GetData.data.totalPages}
+                    currentPage={pageURL}
+                    url={url}
+                    sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
+                    sort={sortURL}
+                />
+            )}
         </div>
     )
 }
