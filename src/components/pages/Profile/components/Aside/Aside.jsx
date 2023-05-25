@@ -10,7 +10,7 @@ import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
 
-const Aside = ({user, refetch, isSuccess}) => {
+const Aside = ({user, refetch}) => {
     const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isAddProofPoopUP, setAddProofPoopUP] = useState(false)
@@ -34,7 +34,7 @@ const Aside = ({user, refetch, isSuccess}) => {
 
     return (
         <div className={styles.wrapper}>
-            <Info user={user} refetch={refetch} isSuccess={isSuccess} />
+            <Info user={user} />
             {data.id && data.scope === "ROLE_TALENT" && (
                 <AddProof
                     idTalent={id}

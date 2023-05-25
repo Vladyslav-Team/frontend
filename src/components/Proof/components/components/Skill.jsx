@@ -1,5 +1,5 @@
 import React from "react"
-import {Chip, Tooltip} from "@mui/material"
+import {Chip, Tooltip, Typography} from "@mui/material"
 import {useGetSkillKudosQuery} from "../../../AddKudosForm/api"
 
 const Skill = ({idProof, skill, isSponsor}) => {
@@ -20,7 +20,14 @@ const Skill = ({idProof, skill, isSponsor}) => {
         : ""
 
     return (
-        <Tooltip arrow title={`${skill.title} ${amountOfSponsor}${amount}`}>
+        <Tooltip
+            arrow
+            title={
+                <Typography
+                    sx={{
+                        fontSize: "15px",
+                    }}>{`${skill.title} ${amountOfSponsor}${amount}`}</Typography>
+            }>
             <Chip
                 label={skill.title}
                 sx={{

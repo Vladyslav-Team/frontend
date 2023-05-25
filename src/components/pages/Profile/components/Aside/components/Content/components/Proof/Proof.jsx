@@ -11,13 +11,20 @@ import {StyledProof} from "./StyledProof"
 import {useRefetchAndClose} from "./hooks"
 import {useNavigate} from "react-router"
 import {ProofSkills} from "./components/ProofActivity/components"
+import {SponsorKudoses} from "../../../../../../../../AddKudosForm/components/SponsorKudoses"
+import {useGetKudosQuery} from "../../../../../../../../AddKudosForm/api"
+import {Grid} from "@mui/material"
+import {useGetSkillsByProofsQuery} from "./api"
 
 const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
     const id = location.pathname.replace("/profile/", "").split("/")
+    const proofId = proof.id
+    const idProof = proof.id
     const [addProof, result] = useAddProofMutation()
     const [changeProof, changeProofResult] = useChangeProofMutation()
+    const skills = useGetSkillsByProofsQuery(idProof)
     const {
         register,
         handleSubmit,
@@ -53,6 +60,13 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
             })
         }
     }
+
+    const KudosInfo = useGetKudosQuery(
+        {proofId},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
 
     useEffect(() => {
         if (changeProofResult.data) {
@@ -92,17 +106,6 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                     proofId={proof && proof.id}
                 />
             )}
-            <ProofActivity
-                isEditMode={isEditMode}
-                proofId={proof && proof.id}
-                statusVis={statusVis}
-                status={status}
-                setVis={setVis}
-                addProof={addProof}
-                watch={watch}
-                allProofsRefetch={allProofsRefetch}
-                talentId={id[0]}
-            />
             <ProofSkills
                 proofId={proof && proof.id}
                 talentId={id[0]}
@@ -110,6 +113,24 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 isEditMode={isEditMode}
                 statusVis={statusVis}
             />
+            <Grid>
+                <SponsorKudoses
+                    KudosInfo={KudosInfo}
+                    isHaveSkills={skills.isSuccess && skills.data.skills.length !== 0}
+                    isDraft={status === "DRAFT"}
+                />
+                <ProofActivity
+                    isEditMode={isEditMode}
+                    proofId={proof && proof.id}
+                    statusVis={statusVis}
+                    status={status}
+                    setVis={setVis}
+                    addProof={addProof}
+                    watch={watch}
+                    allProofsRefetch={allProofsRefetch}
+                    talentId={id[0]}
+                />
+            </Grid>
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />
             )}

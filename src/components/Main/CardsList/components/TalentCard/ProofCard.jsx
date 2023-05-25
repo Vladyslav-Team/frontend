@@ -7,16 +7,18 @@ import {SkillsOnProof} from "../../../../Proof/components"
 import {Box, Grid} from "@mui/material"
 import {useGetKudosQuery} from "../../../../AddKudosForm/api"
 import {SponsorKudoses} from "../../../../AddKudosForm/components/SponsorKudoses"
+import {useGetSkillsByProofsQuery} from "../../../../pages/Profile/components/Aside/components/Content/components/Proof/api"
 
 const ProofCard = ({proof}) => {
-    // const proofId = proof?.id
-    // const KudosInfo = useGetKudosQuery(
-    //     {proofId},
-    //     {
-    //         refetchOnMountOrArgChange: true,
-    //     }
-    // )
-    // console.log(KudosInfo.isSuccess && KudosInfo.data)
+    const proofId = proof?.id
+    const idProof = proof?.id
+    const skills = useGetSkillsByProofsQuery(idProof)
+    const KudosInfo = useGetKudosQuery(
+        {proofId},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
 
     return (
         <div
@@ -54,15 +56,24 @@ const ProofCard = ({proof}) => {
                 }}>
                 <Typography variant="body1">{proof.description}</Typography>
             </Box>
-            <Box>
-                {/* <SponsorKudoses
-                    amount={KudosInfo.data && KudosInfo.data.amount_of_kudos_current_user}
-                /> */}
-            </Box>
-            <Box position={"absolute"} bottom={"42px"}>
-                <SkillsOnProof idProof={proof.id} />
-            </Box>
-
+            <Grid
+                container
+                sx={{
+                    justifyContent: "space-between",
+                    position: "absolute",
+                    bottom: "42px",
+                    p: "0px 30px",
+                }}>
+                <Box>
+                    <SkillsOnProof idProof={proof.id} />
+                </Box>
+                <Box>
+                    <SponsorKudoses
+                        KudosInfo={KudosInfo}
+                        isHaveSkills={skills.isSuccess && skills.data.skills.length !== 0}
+                    />
+                </Box>
+            </Grid>
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (
                     <VisitButton

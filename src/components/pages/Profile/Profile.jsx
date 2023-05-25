@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import styles from "./Profile.module.css"
 import {ProfileSidebar} from "./components/ProfileSidebar"
 import {Aside} from "./components/Aside"
@@ -25,6 +25,10 @@ const Profile = () => {
                 refetchOnMountOrArgChange: true,
             }
         )
+
+    useEffect(() => {
+        isSuccess && refetch()
+    }, [isSuccess, refetch])
 
     return (
         <>

@@ -6,6 +6,7 @@ import {ActionHeaderProofButtons} from "./components"
 const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) => {
     const {data} = useJwtCheck()
     const isYourAccount = +talentId === data.id
+    const isSponsor = data.scope === "ROLE_SPONSOR"
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState()
@@ -55,7 +56,7 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) =
             <Typography variant="h6" zIndex={20}>
                 {status}
             </Typography>
-            {isYourAccount && (
+            {isYourAccount && !isSponsor && (
                 <ActionHeaderProofButtons {...propsActionHeaderProofButtons} />
             )}
         </Grid>

@@ -6,13 +6,9 @@ import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {Box} from "@mui/material"
 import {useParams} from "react-router-dom"
 
-const Info = ({user, refetch, isSuccess}) => {
+const Info = ({user}) => {
     const {talentId} = useParams()
     const {data} = useJwtCheck()
-
-    useEffect(() => {
-        isSuccess && refetch()
-    }, [isSuccess, refetch])
 
     return (
         <div className={styles.info}>

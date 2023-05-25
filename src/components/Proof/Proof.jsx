@@ -111,7 +111,7 @@ const ProofAllInfo = () => {
                                 }}>
                                 <p>{data.description}</p>
                             </Grid>
-                            {skills.isSuccess && skills?.data.skills.length !== 0 && (
+                            {skills.isSuccess && skills?.data.skills && skillsSet && (
                                 <Grid
                                     container
                                     sx={{

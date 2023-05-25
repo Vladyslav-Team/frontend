@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
-import styles from "./AddKudosForm.module.css"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {useAddKudosMutation, useGetKudosQuery} from "./api"
 import Loader from "../../shared/components/Loader"
-import {Button, TextField, Tooltip} from "@mui/material"
+import {Button, TextField} from "@mui/material"
 import {useForm} from "react-hook-form"
 import {AlertError} from "../../shared/components"
 import {DialogForm} from "./components/DialogForm/DialogForm"
@@ -12,7 +11,6 @@ import {SponsorKudoses} from "./components/SponsorKudoses"
 
 const AddKudosForm = ({proofId, skills, setSkills}) => {
     const jwt = useJwtCheck()
-
     const isSponsor = jwt.data && jwt.data.scope === "ROLE_SPONSOR"
     const [amount, setAmount] = useState(0)
     const [totalCount, setTotalCount] = useState(skills ? skills.length * amount : 0)
@@ -76,7 +74,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
     }
 
     useEffect(() => {
-        result.data && KudosInfo.refetch()
+        result.data && KudosInfo.isSuccess && KudosInfo.refetch()
     }, [result.status])
 
     useEffect(() => {
@@ -90,9 +88,10 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
     return (
         <>
             {!KudosInfo.isLoading ? (
-                {
-                    /* <SponsorKudoses KudosInfo={KudosInfo} /> */
-                }
+                <SponsorKudoses
+                    KudosInfo={KudosInfo}
+                    isHaveSkills={skills.length !== 0}
+                />
             ) : (
                 <Loader
                     isLoading={KudosInfo.isLoading}
@@ -100,7 +99,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
                     error={KudosInfo.error}
                 />
             )}
-            {isSponsor && (
+            {isSponsor && skills && skills.length !== 0 && (
                 <>
                     <TextField
                         sx={{
