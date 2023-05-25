@@ -47,6 +47,7 @@ const AddKudosForm = ({proofId, skills, setSkills}) => {
         skills.map((skill) => {
             const skillId = +skill.id
             const skillAmount = +skill.amount
+
             !!skillAmount &&
                 updateKudos({
                     proofId,

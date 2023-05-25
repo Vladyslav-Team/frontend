@@ -85,6 +85,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 proofId={proof && proof.id}
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
+                publication_date={publication_date}
             />
             {isEditMode ? (
                 <ProofForm

@@ -2,14 +2,40 @@ import React, {useEffect, useState} from "react"
 import {Grid, Typography} from "@mui/material"
 import {useJwtCheck} from "../../../../../../../../../../../shared/api/hooks"
 import {ActionHeaderProofButtons} from "./components"
+import Tooltip from "@mui/material/Tooltip"
+import AccessTimeIcon from "@mui/icons-material/AccessTime"
 
-const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) => {
+const Time = ({time}) => {
+    return (
+        <Grid
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            padding={"5px"}>
+            <AccessTimeIcon sx={{width: "17px"}} />
+            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
+                {time}
+            </Typography>
+        </Grid>
+    )
+}
+
+const ProofHeader = ({
+    status,
+    statusVis,
+    proofId,
+    allProofsRefetch,
+    talentId,
+    publication_date,
+}) => {
     const {data} = useJwtCheck()
     const isYourAccount = +talentId === data.id
     const isSponsor = data.scope === "ROLE_SPONSOR"
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState()
+    const time = publication_date && publication_date.split(" ")[0]
+    const date = publication_date && publication_date.split(" ")[1]
 
     const handleShowConfirm = (option) => {
         setShowConfirm(true)
@@ -46,7 +72,7 @@ const ProofHeader = ({status, statusVis, proofId, allProofsRefetch, talentId}) =
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
-            padding={"0 5px 0 15px"}
+            padding={"0 15px 0 15px"}
             sx={{
                 width: "100%",
                 height: "40px",

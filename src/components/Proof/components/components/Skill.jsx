@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Chip, Tooltip, Typography} from "@mui/material"
 import {useGetSkillKudosQuery} from "../../../AddKudosForm/api"
 

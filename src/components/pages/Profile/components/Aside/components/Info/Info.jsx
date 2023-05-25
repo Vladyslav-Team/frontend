@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React from "react"
 import {Biography} from "../Biography"
 import styles from "./info.module.css"
 import {Place} from "@mui/icons-material"
