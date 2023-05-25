@@ -53,7 +53,7 @@ const AddSkill = ({
     refetch,
     status,
     skillsByProof,
-    skills
+    skills,
 }) => {
     const open = Boolean(anchorEl)
     const idTalent = location.pathname.replace("/profile/", "")
@@ -100,7 +100,8 @@ const AddSkill = ({
             (data.isSuccess && isProfile && data.data.skills.length > 0)
         if (isProfilePageSearch) {
             return dataArray.map((obj, id) => {
-                const isDisabled = skillTitleProfile && skillTitleProfile.includes(obj.title)
+                const isDisabled =
+                    skillTitleProfile && skillTitleProfile.includes(obj.title)
                 return (
                     <MenuItem
                         key={obj.id}

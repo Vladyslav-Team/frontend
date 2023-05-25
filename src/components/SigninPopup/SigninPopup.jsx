@@ -36,7 +36,11 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
         if (result.data) {
             const jwt = jwtDecode(result.data["jwt-token"])
             localStorage.setItem("jwt-token", result.data["jwt-token"])
-            jwt && navigate(`/profile/${jwt.id}`)
+            if (id && jwt) {
+                navigate(`/profile/${id}`)
+            } else {
+                navigate(`/profile/${jwt.id}`)
+            }
             id && location.pathname === "/proofs" && navigate(`/proof/${id}`)
             id && setVisibilitySigninPopup({status: false})
             AvatarIMG && AvatarIMG.refetch()

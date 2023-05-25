@@ -10,7 +10,11 @@ export const api = createApi({
                 query: ({pageURL, typeCards, sortURL, skills}) => ({
                     url: `/${typeCards}?page=${pageURL}&newest=${
                         sortURL === "newest"
-                    }&skills=${encodeURIComponent(skills.join(","))}`,
+                    }&skills=${
+                        !skills.join(",").includes("%")
+                            ? encodeURIComponent(skills.join(","))
+                            : skills.join(",")
+                    }`,
                     method: "GET",
                 }),
             }),

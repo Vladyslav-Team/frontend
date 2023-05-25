@@ -19,14 +19,14 @@ const Header = ({AvatarIMG}) => {
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
-                <NavLink to={"/talents?page=1"}>
+                <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                     <Logo />
                 </NavLink>
             </div>
             <nav className={styles.navigation}>
                 <ul>
                     <li>
-                        <NavLink to={"/talents?page=1"}>
+                        <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isTalentsPage && styles.active

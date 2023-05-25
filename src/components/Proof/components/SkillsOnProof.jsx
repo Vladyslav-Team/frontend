@@ -24,5 +24,4 @@ const SkillsOnProof = ({idProof}) => {
         </>
     )
 }
-
 export {SkillsOnProof}
