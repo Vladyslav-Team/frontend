@@ -7,6 +7,7 @@ import {useGetUserAvatarQuery} from "../Avatar/api"
 import {AddKudosForm} from "../AddKudosForm"
 import {SkillsOnProof} from "./components/SkillsOnProof"
 import {useGetSkillsByProofsQuery} from "../pages/Profile/components/Aside/components/Content/components/Proof/api"
+import {useAddKudosMutation} from "../AddKudosForm/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
@@ -17,6 +18,7 @@ const ProofAllInfo = () => {
     const [skillsSet, setSkillsSet] = useState([])
     const skills = useGetSkillsByProofsQuery(idProof)
     const AvatarIMG = useGetUserAvatarQuery(data && data.talent_id)
+    const [updateKudos, result] = useAddKudosMutation()
 
     useEffect(() => {
         const skillsSet =
@@ -121,7 +123,10 @@ const ProofAllInfo = () => {
                                         mb: 2,
                                     }}>
                                     <Box>
-                                        <SkillsOnProof idProof={idProof} />
+                                        <SkillsOnProof
+                                            result={result}
+                                            idProof={idProof}
+                                        />
                                     </Box>
                                     <Grid
                                         sx={{
@@ -133,6 +138,8 @@ const ProofAllInfo = () => {
                                             proofId={idProof}
                                             skills={skillsSet}
                                             setSkills={setSkillsSet}
+                                            updateKudos={updateKudos}
+                                            result={result}
                                         />
                                     </Grid>
                                 </Grid>

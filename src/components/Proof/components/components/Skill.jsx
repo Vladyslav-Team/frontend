@@ -2,22 +2,25 @@ import React, {useEffect} from "react"
 import {Chip, Tooltip, Typography} from "@mui/material"
 import {useGetSkillKudosQuery} from "../../../AddKudosForm/api"
 
-const Skill = ({idProof, skill, isSponsor}) => {
+const Skill = ({idProof, skill, isSponsor, result = {data: null}}) => {
     const skillId = skill.id
 
-    const SkillsKudosInfo = useGetSkillKudosQuery(
+    const skillsKudosInfo = useGetSkillKudosQuery(
         {idProof, skillId},
         {
             refetchOnMountOrArgChange: true,
         }
     )
 
-    const amount =
-        SkillsKudosInfo.isSuccess && SkillsKudosInfo.currentData.amount_of_kudos
-    const amountOfSponsor = isSponsor
-        ? SkillsKudosInfo.isSuccess &&
-          SkillsKudosInfo.currentData.amount_of_kudos_current_user + "/"
-        : ""
+    let amount = skillsKudosInfo.isSuccess && skillsKudosInfo.data.amount_of_kudos
+    let amountOfSponsor =
+        skillsKudosInfo.isSuccess && isSponsor
+            ? `${skillsKudosInfo.data.amount_of_kudos_current_user}/`
+            : ""
+
+    useEffect(() => {
+        result?.data && skillsKudosInfo.refetch()
+    }, [result.data, skillsKudosInfo.refetch])
 
     return (
         <Tooltip
@@ -35,7 +38,7 @@ const Skill = ({idProof, skill, isSponsor}) => {
                     marginBottom: "5px",
                     maxWidth: "70px",
                 }}
-                color={"primary"}
+                color="primary"
             />
         </Tooltip>
     )

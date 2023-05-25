@@ -3,7 +3,7 @@ import {useGetSkillsByProofsQuery} from "../../pages/Profile/components/Aside/co
 import {Skill} from "./components/Skill"
 import {useJwtCheck} from "../../../shared/api/hooks"
 
-const SkillsOnProof = ({idProof}) => {
+const SkillsOnProof = ({idProof, result}) => {
     const skills = useGetSkillsByProofsQuery(idProof)
     const {data} = useJwtCheck()
     const isSponsor = data && data.scope === "ROLE_SPONSOR"
@@ -14,6 +14,7 @@ const SkillsOnProof = ({idProof}) => {
                 skills.data.skills.map((skill) => {
                     return (
                         <Skill
+                            result={result}
                             idProof={idProof}
                             skill={skill}
                             isSponsor={isSponsor}

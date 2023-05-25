@@ -7,7 +7,7 @@ const Info = ({user, refetch}) => {
 
     const skills =
         originalSkills &&
-        [...originalSkills].sort((a, b) => a.title.localeCompare(b.title))
+        [...originalSkills].sort((a, b) => a.skill.title.localeCompare(b.skill.title))
 
     // const { facebook, twitter, github, linkedin } = { ...socials }
 
