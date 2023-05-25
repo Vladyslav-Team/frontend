@@ -5,7 +5,15 @@ import {AddSkill} from "../../../../../../../../../../../../shared/components/Ad
 import AddIcon from "@mui/icons-material/Add"
 import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
 
-const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
+const ProofSkills = ({
+    proofId,
+    talentId,
+    status,
+    isEditMode,
+    statusVis,
+    staticsSkiils,
+}) => {
+    console.log()
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
@@ -39,12 +47,25 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     } else if (isEdit) {
         marginBottomForGridWrapper = -12
     }
+    const applyStats = (elementID) => {
+        return (
+            staticsSkiils &&
+            staticsSkiils.mostKudosed.map((id) => {
+                if (id === elementID) {
+                    return "#f17e28"
+                }
+            })
+        )
+    }
 
     let skills
     if (data && data.skills[0]) {
         skills =
             data &&
             data.skills.map((el) => {
+                let color = ""
+                color = applyStats(el.id)
+
                 return (
                     <Tooltip arrow title={el.title} key={el.id}>
                         <Chip
@@ -53,6 +74,7 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
                                 marginRight: "5px",
                                 marginBottom: "5px",
                                 maxWidth: "70px",
+                                backgroundColor: color,
                                 "& .MuiChip-deleteIcon": {
                                     display: "none",
                                 },

@@ -10,29 +10,32 @@ const SponsorKudoses = React.memo(({KudosInfo, isHaveSkills, isDraft = false}) =
     return (
         <>
             {isHaveSkills && !isDraft && (
-                <Tooltip
-                    title={
-                        isHaveSkills && (
-                            <Grid container justifyContent="center" alignItems="center">
-                                <Typography
-                                    paddingLeft={1}
-                                    paddingTop={1}
-                                    sx={{fontSize: "13px"}}>
-                                    {KudosInfo.isSuccess &&
-                                        KudosInfo.data.amount_of_kudos_current_user}
-                                </Typography>
-                            </Grid>
-                        )
-                    }
-                    arrow>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: isProfile ? "flex-end" : "space-around",
-                            pr: isProfile ? 3 : 0,
-                        }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: isProfile ? "flex-end" : "space-around",
+                        pr: isProfile ? 3 : 0,
+                    }}>
+                    <Tooltip
+                        title={
+                            isHaveSkills && (
+                                <Grid
+                                    container
+                                    justifyContent="center"
+                                    alignItems="center">
+                                    <Typography
+                                        paddingLeft={1}
+                                        paddingTop={1}
+                                        sx={{fontSize: "13px"}}>
+                                        {KudosInfo.isSuccess &&
+                                            KudosInfo.data.amount_of_kudos_current_user}
+                                    </Typography>
+                                </Grid>
+                            )
+                        }
+                        arrow>
                         <Box
                             sx={{
                                 height: "28px",
@@ -49,11 +52,11 @@ const SponsorKudoses = React.memo(({KudosInfo, isHaveSkills, isDraft = false}) =
                                 alt="Unlike"
                             />
                         </Box>
-                        <Box sx={{fontSize: "18px"}}>
-                            {KudosInfo.data && KudosInfo.data.amount_of_kudos}
-                        </Box>
+                    </Tooltip>
+                    <Box sx={{fontSize: "18px"}}>
+                        {KudosInfo.data && KudosInfo.data.amount_of_kudos}
                     </Box>
-                </Tooltip>
+                </Box>
             )}
         </>
     )

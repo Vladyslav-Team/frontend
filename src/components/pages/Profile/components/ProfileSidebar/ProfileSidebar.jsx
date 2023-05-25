@@ -48,6 +48,22 @@ const ProfileSidebar = ({user, idTalentURL, refetch}) => {
                             )}
                         </NavLink>
                     )}
+                    {data.scope === "ROLE_SPONSOR" && (
+                        <NavLink to={`/profile/${user.id}/PaymentsHistory`}>
+                            {data.id === +idTalentURL && (
+                                <Button
+                                    variant="outlined"
+                                    size="large"
+                                    sx={{
+                                        width: theme.spacing(30),
+                                        marginTop: theme.spacing(5),
+                                        borderRadius: theme.shape.borderRadius,
+                                    }}>
+                                    Payments History
+                                </Button>
+                            )}
+                        </NavLink>
+                    )}
                 </>
             )}
         </div>
