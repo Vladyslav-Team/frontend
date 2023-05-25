@@ -7,8 +7,8 @@ export const DeleteAccount = createApi({
     endpoints: (build) => {
         return {
             DeleteAccount: build.mutation({
-                query: (id) => ({
-                    url: `/talents/${id}`,
+                query: ({id, role}) => ({
+                    url: `/${role}/${id}`,
                     method: "DELETE",
                 }),
             }),

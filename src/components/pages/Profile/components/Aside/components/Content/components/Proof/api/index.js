@@ -7,10 +7,8 @@ export const ProofApi = createApi({
     endpoints: (build) => {
         return {
             GetProofs: build.query({
-                query: ({idTalent, page}) => ({
-                    url: `/talents/${idTalent}/proofs?page=${
-                        page ? page : 1
-                    }&newest=true`,
+                query: ({id, page}) => ({
+                    url: `/talents/${id}/proofs?page=${page ? page : 1}&newest=true`,
                     method: "GET",
                 }),
             }),
@@ -20,8 +18,33 @@ export const ProofApi = createApi({
                     method: "GET",
                 }),
             }),
+            GetSkills: build.query({
+                query: (text) => ({
+                    url: `/skills?text=${text}`,
+                    method: "GET",
+                }),
+            }),
+            AddSkill: build.mutation({
+                query: ({talentId, proofId, body}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/skills`,
+                    method: "POST",
+                    data: body,
+                }),
+            }),
+            DeleteSkill: build.mutation({
+                query: ({talentId, proofId, skillId}) => ({
+                    url: `/talents/${talentId}/proofs/${proofId}/skills/${skillId}`,
+                    method: "DELETE",
+                }),
+            }),
         }
     },
 })
 
-export const {useGetProofsQuery, useGetSkillsByProofsQuery} = ProofApi
+export const {
+    useGetProofsQuery,
+    useGetSkillsByProofsQuery,
+    useGetSkillsQuery,
+    useAddSkillMutation,
+    useDeleteSkillMutation,
+} = ProofApi

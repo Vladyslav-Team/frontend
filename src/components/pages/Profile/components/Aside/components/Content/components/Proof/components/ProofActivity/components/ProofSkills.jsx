@@ -1,27 +1,45 @@
 import {Button, Chip, Grid, Tooltip} from "@mui/material"
-import React, {useState} from "react"
-import {useGetSkillsByProofsQuery} from "../../../api"
+import React, {useEffect, useState} from "react"
+import {useGetSkillsByProofsQuery, useDeleteSkillMutation} from "../../../api"
 import {AddSkill} from "../../../../../../../../../../../../shared/components/AddSkill"
 import AddIcon from "@mui/icons-material/Add"
+import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
 
-const skillsData = {
-    id: 4,
-    skills: [],
-}
-
-const ProofSkills = ({proofId, status, isEditMode}) => {
+const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
+    const {data, refetch} = useGetSkillsByProofsQuery(proofId)
+    const [deleteSkill, result] = useDeleteSkillMutation()
     const isAddSkills =
-        skillsData.skills.length < 4 && status !== "PUBLISHED" && status !== "HIDDEN"
+        data === undefined ||
+        (data.skills.length < 4 && status !== "PUBLISHED" && status !== "HIDDEN")
     const isHidden = status !== "HIDDEN"
+    const isPublished = status === "PUBLISHED"
+    const isAdded = statusVis === "Added"
+    const isEdit = statusVis === "Edit"
+    const jwt = useJwtCheck()
+    let marginBottomForGridWrapper = 0
+    const isHaveSkills = data === undefined || data.skills.length < 1
 
-    const isHaveSkills = skillsData.skills.length < 1
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
     }
-    const {data} = useGetSkillsByProofsQuery(proofId)
+    const handleDelete = (skillId) => {
+        deleteSkill({talentId, proofId, skillId: skillId})
+    }
+
+    useEffect(() => {
+        if (result.isSuccess) {
+            refetch()
+        }
+    }, [refetch, result])
+
+    if (isPublished && data && data.skills.length === 1) {
+        marginBottomForGridWrapper = -34
+    } else if (isEdit) {
+        marginBottomForGridWrapper = -12
+    }
 
     let skills
     if (data && data.skills[0]) {
@@ -36,43 +54,36 @@ const ProofSkills = ({proofId, status, isEditMode}) => {
                                 marginRight: "5px",
                                 marginBottom: "5px",
                                 maxWidth: "70px",
+                                "& .MuiChip-deleteIcon": {
+                                    display: "none",
+                                },
+                                "&:hover": {
+                                    "& .MuiChip-deleteIcon": {
+                                        display: isPublished ? "none" : "block",
+                                    },
+                                    backgroundColor: isPublished ? undefined : "red",
+                                },
                             }}
-                            color={isHidden ? "primary" : "default"}
-                        />
-                    </Tooltip>
-                )
-            })
-    } else {
-        skills =
-            data &&
-            skillsData.skills.map((el) => {
-                return (
-                    <Tooltip arrow title={el.title} key={el.id}>
-                        <Chip
-                            label={el.title}
-                            sx={{
-                                marginRight: "5px",
-                                marginBottom: "5px",
-                                maxWidth: "70px",
-                            }}
+                            onDelete={!isPublished ? () => handleDelete(el.id) : null}
                             color={isHidden ? "primary" : "default"}
                         />
                     </Tooltip>
                 )
             })
     }
-    return (
+    return !isAdded ? (
         <Grid
             container
             position={"absolute"}
             left={isEditMode ? "20px" : "10px"}
-            bottom={!isHaveSkills ? "-35px" : 0}
+            bottom={!isHaveSkills ? "0px" : "-35px"}
+            marginBottom={marginBottomForGridWrapper + "px"}
             height={"75px"}
             flexDirection={isEditMode ? "row" : "column"}
             width={"max-content"}
             alignItems={"center"}>
             {skills}
-            {isAddSkills && (
+            {jwt.data.scope !== "ROLE_SPONSOR" && isAddSkills && (
                 <>
                     <Button
                         variant="outlined"
@@ -93,11 +104,15 @@ const ProofSkills = ({proofId, status, isEditMode}) => {
                         setAnchorEl={setAnchorEl}
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
+                        proofId={proofId}
+                        talentId={talentId}
+                        refetch={refetch}
+                        skillsByProof={data && data.skills}
                     />
                 </>
             )}
         </Grid>
-    )
+    ) : null
 }
 
 export {ProofSkills}

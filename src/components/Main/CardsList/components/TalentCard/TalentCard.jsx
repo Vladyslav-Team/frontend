@@ -3,7 +3,7 @@ import {Avatar} from "../../../../Avatar"
 import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
 import {SigninPopupContext} from "../../../../../context"
-import {Box, Grid} from "@mui/material"
+import {Box, Grid, Chip} from "@mui/material"
 import {useTheme} from "@emotion/react"
 
 const TalentCard = ({talent}) => {
@@ -13,6 +13,7 @@ const TalentCard = ({talent}) => {
         <Grid
             container
             sx={{
+                position: "relative",
                 width: "230px",
                 height: "290px",
                 flexDirection: "column",
@@ -39,9 +40,9 @@ const TalentCard = ({talent}) => {
                     flex: "1 0 auto",
                     flexDirection: "column",
                     alignContent: "center",
-                    padding: "30px 8px 6px",
+                    padding: "28px 8px 6px",
                     "& > * ": {
-                        mt: "5px",
+                        mt: "3px",
                         fontSize: "14px",
 
                         textOverflow: "ellipsis",
@@ -51,7 +52,35 @@ const TalentCard = ({talent}) => {
                 }}>
                 <Box sx={{fontWeight: "bold"}}>{`${talent.name} ${talent.surname}`}</Box>
                 <Box>{talent.location}</Box>
-                <Box>{talent.experience}</Box>
+                <Box sx={{wordBreak: "normal", textOverflow: "ellipsis"}}>
+                    {talent.experience}
+                </Box>
+                <Box
+                    sx={{
+                        mt: 2,
+                        height: "80px",
+                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        gap: "4px",
+                    }}>
+                    {talent.skills &&
+                        talent.skills.slice(0, 6).map((skill) => {
+                            return (
+                                <Chip
+                                    size="small"
+                                    label={skill.title}
+                                    key={skill.id}
+                                    sx={{
+                                        bgcolor: palette.primary.main,
+                                        color: "#ffffff",
+                                        fontSize: "12px",
+                                    }}
+                                />
+                            )
+                        })}
+                </Box>
             </Grid>
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (

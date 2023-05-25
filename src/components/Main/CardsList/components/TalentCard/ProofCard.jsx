@@ -1,10 +1,11 @@
 import React from "react"
-import styles from "./TalentCard.module.css"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
 import {Grid} from "@mui/material"
 import {useTheme} from "@emotion/react"
+import {SkillsOnProof} from "../../../../Proof/components"
+import {Box} from "@mui/material"
 
 const ProofCard = ({proof}) => {
     const {palette} = useTheme()
@@ -13,6 +14,7 @@ const ProofCard = ({proof}) => {
         <Grid
             container
             sx={{
+                position: "relative",
                 flexDirection: "column",
                 width: "470px",
                 textOverflow: "ellipsis",
@@ -25,8 +27,8 @@ const ProofCard = ({proof}) => {
                 boxShadow: "0 0 10px 4px rgba(0, 0, 0, 0.25)",
                 overflow: "hidden",
                 bgcolor: palette.neutral.secondary,
-            }}
-            className={styles.card}>
+                pb: "30px",
+            }}>
             <Grid
                 sx={{
                     display: "flex",
@@ -41,7 +43,6 @@ const ProofCard = ({proof}) => {
             </Grid>
             <Grid
                 container
-                className={styles.content}
                 sx={{
                     width: "100%",
                     wordBreak: "break-word",
@@ -53,16 +54,13 @@ const ProofCard = ({proof}) => {
                 <Grid sx={{flex: "1 0 auto"}}>
                     <Typography variant="body1">{proof.description}</Typography>
                 </Grid>
-                <Grid
-                    variant="subtitle2"
-                    sx={{
-                        width: "100%",
-                        alignItems: "center",
-                    }}>
-                    {proof.publication_date}
-                </Grid>
+                <Box>
+                    <SkillsOnProof idProof={proof.id} />
+                    <Typography variant="subtitle2" gutterBottom>
+                        {proof.publication_date}
+                    </Typography>
+                </Box>
             </Grid>
-
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (
                     <VisitButton

@@ -36,17 +36,20 @@ const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
     const [sort, setSort] = useState(false)
+    const [skillsSet, setSkillsSet] = useState(new Set())
+    const skills = Array.from(skillsSet)
     const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
     const sortURL = searchParams.get("sort") && searchParams.get("sort")
 
     const navigate = useNavigate()
     const GetData = useGetTalentsQuery(
-        {pageURL, typeCards, sortURL},
+        {pageURL, typeCards, sortURL, skills},
         {
             refetchOnMountOrArgChange: true,
         }
     )
+
     useEffect(() => {
         if (type === "proofs") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, "sort")
@@ -65,6 +68,8 @@ const Main = ({url, type}) => {
                 type={type}
                 setSort={setSort}
                 sort={sort}
+                skillsSet={skillsSet}
+                setSkillsSet={setSkillsSet}
             />
             <Pagination
                 totalPages={GetData.data && GetData.data.totalPages}

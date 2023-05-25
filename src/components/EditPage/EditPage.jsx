@@ -11,9 +11,9 @@ import {
 import {useForm} from "react-hook-form"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {useLocation, useNavigate} from "react-router-dom"
-import {useGetAllInfoByIDQuery} from "../pages/Profile/api"
+import {useGetAllUserInfoByIDQuery} from "../pages/Profile/api"
 import Loader from "../../shared/components/Loader"
-import {useEditTalentMutation} from "./api"
+import {useEditUserInfoMutation} from "./api"
 import {useJwtCheck} from "../../shared/api/hooks"
 import {DeleteField} from "./components/DeleteField/DeleteField"
 import {ConfirmationPopup} from "./components/DeleteField/components/ConfirmationPopup/ConfirmationPopup"
@@ -51,10 +51,10 @@ const EditPage = ({AvatarIMG}) => {
     const location = useLocation()
     const {data} = useJwtCheck()
     const matches = useMediaQuery("(min-width:750px)")
-    const idTalent = location.pathname.replace(/[^0-9\\.]+/g, "")
-    const [updateTalentInfo, result] = useEditTalentMutation()
-    const AllInfo = useGetAllInfoByIDQuery(idTalent)
-
+    const id = location.pathname.replace(/[^0-9\\.]+/g, "")
+    const [updateUserInfo, result] = useEditUserInfoMutation()
+    const role = data.scope === "ROLE_TALENT" ? "talents" : "sponsors"
+    const AllInfo = useGetAllUserInfoByIDQuery({id, role})
     const [visibilityConfirmationPopup, setVisibilityConfirmationPopup] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)
 
@@ -63,9 +63,7 @@ const EditPage = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
         setValue,
-        watch,
     } = useForm()
-    const password = watch("password")
 
     useEffect(() => {
         setDefaultValueForm(AllInfo.data, setValue)
@@ -73,16 +71,16 @@ const EditPage = ({AvatarIMG}) => {
 
     const onSubmit = (data) => {
         const payload = filterResForm(filterDataForDate(data), AllInfo.data)
-        updateTalentInfo({payload, idTalent})
+        updateUserInfo({payload, id, role})
         AvatarIMG.refetch()
     }
     useEffect(() => {
         if (result.data) {
             navigate(`/profile/${data.id}`)
         } else if (data) {
-            data.id !== parseInt(idTalent) && navigate(`/profile/${data.id}/edit`)
+            data.id !== parseInt(id) && navigate(`/profile/${data.id}/edit`)
         }
-    }, [data, idTalent, navigate, result, result.data])
+    }, [data, id, navigate, result, result.data])
 
     return (
         <>
@@ -135,12 +133,12 @@ const EditPage = ({AvatarIMG}) => {
                                 <BasicInfoChange control={control} errors={errors} />
                                 <NameStage name={"About Me"} errors={errors} />
                                 <AboutMeChange control={control} errors={errors} />
-                                <NameStage name={"Security"} errors={errors} />
+                                {/* <NameStage name={"Security"} errors={errors} />
                                 <SecurityChange
                                     control={control}
                                     errors={errors}
                                     password={password}
-                                />
+                                /> */}
                             </Box>
                         </form>
                         <DeleteField
@@ -150,6 +148,7 @@ const EditPage = ({AvatarIMG}) => {
                                 setVisibilityConfirmationPopup
                             }
                             visibilityConfirmationPopup={visibilityConfirmationPopup}
+                            role={role}
                         />
                     </Grid>
                 </Grid>

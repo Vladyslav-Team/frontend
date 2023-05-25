@@ -21,6 +21,13 @@ select {
     padding: 0 10px;
 }
 
+.checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    margin-left: 20px;
+}
+
 form .error {
     position: absolute;
     font-size: 12px;
@@ -87,5 +94,4 @@ button:disabled,
 button[disabled]:hover {
     border: 1px solid #ffffff;
     background: #ffffff;
-    color: #0a6e9a;
 }

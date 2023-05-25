@@ -17,8 +17,7 @@ import styled from "@emotion/styled"
 const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
     let location = useLocation()
-    const isSignup =
-        location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
+    const isSignup = location.pathname === "/signup" || location.pathname === "/signin"
 
     const isTalentsPage = location.pathname === "/talents"
     const isProofsPage = location.pathname === "/proofs"
@@ -120,7 +119,7 @@ const Header = ({AvatarIMG}) => {
                         </>
                     ) : (
                         <>
-                            <NavLink to="/talents/signup">
+                            <NavLink to="/signup">
                                 <Button>SIGN UP</Button>
                             </NavLink>
                             <NavLink to={`${Endpoints.POST_TALENT_SIGNIN}`}>

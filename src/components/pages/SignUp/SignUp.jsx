@@ -19,10 +19,14 @@ const SignUp = ({AvatarIMG}) => {
         handleSubmit,
         formState: {errors},
     } = useForm()
+
     const onSubmit = (data) => {
         const res = data
+        const isSponsor = data.roles
+        const role = isSponsor ? "sponsors" : "talents"
         res.birthday = data.birthday.split("-").reverse().join("-")
-        updatePost(JSON.stringify(res))
+        res.roles = Array(isSponsor ? "SPONSOR" : "TALENT")
+        updatePost({role, body: JSON.stringify(res)})
     }
     useEffect(() => {
         if (result.data) {
@@ -44,7 +48,7 @@ const SignUp = ({AvatarIMG}) => {
                         margin: "0 auto",
                         display: "flex",
                         width: "320px",
-                        height: "550px",
+                        height: "580px",
                         background:
                             palette.mode === "dark"
                                 ? palette.neutral.secondary
@@ -124,6 +128,14 @@ const SignUp = ({AvatarIMG}) => {
                                 <p className={styles.error}>{errors.birthday.message}</p>
                             )}
                         </div>
+                        <div className={styles.input_wrap}>
+                            <label htmlFor="roles">Sponsor:</label>
+                            <input
+                                className={styles.checkbox}
+                                type="checkbox"
+                                {...register("roles", {})}
+                            />
+                        </div>
                         <Button
                             sx={{
                                 background:
@@ -155,9 +167,7 @@ const SignUp = ({AvatarIMG}) => {
                     <p className={styles.or}>or</p>
                     <p className={styles.signin_check}>
                         Already on SkillScope?{" "}
-                        <NavLink
-                            className={styles.signin_form_elem}
-                            to={"/talents/signin"}>
+                        <NavLink className={styles.signin_form_elem} to={"/signin"}>
                             Sign in
                         </NavLink>
                     </p>

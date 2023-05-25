@@ -17,7 +17,7 @@ const ArrowButton = ({id}) => {
     }
     const SignOut = () => {
         updatePost()
-        localStorage.removeItem("jwt-token")
+        localStorage.clear()
     }
 
     return (

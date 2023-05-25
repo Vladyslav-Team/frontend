@@ -6,15 +6,15 @@ export const GetAllInfoByID = createApi({
     baseQuery: axiosBaseQuery(),
     endpoints: (build) => {
         return {
-            GetAllInfoByID: build.query({
-                query: (id) => ({
-                    url: `/talents/${id}`,
+            GetAllUserInfoByID: build.query({
+                query: ({id, role}) => ({
+                    url: `/${role}/${id}`,
                     method: "GET",
                 }),
             }),
             GetAllProof: build.query({
                 query: (id) => ({
-                    url: `/proofs${id}`,
+                    url: `/proofs/${id}`,
                     method: "GET",
                 }),
             }),
@@ -44,15 +44,30 @@ export const GetAllInfoByID = createApi({
                     method: "DELETE",
                 }),
             }),
+            AddSkillProfile: build.mutation({
+                query: ({talentId, body}) => ({
+                    url: `/talents/${talentId}/skills`,
+                    method: "POST",
+                    data: body,
+                }),
+            }),
+            DeleteSkillProfile: build.mutation({
+                query: ({talentId, skillId}) => ({
+                    url: `/talents/${talentId}/skills/${skillId}`,
+                    method: "DELETE",
+                }),
+            }),
         }
     },
 })
 
 export const {
-    useGetAllInfoByIDQuery,
+    useGetAllUserInfoByIDQuery,
     useGetAllProofQuery,
     useAddProofMutation,
     useChangeStatusProofMutation,
     useChangeProofMutation,
     useDeleteProofMutation,
+    useAddSkillProfileMutation,
+    useDeleteSkillProfileMutation,
 } = GetAllInfoByID

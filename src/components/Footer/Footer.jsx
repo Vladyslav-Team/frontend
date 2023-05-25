@@ -8,11 +8,14 @@ const Footer = () => {
         <Grid
             container
             sx={{
-                padding: "10px 0",
+                padding: "20px 0 10px",
                 alignItems: "flex-start",
                 justifyContent: "space-around",
                 backgroundColor: "#313131",
                 color: "white",
+                "& > div:first-of-type": {
+                    margin: "auto 0",
+                },
             }}>
             <div className={styles.footer_column}>
                 <Logo />

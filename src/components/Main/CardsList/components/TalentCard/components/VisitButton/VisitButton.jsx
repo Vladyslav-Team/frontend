@@ -1,7 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styles from "./VisitButton.module.css"
-
 import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {useNavigate} from "react-router-dom"
 import {Button, Typography} from "@mui/material"
@@ -24,6 +22,7 @@ const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visi
             <Button
                 variant="contained"
                 sx={{
+                    position: "absolute",
                     bottom: "0",
                     width: "100%",
                     height: "40px",

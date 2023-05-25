@@ -16,6 +16,7 @@ const themeSettings = (mode) => {
                       neutral: {
                           main: colors.white[600],
                           secondary: colors.white[100],
+                          black: colors.black.DEFAULT,
                       },
                   }
                 : {
@@ -28,6 +29,7 @@ const themeSettings = (mode) => {
                       neutral: {
                           main: colors.white.DEFAULT,
                           secondary: colors.white.DEFAULT,
+                          black: colors.black.DEFAULT,
                       },
                   }),
         },
@@ -70,9 +72,21 @@ const themeSettings = (mode) => {
                         color: mode === "dark" ? "#efefef" : "#0a6e9a",
                         backgroundColor: mode === "dark" ? "#313131" : "none",
                         border: `1px solid ${mode === "dark" ? "#efefef" : "#0a6e9a"}`,
+                        "&:hover": {
+                            border: `1px solid ${
+                                mode === "dark" ? "#ffffff" : "#0a6e9a"
+                            }`,
+                        },
                     },
                 },
             },
+            // MuiChip: {
+            //     styleOverrides: {
+            //         root: {
+            //             backgroundColor: colors.blue.DEFAULT,
+            //         },
+            //     },
+            // },
         },
     }
 }
