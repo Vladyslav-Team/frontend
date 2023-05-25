@@ -9,13 +9,7 @@ const Info = ({user, refetch}) => {
         originalSkills &&
         [...originalSkills].sort((a, b) => {
             a.skill.title.localeCompare(b.skill.title)
-            //    a.map(el => {
-            //     el.title.localeCompare(b.title)
-            //    })
         })
-    console.log(skills)
-    // const { facebook, twitter, github, linkedin } = { ...socials }
-
     return (
         <div className={styles.wrapper}>
             {age ? (

@@ -1,9 +1,59 @@
-import {Button, Chip, Grid, Tooltip} from "@mui/material"
+import {Button, Chip, Grid, Tooltip, Typography} from "@mui/material"
 import React, {useEffect, useState} from "react"
 import {useGetSkillsByProofsQuery, useDeleteSkillMutation} from "../../../api"
 import {AddSkill} from "../../../../../../../../../../../../shared/components/AddSkill"
 import AddIcon from "@mui/icons-material/Add"
 import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
+import {useGetSkillKudosQuery} from "../../../../../../../../../../../AddKudosForm/api"
+
+export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSponsor}) => {
+    const skillId = el.id
+    const skillsKudosInfo = useGetSkillKudosQuery(
+        {idProof, skillId},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
+
+    let amount = skillsKudosInfo.isSuccess && skillsKudosInfo.data.amount_of_kudos
+    let amountOfSponsor =
+        skillsKudosInfo.isSuccess && isSponsor
+            ? `${skillsKudosInfo.data.amount_of_kudos_current_user}/`
+            : ""
+
+    return (
+        <Tooltip
+            arrow
+            title={
+                <Typography
+                    sx={{
+                        fontSize: "15px",
+                    }}>{`${el.title} ${
+                    isPublished ? `${amountOfSponsor}${amount}` : ""
+                }`}</Typography>
+            }>
+            <Chip
+                label={el.title}
+                sx={{
+                    marginRight: "5px",
+                    marginBottom: "5px",
+                    maxWidth: "70px",
+                    "& .MuiChip-deleteIcon": {
+                        display: "none",
+                    },
+                    "&:hover": {
+                        "& .MuiChip-deleteIcon": {
+                            display: isPublished ? "none" : "block",
+                        },
+                        backgroundColor: isPublished ? undefined : "red",
+                    },
+                }}
+                onDelete={!isPublished ? () => handleDelete(el.id) : null}
+                color={isHidden ? "primary" : "default"}
+            />
+        </Tooltip>
+    )
+}
 
 const ProofSkills = ({
     proofId,
@@ -13,7 +63,6 @@ const ProofSkills = ({
     statusVis,
     staticsSkiils,
 }) => {
-    console.log()
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
@@ -27,6 +76,7 @@ const ProofSkills = ({
     const isAdded = statusVis === "Added"
     const isEdit = statusVis === "Edit"
     const jwt = useJwtCheck()
+    const idProof = proofId
     let marginBottomForGridWrapper = 0
     const isHaveSkills = data === undefined || data.skills.length < 1
     const handleOpen = (e) => {
