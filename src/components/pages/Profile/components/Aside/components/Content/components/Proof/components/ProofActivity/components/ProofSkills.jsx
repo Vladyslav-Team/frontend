@@ -55,7 +55,14 @@ export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSpons
     )
 }
 
-const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
+const ProofSkills = ({
+    proofId,
+    talentId,
+    status,
+    isEditMode,
+    statusVis,
+    staticsSkiils,
+}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
@@ -90,22 +97,48 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     } else if (isEdit) {
         marginBottomForGridWrapper = -12
     }
+    const applyStats = (elementID) => {
+        return (
+            staticsSkiils &&
+            staticsSkiils.mostKudosed.map((id) => {
+                if (id === elementID) {
+                    return "#f17e28"
+                }
+            })
+        )
+    }
 
     let skills
     if (data && data.skills[0]) {
         skills =
             data &&
             data.skills.map((el) => {
+                let color = ""
+                color = applyStats(el.id)
+
                 return (
-                    <Skill
-                        el={el}
-                        isPublished={isPublished}
-                        handleDelete={handleDelete}
-                        isHidden={isHidden}
-                        idProof={proofId}
-                        isSponsor={jwt.data.scope === "ROLE_SPONSOR"}
-                        key={el.id}
-                    />
+                    <Tooltip arrow title={el.title} key={el.id}>
+                        <Chip
+                            label={el.title}
+                            sx={{
+                                marginRight: "5px",
+                                marginBottom: "5px",
+                                maxWidth: "70px",
+                                backgroundColor: color,
+                                "& .MuiChip-deleteIcon": {
+                                    display: "none",
+                                },
+                                "&:hover": {
+                                    "& .MuiChip-deleteIcon": {
+                                        display: isPublished ? "none" : "block",
+                                    },
+                                    backgroundColor: isPublished ? undefined : "red",
+                                },
+                            }}
+                            onDelete={!isPublished ? () => handleDelete(el.id) : null}
+                            color={isHidden ? "primary" : "default"}
+                        />
+                    </Tooltip>
                 )
             })
     }

@@ -14,9 +14,18 @@ import {ProofSkills} from "./components/ProofActivity/components"
 import {SponsorKudoses} from "../../../../../../../../AddKudosForm/components/SponsorKudoses"
 import {useGetKudosQuery} from "../../../../../../../../AddKudosForm/api"
 import {Grid} from "@mui/material"
-import {useGetSkillsByProofsQuery} from "./api"
+import {useGetSkillsByProofsQuery, useStatisticQuery} from "./api"
 
-const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch}) => {
+const Proof = ({
+    proof,
+    isEditMode,
+    styleObj,
+    statusVis,
+    setVis,
+    allProofsRefetch,
+    staticsSkiils,
+    staticsProofs,
+}) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
     const id = location.pathname.replace("/profile/", "").split("/")
@@ -25,6 +34,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
     const [addProof, result] = useAddProofMutation()
     const [changeProof, changeProofResult] = useChangeProofMutation()
     const skills = useGetSkillsByProofsQuery(idProof)
+
     const {
         register,
         handleSubmit,
@@ -86,6 +96,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
                 publication_date={publication_date}
+                staticsProofs={staticsProofs}
             />
             {isEditMode ? (
                 <ProofForm
@@ -113,6 +124,7 @@ const Proof = ({proof, isEditMode, styleObj, statusVis, setVis, allProofsRefetch
                 status={status}
                 isEditMode={isEditMode}
                 statusVis={statusVis}
+                staticsSkiils={staticsSkiils}
             />
             <Grid>
                 <SponsorKudoses

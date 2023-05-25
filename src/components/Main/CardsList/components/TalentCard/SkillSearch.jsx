@@ -23,7 +23,11 @@ const SkillSearch = ({setIsFiltered}) => {
     const location = useLocation()
     const navigate = useNavigate()
     let dataArray = data.isSuccess && data.data.skills
-    const skillArray = window.location.href.split("&")[1].split("=")[1].split(",")
+    const skillArray =
+        window.location.href.split("&")[1] &&
+        window.location.href.split("&")[1].includes("=") &&
+        window.location.href.split("&")[1] &&
+        window.location.href.split("&")[1].split("=")[1].split(",")
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }

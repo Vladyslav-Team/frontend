@@ -10,6 +10,7 @@ import {Profile} from "../components/pages/Profile"
 import {EditProofPage} from "../components/EditProofPage/EditProofPage"
 import {ProofAllInfo} from "../components/Proof"
 import {Clicker} from "../components/Clicker"
+import {PaymentsHistory} from "../components/PaymentsHistory"
 
 const Router = ({AvatarIMG}) => {
     return (
@@ -26,6 +27,10 @@ const Router = ({AvatarIMG}) => {
             <Route path={"/profile"}>
                 <Route path={":talentId"} element={<Profile />} />
                 <Route path={":sponsorId/KudosFarming"} element={<Clicker />} />
+                <Route
+                    path={":sponsorId/PaymentsHistory"}
+                    element={<PaymentsHistory />}
+                />
                 <Route
                     path=":talentId/edit"
                     element={<EditPage AvatarIMG={AvatarIMG} />}

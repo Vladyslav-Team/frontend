@@ -75,7 +75,6 @@ const NameStage = ({type, refetch, skills}) => {
             setIsFiltered(true)
         }
     }, [location.search])
-    // setSkillsSet(updatedSet)
     return (
         <Grid p={2}>
             <Grid

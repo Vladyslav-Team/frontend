@@ -31,7 +31,7 @@ const forAllCard = (page, url, setPage, pageURL, isError, navigate, type, skills
         if (type === "sort") {
             navigate(`/${url}=1&sort=newest`)
         } else {
-            // navigate(`/${url}=1&filterBySkills=nofilter`)
+            //navigate(`/${url}=1&filterBySkills=nofilter`)
             setPage(1)
         }
     }
@@ -41,11 +41,16 @@ const Main = ({url, type}) => {
     const [searchParams] = useSearchParams()
     const [page, setPage] = useState(null)
     const [sort, setSort] = useState(false)
+
+    console.log(window.location.href.split("&")[0])
     const skills =
         window.location.href.split("&")[1] &&
+        window.location.href.split("&")[1].includes("=") &&
+        window.location.href.split("&")[1].split("=")[1] &&
         window.location.href.split("&")[1].split("=")[1] !== "nofilter"
             ? window.location.href.split("&")[1].split("=")[1].split(",")
             : []
+
     const typeCards = type
     const pageURL = +searchParams.get("page") ? +searchParams.get("page") : 1
     const sortURL = searchParams.get("sort") && searchParams.get("sort")
@@ -57,18 +62,21 @@ const Main = ({url, type}) => {
             refetchOnMountOrArgChange: true,
         }
     )
-
+    console.log(searchParams.get("filterBySkills") === null)
     useEffect(() => {
+        if (
+            (type === "talents" && searchParams.get("filterBySkills") === null) ||
+            searchParams.get("filterBySkills") === ""
+        ) {
+            navigate(
+                `/talents?page=${pageURL !== 0 ? pageURL : 1}&filterBySkills=nofilter`
+            )
+        }
         if (type === "proofs") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, "sort")
         } else if (type === "talents") {
             forAllCard(page, url, setPage, pageURL, GetData.isError, navigate, null)
         } else {
-            navigate(
-                `/talents?page=${pageURL !== 0 ? pageURL : 1}&filterBySkills=nofilter`
-            )
-        }
-        if (type === "talents" && !searchParams.get("filterBySkills")) {
             navigate(
                 `/talents?page=${pageURL !== 0 ? pageURL : 1}&filterBySkills=nofilter`
             )

@@ -29,6 +29,12 @@ export const PaymentApi = createApi({
                 method: "POST",
             }),
         }),
+        HistoryPayments: builder.query({
+            query: (sponsorID) => ({
+                url: `sponsors/${sponsorID}/orders?page=1&size=900`,
+                method: "GET",
+            }),
+        }),
     }),
 })
 
@@ -37,4 +43,5 @@ export const {
     useCaptureMutation,
     useGetStatusQuery,
     useFarmKudosMutation,
+    useHistoryPaymentsQuery,
 } = PaymentApi

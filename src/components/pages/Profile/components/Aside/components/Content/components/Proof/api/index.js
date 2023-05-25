@@ -37,6 +37,12 @@ export const ProofApi = createApi({
                     method: "DELETE",
                 }),
             }),
+            Statistic: build.query({
+                query: ({talentId, type}) => ({
+                    url: `/talents/${talentId}/stats/${type}`,
+                    method: "GET",
+                }),
+            }),
         }
     },
 })
@@ -47,4 +53,5 @@ export const {
     useGetSkillsQuery,
     useAddSkillMutation,
     useDeleteSkillMutation,
+    useStatisticQuery,
 } = ProofApi
