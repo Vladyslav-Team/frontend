@@ -52,9 +52,9 @@ export const Skill = ({
                     },
                     "&:hover": {
                         "& .MuiChip-deleteIcon": {
-                            display: isPublished ? "none" : "block",
+                            display: (!isHidden || isPublished) ? "none" : "block",
                         },
-                        backgroundColor: isPublished ? undefined : "red",
+                        backgroundColor: (!isHidden || isPublished) ? undefined : "red",
                     },
                 }}
                 onDelete={!isPublished ? () => handleDelete(el.id) : null}
