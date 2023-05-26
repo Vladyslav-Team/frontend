@@ -6,7 +6,15 @@ import AddIcon from "@mui/icons-material/Add"
 import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
 import {useGetSkillKudosQuery} from "../../../../../../../../../../../AddKudosForm/api"
 
-export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSponsor}) => {
+export const Skill = ({
+    el,
+    isPublished,
+    handleDelete,
+    isHidden,
+    idProof,
+    isSponsor,
+    color,
+}) => {
     const skillId = el.id
     const skillsKudosInfo = useGetSkillKudosQuery(
         {idProof, skillId},
@@ -38,6 +46,7 @@ export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSpons
                     marginRight: "5px",
                     marginBottom: "5px",
                     maxWidth: "70px",
+                    bgcolor: color,
                     "& .MuiChip-deleteIcon": {
                         display: "none",
                     },
@@ -55,7 +64,14 @@ export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSpons
     )
 }
 
-const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
+const ProofSkills = ({
+    proofId,
+    talentId,
+    status,
+    isEditMode,
+    statusVis,
+    staticsSkiils,
+}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
     const open = Boolean(anchorEl)
@@ -90,15 +106,29 @@ const ProofSkills = ({proofId, talentId, status, isEditMode, statusVis}) => {
     } else if (isEdit) {
         marginBottomForGridWrapper = -12
     }
+    const applyStats = (elementID) => {
+        return (
+            staticsSkiils &&
+            staticsSkiils.mostKudosed.map((id) => {
+                if (id === elementID) {
+                    return "#f17e28"
+                }
+            })
+        )
+    }
 
     let skills
     if (data && data.skills[0]) {
         skills =
             data &&
             data.skills.map((el) => {
+                let color = ""
+                color = applyStats(el.id)
+
                 return (
                     <Skill
                         el={el}
+                        color={color}
                         isPublished={isPublished}
                         handleDelete={handleDelete}
                         isHidden={isHidden}

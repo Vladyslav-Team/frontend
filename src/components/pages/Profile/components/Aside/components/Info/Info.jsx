@@ -36,6 +36,11 @@ const Info = ({user}) => {
                 ) : (
                     <Biography biography={user.about} />
                 )}
+                {data.scope === "ROLE_TALENT" && +talentId === data.id ? (
+                    <Box sx={{fontSize: "24px"}}>Amount of Kudoses: {user.balance}</Box>
+                ) : (
+                    <Biography biography={user.about} />
+                )}
             </div>
         </Box>
     )

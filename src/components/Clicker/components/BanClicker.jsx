@@ -1,10 +1,7 @@
 import React from "react"
 import {Typography} from "@mui/material"
-import {useTheme} from "@emotion/react"
 
 const BanClicker = () => {
-    const {palette} = useTheme()
-
     return (
         <div>
             <Typography

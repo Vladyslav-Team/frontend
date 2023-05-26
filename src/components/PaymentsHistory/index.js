@@ -1,0 +1,1 @@
+export {PaymentsHistory} from "./PaymentsHistory"
