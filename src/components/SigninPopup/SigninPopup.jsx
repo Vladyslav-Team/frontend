@@ -94,7 +94,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status, AvatarIMG}) => {
                     color: "#000000",
                     border: `2px solid ${palette.neutral.main}`,
                     borderRadius: "30px",
-                    zIndex: 102,
+                    zIndex: !status ? 99 : 101,
                 }}>
                 <form onSubmit={handleSubmit(onSubmit)} style={SigninStyle}>
                     <h2 className={styles.signin_form_elem}>Sign in</h2>

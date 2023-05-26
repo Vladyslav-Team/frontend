@@ -51,6 +51,7 @@ const ProofActivity = ({
                         proofId={proofId}
                         statusVis={statusVis}
                         allProofsRefetch={allProofsRefetch}
+                        refetch={refetch}
                     />
                 )}
                 {isPublish && <ActionsButtonShowMore proofId={proofId} />}

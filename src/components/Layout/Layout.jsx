@@ -13,7 +13,12 @@ const Layout = ({AvatarIMG}) => {
     const theme = useTheme()
 
     return (
-        <Grid sx={{bgcolor: theme.palette.neutral.main, pb: 10, flex: "1 0 auto"}}>
+        <Grid
+            sx={{
+                bgcolor: theme.palette.neutral.main,
+                pb: 10,
+                flex: "1 0 auto",
+            }}>
             <SigninPopupContext.Provider value={{setVisibilitySigninPopup}}>
                 <Router AvatarIMG={AvatarIMG} />
             </SigninPopupContext.Provider>

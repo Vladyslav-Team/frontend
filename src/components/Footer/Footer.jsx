@@ -13,13 +13,14 @@ const Footer = () => {
                 justifyContent: "space-around",
                 backgroundColor: "#313131",
                 color: "white",
+                mb: -10,
                 "& > div:first-of-type": {
                     margin: "auto 0",
                 },
             }}>
             <div className={styles.footer_column}>
                 <Logo />
-                <p className={styles.moto}>Scoup out your skills</p>
+                <p className={styles.moto}>Scope out your skills</p>
                 <p className={styles.main_text}>@Vladyslav Khrychov</p>
             </div>
             <div className={styles.line}></div>

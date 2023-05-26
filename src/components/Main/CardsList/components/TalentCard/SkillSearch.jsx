@@ -73,7 +73,6 @@ const SkillSearch = ({setIsFiltered}) => {
     }
 
     const handleChange = (e) => {
-        console.log(e.target.value)
         setSearchQuery(e.target.value)
     }
 
@@ -108,6 +107,7 @@ const SkillSearch = ({setIsFiltered}) => {
                         dataArray.map((skill, id) => {
                             const isDisabled =
                                 skillArray && skillArray.includes(skill.title)
+
                             return (
                                 <MenuItem
                                     key={skill.id}

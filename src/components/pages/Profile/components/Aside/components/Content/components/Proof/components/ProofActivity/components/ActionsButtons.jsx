@@ -32,9 +32,11 @@ export const ActionsButtonDraft = ({
     proofId,
     statusVis,
     allProofsRefetch,
+    refetch,
 }) => {
     const handleShowConfirm = async () => {
         setShowConfirm(true)
+        //refetch()
     }
 
     return (

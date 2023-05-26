@@ -1,22 +1,5 @@
 import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
-import Tooltip from "@mui/material/Tooltip"
-import AccessTimeIcon from "@mui/icons-material/AccessTime"
-
-const Time = ({time}) => {
-    return (
-        <Grid
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            padding={"5px"}>
-            <AccessTimeIcon sx={{width: "17px"}} />
-            <Typography paddingLeft={"2px"} paddingTop={"2px"} sx={{fontSize: "13px"}}>
-                {time}
-            </Typography>
-        </Grid>
-    )
-}
 
 const ProofContent = ({title, data, description, publication_date, proofId}) => {
     const time = publication_date && publication_date.split(" ")[0]
@@ -32,14 +15,6 @@ const ProofContent = ({title, data, description, publication_date, proofId}) => 
                 <Typography gutterBottom variant="h5" noWrap={true} maxWidth={"65%"}>
                     {title}
                 </Typography>
-                <Tooltip title={<Time time={time} />} arrow>
-                    <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{cursor: "default"}}>
-                        {date}
-                    </Typography>
-                </Tooltip>
             </Grid>
             <Grid sx={{maxHeight: "100px", overflow: "hidden"}}>
                 <Typography variant="body2" color="text.secondary">

@@ -10,7 +10,9 @@ const Info = ({user, refetch}) => {
     const skills =
         originalSkills &&
         [...originalSkills].sort((a, b) => {
-            a.skill.title.localeCompare(b.skill.title)
+            const textA = a.skill.title.toUpperCase()
+            const textB = b.skill.title.toUpperCase()
+            return textA < textB ? -1 : textA > textB ? 1 : 0
         })
 
     const {palette} = useTheme()
