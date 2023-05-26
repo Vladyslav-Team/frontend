@@ -42,7 +42,7 @@ const ProofActivity = ({
             <CardActions sx={CardActionsStyle}>
                 {isDraft && <Edit proofId={proofId} />}
                 {isEditOrAdded && (
-                    <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis}/>
+                    <ActionsButtonsEditAndAdded statusVis={statusVis} setVis={setVis} />
                 )}
                 {isDraft && (
                     <ActionsButtonDraft
@@ -51,7 +51,7 @@ const ProofActivity = ({
                         proofId={proofId}
                         statusVis={statusVis}
                         allProofsRefetch={allProofsRefetch}
-                        refetch={refetch} 
+                        refetch={refetch}
                     />
                 )}
                 {isPublish && <ActionsButtonShowMore proofId={proofId} />}

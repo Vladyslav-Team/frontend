@@ -107,9 +107,7 @@ const ProofHeader = ({
                 )}
             </Typography>
             <Tooltip title={<Time time={time} />} arrow>
-                <Typography
-                    variant="body2" 
-                    color="#ffffff">
+                <Typography variant="body2" color="#ffffff">
                     {date}
                 </Typography>
             </Tooltip>

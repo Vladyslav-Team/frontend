@@ -25,7 +25,7 @@ const Proof = ({
     allProofsRefetch,
     staticsSkiils,
     staticsProofs,
-   refetch
+    refetch,
 }) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
