@@ -46,7 +46,7 @@ export const Skill = ({
                     marginRight: "5px",
                     marginBottom: "5px",
                     maxWidth: "70px",
-                    bgcolor: color,
+                    backgroundColor: color,
                     "& .MuiChip-deleteIcon": {
                         display: "none",
                     },
@@ -184,3 +184,4 @@ const ProofSkills = ({
 }
 
 export {ProofSkills}
+
