@@ -25,6 +25,7 @@ const Proof = ({
     allProofsRefetch,
     staticsSkiils,
     staticsProofs,
+   refetch
 }) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
@@ -142,6 +143,7 @@ const Proof = ({
                     watch={watch}
                     allProofsRefetch={allProofsRefetch}
                     talentId={id[0]}
+                    refetch={refetch}
                 />
             </Grid>
             {result.isError && (

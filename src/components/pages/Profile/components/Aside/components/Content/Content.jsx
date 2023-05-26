@@ -3,7 +3,7 @@ import styles from "./Content.module.css"
 import {Proof} from "./components/Proof"
 import {useStatisticQuery} from "./components/Proof/api"
 
-const Content = ({allProofs}) => {
+const Content = ({allProofs, refetch}) => {
     const id = location.pathname.replace("/profile/", "").split("/")
     const staticsSkiils = useStatisticQuery({talentId: id, type: "skills"})
     const staticsProofs = useStatisticQuery({talentId: id, type: "proofs"})
@@ -19,6 +19,7 @@ const Content = ({allProofs}) => {
                             allProofsRefetch={allProofs.refetch}
                             staticsSkiils={staticsSkiils.data}
                             staticsProofs={staticsProofs.data}
+                            refetch={refetch}
                         />
                     )
                 })}
