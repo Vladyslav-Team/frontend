@@ -4,6 +4,8 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider"
 import {DatePicker} from "@mui/x-date-pickers/DatePicker"
 import {Controller} from "react-hook-form"
 import {registerOptions} from "../../../../pages/SignUp/validationRules"
+import dayjs from "dayjs"
+import {limitBirthDate} from "../../../../pages/SignUp/components"
 
 const BirthDate = ({control, errors}) => {
     return (
@@ -33,6 +35,7 @@ const BirthDate = ({control, errors}) => {
                             }}
                             {...restField}
                             disableFuture
+                            maxDate={dayjs(limitBirthDate().toISOString())}
                         />
                     </LocalizationProvider>
                 )}

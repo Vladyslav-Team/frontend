@@ -1,4 +1,5 @@
 import countriesList from "../../../shared/api/constants/countries.json"
+import {limitBirthDate} from "./components"
 
 const validatePassword = (value) => {
     // Check for invalid passwords - 8 identical characters
@@ -29,10 +30,11 @@ const validateLocation = (value) => {
 }
 
 const validateDate = (value) => {
-    const today = new Date()
+    const today = limitBirthDate()
+    today.setHours(new Date().getHours())
     const birthDate = new Date(value)
     if (birthDate.getTime() > today.getTime()) {
-        return "Birth date cannot be later than today"
+        return "You must be at least 18 years old"
     }
     if (birthDate.getYear() < 0) {
         return "This date is too old. Please select a more recent date"

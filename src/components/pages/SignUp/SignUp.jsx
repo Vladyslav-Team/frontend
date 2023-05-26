@@ -8,6 +8,8 @@ import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
 import jwtDecode from "jwt-decode"
+import {limitBirthDate} from "./components"
+
 const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
@@ -100,7 +102,7 @@ const SignUp = ({AvatarIMG}) => {
                             <input
                                 type="date"
                                 min="1900-01-01"
-                                max={new Date().toISOString().split("T")[0]}
+                                max={limitBirthDate().toISOString().split("T")[0]}
                                 {...register("birthday", registerOptions.birthday)}
                             />
                             {errors.birthday && (
