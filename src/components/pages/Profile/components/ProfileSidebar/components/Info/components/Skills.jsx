@@ -50,6 +50,7 @@ const Skills = ({skills, status, talentId, refetch}) => {
     const {data} = useJwtCheck()
     const idTalent = location.pathname.replace("/profile/", "")
     const isHome = +data.id === +idTalent
+    console.log(skills)
 
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget)
@@ -60,7 +61,7 @@ const Skills = ({skills, status, talentId, refetch}) => {
             return (
                 <Skill
                     name={skill.skill.title}
-                    color="primary"
+                    color={skill.verified ? "primary" : "default"}
                     key={skill.skill.id}
                     skillId={skill.skill.id}
                     talentId={talentId}
