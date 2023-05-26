@@ -1,9 +1,10 @@
 .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 230px;
-    height: 290px;
+    height: 310px;
     color: #0a6e9a;
     font-weight: bold;
     text-align: center;
@@ -24,8 +25,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1 0 auto;
-    padding: 30px 8px 6px;
+    padding: 25px 8px 6px;
 }
 
 .content > * {
@@ -36,10 +36,9 @@
     font-weight: 600;
 }
 .proof {
-    text-overflow: ellipsis;
-    white-space: wrap;
-    word-wrap: wrap;
-    max-width: 200px;
-    white-space: wrap;
-    overflow: hidden;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
 }

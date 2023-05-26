@@ -4,6 +4,7 @@ import {useJwtCheck} from "../../../../../../../../../../../shared/api/hooks"
 import {ActionHeaderProofButtons} from "./components"
 import Tooltip from "@mui/material/Tooltip"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
+import WhatshotIcon from "@mui/icons-material/Whatshot"
 
 const Time = ({time}) => {
     return (
@@ -27,19 +28,28 @@ const ProofHeader = ({
     allProofsRefetch,
     talentId,
     publication_date,
+    staticsProofs,
 }) => {
     const {data} = useJwtCheck()
     const isYourAccount = +talentId === data.id
+    const isSponsor = data.scope === "ROLE_SPONSOR"
     const [showConfirm, setShowConfirm] = useState(false)
     const [statusColor, setStatusColor] = useState()
     const [option, setOption] = useState()
     const time = publication_date && publication_date.split(" ")[0]
     const date = publication_date && publication_date.split(" ")[1]
-
+    let isMostProof = false
     const handleShowConfirm = (option) => {
         setShowConfirm(true)
         setOption(option)
     }
+
+    staticsProofs &&
+        staticsProofs.mostKudosed.map((id) => {
+            if (id === +proofId) {
+                isMostProof = true
+            }
+        })
 
     useEffect(() => {
         const handleStatusColor = () => {
@@ -78,15 +88,26 @@ const ProofHeader = ({
                 backgroundColor: statusColor,
                 color: "#ffffff",
             }}>
-            <Typography variant="h6" zIndex={20}>
-                {status}
+            <Typography
+                variant="h6"
+                zIndex={20}
+                textAlign={"center"}
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                }}>
+                {status}{" "}
+                {isMostProof && (
+                    <WhatshotIcon
+                        sx={{
+                            color: "#f17e28",
+                            marginLeft: "6px",
+                        }}
+                    />
+                )}
             </Typography>
-            <Tooltip title={<Time time={time} />} arrow>
-                <Typography variant="body2" color="#ffffff">
-                    {date}
-                </Typography>
-            </Tooltip>
-            {isYourAccount && (
+
+            {isYourAccount && !isSponsor && (
                 <ActionHeaderProofButtons {...propsActionHeaderProofButtons} />
             )}
         </Grid>

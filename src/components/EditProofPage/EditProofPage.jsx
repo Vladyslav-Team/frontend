@@ -7,7 +7,7 @@ import {useLocation} from "react-router"
 const EditProofPage = () => {
     const location = useLocation()
     const idProof = location.pathname.replace("/profile/", "").split("/")[2]
-    const {data} = useGetAllProofQuery(`/${idProof}`, {
+    const {data} = useGetAllProofQuery(`${idProof}`, {
         refetchOnMountOrArgChange: true,
     })
     return (

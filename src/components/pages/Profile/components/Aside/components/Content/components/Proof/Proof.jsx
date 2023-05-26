@@ -10,6 +10,11 @@ import {AlertError} from "../../../../../../../../../shared/components/AlertErro
 import {StyledProof} from "./StyledProof"
 import {useRefetchAndClose} from "./hooks"
 import {useNavigate} from "react-router"
+import {ProofSkills} from "./components/ProofActivity/components"
+import {SponsorKudoses} from "../../../../../../../../AddKudosForm/components/SponsorKudoses"
+import {useGetKudosQuery} from "../../../../../../../../AddKudosForm/api"
+import {Grid} from "@mui/material"
+import {useGetSkillsByProofsQuery, useStatisticQuery} from "./api"
 
 const Proof = ({
     proof,
@@ -18,13 +23,18 @@ const Proof = ({
     statusVis,
     setVis,
     allProofsRefetch,
-    refetch,
+    staticsSkiils,
+    staticsProofs,
 }) => {
     const {title, description, data, status, publication_date} = proof
     const navigate = useNavigate()
     const id = location.pathname.replace("/profile/", "").split("/")
+    const proofId = proof.id
+    const idProof = proof.id
     const [addProof, result] = useAddProofMutation()
     const [changeProof, changeProofResult] = useChangeProofMutation()
+    const skills = useGetSkillsByProofsQuery(idProof)
+
     const {
         register,
         handleSubmit,
@@ -61,6 +71,13 @@ const Proof = ({
         }
     }
 
+    const KudosInfo = useGetKudosQuery(
+        {proofId},
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    )
+
     useEffect(() => {
         if (changeProofResult.data) {
             navigate(-1)
@@ -79,6 +96,7 @@ const Proof = ({
                 allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
                 publication_date={publication_date}
+                staticsProofs={staticsProofs}
             />
             {isEditMode ? (
                 <ProofForm
@@ -92,20 +110,40 @@ const Proof = ({
                     errors={errors}
                 />
             ) : (
-                <ProofContent title={title} data={data} description={description} />
+                <ProofContent
+                    title={title}
+                    data={data}
+                    description={description}
+                    publication_date={publication_date}
+                    proofId={proof && proof.id}
+                />
             )}
-            <ProofActivity
-                isEditMode={isEditMode}
+            <ProofSkills
                 proofId={proof && proof.id}
-                statusVis={statusVis}
-                status={status}
-                setVis={setVis}
-                addProof={addProof}
-                watch={watch}
-                allProofsRefetch={allProofsRefetch}
                 talentId={id[0]}
-                refetch={refetch}
+                status={status}
+                isEditMode={isEditMode}
+                statusVis={statusVis}
+                staticsSkiils={staticsSkiils}
             />
+            <Grid>
+                <SponsorKudoses
+                    KudosInfo={KudosInfo}
+                    isHaveSkills={skills.isSuccess && skills.data.skills.length !== 0}
+                    isDraft={status === "DRAFT"}
+                />
+                <ProofActivity
+                    isEditMode={isEditMode}
+                    proofId={proof && proof.id}
+                    statusVis={statusVis}
+                    status={status}
+                    setVis={setVis}
+                    addProof={addProof}
+                    watch={watch}
+                    allProofsRefetch={allProofsRefetch}
+                    talentId={id[0]}
+                />
+            </Grid>
             {result.isError && (
                 <AlertError defaultStatus={true} massageError={result.error.message} />
             )}

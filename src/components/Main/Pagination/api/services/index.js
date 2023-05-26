@@ -7,9 +7,13 @@ export const api = createApi({
     endpoints: (build) => {
         return {
             getTalents: build.query({
-                query: ({pageURL, typeCards, sortURL}) => ({
-                    url: `/${typeCards}?page=${pageURL}${
-                        sortURL === "newest" ? "&newest=true" : "&newest=false"
+                query: ({pageURL, typeCards, sortURL, skills}) => ({
+                    url: `/${typeCards}?page=${pageURL}&newest=${
+                        sortURL === "newest"
+                    }&skills=${
+                        !skills.join(",").includes("%")
+                            ? encodeURIComponent(skills.join(","))
+                            : skills.join(",")
                     }`,
                     method: "GET",
                 }),

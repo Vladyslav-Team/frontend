@@ -14,7 +14,7 @@ export const GetAllInfoByID = createApi({
             }),
             GetAllProof: build.query({
                 query: (id) => ({
-                    url: `/proofs${id}`,
+                    url: `/proofs/${id}`,
                     method: "GET",
                 }),
             }),
@@ -44,6 +44,19 @@ export const GetAllInfoByID = createApi({
                     method: "DELETE",
                 }),
             }),
+            AddSkillProfile: build.mutation({
+                query: ({talentId, body}) => ({
+                    url: `/talents/${talentId}/skills`,
+                    method: "POST",
+                    data: body,
+                }),
+            }),
+            DeleteSkillProfile: build.mutation({
+                query: ({talentId, skillId}) => ({
+                    url: `/talents/${talentId}/skills/${skillId}`,
+                    method: "DELETE",
+                }),
+            }),
         }
     },
 })
@@ -55,4 +68,6 @@ export const {
     useChangeStatusProofMutation,
     useChangeProofMutation,
     useDeleteProofMutation,
+    useAddSkillProfileMutation,
+    useDeleteSkillProfileMutation,
 } = GetAllInfoByID

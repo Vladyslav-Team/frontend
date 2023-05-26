@@ -11,8 +11,7 @@ import {useJwtCheck} from "../../shared/api/hooks"
 const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()
     let location = useLocation()
-    const isSignup =
-        location.pathname === "/talents/signup" || location.pathname === "/talents/signin"
+    const isSignup = location.pathname === "/signup" || location.pathname === "/signin"
 
     const isTalentsPage = location.pathname === "/talents"
     const isProofsPage = location.pathname === "/proofs"
@@ -20,14 +19,14 @@ const Header = ({AvatarIMG}) => {
     return (
         <header className={styles.header}>
             <div className={styles.logo_wrap}>
-                <NavLink to={"/talents?page=1"}>
+                <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                     <Logo />
                 </NavLink>
             </div>
             <nav className={styles.navigation}>
                 <ul>
                     <li>
-                        <NavLink to={"/talents?page=1"}>
+                        <NavLink to={"/talents?page=1&filterBySkills=nofilter"}>
                             <span
                                 className={`${styles.navItem} ${
                                     isTalentsPage && styles.active

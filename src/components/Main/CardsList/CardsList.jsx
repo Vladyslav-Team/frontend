@@ -3,8 +3,9 @@ import {NameStage, ProofCard, TalentCard} from "./components/TalentCard"
 import Grid from "@mui/material/Grid"
 import styles from "./CardsList.module.css"
 
-const CardsList = ({GetData, type}) => {
-    const {data, currentData, refetch} = GetData
+const CardsList = ({GetData, type, setSort, sort, skills}) => {
+    const {data, currentData, refetch, isError} = GetData
+
     const Cards = useMemo(() => {
         return (
             currentData &&
@@ -24,12 +25,21 @@ const CardsList = ({GetData, type}) => {
 
     return (
         <div className={styles.wrapper}>
-            {data && <NameStage type={type} refetch={refetch} />}
+            {skills && (
+                <NameStage
+                    type={type}
+                    setSort={setSort}
+                    sort={sort}
+                    refetch={refetch}
+                    skills={skills}
+                />
+            )}
             <Grid
                 container
                 spacing={10}
                 sx={{display: "flex", justifyContent: "center", paddingTop: "20px"}}>
                 {Cards && Cards}
+                {GetData.isError && "Talents not found"}
             </Grid>
         </div>
     )

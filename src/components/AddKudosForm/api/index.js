@@ -7,8 +7,8 @@ export const KudosApi = createApi({
     endpoints: (build) => {
         return {
             AddKudos: build.mutation({
-                query: ({proofId, body}) => ({
-                    url: `/proofs/${proofId}/kudos`,
+                query: ({proofId, skillId, body}) => ({
+                    url: `/proofs/${proofId}/skills/${skillId}/kudos`,
                     method: "POST",
                     data: body,
                 }),
@@ -19,8 +19,14 @@ export const KudosApi = createApi({
                     method: "GET",
                 }),
             }),
+            GetSkillKudos: build.query({
+                query: ({idProof, skillId}) => ({
+                    url: `/proofs/${idProof}/skills/${skillId}/kudos`,
+                    method: "GET",
+                }),
+            }),
         }
     },
 })
 
-export const {useAddKudosMutation, useGetKudosQuery} = KudosApi
+export const {useAddKudosMutation, useGetKudosQuery, useGetSkillKudosQuery} = KudosApi
