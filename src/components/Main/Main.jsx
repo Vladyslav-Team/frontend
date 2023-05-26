@@ -42,7 +42,6 @@ const Main = ({url, type}) => {
     const [page, setPage] = useState(null)
     const [sort, setSort] = useState(false)
 
-    console.log(window.location.href.split("&")[0])
     const skills =
         window.location.href.split("&")[1] &&
         window.location.href.split("&")[1].includes("=") &&
@@ -62,7 +61,7 @@ const Main = ({url, type}) => {
             refetchOnMountOrArgChange: true,
         }
     )
-    console.log(searchParams.get("filterBySkills") === null)
+
     useEffect(() => {
         if (
             (type === "talents" && searchParams.get("filterBySkills") === null) ||

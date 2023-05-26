@@ -6,7 +6,15 @@ import AddIcon from "@mui/icons-material/Add"
 import {useJwtCheck} from "../../../../../../../../../../../../shared/api/hooks"
 import {useGetSkillKudosQuery} from "../../../../../../../../../../../AddKudosForm/api"
 
-export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSponsor}) => {
+export const Skill = ({
+    el,
+    isPublished,
+    handleDelete,
+    isHidden,
+    idProof,
+    isSponsor,
+    color,
+}) => {
     const skillId = el.id
     const skillsKudosInfo = useGetSkillKudosQuery(
         {idProof, skillId},
@@ -38,6 +46,7 @@ export const Skill = ({el, isPublished, handleDelete, isHidden, idProof, isSpons
                     marginRight: "5px",
                     marginBottom: "5px",
                     maxWidth: "70px",
+                    backgroundColor: color,
                     "& .MuiChip-deleteIcon": {
                         display: "none",
                     },
@@ -117,28 +126,16 @@ const ProofSkills = ({
                 color = applyStats(el.id)
 
                 return (
-                    <Tooltip arrow title={el.title} key={el.id}>
-                        <Chip
-                            label={el.title}
-                            sx={{
-                                marginRight: "5px",
-                                marginBottom: "5px",
-                                maxWidth: "70px",
-                                backgroundColor: color,
-                                "& .MuiChip-deleteIcon": {
-                                    display: "none",
-                                },
-                                "&:hover": {
-                                    "& .MuiChip-deleteIcon": {
-                                        display: isPublished ? "none" : "block",
-                                    },
-                                    backgroundColor: isPublished ? undefined : "red",
-                                },
-                            }}
-                            onDelete={!isPublished ? () => handleDelete(el.id) : null}
-                            color={isHidden ? "primary" : "default"}
-                        />
-                    </Tooltip>
+                    <Skill
+                        el={el}
+                        color={color}
+                        isPublished={isPublished}
+                        handleDelete={handleDelete}
+                        isHidden={isHidden}
+                        idProof={proofId}
+                        isSponsor={jwt.data.scope === "ROLE_SPONSOR"}
+                        key={el.id}
+                    />
                 )
             })
     }

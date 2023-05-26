@@ -48,7 +48,6 @@ const ProofHeader = ({
         staticsProofs.mostKudosed.map((id) => {
             if (id === +proofId) {
                 isMostProof = true
-                console.log(isMostProof)
             }
         })
 
