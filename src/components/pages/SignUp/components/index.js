@@ -1,0 +1,1 @@
+export {limitBirthDate} from "./limitBirthDate"
