@@ -102,3 +102,4 @@ const Skills = ({skills, status, talentId, refetch}) => {
 }
 
 export {Skills}
+

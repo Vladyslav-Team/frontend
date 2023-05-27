@@ -5,6 +5,7 @@ import {Grid} from "@mui/material"
 import {Typography} from "@mui/material"
 import {useHistoryPaymentsQuery} from "../Clicker/components/api"
 import {useJwtCheck} from "../../shared/api/hooks"
+import {useTheme} from "@emotion/react"
 
 const columns = [
     {
@@ -42,6 +43,8 @@ const columns = [
 const PaymentsHistory = () => {
     const jwt = useJwtCheck()
     const {data} = useHistoryPaymentsQuery(jwt.data && jwt.data.id)
+    const {palette} = useTheme()
+
     return (
         <Grid
             display={"flex"}
@@ -53,13 +56,38 @@ const PaymentsHistory = () => {
             <Typography
                 variant="h4"
                 fontWeight={"600"}
-                color={"primary"}
-                paddingBottom={"10px"}>
+                paddingBottom={"10px"}
+                sx={{
+                    color: palette.mode === "dark" ? "#fff" : palette.primary.main,
+                }}>
                 Payments History
             </Typography>
             <Box sx={{height: 400}}>
                 {data && data.status !== "No orders were found. Try next time." ? (
-                    <DataGrid rows={data ? data.orders : []} columns={columns} />
+                    <DataGrid
+                        rows={data ? data.orders : []}
+                        columns={columns}
+                        sx={{
+                            "& > div > div": {
+                                "&::-webkit-scrollbar": {
+                                    width: "8px",
+                                },
+
+                                "&::-webkit-scrollbar-thumb": {
+                                    backgroundColor: "#888",
+                                    borderRadius: "4px",
+                                },
+
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                    backgroundColor: "#555",
+                                },
+
+                                "&::-webkit-scrollbar-track": {
+                                    backgroundColor: "#f1f1f1",
+                                },
+                            },
+                        }}
+                    />
                 ) : (
                     <Typography
                         fontWeight={"600"}

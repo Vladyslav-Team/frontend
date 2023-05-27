@@ -2,13 +2,14 @@ import React from "react"
 import {Avatar} from "../../../../Avatar"
 import {VisitButton} from "./components/VisitButton"
 import PropTypes from "prop-types"
-import styles from "./TalentCard.module.css"
 import {SigninPopupContext} from "../../../../../context"
-import {Chip} from "@mui/material"
+import {Box, Grid, Chip} from "@mui/material"
+import {useTheme} from "@emotion/react"
 import {useNavigate} from "react-router-dom"
 
 const TalentCard = ({talent}) => {
     const navigate = useNavigate()
+    const {palette} = useTheme()
     const filterSkillsOnURL =
         window.location.href.split("&")[1] &&
         window.location.href.split("&")[1].split("=")[1].split(",")
@@ -61,15 +62,60 @@ const TalentCard = ({talent}) => {
     }
 
     return (
-        <div className={styles.card}>
-            <div className={styles.background}>
+        <Grid
+            container
+            sx={{
+                position: "relative",
+                width: "230px",
+                height: "290px",
+                flexDirection: "column",
+                color: palette.primary.main,
+                textAlign: "center",
+                fontSize: "14px",
+                border: `1px solid ${palette.primary.main}`,
+                borderRadius: "8px",
+                boxShadow: "0 0 10px 4px rgba(0, 0, 0, 0.25)",
+                overflow: "hidden",
+                bgcolor: palette.neutral.secondary,
+            }}>
+            <Box
+                sx={{
+                    width: "100%",
+                    height: "45px",
+                    backgroundColor: palette.primary.main,
+                }}>
                 <Avatar avatar={talent.image} size={58} />
-            </div>
-            <div className={styles.content}>
-                <div>{`${talent.name} ${talent.surname}`}</div>
-                <div className={styles.location}>{talent.location}</div>
-                <span>{talent.experience}</span>
-                <div className={styles.proof}>
+            </Box>
+            <Grid
+                container
+                sx={{
+                    flex: "1 0 auto",
+                    flexDirection: "column",
+                    alignContent: "center",
+                    padding: "27px 8px 6px",
+                    "& > * ": {
+                        mt: "3px",
+                        fontSize: "14px",
+
+                        textOverflow: "ellipsis",
+                        maxWidth: "200px",
+                        overflow: "hidden",
+                    },
+                }}>
+                <Box sx={{fontWeight: "bold"}}>{`${talent.name} ${talent.surname}`}</Box>
+                <Box>{talent.location}</Box>
+                <Box sx={{wordBreak: "normal", textOverflow: "ellipsis"}}>
+                    {talent.experience}
+                </Box>
+                <Box
+                    sx={{
+                        mt: 1,
+                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        gap: "4px",
+                    }}>
                     {talent.skills &&
                         Array.from(result)
                             .slice(0, 4)
@@ -81,15 +127,18 @@ const TalentCard = ({talent}) => {
                                         onClick={() => onClickSkils(skill)}
                                         key={i}
                                         sx={{
-                                            bgcolor: "rgba(10, 110, 154,1)",
+                                            bgcolor: palette.primary.main,
                                             color: "#ffffff",
                                             fontSize: "12px",
+                                            "&:hover": {
+                                                backgroundColor: "#bdbdbd",
+                                            },
                                         }}
                                     />
                                 )
                             })}
-                </div>
-            </div>
+                </Box>
+            </Grid>
             <SigninPopupContext.Consumer>
                 {({setVisibilitySigninPopup}) => (
                     <VisitButton
@@ -99,7 +148,7 @@ const TalentCard = ({talent}) => {
                     />
                 )}
             </SigninPopupContext.Consumer>
-        </div>
+        </Grid>
     )
 }
 

@@ -9,6 +9,7 @@ import {PopUpProof} from "./components/PopUpProof"
 import {useJwtCheck} from "../../../../../shared/api/hooks"
 import {Info} from "./components/Info"
 import {AddProof} from "./components/AddProof"
+import {Box} from "@mui/material"
 
 const Aside = ({user, refetch}) => {
     const location = useLocation()
@@ -33,7 +34,7 @@ const Aside = ({user, refetch}) => {
     const isPageNotZero = (allProofs.data && allProofs.data.totalPages) > 1
 
     return (
-        <div className={styles.wrapper}>
+        <Box className={styles.wrapper}>
             <Info user={user} />
             {data.id && data.scope === "ROLE_TALENT" && (
                 <AddProof
@@ -58,7 +59,7 @@ const Aside = ({user, refetch}) => {
                     sx={{position: "relative", bottom: 0, transform: "translateX(-50%)"}}
                 />
             )}
-        </div>
+        </Box>
     )
 }
 

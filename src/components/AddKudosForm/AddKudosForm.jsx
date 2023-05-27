@@ -102,12 +102,16 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
                         sx={{
                             width: "85px",
                             marginRight: "5px",
+                            "& > div": {
+                                color: "#000000",
+                            },
                         }}
                         id="outlined-basic"
                         label="Add kudos"
                         variant="outlined"
                         type="number"
                         size="small"
+                        focused
                         value={amount}
                         onChange={handleAmountChange}
                         inputProps={{min: 0}}
@@ -140,3 +144,4 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
 }
 
 export {AddKudosForm}
+

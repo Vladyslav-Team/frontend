@@ -1,9 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styles from "./VisitButton.module.css"
-
 import {useJwtCheck} from "../../../../../../../shared/api/hooks"
 import {useNavigate} from "react-router-dom"
+import {Button, Typography} from "@mui/material"
+import {useTheme} from "@emotion/react"
 
 const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visit"}) => {
     const {data} = useJwtCheck()
@@ -15,11 +15,30 @@ const VisitButton = ({setVisibilitySigninPopup, id, to = "profile", text = "Visi
             setVisibilitySigninPopup({status: true, id: id, type: "proof"})
         }
     }
+    const {palette} = useTheme()
+
     return (
         <>
-            <button className={styles.visitButton} onClick={handleClick}>
-                <span className={styles.link}>{text}</span>
-            </button>
+            <Button
+                variant="contained"
+                sx={{
+                    position: "absolute",
+                    bottom: "0",
+                    width: "100%",
+                    height: "40px",
+                    borderRadius: 0,
+                    color: palette.neutral.secondary,
+                    backgroundColor: palette.mode === "dark" ? "#313131" : "none",
+                    "&:hover": {
+                        backgroundColor: palette.mode === "dark" ? "#121212" : "none",
+                    },
+                }}
+                onClick={handleClick}>
+                <Typography
+                    sx={{fontWeight: "bold", fontSize: "14px", textTransform: "none"}}>
+                    {text}
+                </Typography>
+            </Button>
         </>
     )
 }

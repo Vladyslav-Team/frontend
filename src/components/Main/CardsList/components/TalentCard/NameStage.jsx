@@ -7,6 +7,7 @@ import RefreshIcon from "@mui/icons-material/Refresh"
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
 import {SkillSearch} from "./SkillSearch"
 import {Chip} from "@mui/material"
+import {useTheme} from "@emotion/react"
 
 const Skill = ({title, handleRemoveSkill}) => {
     return (
@@ -40,6 +41,7 @@ const NameStage = ({type, refetch, skills}) => {
     const typeSort = location.search.split("&")[1] ? sort : "newest"
 
     const [isFiltered, setIsFiltered] = useState(false)
+    const {palette} = useTheme()
     let filterQuery = []
     const handleChange = (event) => {
         if (!location.search.includes("sort")) {
@@ -87,7 +89,12 @@ const NameStage = ({type, refetch, skills}) => {
                 pt={2}
                 sx={
                     type === "talents" && {
-                        borderBottom: "1px solid #000000",
+                        borderBottom: `1px solid ${
+                            type === "talents" &&
+                            (palette.mode === "dark"
+                                ? palette.neutral.secondary
+                                : palette.neutral.black)
+                        }`,
                         pb: 1,
                         mb: 1,
                     }
