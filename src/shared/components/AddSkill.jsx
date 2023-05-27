@@ -67,7 +67,7 @@ const AddSkill = ({
     const isProfile = status === "Profile"
     let updateSkill, result
     const skillTitles = skillsByProof && skillsByProof.map((skill) => skill.title)
-    const skillTitleProfile = skills && skills.map((skill) => skill.title)
+    const skillTitleProfile = skills && skills.map((skill) => skill.skill.title)
 
     if (isProfile) {
         ;[updateSkill, result] = useAddSkillProfileMutation()
@@ -133,15 +133,16 @@ const AddSkill = ({
                 role !== "sponsors" &&
                 talent.data &&
                 talent.data.skills.map((obj, id) => {
-                    const isDisabled = skillTitles && skillTitles.includes(obj.title)
+                    const isDisabled =
+                        skillTitles && skillTitles.includes(obj.skill.title)
                     return (
                         <MenuItem
                             key={obj.id}
                             disabled={isDisabled}
                             onClick={(event) =>
-                                handleMenuItemClick(event, id, obj.title)
+                                handleMenuItemClick(event, id, obj.skill.title)
                             }>
-                            {obj.title}
+                            {obj.skill.title}
                         </MenuItem>
                     )
                 })

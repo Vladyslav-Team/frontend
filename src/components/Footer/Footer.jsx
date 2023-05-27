@@ -7,7 +7,7 @@ const Footer = () => {
         <footer className={styles.footer_wrap}>
             <div className={styles.footer_column}>
                 <Logo />
-                <p className={styles.moto}>Scoup out your skills</p>
+                <p className={styles.moto}>Scope out your skills</p>
                 <p className={styles.main_text}>@Vladyslav Khrychov</p>
             </div>
             <div className={styles.line}></div>
