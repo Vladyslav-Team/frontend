@@ -20,6 +20,7 @@ const Skill = ({idProof, skill, isSponsor, result = {data: null}}) => {
 
     useEffect(() => {
         result?.data && skillsKudosInfo.refetch()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.data, skillsKudosInfo.refetch])
 
     return (

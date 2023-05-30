@@ -15,12 +15,9 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
     const [amount, setAmount] = useState(0)
     const [totalCount, setTotalCount] = useState(skills ? skills.length * amount : 0)
     const [show, setShow] = useState(false)
-
     const id = jwt.data.id
     const role = "sponsors"
-
     const {
-        register,
         handleSubmit,
         formState: {errors},
     } = useForm()
@@ -43,7 +40,6 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
         skills.map((skill) => {
             const skillId = +skill.id
             const skillAmount = +skill.amount
-
             !!skillAmount &&
                 updateKudos({
                     proofId,
@@ -72,6 +68,7 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
 
     useEffect(() => {
         result.data && KudosInfo.isSuccess && KudosInfo.refetch()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.status])
 
     useEffect(() => {
@@ -144,4 +141,3 @@ const AddKudosForm = ({proofId, skills, setSkills, updateKudos, result}) => {
 }
 
 export {AddKudosForm}
-

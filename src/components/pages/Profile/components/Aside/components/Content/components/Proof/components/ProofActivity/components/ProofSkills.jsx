@@ -85,7 +85,6 @@ const ProofSkills = ({
     const isAdded = statusVis === "Added"
     const isEdit = statusVis === "Edit"
     const jwt = useJwtCheck()
-    const idProof = proofId
     let marginBottomForGridWrapper = 0
     const isHaveSkills = data === undefined || data.skills.length < 1
     const handleOpen = (e) => {
@@ -184,4 +183,3 @@ const ProofSkills = ({
 }
 
 export {ProofSkills}
-

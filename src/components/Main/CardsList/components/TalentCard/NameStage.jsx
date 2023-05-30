@@ -4,7 +4,7 @@ import Select from "@mui/material/Select"
 import Grid from "@mui/material/Grid"
 import IconButton from "@mui/material/IconButton"
 import RefreshIcon from "@mui/icons-material/Refresh"
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import {SkillSearch} from "./SkillSearch"
 import {Chip} from "@mui/material"
 import {useTheme} from "@emotion/react"
@@ -34,7 +34,6 @@ const Skill = ({title, handleRemoveSkill}) => {
 const NameStage = ({type, refetch, skills}) => {
     const navigate = useNavigate()
     const location = useLocation()
-    const [searchParams] = useSearchParams()
     const sort =
         location.search.split("&")[1] &&
         location.search.split("&")[1].replace("sort=", "")
@@ -76,6 +75,7 @@ const NameStage = ({type, refetch, skills}) => {
         } else if (location.search.split("&")[1]) {
             setIsFiltered(true)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.search])
     return (
         <Grid p={2}>

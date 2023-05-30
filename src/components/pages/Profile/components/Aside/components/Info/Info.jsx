@@ -31,10 +31,8 @@ const Info = ({user}) => {
                 <span>{user.experience}</span>
             </div>
             <div className={styles.biography}>
-                {data.scope === "ROLE_SPONSOR" && +talentId === data.id ? (
+                {data.scope === "ROLE_SPONSOR" && +talentId === data.id && (
                     <Box sx={{fontSize: "24px"}}>Balance: {user.balance}</Box>
-                ) : (
-                    <Biography biography={user.about} />
                 )}
                 {data.scope === "ROLE_TALENT" && +talentId === data.id ? (
                     <Box sx={{fontSize: "24px"}}>Amount of Kudoses: {user.balance}</Box>

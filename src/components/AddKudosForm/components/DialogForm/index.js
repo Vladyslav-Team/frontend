@@ -1,1 +1,1 @@
-import {DialogForm} from "./DialogForm"
+export {DialogForm} from "./DialogForm"

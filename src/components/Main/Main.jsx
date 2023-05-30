@@ -5,7 +5,7 @@ import {CardsList} from "./CardsList"
 import {useNavigate, useSearchParams} from "react-router-dom"
 import styles from "./Main.module.css"
 
-const redirectReset = (type, pageURL, url, navigate, setPage, skills) => {
+const redirectReset = (type, pageURL, url, navigate, setPage) => {
     if (type === "sort") {
         navigate(`/${url}=${pageURL !== 0 ? pageURL : 1}&sort=newest`)
         setPage(pageURL)

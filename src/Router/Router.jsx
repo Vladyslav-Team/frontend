@@ -46,7 +46,6 @@ const Router = ({AvatarIMG}) => {
                 path={"profile/:talentId/proof/:proofId/edit"}
                 element={<EditProofPage />}
             />
-
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
