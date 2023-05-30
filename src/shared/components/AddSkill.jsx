@@ -60,7 +60,7 @@ const AddSkill = ({
     const jwt = useJwtCheck()
     const role = jwt.data.scope.split("_")[1].toLowerCase() + "s"
     const talent = useGetAllUserInfoByIDQuery({id: idTalent, role})
-    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
     const data = useGetSkillsQuery(value)
     let dataArray = data.isSuccess && data.data.skills
@@ -166,4 +166,3 @@ const AddSkill = ({
 }
 
 export {AddSkill}
-

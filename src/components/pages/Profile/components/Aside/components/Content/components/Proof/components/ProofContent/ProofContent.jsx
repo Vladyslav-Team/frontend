@@ -1,10 +1,7 @@
 import React from "react"
 import {CardContent, Grid, Typography} from "@mui/material"
 
-const ProofContent = ({title, data, description, publication_date, proofId}) => {
-    const time = publication_date && publication_date.split(" ")[0]
-    const date = publication_date && publication_date.split(" ")[1]
-
+const ProofContent = ({title, description}) => {
     return (
         <CardContent sx={{flex: "1 0 auto"}}>
             <Grid

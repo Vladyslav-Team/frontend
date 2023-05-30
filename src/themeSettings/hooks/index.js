@@ -1,1 +1,1 @@
-export { useMode } from "./useMode";
+export {useMode} from "./useMode"

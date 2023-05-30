@@ -1,13 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import {
-    AvatarChange,
-    NameStage,
-    BasicInfoChange,
-    AboutMeChange,
-    SecurityChange,
-} from "./components"
+import {AvatarChange, NameStage, BasicInfoChange, AboutMeChange} from "./components"
 import {useForm} from "react-hook-form"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import {useLocation, useNavigate} from "react-router-dom"

@@ -2,7 +2,6 @@ import {Button} from "@mui/material"
 import React from "react"
 import {useNavigate} from "react-router-dom"
 import {ConfirmPopup} from "../../ConfirmPopup"
-import {useTheme} from "@emotion/react"
 
 export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
     const navigate = useNavigate()
@@ -32,7 +31,6 @@ export const ActionsButtonDraft = ({
     proofId,
     statusVis,
     allProofsRefetch,
-    refetch,
 }) => {
     const handleShowConfirm = async () => {
         setShowConfirm(true)

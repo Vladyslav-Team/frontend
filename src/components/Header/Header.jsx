@@ -12,7 +12,6 @@ import {ColorModeContext} from "../../themeSettings"
 import LightModeIcon from "@mui/icons-material/LightMode"
 import DarkModeIcon from "@mui/icons-material/DarkMode"
 import {useTheme} from "@emotion/react"
-import styled from "@emotion/styled"
 
 const Header = ({AvatarIMG}) => {
     const {data} = useJwtCheck()

@@ -176,7 +176,11 @@ const SignUp = ({AvatarIMG}) => {
             {result.error && (
                 <AlertError
                     defaultStatus={true}
-                    massageError={"This e-mail is already taken"}
+                    massageError={
+                        result.error.message !== "Request failed with status code 409"
+                            ? "The registration is currently unavailable. Try again later."
+                            : "This e-mail is already taken"
+                    }
                 />
             )}
         </>

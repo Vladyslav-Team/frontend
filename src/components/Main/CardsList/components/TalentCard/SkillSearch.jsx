@@ -16,7 +16,6 @@ import {useLocation, useNavigate} from "react-router-dom"
 const SkillSearch = ({setIsFiltered}) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchQuery, setSearchQuery] = useState("")
-    const [setSelectedIndex] = useState(1)
     const [value] = useDebounce(searchQuery, 1000, {trailing: true})
 
     const data = useGetSkillsQuery(value)
