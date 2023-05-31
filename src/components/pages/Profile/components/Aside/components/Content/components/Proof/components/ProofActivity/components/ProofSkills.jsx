@@ -94,6 +94,7 @@ const ProofSkills = ({
         deleteSkill({talentId, proofId, skillId: skillId})
     }
 
+    const lastURL = window.location.href.split("/").at(-1)
     useEffect(() => {
         if (result.isSuccess) {
             refetch()
@@ -143,7 +144,7 @@ const ProofSkills = ({
             container
             position={"absolute"}
             left={isEditMode ? "20px" : "10px"}
-            bottom={!isHaveSkills ? "0px" : "-35px"}
+            bottom={!isHaveSkills || lastURL === "edit" ? "0px" : "-35px"}
             marginBottom={marginBottomForGridWrapper + "px"}
             height={"75px"}
             flexDirection={isEditMode ? "row" : "column"}
