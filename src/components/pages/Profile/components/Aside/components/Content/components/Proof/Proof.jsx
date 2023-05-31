@@ -14,7 +14,7 @@ import {ProofSkills} from "./components/ProofActivity/components"
 import {SponsorKudoses} from "../../../../../../../../AddKudosForm/components/SponsorKudoses"
 import {useGetKudosQuery} from "../../../../../../../../AddKudosForm/api"
 import {Grid} from "@mui/material"
-import {useGetSkillsByProofsQuery, useStatisticQuery} from "./api"
+import {useGetSkillsByProofsQuery} from "./api"
 
 const Proof = ({
     proof,

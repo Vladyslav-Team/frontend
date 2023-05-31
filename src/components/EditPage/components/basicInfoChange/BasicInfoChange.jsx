@@ -15,7 +15,7 @@ const BasicInfoChange = ({control, errors}) => {
             marginTop={2}
             paddingRight={"50px"}>
             <FullName control={control} errors={errors} />
-            <Grid item width={"100%"}>
+            <Grid item width={"100%"} gap={3}>
                 <BirthDate control={control} errors={errors} />
                 <Location control={control} errors={errors} />
                 <Controller

@@ -7,11 +7,13 @@ import {useGetUserAvatarQuery} from "../Avatar/api"
 import {AddKudosForm} from "../AddKudosForm"
 import {SkillsOnProof} from "./components/SkillsOnProof"
 import {useGetSkillsByProofsQuery} from "../pages/Profile/components/Aside/components/Content/components/Proof/api"
+import {useTheme} from "@emotion/react"
 import {useAddKudosMutation} from "../AddKudosForm/api"
 
 const ProofAllInfo = () => {
     const location = useLocation()
     const idProof = location.pathname.replace("/proof/", "")
+    const {palette} = useTheme()
     const {data} = useGetAllProofQuery(idProof, {
         refetchOnMountOrArgChange: true,
     })
@@ -45,16 +47,16 @@ const ProofAllInfo = () => {
                         sx={{
                             borderRadius: "20px",
                             overflow: "hidden",
-                            border: "1px solid #0a6e9a",
-                            bgcolor: "#ffffff",
+                            border: `1px solid ${palette.primary.main}`,
+                            bgcolor: palette.neutral.secondary,
                             color: "#000000",
                         }}>
                         <Grid item width={"100%"}>
                             <Typography
                                 component={"div"}
                                 sx={{
-                                    fontSize: "24px",
-                                    bgcolor: "#0a6e9a",
+                                    fontSize: "28px",
+                                    bgcolor: palette.primary.main,
                                     padding: "5px 20px",
                                     color: "#ffffff",
                                     wordWrap: "break-word",

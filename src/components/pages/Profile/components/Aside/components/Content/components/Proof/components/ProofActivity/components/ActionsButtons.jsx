@@ -15,11 +15,11 @@ export const ActionsButtonsEditAndAdded = ({statusVis, setVis}) => {
 
     return (
         <>
-            <Button type="submit" form="proof-form" variant="outlined">
-                Save
-            </Button>
             <Button onClick={handleCancel} form="proof-form" variant="outlined">
                 Cancel
+            </Button>
+            <Button type="submit" form="proof-form" variant="contained">
+                Save
             </Button>
         </>
     )
@@ -31,12 +31,12 @@ export const ActionsButtonDraft = ({
     proofId,
     statusVis,
     allProofsRefetch,
-    refetch,
 }) => {
     const handleShowConfirm = async () => {
         setShowConfirm(true)
         //refetch()
     }
+
     return (
         <>
             <Button variant="contained" onClick={handleShowConfirm}>

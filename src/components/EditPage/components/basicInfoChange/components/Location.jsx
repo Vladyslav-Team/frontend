@@ -15,7 +15,7 @@ const Location = ({control, errors}) => {
             flexDirection={"row"}
             flexWrap={"wrap"}
             justifyContent={"space-between"}
-            paddingBottom={"20px"}>
+            paddingBottom={"10px"}>
             <Controller
                 control={control}
                 name="location"

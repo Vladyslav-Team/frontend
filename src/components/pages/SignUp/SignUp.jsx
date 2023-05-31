@@ -8,9 +8,12 @@ import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import {AlertError} from "../../../shared/components"
 import jwtDecode from "jwt-decode"
+import {Button, Paper} from "@mui/material"
+import {useTheme} from "@emotion/react"
 const SignUp = ({AvatarIMG}) => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
+    const {palette} = useTheme()
     const {
         register,
         handleSubmit,
@@ -39,7 +42,25 @@ const SignUp = ({AvatarIMG}) => {
         <>
             <div className={styles.signup}>
                 <h1>Monetize your Talent</h1>
-                <div className={styles.form_wrap}>
+                <Paper
+                    sx={{
+                        position: "relative",
+                        margin: "0 auto",
+                        display: "flex",
+                        width: "320px",
+                        height: "580px",
+                        background:
+                            palette.mode === "dark"
+                                ? palette.neutral.secondary
+                                : "#b5d3e1",
+                        color: "#000000",
+                        border: `2px solid ${palette.neutral.main}`,
+                        borderRadius: "30px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        top: "-30px",
+                    }}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className={styles.input_wrap}>
                             <label htmlFor="name">Name</label>
@@ -115,9 +136,33 @@ const SignUp = ({AvatarIMG}) => {
                                 {...register("roles", {})}
                             />
                         </div>
-                        <button className="action" type="submit">
+                        <Button
+                            sx={{
+                                background:
+                                    palette.mode === "dark"
+                                        ? palette.primary.main
+                                        : palette.neutral.main,
+
+                                justifyContent: "center",
+                                width: "100px",
+                                height: "30px",
+                                margin: "0 auto",
+                                color:
+                                    palette.mode === "dark"
+                                        ? palette.neutral.secondary
+                                        : palette.primary.main,
+                                borderRadius: "400px",
+                                "&:hover": {
+                                    background:
+                                        palette.mode === "dark"
+                                            ? palette.neutral.main
+                                            : palette.primary.main,
+                                    color: "#ffffff",
+                                },
+                            }}
+                            type="submit">
                             SIGN UP
-                        </button>
+                        </Button>
                     </form>
                     <p className={styles.or}>or</p>
                     <p className={styles.signin_check}>
@@ -126,12 +171,16 @@ const SignUp = ({AvatarIMG}) => {
                             Sign in
                         </NavLink>
                     </p>
-                </div>
+                </Paper>
             </div>
             {result.error && (
                 <AlertError
                     defaultStatus={true}
-                    massageError={"This e-mail is already taken"}
+                    massageError={
+                        result.error.message !== "Request failed with status code 409"
+                            ? "The registration is currently unavailable. Try again later."
+                            : "This e-mail is already taken"
+                    }
                 />
             )}
         </>

@@ -5,7 +5,6 @@ import {
     ActionsButtonsEditAndAdded,
     ActionsButtonDraft,
     ActionsButtonShowMore,
-    ProofSkills,
 } from "./components"
 
 const Edit = ({proofId}) => {
@@ -25,7 +24,6 @@ const ProofActivity = ({
     setVis,
     allProofsRefetch,
     status,
-    talentId,
     refetch,
 }) => {
     const [showConfirm, setShowConfirm] = useState(false)

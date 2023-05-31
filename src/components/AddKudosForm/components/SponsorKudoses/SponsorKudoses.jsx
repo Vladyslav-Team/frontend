@@ -1,11 +1,14 @@
 import React from "react"
 import {Box, Grid, Tooltip, Typography} from "@mui/material"
 import Unlike from "../../img/unlike.png"
+import Like from "../../img/like.png"
 import {useLocation} from "react-router-dom"
+import {useTheme} from "@emotion/react"
 
 const SponsorKudoses = React.memo(({KudosInfo, isHaveSkills, isDraft = false}) => {
     const {pathname} = useLocation()
     const isProfile = pathname.split("/")[1] === "profile"
+    const {palette} = useTheme()
 
     return (
         <>
@@ -48,7 +51,7 @@ const SponsorKudoses = React.memo(({KudosInfo, isHaveSkills, isDraft = false}) =
                                     width: "28px",
                                     marginRight: "3px",
                                 }}
-                                src={Unlike}
+                                src={palette.mode === "dark" ? Like : Unlike}
                                 alt="Unlike"
                             />
                         </Box>

@@ -1,4 +1,4 @@
-import {Typography} from "@mui/material"
+import {Box, Typography} from "@mui/material"
 import React from "react"
 import {Chart, statistic} from "./snippets"
 
@@ -6,7 +6,7 @@ const Rules = () => {
     return (
         <>
             {!statistic[0] ? (
-                <>
+                <Box sx={{color: "#000000"}}>
                     <Typography
                         textAlign={"center"}
                         variant="h4"
@@ -35,7 +35,7 @@ const Rules = () => {
                         next day, or pay $5.99 to reset the timer.
                         <br />
                     </Typography>
-                </>
+                </Box>
             ) : (
                 <>
                     <Chart />

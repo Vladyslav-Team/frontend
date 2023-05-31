@@ -1,6 +1,8 @@
 import React from "react"
 import styles from "./Info.module.css"
 import {Skills} from "./components"
+import {Box} from "@mui/material"
+import {useTheme} from "@emotion/react"
 
 const Info = ({user, refetch}) => {
     const {education, age, email, phone, skills: originalSkills, id} = {...user}
@@ -13,8 +15,21 @@ const Info = ({user, refetch}) => {
             return textA < textB ? -1 : textA > textB ? 1 : 0
         })
 
+    const {palette} = useTheme()
+
     return (
-        <div className={styles.wrapper}>
+        <Box
+            sx={{
+                "& > *:not(:last-child)": {
+                    borderBottom: `1px solid ${
+                        palette.mode === "dark"
+                            ? palette.neutral.secondary
+                            : palette.primary.main
+                    }`,
+                    wordWrap: "break-word",
+                },
+            }}
+            className={styles.wrapper}>
             {age ? (
                 <div>
                     <span>Age : </span>
@@ -48,7 +63,7 @@ const Info = ({user, refetch}) => {
                     refetch={refetch}
                 />
             )}
-        </div>
+        </Box>
     )
 }
 

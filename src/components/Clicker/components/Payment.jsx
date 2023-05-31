@@ -12,7 +12,7 @@ const Payment = ({open, data, setOpenPayment}) => {
     const handleNext = () => {
         window.location = data.redirect_url
     }
-    const handleСancel = () => {
+    const handleCancel = () => {
         setOpenPayment(false)
     }
 
@@ -70,11 +70,11 @@ const Payment = ({open, data, setOpenPayment}) => {
                 paddingRight={"20px"}
                 paddingBottom={"5px"}>
                 <Button
-                    onClick={handleСancel}
+                    onClick={handleCancel}
                     variant="outlined"
                     size="small"
                     sx={{marginRight: "10px"}}>
-                    Сancel
+                    Cancel
                 </Button>
                 <Button variant="outlined" size="small" onClick={handleNext}>
                     Next

@@ -1,10 +1,23 @@
 import React from "react"
 import styles from "./Footer.module.css"
 import {Logo} from "../Header/components/Logo"
+import {Grid} from "@mui/material"
 
 const Footer = () => {
     return (
-        <footer className={styles.footer_wrap}>
+        <Grid
+            container
+            sx={{
+                padding: "20px 0 10px",
+                alignItems: "flex-start",
+                justifyContent: "space-around",
+                backgroundColor: "#313131",
+                color: "white",
+                mb: -10,
+                "& > div:first-of-type": {
+                    margin: "auto 0",
+                },
+            }}>
             <div className={styles.footer_column}>
                 <Logo />
                 <p className={styles.moto}>Scope out your skills</p>
@@ -40,7 +53,7 @@ const Footer = () => {
                     <li>Anastasia Pidlisna</li>
                 </ul>
             </div>
-        </footer>
+        </Grid>
     )
 }
 

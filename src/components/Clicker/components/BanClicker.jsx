@@ -4,7 +4,11 @@ import {Typography} from "@mui/material"
 const BanClicker = () => {
     return (
         <div>
-            <Typography variant="h2" fontSize={"20px"} fontWeight={"700"}>
+            <Typography
+                variant="h2"
+                fontSize={"20px"}
+                fontWeight={"700"}
+                sx={{color: "#000000"}}>
                 {
                     "You can't use farm kudos today, come back tomorrow or you can reset the timer for only"
                 }

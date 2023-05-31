@@ -3,10 +3,12 @@ import {NavLink} from "react-router-dom"
 import {KeyboardArrowDown} from "@mui/icons-material"
 import {Menu, MenuItem} from "@mui/material"
 import {useSignOutTalentMutation} from "../../../../shared/api/services/authentication"
+
 const ArrowButton = ({id}) => {
     const [updatePost] = useSignOutTalentMutation()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -15,7 +17,7 @@ const ArrowButton = ({id}) => {
     }
     const SignOut = () => {
         updatePost()
-        localStorage.clear()
+        localStorage.removeItem("jwt-token")
     }
 
     return (
@@ -42,7 +44,15 @@ const ArrowButton = ({id}) => {
                     vertical: "top",
                     horizontal: "right",
                 }}
-                onClose={handleClose}>
+                onClose={handleClose}
+                sx={{
+                    "& > div > ul": {
+                        bgcolor: "#ffffff",
+                    },
+                    "& > div > ul > a > li:hover": {
+                        filter: "brightness(0.4)",
+                    },
+                }}>
                 <NavLink to={id && `/profile/${id}/edit`}>
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
                 </NavLink>

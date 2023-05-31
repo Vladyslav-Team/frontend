@@ -1,1 +1,1 @@
-import {DialogFormDescription} from "./DialogFormDescription"
+export {DialogFormDescription} from "./DialogFormDescription"

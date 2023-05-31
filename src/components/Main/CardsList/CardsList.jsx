@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import styles from "./CardsList.module.css"
 
 const CardsList = ({GetData, type, setSort, sort, skills}) => {
-    const {data, currentData, refetch, isError} = GetData
+    const {data, currentData, refetch} = GetData
 
     const Cards = useMemo(() => {
         return (

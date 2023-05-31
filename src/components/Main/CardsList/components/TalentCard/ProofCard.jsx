@@ -1,8 +1,8 @@
 import React from "react"
-import styles from "./TalentCard.module.css"
 import Typography from "@mui/material/Typography"
 import {SigninPopupContext} from "../../../../../context"
 import {VisitButton} from "./components/VisitButton"
+import {useTheme} from "@emotion/react"
 import {SkillsOnProof} from "../../../../Proof/components"
 import {Box, Grid} from "@mui/material"
 import {useGetKudosQuery} from "../../../../AddKudosForm/api"
@@ -13,6 +13,7 @@ const ProofCard = ({proof}) => {
     const proofId = proof?.id
     const idProof = proof?.id
     const skills = useGetSkillsByProofsQuery(idProof)
+    const {palette} = useTheme()
     const KudosInfo = useGetKudosQuery(
         {proofId},
         {
@@ -21,38 +22,55 @@ const ProofCard = ({proof}) => {
     )
 
     return (
-        <div
-            style={{width: "470px", textOverflow: "ellipsis", position: "relative"}}
-            className={styles.card}>
-            <Box
+        <Grid
+            container
+            sx={{
+                position: "relative",
+                flexDirection: "column",
+                width: "470px",
+                textOverflow: "ellipsis",
+                height: "290px",
+                color: palette.primary.main,
+                textAlign: "center",
+                fontSize: "14px",
+                border: `1px solid ${palette.primary.main}`,
+                borderRadius: "8px",
+                boxShadow: "0 0 10px 4px rgba(0, 0, 0, 0.25)",
+                overflow: "hidden",
+                bgcolor: palette.neutral.secondary,
+                pb: "30px",
+            }}>
+            <Grid
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     p: "10px 30px",
+                    height: "45px",
+                    bgcolor: palette.primary.main,
                     "& > div ": {
                         color: "#ffff",
                     },
-                }}
-                className={styles.background}>
+                }}>
                 <Grid>
-                    <Typography style={{fontSize: "20px"}}>{proof.title}</Typography>
+                    <Typography sx={{fontSize: "20px"}}>{proof.title}</Typography>
                 </Grid>
                 <Grid>
-                    <Typography style={{fontSize: "14px"}}>
+                    <Typography sx={{fontSize: "14px"}}>
                         {proof.publication_date}
                     </Typography>
                 </Grid>
-            </Box>
+            </Grid>
             <Box
                 sx={{
-                    maxHeight: "168px",
+                    maxHeight: "155px",
                     textAlign: "left",
                     width: "90%",
                     wordBreak: "break-word",
-                    padding: "20px 8px 6px",
+                    padding: "10px 8px 6px",
                     textOverflow: "ellipsis",
                     overflow: "hidden",
+                    m: "0 auto",
                 }}>
                 <Typography variant="body1">{proof.description}</Typography>
             </Box>
@@ -84,7 +102,7 @@ const ProofCard = ({proof}) => {
                     />
                 )}
             </SigninPopupContext.Consumer>
-        </div>
+        </Grid>
     )
 }
 

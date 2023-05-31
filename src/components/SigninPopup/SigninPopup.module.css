@@ -1,32 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Nunito:wght@900&display=swap");
 
-.signin_background {
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: #636363;
-    opacity: 50%;
-    cursor: pointer;
-    z-index: 101;
-}
-
-.signin_form {
-    position: absolute;
-    top: 20vh;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 30px 50px 20px 50px;
-    width: 350px;
-    text-align: center;
-    background: #b5d3e1;
-    border-radius: 30px;
-    font-family: "Nunito";
-    z-index: 102;
-}
-
 h2.signin_form_elem {
     margin: 0 0 10px 0;
 }
@@ -52,31 +25,6 @@ input.signin_form_elem {
 
 input.signin_form_elem:focus {
     border: 2px solid black;
-}
-
-button.signin_form_elem {
-    display: block;
-    justify-content: center;
-    width: 100px;
-    height: 28px;
-    margin: auto;
-    margin-top: 20px;
-    padding: 4px 8px;
-    position: relative;
-    border: 1px solid #ffffff;
-    background: #ffffff;
-    color: #0a6e9a;
-    border-radius: 400px;
-    cursor: pointer;
-    font-family: "Inter";
-    font-size: 14px;
-    line-height: 20px;
-    transition-duration: 0.3s;
-}
-
-button.signin_form_elem:hover {
-    background: #0a6e9a;
-    color: #ffffff;
 }
 
 p.signin_form_elem {
