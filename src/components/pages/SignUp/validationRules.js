@@ -135,9 +135,9 @@ const registerOptions = {
         },
     },
     link: {
-        pattern: {
-            value: /^https:\/\/(?:[\w-]+\.)+[a-z]{2,}(?:\/[\w-]*)*(?:\?[^\s]*)?$/,
-            message: "Not a valid HTTPS link.",
+        maxLength: {
+            value: 200,
+            message: "Link must have maximum 200 characters",
         },
     },
     proofTitle: {
