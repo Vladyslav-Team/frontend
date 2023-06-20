@@ -3,7 +3,7 @@ name: React CI
 on:
   push:
     branches:
-      - dev
+      - "!dev"
 
 jobs:
   build:
