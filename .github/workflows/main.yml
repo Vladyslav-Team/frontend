@@ -1,9 +1,11 @@
 name: React CI
 
 on:
+  workflow_dispatch: 
   push:
     branches:
       - "**"
+
 
 jobs:
   build:
