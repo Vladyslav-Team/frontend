@@ -3,7 +3,6 @@ name: React CI
 on:
   push:
     branches:
-      - "main"
       - "dev"
 
 jobs:
