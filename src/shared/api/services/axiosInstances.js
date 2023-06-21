@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios"
 import {Endpoints} from "../constants/endpoints"
-
+ 
 const axiosInstance = axios.create({
     baseURL: Endpoints.BASE_ENDPOINT_BACKEND,
     headers: {

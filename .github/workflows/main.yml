@@ -1,0 +1,19 @@
+name: React CI
+
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - "dev"
+
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+      - uses: actions/checkout@v1

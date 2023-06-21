@@ -70,8 +70,10 @@ const AddSkill = ({
     const skillTitleProfile = skills && skills.map((skill) => skill.skill.title)
 
     if (isProfile) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         ;[updateSkill, result] = useAddSkillProfileMutation()
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         ;[updateSkill, result] = useAddSkillMutation()
     }
 
