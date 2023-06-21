@@ -1,5 +1,5 @@
+[![React CI](https://github.com/Vladyslav-Team/frontend/actions/workflows/main.yml/badge.svg?branch=dev)](https://github.com/Vladyslav-Team/frontend/actions/workflows/main.yml)
 # Project SkillScope
-
 This is frontend part of SkillScope project that will help you build whole website. Instruction describes how to clone and run the project on your local machine.
 
 ## Getting Started
