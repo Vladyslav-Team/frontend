@@ -9,8 +9,8 @@ import {Footer} from "./components/Footer/Footer"
 import {Layout} from "./components/Layout"
 import {useLocation, useNavigate} from "react-router-dom"
 import {Payment} from "./components/Payment"
-  
-const App = () => { 
+
+const App = () => {
     const {data} = useJwtCheck()
     const id = data && data.id
     const role = data && data.scope === "ROLE_TALENT" ? "talent" : "sponsor"

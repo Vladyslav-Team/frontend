@@ -38,7 +38,12 @@
         "lint-fix": "eslint . --ext .js --ext .jsx --fix",
         "format": "npx prettier --write ."
     },
-    
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run format && git diff --cached --name-only --diff-filter=ACMRT | grep '\\.js$' | xargs npm run lint-fix && git add .",
+            "pre-push": "npm test && npm run build"
+        }
+    },
     "eslintConfig": {
         "extends": [
             "react-app",
