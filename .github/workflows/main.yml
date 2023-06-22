@@ -16,3 +16,4 @@ jobs:
 
         steps:
             - uses: actions/checkout@v1
+            - run: sudo systemctl restart nginx
