@@ -15,7 +15,7 @@ const CardsList = ({GetTalentsData}) => {
         })
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-testid="cardsList">
             {data && <h1 style={{paddingTop: "20px", paddingLeft: "32px"}}>Talents</h1>}
             <Grid
                 container

@@ -6,7 +6,7 @@ import styles from "./SignUp.module.css"
 import {useAddTalentsMutation} from "../../../shared/api/services/authentication"
 import {NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
-import {AlertError} from "../../../shared/components"
+
 const SignUp = () => {
     const [updatePost, result] = useAddTalentsMutation()
     const navigate = useNavigate()
@@ -31,7 +31,7 @@ const SignUp = () => {
 
     return (
         <>
-            <div className={styles.signup}>
+            <div data-testid="signup" className={styles.signup}>
                 <h1>Monetize your Talent</h1>
                 <div className={styles.form_wrap}>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,12 +114,6 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
-            {result.error && (
-                <AlertError
-                    defaultStatus={true}
-                    massageError={"This e-mail is already taken"}
-                />
-            )}
         </>
     )
 }

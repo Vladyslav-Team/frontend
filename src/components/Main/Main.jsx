@@ -23,7 +23,7 @@ const Main = () => {
     }, [GetTalentsData.isError, navigate, page, pageURL, searchParams])
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper}  data-testid="main-page">
             <CardsList GetTalentsData={GetTalentsData} className={styles.content} />
             <Pagination
                 totalPages={GetTalentsData.data && GetTalentsData.data.totalPages}

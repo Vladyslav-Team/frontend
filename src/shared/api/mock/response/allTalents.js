@@ -6,7 +6,7 @@ export const page1 = {
         {
             id: 1,
             image: "https://drive.google.com/uc?export=view&id=1LRAGjCeeJwjs9g00wI40acPfwGlLe4z9",
-            name: "Oleksandr ",
+            name: "Oleksandr",
             surname: "Butrym",
             location: "Kharkiv",
         },

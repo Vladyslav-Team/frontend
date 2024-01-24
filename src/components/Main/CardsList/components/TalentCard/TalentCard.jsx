@@ -7,7 +7,7 @@ import {SigninPopupContext} from "../../../../../context"
 
 const TalentCard = ({talent}) => {
     return (
-        <div className={styles.card}>
+        <div className={styles.card} data-testid="talentCard">
             <div className={styles.background}>
                 <Avatar avatar={talent.image} size={58} />
             </div>

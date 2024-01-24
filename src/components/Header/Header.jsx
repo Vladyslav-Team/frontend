@@ -20,7 +20,7 @@ const Header = () => {
     const AvatarIMG = useGetAvatarTalentQuery(data && data.id)
 
     return (
-        <header className={styles.header}>
+        <header className={styles.header} data-testid="header">
             <div className={styles.logo_wrap}>
                 <NavLink to={"/talents?page=1"}>
                     <Logo />

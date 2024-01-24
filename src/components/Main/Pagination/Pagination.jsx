@@ -20,18 +20,18 @@ const Pagination = ({totalPages, currentPage}) => {
     }
 
     return (
-        <WrapperPagination>
-            <PaginationUI
-                size="medium"
-                count={totalPages}
-                page={currentPage}
-                siblingCount={1}
-                boundaryCount={1}
-                color="primary"
-                shape="rounded"
-                onChange={handleChange}
-            />
-        </WrapperPagination>
+        <WrapperPagination data-testid="pagination">
+  <PaginationUI
+    size="medium"
+    count={totalPages}
+    page={currentPage}
+    siblingCount={1}
+    boundaryCount={1}
+    color="primary"
+    shape="rounded"
+    onChange={handleChange}
+  />
+</WrapperPagination>
     )
 }
 

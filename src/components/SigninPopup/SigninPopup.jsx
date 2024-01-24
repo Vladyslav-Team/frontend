@@ -41,6 +41,7 @@ const SigninPopup = ({setVisibilitySigninPopup, id, status}) => {
     return (
         <>
             <div
+                data-testid="signin-popup"
                 className={styles.signin_background}
                 style={{display: !setVisibilitySigninPopup ? "none" : "flex"}}
                 onClick={() =>

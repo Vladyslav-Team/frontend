@@ -7,4 +7,5 @@ export const Endpoints = {
     POST_TALENT_SIGNIN: "/talents/signin",
     PATCH_TALENT_INFO: "/talents",
     DELETE_TALENT: "/talents",
+    GET_PROFILE_BY_ID: "/profile",
 }

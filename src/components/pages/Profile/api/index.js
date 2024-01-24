@@ -1,6 +1,7 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
 import {axiosBaseQuery} from "../../../../shared/api/services"
 
+
 export const GetAllInfoByID = createApi({
     reducerPath: "GetAllInfoByID",
     baseQuery: axiosBaseQuery(),

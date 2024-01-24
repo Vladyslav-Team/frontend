@@ -6,6 +6,7 @@ const PageNotFound = () => {
     const matches = useMediaQuery("(max-width:832px)")
     return (
         <Grid
+            data-testid="pageNotFound"
             container
             width={"100%"}
             height={"100vh"}

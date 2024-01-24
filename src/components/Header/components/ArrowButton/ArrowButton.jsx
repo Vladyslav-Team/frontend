@@ -21,16 +21,19 @@ const ArrowButton = () => {
     return (
         <>
             <KeyboardArrowDown
+                data-testid="KeyboardArrowDownIcon"
                 onClick={handleClick}
                 id="avatar-button"
                 fontSize="large"
                 sx={{color: "white", marginLeft: -2, cursor: "pointer"}}
             />
             <Menu
+                data-testid="avatar-menu"
                 id="avatar-menu"
                 anchorEl={anchorEl}
                 disableScrollLock={true}
                 open={open}
+                aria-hidden="true"
                 MenuListProps={{
                     "aria-labelledby": "avatar-button",
                 }}
